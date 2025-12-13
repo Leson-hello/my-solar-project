@@ -44,10 +44,6 @@ public class HomeController {
         return "services";
     }
 
-    @GetMapping("/products")
-    public String products(Model model) {
-        return "products";
-    }
 
     @GetMapping("/projects")
     public String projects(Model model) {

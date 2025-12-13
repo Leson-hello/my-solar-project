@@ -2,6 +2,8 @@ package com.s.solar_backend.controller;
 
 import com.s.solar_backend.dto.NewsDTO;
 import com.s.solar_backend.service.NewsService;
+import com.s.solar_backend.service.ProductService;
+import com.s.solar_backend.service.QuoteRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +23,12 @@ import java.util.UUID;
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
 public class AdminRestController {
-
     private final NewsService newsService;
-/// Test github
+    private final ProductService productService;
+    private final QuoteRequestService quoteRequestService;
 
-    /// Test github
+
+
     /**
      * Upload image for content editor
      */
@@ -109,14 +112,14 @@ public class AdminRestController {
     }
 
     /**
-     * Create draft for auto-save (for new news)
+     * Create a draft for auto-save (for new news)
      */
     @PostMapping("/news/create-draft")
     public ResponseEntity<Map<String, Object>> createDraft(@RequestBody NewsDTO newsDTO) {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            // Ensure it's saved as draft
+            // Ensure it's saved as a draft
             newsDTO.setIsPublished(false);
             newsDTO.setIsFeatured(false);
 
@@ -201,5 +204,118 @@ public class AdminRestController {
         Files.copy(imageFile.getInputStream(), filePath);
 
         return "/photo/" + fileName;
+    }
+
+    /**
+     * Upload product image
+     */
+    @PostMapping("/upload-product-image")
+    public ResponseEntity<Map<String, Object>> uploadProductImage(
+            @RequestParam("image") MultipartFile imageFile) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        try {
+            if (imageFile.isEmpty()) {
+                response.put("success", false);
+                response.put("message", "File không được để trống");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            String contentType = imageFile.getContentType();
+            if (contentType == null || !contentType.startsWith("image/")) {
+                response.put("success", false);
+                response.put("message", "Chỉ chấp nhận file hình ảnh");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            if (imageFile.getSize() > 5 * 1024 * 1024) {
+                response.put("success", false);
+                response.put("message", "File không được vượt quá 5MB");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            String imageUrl = saveImage(imageFile);
+
+            response.put("success", true);
+            response.put("url", imageUrl);
+            response.put("message", "Upload thành công");
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Lỗi khi upload: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(response);
+        }
+    }
+
+    /**
+     * Get product statistics
+     */
+    @GetMapping("/products/stats")
+    public ResponseEntity<Map<String, Object>> getProductStats() {
+        Map<String, Object> response = new HashMap<>();
+
+        long totalProducts = productService.getAllProducts(0, Integer.MAX_VALUE).getTotalElements();
+        long activeProducts = productService.getActiveProducts(0, Integer.MAX_VALUE).getTotalElements();
+        long featuredProducts = productService.getFeaturedProducts().size();
+
+        response.put("total", totalProducts);
+        response.put("active", activeProducts);
+        response.put("featured", featuredProducts);
+        response.put("inactive", totalProducts - activeProducts);
+
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Get quote statistics
+     */
+    @GetMapping("/quotes/stats")
+    public ResponseEntity<Map<String, Object>> getQuoteStats() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("pending", quoteRequestService.countByStatus("PENDING"));
+        response.put("contacted", quoteRequestService.countByStatus("CONTACTED"));
+        response.put("quoted", quoteRequestService.countByStatus("QUOTED"));
+        response.put("completed", quoteRequestService.countByStatus("COMPLETED"));
+        response.put("cancelled", quoteRequestService.countByStatus("CANCELLED"));
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Toggle product active status via API
+     */
+    @PutMapping("/products/{id}/toggle-active")
+    public ResponseEntity<Map<String, Object>> toggleProductActive(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            productService.toggleActiveStatus(id);
+            response.put("success", true);
+            response.put("message", "Trạng thái sản phẩm đã được cập nhật");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Lỗi: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+    /**
+     * Toggle product featured status via API
+     */
+    @PutMapping("/products/{id}/toggle-featured")
+    public ResponseEntity<Map<String, Object>> toggleProductFeatured(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            productService.toggleFeaturedStatus(id);
+            response.put("success", true);
+            response.put("message", "Sản phẩm nổi bật đã được cập nhật");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Lỗi: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
 }

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản Phẩm - DAT Group</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/products.css}" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{layout/header :: header}"></div>
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">SẢN PHẨM NĂNG LƯỢNG MẶT TRỜI</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
+                <li class="breadcrumb-item active">Sản phẩm</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="products-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sidebar">
+                    <div class="sidebar-widget">
+                        <h5 class="widget-title">Tìm kiếm</h5>
+                        <form th:action="@{/products}" method="get">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search"
+                                       th:value="${search}" placeholder="Tìm sản phẩm...">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h5 class="widget-title">Danh mục</h5>
+                        <ul class="category-list">
+                            <li>
+                                <a th:href="@{/products}" th:class="${category == null ? 'active' : ''}">
+                                    <i class="fas fa-th-large"></i> Tất cả sản phẩm
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/products(category='tam-pin')}"
+                                   th:class="${category == 'tam-pin' ? 'active' : ''}">
+                                    <i class="fas fa-solar-panel"></i> Tấm pin năng lượng mặt trời
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/products(category='inverter')}"
+                                   th:class="${category == 'inverter' ? 'active' : ''}">
+                                    <i class="fas fa-microchip"></i> Inverter / Bộ hòa lưới
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/products(category='pin-luu-tru')}"
+                                   th:class="${category == 'pin-luu-tru' ? 'active' : ''}">
+                                    <i class="fas fa-battery-full"></i> Pin lưu trữ
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/products(category='phu-kien')}"
+                                   th:class="${category == 'phu-kien' ? 'active' : ''}">
+                                    <i class="fas fa-tools"></i> Phụ kiện
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-widget" th:if="${featuredProducts != null and !featuredProducts.isEmpty()}">
+                        <h5 class="widget-title">Sản phẩm nổi bật</h5>
+                        <div class="featured-products-sidebar">
+                            <div class="featured-product-item" th:each="product : ${featuredProducts}">
+                                <a th:href="@{/products/{id}(id=${product.id})}" class="d-flex">
+                                    <img th:src="@{${product.imageUrl != null ? product.imageUrl : '/photo/default-product.jpg'}}"
+                                         th:alt="${product.name}" class="featured-product-image">
+                                    <div class="featured-product-info">
+                                        <h6 th:text="${product.name}">Product Name</h6>
+                                        <span class="product-power"
+                                              th:text="${product.power + ' ' + product.powerUnit}">520W</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget cta-widget">
+                        <div class="cta-content">
+                            <i class="fas fa-file-invoice fa-3x mb-3"></i>
+                            <h5>Cần báo giá?</h5>
+                            <p>Để lại thông tin, chúng tôi sẽ tư vấn chi tiết</p>
+                            <a th:href="@{/quote-request}" class="btn btn-warning">Yêu cầu báo giá</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="filter-bar mb-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="results-info">
+                            Hiển thị <strong th:text="${products.size()}">12</strong> trong
+                            <strong th:text="${totalItems}">48</strong> sản phẩm
+                        </div>
+                        <div class="view-options">
+                            <button class="btn btn-sm btn-outline-secondary active" id="gridView">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" id="listView">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row products-grid" id="productsContainer">
+                    <div class="col-md-4 mb-4" th:each="product : ${products}">
+                        <div class="product-card">
+                            <div class="product-image-wrapper">
+                                <a th:href="@{/products/{id}(id=${product.id})}">
+                                    <img th:src="@{${product.imageUrl != null ? product.imageUrl : '/photo/default-product.jpg'}}"
+                                         th:alt="${product.name}" class="product-image">
+                                </a>
+                                <span class="product-badge" th:if="${product.warranty != null}">
+                                    Bảo hành <span th:text="${product.warranty}">25</span> năm
+                                </span>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-brand" th:text="${product.brand}">Canadian Solar</div>
+                                <h5 class="product-name">
+                                    <a th:href="@{/products/{id}(id=${product.id})}"
+                                       th:text="${product.name}">
+                                        HiKu - Tấm pin năng lượng mặt trời
+                                    </a>
+                                </h5>
+                                <p class="product-description"
+                                   th:text="${product.description != null ? (product.description.length() > 100 ? product.description.substring(0, 100) + '...' : product.description) : ''}">
+                                    Tấm pin năng lượng mặt trời hiệu suất cao
+                                </p>
+                                <div class="product-specs">
+                                    <span class="spec-item" th:if="${product.power != null}">
+                                        <i class="fas fa-bolt"></i>
+                                        <span th:text="${product.power + ' ' + product.powerUnit}">520W</span>
+                                    </span>
+                                    <span class="spec-item" th:if="${product.type != null}">
+                                        <i class="fas fa-tag"></i>
+                                        <span th:text="${product.type}">Mono PERC</span>
+                                    </span>
+                                </div>
+                                <div class="product-footer">
+                                    <a th:href="@{/products/{id}(id=${product.id})}"
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye"></i> Xem chi tiết
+                                    </a>
+                                    <a th:href="@{/quote-request(productId=${product.id})}"
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fas fa-file-invoice"></i> Báo giá
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center py-5" th:if="${products.isEmpty()}">
+                    <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+                    <h4>Không tìm thấy sản phẩm</h4>
+                    <p>Vui lòng thử lại với từ khóa khác</p>
+                    <a th:href="@{/products}" class="btn btn-primary">Xem tất cả sản phẩm</a>
+                </div>
+
+                <nav th:if="${totalPages > 1}">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
+                            <a class="page-link"
+                               th:href="@{/products(page=${currentPage - 1}, category=${category}, search=${search})}">
+                                Trước
+                            </a>
+                        </li>
+
+                        <li class="page-item"
+                            th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                            th:classappend="${i == currentPage ? 'active' : ''}">
+                            <a class="page-link"
+                               th:href="@{/products(page=${i}, category=${category}, search=${search})}"
+                               th:text="${i + 1}">1</a>
+                        </li>
+
+                        <li class="page-item" th:classappend="${currentPage + 1 >= totalPages ? 'disabled' : ''}">
+                            <a class="page-link"
+                               th:href="@{/products(page=${currentPage + 1}, category=${category}, search=${search})}">
+                                Sau
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('gridView').addEventListener('click', function () {
+        document.querySelectorAll('.col-md-4').forEach(el => {
+            el.classList.remove('col-md-12');
+            el.classList.add('col-md-4');
+        });
+        this.classList.add('active');
+        document.getElementById('listView').classList.remove('active');
+    });
+
+    document.getElementById('listView').addEventListener('click', function () {
+        document.querySelectorAll('.col-md-4').forEach(el => {
+            el.classList.remove('col-md-4');
+            el.classList.add('col-md-12');
+        });
+        this.classList.add('active');
+        document.getElementById('gridView').classList.remove('active');
+    });
+</script>
+</body>
+</html>

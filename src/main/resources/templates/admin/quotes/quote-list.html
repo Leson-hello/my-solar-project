@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Yêu cầu Báo giá - Admin DAT Group</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --admin-primary: #2c3e50;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--admin-primary);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .admin-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .sidebar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-link i {
+            margin-right: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="admin-wrapper">
+    <!-- Sidebar -->
+    <nav class="admin-sidebar">
+        <div class="sidebar-header">
+            <a th:href="@{/admin}" class="sidebar-brand">
+                <i class="fas fa-solar-panel"></i> DAT Admin
+            </a>
+            <small class="d-block text-white-50 mt-2">Content Management</small>
+        </div>
+
+        <ul class="sidebar-nav list-unstyled">
+            <li class="nav-item">
+                <a th:href="@{/admin}" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/news}" class="nav-link">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Quản lý tin tức</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/news/create}" class="nav-link">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Tạo tin tức mới</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/products}" class="nav-link">
+                    <i class="fas fa-boxes"></i>
+                    <span>Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/quotes}" class="nav-link active">
+                    <i class="fas fa-file-invoice"></i>
+                    <span>Yêu cầu báo giá</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-images"></i>
+                    <span>Quản lý hình ảnh</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>Người dùng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Cài đặt</span>
+                </a>
+            </li>
+            <li class="nav-item mt-4">
+                <a th:href="@{/}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Về trang chủ</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-content">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="h4 mb-0">Quản lý Yêu cầu Báo giá</h1>
+                    <small class="text-muted">Danh sách yêu cầu báo giá từ khách hàng</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="main-content">
+            <!-- Flash Messages -->
+            <div th:if="${success}" class="alert alert-success alert-dismissible fade show">
+                <i class="fas fa-check-circle"></i> <span th:text="${success}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+                <i class="fas fa-exclamation-circle"></i> <span th:text="${error}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center bg-warning text-dark">
+                        <div class="card-body">
+                            <h5 class="card-title">Chờ xử lý</h5>
+                            <h2 th:text="${pendingCount}">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center bg-info text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Đã liên hệ</h5>
+                            <h2 th:text="${contactedCount}">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center bg-primary text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Đã báo giá</h5>
+                            <h2 th:text="${quotedCount}">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center bg-success text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Hoàn thành</h5>
+                            <h2 th:text="${completedCount}">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter -->
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <select class="form-select" onchange="filterByStatus(this.value)">
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="PENDING" th:selected="${selectedStatus == 'PENDING'}">Chờ xử lý</option>
+                        <option value="CONTACTED" th:selected="${selectedStatus == 'CONTACTED'}">Đã liên hệ</option>
+                        <option value="QUOTED" th:selected="${selectedStatus == 'QUOTED'}">Đã báo giá</option>
+                        <option value="COMPLETED" th:selected="${selectedStatus == 'COMPLETED'}">Hoàn thành</option>
+                        <option value="CANCELLED" th:selected="${selectedStatus == 'CANCELLED'}">Đã hủy</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Quotes table -->
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Khách hàng</th>
+                            <th>Liên hệ</th>
+                            <th>Loại sản phẩm</th>
+                            <th>Công suất</th>
+                            <th>Loại hình</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày tạo</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="quote : ${quotesPage.content}">
+                            <td th:text="${quote.id}">1</td>
+                            <td>
+                                <strong th:text="${quote.fullName}">Nguyễn Văn A</strong><br>
+                                <small th:text="${quote.address}">TP.HCM</small>
+                            </td>
+                            <td>
+                                <small>
+                                    <i class="fas fa-phone"></i> <span th:text="${quote.phone}">0123456789</span><br>
+                                    <i class="fas fa-envelope"></i> <span th:text="${quote.email}">email@example.com</span>
+                                </small>
+                            </td>
+                            <td th:text="${quote.productType}">Tấm pin</td>
+                            <td>
+                                <span th:if="${quote.estimatedPower != null}">
+                                    <span th:text="${quote.estimatedPower}">5</span> kW
+                                </span>
+                                <span th:unless="${quote.estimatedPower != null}">-</span>
+                            </td>
+                            <td th:text="${quote.installationType}">Hộ gia đình</td>
+                            <td>
+                                <span th:if="${quote.status == 'PENDING'}" class="badge bg-warning text-dark">Chờ xử lý</span>
+                                <span th:if="${quote.status == 'CONTACTED'}" class="badge bg-info">Đã liên hệ</span>
+                                <span th:if="${quote.status == 'QUOTED'}" class="badge bg-primary">Đã báo giá</span>
+                                <span th:if="${quote.status == 'COMPLETED'}" class="badge bg-success">Hoàn thành</span>
+                                <span th:if="${quote.status == 'CANCELLED'}" class="badge bg-secondary">Đã hủy</span>
+                            </td>
+                            <td th:text="${#temporals.format(quote.createdAt, 'dd/MM/yyyy HH:mm')}">01/01/2024</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a th:href="@{/admin/quotes/{id}(id=${quote.id})}" 
+                                       class="btn btn-sm btn-outline-primary" title="Xem chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <form th:action="@{/admin/quotes/{id}/delete(id=${quote.id})}" 
+                                          method="post" style="display: inline;"
+                                          onsubmit="return confirm('Bạn có chắc muốn xóa yêu cầu này?')">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Xóa">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <nav th:if="${quotesPage.totalPages > 1}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{/admin/quotes(page=${currentPage - 1}, status=${selectedStatus})}">
+                            Trước
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, quotesPage.totalPages - 1)}"
+                        th:classappend="${i == currentPage ? 'active' : ''}">
+                        <a class="page-link" th:href="@{/admin/quotes(page=${i}, status=${selectedStatus})}"
+                           th:text="${i + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage + 1 >= quotesPage.totalPages ? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{/admin/quotes(page=${currentPage + 1}, status=${selectedStatus})}">
+                            Sau
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function filterByStatus(status) {
+        window.location.href = '/admin/quotes?status=' + status;
+    }
+</script>
+</body>
+</html>

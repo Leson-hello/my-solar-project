@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<!-- Admin Sidebar Fragment -->
+<nav th:fragment="sidebar" class="col-md-2 d-md-block bg-dark sidebar">
+    <div class="position-sticky pt-3">
+        <h5 class="text-white px-3 mb-4">
+            <i class="fas fa-solar-panel"></i> DAT Admin
+        </h5>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link text-white" th:href="@{/admin}" 
+                   th:classappend="${#httpServletRequest.requestURI == '/admin' ? 'active' : ''}">
+                    <i class="fas fa-dashboard"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" th:href="@{/admin/news}" 
+                   th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/admin/news') ? 'active' : ''}">
+                    <i class="fas fa-newspaper"></i> Tin tức
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" th:href="@{/admin/products}" 
+                   th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/admin/products') ? 'active' : ''}">
+                    <i class="fas fa-boxes"></i> Sản phẩm
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" th:href="@{/admin/quotes}" 
+                   th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/admin/quotes') ? 'active' : ''}">
+                    <i class="fas fa-file-invoice"></i> Yêu cầu báo giá
+                </a>
+            </li>
+            <li class="nav-item mt-4">
+                <a class="nav-link text-white" th:href="@{/}">
+                    <i class="fas fa-home"></i> Về trang chủ
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

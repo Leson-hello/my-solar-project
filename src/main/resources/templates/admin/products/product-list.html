@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản phẩm - Admin DAT Group</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --admin-primary: #2c3e50;
+            --admin-secondary: #3498db;
+            --admin-success: #27ae60;
+            --admin-warning: #f39c12;
+            --admin-danger: #e74c3c;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--admin-primary);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .admin-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .sidebar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-link i {
+            margin-right: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+    </style>
+</head>
+<body>
+<div class="admin-wrapper">
+    <!-- Sidebar -->
+    <nav class="admin-sidebar">
+        <div class="sidebar-header">
+            <a th:href="@{/admin}" class="sidebar-brand">
+                <i class="fas fa-solar-panel"></i> DAT Admin
+            </a>
+            <small class="d-block text-white-50 mt-2">Content Management</small>
+        </div>
+
+        <ul class="sidebar-nav list-unstyled">
+            <li class="nav-item">
+                <a th:href="@{/admin}" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/news}" class="nav-link">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Quản lý tin tức</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/news/create}" class="nav-link">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Tạo tin tức mới</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/products}" class="nav-link active">
+                    <i class="fas fa-boxes"></i>
+                    <span>Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/quotes}" class="nav-link">
+                    <i class="fas fa-file-invoice"></i>
+                    <span>Yêu cầu báo giá</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-images"></i>
+                    <span>Quản lý hình ảnh</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>Người dùng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Cài đặt</span>
+                </a>
+            </li>
+            <li class="nav-item mt-4">
+                <a th:href="@{/}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Về trang chủ</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-content">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="h4 mb-0">Quản lý Sản phẩm</h1>
+                    <small class="text-muted">Danh sách tất cả sản phẩm trong hệ thống</small>
+                </div>
+                <div>
+                    <a th:href="@{/admin/products/create}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Thêm sản phẩm mới
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="main-content">
+            <!-- Flash Messages -->
+            <div th:if="${success}" class="alert alert-success alert-dismissible fade show">
+                <i class="fas fa-check-circle"></i> <span th:text="${success}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+                <i class="fas fa-exclamation-circle"></i> <span th:text="${error}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <!-- Filters -->
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <form th:action="@{/admin/products}" method="get">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" 
+                                   th:value="${search}" placeholder="Tìm kiếm sản phẩm...">
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <select class="form-select" onchange="filterByCategory(this.value)">
+                        <option value="">Tất cả danh mục</option>
+                        <option value="tam-pin" th:selected="${selectedCategory == 'tam-pin'}">Tấm pin</option>
+                        <option value="inverter" th:selected="${selectedCategory == 'inverter'}">Inverter</option>
+                        <option value="pin-luu-tru" th:selected="${selectedCategory == 'pin-luu-tru'}">Pin lưu trữ</option>
+                        <option value="phu-kien" th:selected="${selectedCategory == 'phu-kien'}">Phụ kiện</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Products table -->
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Hình ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Thương hiệu</th>
+                            <th>Công suất</th>
+                            <th>Giá</th>
+                            <th>Danh mục</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="product : ${productsPage.content}">
+                            <td th:text="${product.id}">1</td>
+                            <td>
+                                <img th:src="@{${product.imageUrl}}" alt="Product" 
+                                     style="width: 50px; height: 50px; object-fit: cover;">
+                            </td>
+                            <td th:text="${product.name}">Product Name</td>
+                            <td th:text="${product.brand}">Brand</td>
+                            <td>
+                                <span th:if="${product.power != null}">
+                                    <span th:text="${product.power}">520</span>
+                                    <span th:text="${product.powerUnit}">W</span>
+                                </span>
+                            </td>
+                            <td>
+                                <span th:if="${product.price != null}">
+                                    <span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}">3,500,000</span> đ
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge bg-info" th:text="${product.category}">tam-pin</span>
+                            </td>
+                            <td>
+                                <span th:if="${product.isActive}" class="badge bg-success">Hoạt động</span>
+                                <span th:unless="${product.isActive}" class="badge bg-secondary">Ẩn</span>
+                                <span th:if="${product.isFeatured}" class="badge bg-warning text-dark">Nổi bật</span>
+                            </td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a th:href="@{/admin/products/{id}/edit(id=${product.id})}" 
+                                       class="btn btn-sm btn-outline-primary" title="Chỉnh sửa">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a th:href="@{/products/{id}(id=${product.id})}" 
+                                       target="_blank" class="btn btn-sm btn-outline-info" title="Xem">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <form th:action="@{/admin/products/{id}/delete(id=${product.id})}" 
+                                          method="post" style="display: inline;"
+                                          onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Xóa">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <nav th:if="${productsPage.totalPages > 1}">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{/admin/products(page=${currentPage - 1}, category=${selectedCategory}, search=${search})}">
+                            Trước
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, productsPage.totalPages - 1)}"
+                        th:classappend="${i == currentPage ? 'active' : ''}">
+                        <a class="page-link" th:href="@{/admin/products(page=${i}, category=${selectedCategory}, search=${search})}"
+                           th:text="${i + 1}">1</a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage + 1 >= productsPage.totalPages ? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{/admin/products(page=${currentPage + 1}, category=${selectedCategory}, search=${search})}">
+                            Sau
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function filterByCategory(category) {
+        window.location.href = '/admin/products?category=' + category;
+    }
+</script>
+</body>
+</html>
