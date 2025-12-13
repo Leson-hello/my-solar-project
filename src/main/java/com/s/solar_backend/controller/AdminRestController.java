@@ -24,6 +24,8 @@ public class AdminRestController {
 
     private final NewsService newsService;
 /// Test github
+
+    /// Test github
     /**
      * Upload image for content editor
      */
