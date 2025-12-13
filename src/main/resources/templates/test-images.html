@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Images - DAT Solar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .test-image {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            margin: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .image-container {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .image-name {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        h1 {
+            color: #1e88e5;
+        }
+
+        .error {
+            border-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+<h1>🧪 Test Images - DAT Solar Photos</h1>
+<p>Kiểm tra các ảnh có load được không:</p>
+
+<div class="images-grid">
+    <div class="image-container">
+        <img th:src="@{/photo/anh1.jpg}" alt="Anh 1" class="test-image"
+             onerror="this.style.borderColor='red'; this.nextElementSibling.style.color='red';">
+        <div class="image-name">anh1.jpg</div>
+    </div>
+
+    <div class="image-container">
+        <img th:src="@{/photo/anh7.jpg}" alt="Anh 7 - Hero" class="test-image"
+             onerror="this.style.borderColor='red'; this.nextElementSibling.style.color='red';">
+        <div class="image-name">anh7.jpg (Hero)</div>
+    </div>
+
+    <div class="image-container">
+        <img th:src="@{/photo/anh8.jpg}" alt="Anh 8 - Office" class="test-image"
+             onerror="this.style.borderColor='red'; this.nextElementSibling.style.color='red';">
+        <div class="image-name">anh8.jpg (Office)</div>
+    </div>
+
+    <div class="image-container">
+        <img th:src="@{/photo/anh9.jpg}" alt="Anh 9 - Solutions" class="test-image"
+             onerror="this.style.borderColor='red'; this.nextElementSibling.style.color='red';">
+        <div class="image-name">anh9.jpg (Solutions)</div>
+    </div>
+
+    <div class="image-container">
+        <img th:src="@{/photo/anh18.jpg}" alt="Anh 18 - Project" class="test-image"
+             onerror="this.style.borderColor='red'; this.nextElementSibling.style.color='red';">
+        <div class="image-name">anh18.jpg (Project)</div>
+    </div>
+
+    <div class="image-container">
+        <img th:src="@{/photo/anh31.jpg}" alt="Anh 31 - Product 1" class="test-image"
+             onerror="this.style.borderColor='red'; this.nextElementSibling.style.color='red';">
+        <div class="image-name">anh31.jpg (Product)</div>
+    </div>
+
+    <div class="image-container">
+        <img th:src="@{/photo/anh33.jpg}" alt="Anh 33 - Product 2" class="test-image"
+             onerror="this.style.borderColor='red'; this.nextElementSibling.style.color='red';">
+        <div class="image-name">anh33.jpg (Product)</div>
+    </div>
+
+    <div class="image-container">
+        <img th:src="@{/photo/anh39.jpg}" alt="Anh 39 - News" class="test-image"
+             onerror="this.style.borderColor='red'; this.nextElementSibling.style.color='red';">
+        <div class="image-name">anh39.jpg (News)</div>
+    </div>
+
+    <div class="image-container">
+        <img th:src="@{/photo/anh44.jpg}" alt="Anh 44 - Partner SMA" class="test-image"
+             onerror="this.style.borderColor='red'; this.nextElementSibling.style.color='red';">
+        <div class="image-name">anh44.jpg (SMA)</div>
+    </div>
+
+    <div class="image-container">
+        <img th:src="@{/photo/anh45.jpg}" alt="Anh 45 - Partner GoodWe" class="test-image"
+             onerror="this.style.borderColor='red'; this.nextElementSibling.style.color='red';">
+        <div class="image-name">anh45.jpg (GoodWe)</div>
+    </div>
+</div>
+
+<hr style="margin: 30px 0;">
+<h2>🔗 Navigation</h2>
+<p>
+    <a href="/" style="color: #1e88e5; text-decoration: none; margin-right: 20px;">← Về trang chủ</a>
+    <a href="/about" style="color: #1e88e5; text-decoration: none;">Trang giới thiệu</a>
+</p>
+
+<hr style="margin: 30px 0;">
+<h2>📋 Debug Info</h2>
+<p><strong>Static resources path:</strong> /photo/</p>
+<p><strong>Physical path:</strong> classpath:/static/photo/</p>
+<p><strong>Total images:</strong> 72 files (anh1.jpg to anh72.jpg)</p>
+
+<script>
+    // Count loaded vs failed images
+    window.addEventListener('load', function () {
+        const images = document.querySelectorAll('.test-image');
+        let loaded = 0, failed = 0;
+
+        images.forEach(img => {
+            if (img.complete && img.naturalWidth > 0) {
+                loaded++;
+            } else {
+                failed++;
+                img.style.borderColor = 'red';
+            }
+        });
+
+        console.log(`Images loaded: ${loaded}, Failed: ${failed}`);
+    });
+</script>
+</body>
+</html>

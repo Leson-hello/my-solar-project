@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${isEdit ? 'Chỉnh sửa tin tức' : 'Tạo tin tức mới'} + ' - Admin DAT Group'">Tạo tin tức - Admin DAT
+        Group</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Summernote CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --admin-primary: #2c3e50;
+            --admin-secondary: #3498db;
+            --admin-success: #27ae60;
+            --admin-warning: #f39c12;
+            --admin-danger: #e74c3c;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--admin-primary);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .admin-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .sidebar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-link i {
+            margin-right: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, var(--admin-secondary), var(--admin-primary));
+            color: white;
+            padding: 2rem;
+        }
+
+        .form-body {
+            padding: 2rem;
+        }
+
+        .image-preview {
+            max-width: 300px;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px dashed #dee2e6;
+        }
+
+        .image-upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .image-upload-area:hover {
+            border-color: var(--admin-primary);
+        }
+
+        .image-upload-area.dragover {
+            border-color: var(--admin-success);
+            background: rgba(39, 174, 96, 0.1);
+        }
+
+        .form-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--admin-primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--admin-primary);
+        }
+
+        .note-editor {
+            border-radius: 10px !important;
+            border: 1px solid #dee2e6 !important;
+        }
+
+        .sticky-actions {
+            position: sticky;
+            bottom: 20px;
+            z-index: 100;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                transform: translateX(-100%);
+            }
+
+            .admin-content {
+                margin-left: 0;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .form-body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="admin-wrapper">
+    <!-- Sidebar -->
+    <nav class="admin-sidebar">
+        <div class="sidebar-header">
+            <a th:href="@{/admin}" class="sidebar-brand">
+                <i class="fas fa-solar-panel"></i> DAT Admin
+            </a>
+            <small class="d-block text-white-50 mt-2">Content Management</small>
+        </div>
+
+        <ul class="sidebar-nav list-unstyled">
+            <li class="nav-item">
+                <a th:href="@{/admin}" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/news}" class="nav-link">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Quản lý tin tức</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/news/create}" class="nav-link active">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Tạo tin tức mới</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-images"></i>
+                    <span>Quản lý hình ảnh</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>Người dùng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Cài đặt</span>
+                </a>
+            </li>
+            <li class="nav-item mt-4">
+                <a th:href="@{/}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Về trang chủ</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-content">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="h4 mb-0" th:text="${isEdit ? 'Chỉnh sửa tin tức' : 'Tạo tin tức mới'}">Tạo tin tức
+                        mới</h1>
+                    <small class="text-muted"
+                           th:text="${isEdit ? 'Cập nhật thông tin tin tức' : 'Thêm tin tức mới vào hệ thống'}">Thêm tin
+                        tức mới vào hệ thống</small>
+                </div>
+                <div>
+                    <a th:href="@{/admin/news}" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> Quay lại
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="main-content">
+            <!-- Flash Messages -->
+            <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle"></i> <span th:text="${success}">Thành công!</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle"></i> <span th:text="${error}">Có lỗi xảy ra!</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <!-- News Form -->
+            <form th:action="${isEdit ? '/admin/news/' + news.id + '/update' : '/admin/news/create'}"
+                  method="post"
+                  enctype="multipart/form-data"
+                  id="newsForm">
+
+                <div class="row">
+                    <!-- Main Form -->
+                    <div class="col-lg-8">
+                        <div class="form-card">
+                            <div class="form-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-edit"></i>
+                                    <span th:text="${isEdit ? 'Chỉnh sửa tin tức' : 'Thông tin tin tức'}">Thông tin tin tức</span>
+                                </h5>
+                            </div>
+
+                            <div class="form-body">
+                                <!-- Title -->
+                                <div class="mb-4">
+                                    <label for="title" class="form-label">Tiêu đề <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text"
+                                           class="form-control form-control-lg"
+                                           id="title"
+                                           name="title"
+                                           th:value="${news.title}"
+                                           placeholder="Nhập tiêu đề tin tức..."
+                                           required
+                                           maxlength="500">
+                                    <div class="form-text">Tiêu đề nên từ 10-500 ký tự để tối ưu SEO</div>
+                                </div>
+
+                                <!-- Short Description -->
+                                <div class="mb-4">
+                                    <label for="shortDescription" class="form-label">Mô tả ngắn <span
+                                            class="text-danger">*</span></label>
+                                    <textarea class="form-control"
+                                              id="shortDescription"
+                                              name="shortDescription"
+                                              rows="3"
+                                              th:text="${news.shortDescription}"
+                                              placeholder="Nhập mô tả ngắn về tin tức..."
+                                              required
+                                              maxlength="1000"></textarea>
+                                    <div class="form-text">Mô tả này sẽ hiển thị ở trang danh sách tin tức</div>
+                                </div>
+
+                                <!-- Content -->
+                                <div class="mb-4">
+                                    <label for="content" class="form-label">Nội dung chi tiết <span class="text-danger">*</span></label>
+                                    <textarea class="form-control"
+                                              id="content"
+                                              name="content"
+                                              th:text="${news.content}"
+                                              required></textarea>
+                                    <div class="form-text">Sử dụng editor để định dạng nội dung</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="col-lg-4">
+                        <!-- Publish Settings -->
+                        <div class="form-card mb-4">
+                            <div class="form-header">
+                                <h6 class="mb-0"><i class="fas fa-cog"></i> Cài đặt xuất bản</h6>
+                            </div>
+                            <div class="form-body">
+                                <!-- Category -->
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">Danh mục <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="category" name="category" required>
+                                        <option value="">Chọn danh mục...</option>
+                                        <option th:each="cat : ${categories}"
+                                                th:value="${cat.name()}"
+                                                th:text="${cat.getDisplayName()}"
+                                                th:selected="${news.category == cat}">Category
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- Author -->
+                                <div class="mb-3">
+                                    <label for="author" class="form-label">Tác giả</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="author"
+                                           name="author"
+                                           th:value="${news.author ?: 'Admin DAT'}"
+                                           placeholder="Tên tác giả">
+                                </div>
+
+                                <!-- Status -->
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isPublished"
+                                               name="isPublished"
+                                               th:checked="${news.isPublished}">
+                                        <label class="form-check-label" for="isPublished">
+                                            <i class="fas fa-globe"></i> Xuất bản ngay
+                                        </label>
+                                    </div>
+                                    <small class="text-muted">Bỏ tick để lưu nháp</small>
+                                </div>
+
+                                <!-- Featured -->
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               id="isFeatured"
+                                               name="isFeatured"
+                                               th:checked="${news.isFeatured}">
+                                        <label class="form-check-label" for="isFeatured">
+                                            <i class="fas fa-star"></i> Tin nổi bật
+                                        </label>
+                                    </div>
+                                    <small class="text-muted">Hiển thị ở trang chủ</small>
+                                </div>
+
+                                <!-- Views (Edit only) -->
+                                <div class="mb-3" th:if="${isEdit}">
+                                    <label class="form-label">Lượt xem</label>
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-eye text-muted me-2"></i>
+                                        <span th:text="${news.views ?: 0}" class="fw-bold">0</span>
+                                        <span class="text-muted ms-1">lượt xem</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="form-card mb-4">
+                            <div class="form-header">
+                                <h6 class="mb-0"><i class="fas fa-image"></i> Hình ảnh đại diện</h6>
+                            </div>
+                            <div class="form-body">
+                                <!-- Current Image Preview -->
+                                <div class="mb-3" th:if="${isEdit and news.imageUrl != null}">
+                                    <label class="form-label">Hình ảnh hiện tại:</label>
+                                    <div class="text-center">
+                                        <img th:src="@{${news.imageUrl}}"
+                                             class="image-preview"
+                                             th:alt="${news.title}">
+                                    </div>
+                                </div>
+
+                                <!-- File Upload -->
+                                <div class="image-upload-area" onclick="document.getElementById('imageFile').click()"
+                                     ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                                    <i class="fas fa-cloud-upload-alt fa-2x text-muted mb-2"></i>
+                                    <p class="text-muted mb-2">Kéo thả hoặc click để chọn ảnh</p>
+                                    <small class="text-muted">Hỗ trợ JPG, PNG, GIF (max 5MB)</small>
+                                    <input type="file"
+                                           id="imageFile"
+                                           name="imageFile"
+                                           accept="image/*"
+                                           style="display: none;"
+                                           onchange="previewImage(this)">
+                                </div>
+
+                                <!-- Image Preview for New Upload -->
+                                <div id="newImagePreview" class="text-center mt-3" style="display: none;">
+                                    <img id="previewImg" class="image-preview" alt="Preview">
+                                    <div class="mt-2">
+                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                onclick="removeImage()">
+                                            <i class="fas fa-times"></i> Xóa ảnh
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sticky Action Buttons -->
+                        <div class="sticky-actions">
+                            <div class="action-card">
+                                <div class="d-grid gap-2">
+                                    <button type="submit" name="action" value="save" class="btn btn-success">
+                                        <i class="fas fa-save"></i>
+                                        <span th:text="${isEdit ? 'Cập nhật tin tức' : 'Lưu tin tức'}">Lưu tin tức</span>
+                                    </button>
+
+                                    <button type="submit" name="action" value="save_and_publish"
+                                            class="btn btn-primary"
+                                            th:if="${!isEdit or !news.isPublished}">
+                                        <i class="fas fa-globe"></i> Lưu và xuất bản
+                                    </button>
+
+                                    <button type="submit" name="action" value="save_draft"
+                                            class="btn btn-outline-secondary"
+                                            th:if="${isEdit}">
+                                        <i class="fas fa-file-alt"></i> Lưu nháp
+                                    </button>
+
+                                    <a th:href="@{/admin/news}" class="btn btn-outline-dark">
+                                        <i class="fas fa-times"></i> Hủy bỏ
+                                    </a>
+
+                                    <!-- Preview Button -->
+                                    <button type="button" class="btn btn-outline-info" onclick="previewNews()">
+                                        <i class="fas fa-eye"></i> Xem trước
+                                    </button>
+                                </div>
+
+                                <!-- Save Status -->
+                                <div class="mt-3 text-center">
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock"></i>
+                                        <span id="saveStatus">Tự động lưu mỗi 30 giây</span>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="previewModalLabel">
+                    <i class="fas fa-eye"></i> Xem trước tin tức
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="previewContent">
+                    <!-- Preview content will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Lưu tin tức</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Summernote JS -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+
+<script>
+    let newsId = null;
+    let autoSaveTimer;
+    let isNewNews = true;
+
+    $(document).ready(function () {
+        // Check if we're editing existing news
+        const pathParts = window.location.pathname.split('/');
+        if (pathParts.includes('edit')) {
+            newsId = pathParts[pathParts.length - 2];
+            isNewNews = false;
+        }
+
+        // Initialize Summernote rich text editor
+        $('#content').summernote({
+            height: 400,
+            placeholder: 'Nhập nội dung tin tức...',
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ],
+            callbacks: {
+                onImageUpload: function (files) {
+                    // Handle image upload in content
+                    uploadContentImage(files[0]);
+                },
+                onChange: function () {
+                    // Trigger auto-save on content change
+                    scheduleAutoSave();
+                }
+            }
+        });
+
+        // Auto-save functionality
+        function scheduleAutoSave() {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(function () {
+                if (newsId) {
+                    performAutoSave();
+                } else {
+                    // For new news, create draft first
+                    createDraftAndAutoSave();
+                }
+            }, 30000); // 30 seconds
+        }
+
+        // Trigger auto-save on input change
+        $('#title, #shortDescription, #author').on('input', scheduleAutoSave);
+        $('#category, #isPublished, #isFeatured').on('change', scheduleAutoSave);
+    });
+
+    // Auto-save functions
+    function performAutoSave() {
+        if (!newsId) return;
+
+        const newsData = {
+            title: $('#title').val(),
+            shortDescription: $('#shortDescription').val(),
+            content: $('#content').summernote('code'),
+            author: $('#author').val(),
+            category: $('#category').val(),
+            isPublished: $('#isPublished').is(':checked'),
+            isFeatured: $('#isFeatured').is(':checked')
+        };
+
+        $.ajax({
+            url: '/api/admin/news/' + newsId + '/auto-save',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(newsData),
+            success: function (response) {
+                if (response.success) {
+                    $('#saveStatus').text('Đã tự động lưu lúc ' + new Date().toLocaleTimeString());
+                    $('#saveStatus').removeClass('text-danger').addClass('text-success');
+                } else {
+                    $('#saveStatus').text('Lỗi tự động lưu: ' + response.message);
+                    $('#saveStatus').removeClass('text-success').addClass('text-danger');
+                }
+            },
+            error: function () {
+                $('#saveStatus').text('Lỗi kết nối khi tự động lưu');
+                $('#saveStatus').removeClass('text-success').addClass('text-danger');
+            }
+        });
+    }
+
+    function createDraftAndAutoSave() {
+        const newsData = {
+            title: $('#title').val() || 'Tin tức mới',
+            shortDescription: $('#shortDescription').val() || 'Mô tả ngắn',
+            content: $('#content').summernote('code') || '<p>Nội dung tin tức</p>',
+            author: $('#author').val() || 'Admin DAT',
+            category: $('#category').val() || 'COMPANY_NEWS',
+            isPublished: false,
+            isFeatured: false
+        };
+
+        // Only create draft if there's meaningful content
+        if (newsData.title.length > 5 || newsData.shortDescription.length > 10) {
+            $.ajax({
+                url: '/api/admin/news/create-draft',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(newsData),
+                success: function (response) {
+                    if (response.success && response.news) {
+                        newsId = response.news.id;
+                        isNewNews = false;
+
+                        // Update the form action URL
+                        const currentUrl = window.location.pathname;
+                        const newUrl = '/admin/news/' + newsId + '/edit';
+
+                        // Update form action
+                        $('#newsForm').attr('action', '/admin/news/' + newsId + '/update');
+
+                        $('#saveStatus').text('Đã tạo bản nháp lúc ' + new Date().toLocaleTimeString());
+                        $('#saveStatus').removeClass('text-danger').addClass('text-success');
+                    }
+                },
+                error: function () {
+                    $('#saveStatus').text('Lỗi khi tạo bản nháp');
+                    $('#saveStatus').removeClass('text-success').addClass('text-danger');
+                }
+            });
+        }
+    }
+
+    // Image handling
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $('#previewImg').attr('src', e.target.result);
+                $('#newImagePreview').show();
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function removeImage() {
+        $('#imageFile').val('');
+        $('#newImagePreview').hide();
+    }
+
+    // Drag & Drop
+    function dragOverHandler(ev) {
+        ev.preventDefault();
+        ev.currentTarget.classList.add('dragover');
+    }
+
+    function dropHandler(ev) {
+        ev.preventDefault();
+        ev.currentTarget.classList.remove('dragover');
+
+        if (ev.dataTransfer.items) {
+            for (let i = 0; i < ev.dataTransfer.items.length; i++) {
+                if (ev.dataTransfer.items[i].kind === 'file') {
+                    const file = ev.dataTransfer.items[i].getAsFile();
+                    if (file.type.startsWith('image/')) {
+                        $('#imageFile')[0].files = ev.dataTransfer.files;
+                        previewImage($('#imageFile')[0]);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    // Preview functionality
+    function previewNews() {
+        const title = $('#title').val();
+        const shortDesc = $('#shortDescription').val();
+        const content = $('#content').summernote('code');
+        const category = $('#category option:selected').text();
+        const author = $('#author').val() || 'Admin DAT';
+
+        if (!title.trim()) {
+            alert('Vui lòng nhập tiêu đề trước khi xem trước');
+            return;
+        }
+
+        const previewHTML = `
+            <article class="news-article">
+                <header class="mb-4">
+                    <div class="mb-2">
+                        <span class="badge bg-secondary">${category}</span>
+                    </div>
+                    <h2 class="mb-3">${title}</h2>
+                    ${shortDesc ? '<p class="lead text-muted">' + shortDesc + '</p>' : ''}
+                    <div class="text-muted small">
+                        <i class="fas fa-user"></i> ${author} • 
+                        <i class="fas fa-calendar"></i> ${new Date().toLocaleDateString('vi-VN')}
+                    </div>
+                </header>
+                <div class="content-body">
+                    ${content || '<p class="text-muted">Chưa có nội dung</p>'}
+                </div>
+            </article>
+        `;
+
+        $('#previewContent').html(previewHTML);
+        $('#previewModal').modal('show');
+    }
+
+    function submitForm() {
+        $('#previewModal').modal('hide');
+        $('#newsForm').submit();
+    }
+
+    // Upload content image
+    function uploadContentImage(file) {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        $.ajax({
+            url: '/api/admin/upload-content-image',
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#content').summernote('insertImage', response.url);
+                } else {
+                    alert('Lỗi khi tải ảnh: ' + response.message);
+                }
+            },
+            error: function () {
+                alert('Lỗi kết nối khi tải ảnh');
+            }
+        });
+    }
+
+    // Form validation with real-time feedback
+    function validateForm() {
+        let isValid = true;
+        const errors = [];
+
+        // Check required fields
+        const title = $('#title').val().trim();
+        const shortDesc = $('#shortDescription').val().trim();
+        const content = $('#content').summernote('code').trim();
+        const category = $('#category').val();
+
+        // Clear previous errors
+        $('.is-invalid').removeClass('is-invalid');
+        $('.invalid-feedback').remove();
+
+        if (!title || title.length < 10) {
+            $('#title').addClass('is-invalid');
+            $('#title').after('<div class="invalid-feedback">Tiêu đề phải có ít nhất 10 ký tự</div>');
+            errors.push('Tiêu đề phải có ít nhất 10 ký tự');
+            isValid = false;
+        }
+
+        if (!shortDesc || shortDesc.length < 20) {
+            $('#shortDescription').addClass('is-invalid');
+            $('#shortDescription').after('<div class="invalid-feedback">Mô tả ngắn phải có ít nhất 20 ký tự</div>');
+            errors.push('Mô tả ngắn phải có ít nhất 20 ký tự');
+            isValid = false;
+        }
+
+        if (!content || content === '<p><br></p>' || content.trim() === '<p></p>') {
+            $('.note-editor').addClass('is-invalid');
+            $('.note-editor').after('<div class="invalid-feedback">Vui lòng nhập nội dung tin tức</div>');
+            errors.push('Vui lòng nhập nội dung tin tức');
+            isValid = false;
+        }
+
+        if (!category) {
+            $('#category').addClass('is-invalid');
+            $('#category').after('<div class="invalid-feedback">Vui lòng chọn danh mục</div>');
+            errors.push('Vui lòng chọn danh mục');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    // Form validation
+    $('#newsForm').on('submit', function (e) {
+        if (!validateForm()) {
+            e.preventDefault();
+
+            // Scroll to first error
+            const firstError = $('.is-invalid').first();
+            if (firstError.length) {
+                $('html, body').animate({
+                    scrollTop: firstError.offset().top - 100
+                }, 500);
+            }
+
+            return false;
+        }
+
+        // Show loading
+        const submitBtn = $(this).find('button[type="submit"]:focus');
+        const originalText = submitBtn.html();
+        submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Đang xử lý...');
+
+        // Restore button after 5 seconds (in case of redirect issues)
+        setTimeout(() => {
+            submitBtn.prop('disabled', false).html(originalText);
+        }, 5000);
+    });
+
+    // Real-time validation
+    $('#title').on('input', function () {
+        const val = $(this).val().trim();
+        if (val.length >= 10) {
+            $(this).removeClass('is-invalid').addClass('is-valid');
+            $(this).siblings('.invalid-feedback').remove();
+        }
+    });
+
+    $('#shortDescription').on('input', function () {
+        const val = $(this).val().trim();
+        if (val.length >= 20) {
+            $(this).removeClass('is-invalid').addClass('is-valid');
+            $(this).siblings('.invalid-feedback').remove();
+        }
+    });
+
+    $('#content').on('summernote.change', function () {
+        const val = $(this).summernote('code').trim();
+        if (val && val !== '<p><br></p>' && val !== '<p></p>') {
+            $('.note-editor').removeClass('is-invalid');
+            $('.note-editor').siblings('.invalid-feedback').remove();
+        }
+    });
+
+    // Auto-hide alerts
+    setTimeout(() => {
+        $('.alert').alert('close');
+    }, 5000);
+</script>
+</body>
+</html>

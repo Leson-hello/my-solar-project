@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Admin DAT Group</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --admin-primary: #2c3e50;
+            --admin-secondary: #3498db;
+            --admin-success: #27ae60;
+            --admin-warning: #f39c12;
+            --admin-danger: #e74c3c;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--admin-primary);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .admin-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .sidebar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-link i {
+            margin-right: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stats-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="admin-wrapper">
+    <!-- Sidebar -->
+    <nav class="admin-sidebar">
+        <div class="sidebar-header">
+            <a th:href="@{/admin}" class="sidebar-brand">
+                <i class="fas fa-solar-panel"></i> DAT Admin
+                </a>
+                <small class="d-block text-white-50 mt-2">Content Management</small>
+            </div>
+
+            <ul class="sidebar-nav list-unstyled">
+                <li class="nav-item">
+                    <a th:href="@{/admin}" class="nav-link active">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/admin/news}" class="nav-link">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Quản lý tin tức</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/admin/news/create}" class="nav-link">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Tạo tin tức mới</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-images"></i>
+                        <span>Quản lý hình ảnh</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Người dùng</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-4">
+                    <a th:href="@{/}" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Về trang chủ</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="admin-content">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h4 mb-0">Dashboard</h1>
+                        <small class="text-muted">Tổng quan hệ thống quản lý nội dung</small>
+                    </div>
+                    <div>
+                        <span class="text-muted">Xin chào, Admin!</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <main class="main-content">
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="stats-card">
+                            <div class="stats-icon text-primary">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <div class="stats-number text-primary" th:text="${totalNews ?: 0}">0</div>
+                            <div class="text-muted">Tổng tin tức</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="stats-card">
+                            <div class="stats-icon text-success">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="stats-number text-success">0</div>
+                            <div class="text-muted">Tin đã phát hành</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="stats-card">
+                            <div class="stats-icon text-warning">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="stats-number text-warning">0</div>
+                            <div class="text-muted">Bản nháp</div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="stats-card">
+                            <div class="stats-icon text-info">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="stats-number text-info">0</div>
+                            <div class="text-muted">Lượt xem</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent News -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Tin tức gần đây</h5>
+                                    <a th:href="@{/admin/news}" class="btn btn-sm btn-outline-primary">
+                                        Xem tất cả
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive"
+                                     th:if="${recentNews != null and #lists.size(recentNews) > 0}">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>Tiêu đề</th>
+                                            <th>Danh mục</th>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Lượt xem</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="news : ${recentNews}">
+                                            <td>
+                                                <div class="fw-bold" th:text="${news.title}">Tiêu đề tin tức</div>
+                                                <small class="text-muted"
+                                                       th:text="${#strings.abbreviate(news.shortDescription, 60)}">Mô tả
+                                                    ngắn</small>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary" th:text="${news.categoryDisplayName}">Category</span>
+                                            </td>
+                                            <td>
+                                                    <span th:if="${news.isPublished}" class="badge bg-success">
+                                                        <i class="fas fa-globe"></i> Đã phát hành
+                                                    </span>
+                                                <span th:unless="${news.isPublished}" class="badge bg-warning">
+                                                        <i class="fas fa-file-alt"></i> Bản nháp
+                                                    </span>
+                                            </td>
+                                            <td>
+                                                <span th:text="${news.createdDateFormatted}">01.01.2024</span>
+                                            </td>
+                                            <td>
+                                                <i class="fas fa-eye text-muted"></i>
+                                                <span th:text="${news.views ?: 0}">0</span>
+                                            </td>
+                                            <td>
+                                                <a th:href="@{/admin/news/{id}/edit(id=${news.id})}"
+                                                   class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div th:if="${recentNews == null or #lists.size(recentNews) == 0}"
+                                     class="text-center py-5">
+                                    <i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">Chưa có tin tức nào</p>
+                                    <a th:href="@{/admin/news/create}" class="btn btn-primary">
+                                        <i class="fas fa-plus"></i> Tạo tin tức đầu tiên
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${news.title + ' - DAT Group'}">Chi tiết tin tức - DAT Group</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" th:content="${news.shortDescription}">
+    <meta property="og:title" th:content="${news.title}">
+    <meta property="og:description" th:content="${news.shortDescription}">
+    <meta property="og:image" th:content="${news.imageUrl}">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{layout/header :: header}"></div>
+
+<!-- News Detail Section -->
+<section class="news-detail py-5" style="margin-top: 120px;">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/news}">Tin tức</a></li>
+                <li class="breadcrumb-item active" aria-current="page" th:text="${news.title}">Chi tiết tin tức</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <article class="news-article">
+                    <!-- Article Header -->
+                    <header class="article-header mb-4">
+                        <div class="article-meta mb-3">
+                                <span class="badge"
+                                      style="background: var(--secondary-color);"
+                                      th:text="${news.categoryDisplayName}">
+                                    Tin công ty
+                                </span>
+                            <span class="text-muted ms-3">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span th:text="${news.publishedDateFormatted}">24.07.2025</span>
+                                </span>
+                            <span class="text-muted ms-3">
+                                    <i class="fas fa-eye"></i>
+                                    <span th:text="${news.views}">1,234</span> lượt xem
+                                </span>
+                            <span class="text-muted ms-3" th:if="${news.author != null and !news.author.isEmpty()}">
+                                    <i class="fas fa-user"></i>
+                                    <span th:text="${news.author}">Admin</span>
+                                </span>
+                        </div>
+
+                        <h1 class="article-title mb-4" th:text="${news.title}">
+                            CẢNH BÁO: CẨN TRỌNG CHIỀU TRÒ LỪA ĐẢO, GIẢ MAO TUYỂN DỤNG DAT GROUP!
+                        </h1>
+
+                        <div class="article-summary p-4 mb-4"
+                             style="background: #f8f9fa; border-left: 4px solid var(--primary-color); border-radius: 10px;"
+                             th:if="${news.shortDescription != null and !news.shortDescription.isEmpty()}">
+                            <p class="lead mb-0" th:text="${news.shortDescription}">
+                                Thời gian gần đây qua sự thật thông tin mạng xã hội, DAT Group phát hiện nhiều Email,
+                                tài khoản Facebook, Fanpage giả mao tuyển dụng DAT Group với mục tiêu lợi nhuận...
+                            </p>
+                        </div>
+                    </header>
+
+                    <!-- Featured Image -->
+                    <figure class="article-image mb-4" th:if="${news.imageUrl != null and !news.imageUrl.isEmpty()}">
+                        <img th:src="@{${news.imageUrl}}"
+                             th:alt="${news.title}"
+                             class="img-fluid rounded shadow">
+                    </figure>
+
+                    <!-- Article Content -->
+                    <div class="article-content">
+                        <div th:utext="${news.content}" class="content-body">
+                            <!-- Dynamic content will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Article Footer -->
+                    <footer class="article-footer mt-5">
+                        <!-- Social Share Buttons -->
+                        <div class="social-share mb-4">
+                            <h5 class="mb-3">Chia sẻ bài viết:</h5>
+                            <div class="share-buttons">
+                                <a href="#" class="btn btn-outline-primary btn-sm me-2"
+                                   onclick="shareOnFacebook()" title="Chia sẻ lên Facebook">
+                                    <i class="fab fa-facebook-f"></i> Facebook
+                                </a>
+                                <a href="#" class="btn btn-outline-info btn-sm me-2"
+                                   onclick="shareOnTwitter()" title="Chia sẻ lên Twitter">
+                                    <i class="fab fa-twitter"></i> Twitter
+                                </a>
+                                <a href="#" class="btn btn-outline-success btn-sm me-2"
+                                   onclick="copyToClipboard()" title="Sao chép link">
+                                    <i class="fas fa-link"></i> Copy Link
+                                </a>
+                                <a href="#" class="btn btn-outline-secondary btn-sm"
+                                   onclick="window.print()" title="In bài viết">
+                                    <i class="fas fa-print"></i> In
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="article-tags mb-4" th:if="${news.category != null}">
+                            <h6 class="mb-2">Tags:</h6>
+                            <span class="badge bg-light text-dark me-2" th:text="${news.categoryDisplayName}">Tin công ty</span>
+                            <span class="badge bg-light text-dark me-2">Năng lượng mặt trời</span>
+                            <span class="badge bg-light text-dark me-2">DAT Group</span>
+                        </div>
+
+                        <!-- Navigation to Previous/Next -->
+                        <div class="article-navigation">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-outline-secondary w-100 text-start">
+                                        <i class="fas fa-chevron-left"></i> Bài trước
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-outline-secondary w-100 text-end">
+                                        Bài tiếp theo <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <aside class="news-sidebar">
+                    <!-- Search Box -->
+                    <div class="sidebar-widget mb-4">
+                        <h5 class="widget-title mb-3">Tìm kiếm tin tức</h5>
+                        <form th:action="@{/news}" method="get" class="d-flex">
+                            <input type="search" class="form-control me-2" name="search"
+                                   placeholder="Nhập từ khóa...">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="sidebar-widget mb-4">
+                        <h5 class="widget-title mb-3">Danh mục tin tức</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <a th:href="@{/news}"
+                                   class="text-decoration-none d-flex justify-content-between align-items-center">
+                                    <span>Tất cả tin tức</span>
+                                    <span class="badge bg-secondary">All</span>
+                                </a>
+                            </li>
+                            <li class="mb-2"
+                                th:each="category : ${T(com.s.solar_backend.entity.News.NewsCategory).values()}">
+                                <a th:href="@{/news(category=${category.name()})}"
+                                   class="text-decoration-none d-flex justify-content-between align-items-center"
+                                   th:classappend="${news.category == category} ? 'text-primary fw-bold' : ''">
+                                    <span th:text="${category.getDisplayName()}">Tin công ty</span>
+                                    <i class="fas fa-chevron-right" th:if="${news.category == category}"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Related News -->
+                    <div class="sidebar-widget mb-4" th:if="${relatedNews != null and !relatedNews.isEmpty()}">
+                        <h5 class="widget-title mb-3">Tin liên quan</h5>
+                        <div class="related-news">
+                            <div class="related-item mb-3" th:each="related : ${relatedNews}"
+                                 th:if="${related.id != news.id}">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a th:href="@{/news/{id}(id=${related.id})}">
+                                            <img th:src="@{${related.imageUrl != null ? related.imageUrl : '/photo/anh39.jpg'}}"
+                                                 th:alt="${related.title}"
+                                                 class="img-fluid rounded" style="height: 60px; object-fit: cover;">
+                                        </a>
+                                    </div>
+                                    <div class="col-8">
+                                        <h6 class="mb-1">
+                                            <a th:href="@{/news/{id}(id=${related.id})}"
+                                               th:text="${related.title}"
+                                               class="text-decoration-none text-dark small">
+                                                Related news title
+                                            </a>
+                                        </h6>
+                                        <small class="text-muted" th:text="${related.publishedDateFormatted}">
+                                            24.07.2025
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact CTA -->
+                    <div class="sidebar-widget">
+                        <div class="cta-box p-4 text-center"
+                             style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px;">
+                            <h5 class="text-white mb-3">Cần tư vấn?</h5>
+                            <p class="text-white-50 mb-3">Liên hệ với chúng tôi để được tư vấn miễn phí về giải pháp
+                                năng lượng mặt trời</p>
+                            <a th:href="@{/contact}" class="btn btn-light">
+                                <i class="fas fa-phone"></i> Liên hệ ngay
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<div th:replace="~{layout/footer :: footer}"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script th:src="@{/js/main.js}"></script>
+
+<script>
+    // Social sharing functions
+    function shareOnFacebook() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+    }
+
+    function shareOnTwitter() {
+        const url = encodeURIComponent(window.location.href);
+        const title = encodeURIComponent(document.title);
+        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${title}`, '_blank', 'width=600,height=400');
+    }
+
+    function copyToClipboard() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            alert('Đã sao chép link vào clipboard!');
+        });
+    }
+</script>
+
+<style>
+    .article-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: var(--dark-color);
+        line-height: 1.3;
+    }
+
+    .article-meta {
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 1rem;
+    }
+
+    .content-body {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #333;
+    }
+
+    .content-body p {
+        margin-bottom: 1.5rem;
+    }
+
+    .content-body h1, .content-body h2, .content-body h3 {
+        color: var(--dark-color);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .content-body img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        margin: 1.5rem 0;
+    }
+
+    .sidebar-widget {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .widget-title {
+        color: var(--dark-color);
+        font-weight: bold;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+    }
+
+    .related-item:hover {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 0.5rem;
+        transition: all 0.3s;
+    }
+
+    .share-buttons .btn {
+        border-radius: 25px;
+        font-size: 0.875rem;
+    }
+
+    .article-navigation .btn {
+        border-radius: 10px;
+        padding: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .article-title {
+            font-size: 2rem;
+        }
+
+        .content-body {
+            font-size: 1rem;
+        }
+
+        .article-navigation .btn {
+            margin-bottom: 1rem;
+        }
+    }
+</style>
+</body>
+</html>
