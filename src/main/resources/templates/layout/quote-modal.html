@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Quote Request Modal Fragment -->
+<div th:fragment="quoteModal">
+    <!-- Quote Request Modal Overlay -->
+    <div class="quote-modal-overlay" id="quoteModalOverlay" onclick="closeQuoteModal()"></div>
+
+    <!-- Quote Request Modal -->
+    <div class="quote-modal-container" id="quoteModal">
+        <div class="quote-modal">
+            <div class="quote-modal-header">
+                <h2>TƯ VẤN & BÁO GIÁ</h2>
+                <button type="button" class="close-btn" onclick="closeQuoteModal()">&times;</button>
+            </div>
+
+            <div class="quote-modal-body">
+                <!-- Product info if available -->
+                <div id="productInfoBox" class="product-info" style="display: none;">
+                    <strong id="productNameDisplay">Tên sản phẩm</strong>
+                    <p id="productPowerDisplay"></p>
+                </div>
+
+                <form id="quoteModalForm">
+                    <input type="hidden" id="modalProductId">
+
+                    <div class="form-group">
+                        <label>Tên của bạn <span class="required">*</span></label>
+                        <input type="text" id="modalFullName" name="fullName" placeholder="VD: Nguyễn Văn A" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Số điện thoại <span class="required">*</span></label>
+                        <input type="tel" id="modalPhone" name="phone" placeholder="0987 XXX XXX *" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email <span class="required">*</span></label>
+                        <input type="email" id="modalEmail" name="email" placeholder="VD: nguyenvana@gmail.com"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bạn là... <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="customerType" value="ca-nhan" checked>
+                                Người dùng cá nhân
+                            </label>
+                            <label>
+                                <input type="radio" name="customerType" value="dai-ly">
+                                Đại lý/Nhà phân phối, bán lẻ/Nhà thầu...
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Công suất, số lượng, ứng dụng hoặc mã sản phẩm... <span class="required">*</span></label>
+                        <input type="text" id="modalRequirements" name="requirements"
+                            placeholder="20 tấm 550, 1 cont tấm 440..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tỉnh/Thành phố <span class="required">*</span></label>
+                        <input type="text" id="modalCity" name="city" placeholder="Thành phố Cần Thơ" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="modalSubmitBtn">
+                        Gửi yêu cầu
+                    </button>
+                </form>
+
+                <div id="modalFormMessage" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quote Modal Styles -->
+    <style>
+        .quote-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9998;
+        }
+
+        .quote-modal-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .quote-modal-container.active,
+        .quote-modal-overlay.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 50px;
+        }
+
+        .quote-modal-overlay.active {
+            display: block;
+        }
+
+        .quote-modal {
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 520px;
+            width: 100%;
+            position: relative;
+            animation: modalSlideUp 0.3s ease-out;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .quote-modal-header {
+            padding: 25px 30px 20px;
+            border-bottom: 1px solid #e9ecef;
+            position: relative;
+        }
+
+        .quote-modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .quote-modal .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .quote-modal .close-btn:hover {
+            color: #333;
+        }
+
+        .quote-modal-body {
+            padding: 25px 30px;
+        }
+
+        .quote-modal .form-group {
+            margin-bottom: 18px;
+        }
+
+        .quote-modal .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .quote-modal .form-group label .required {
+            color: #dc3545;
+        }
+
+        .quote-modal .form-group input[type="text"],
+        .quote-modal .form-group input[type="tel"],
+        .quote-modal .form-group input[type="email"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .quote-modal .form-group input:focus {
+            outline: none;
+            border-color: #2196F3;
+            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+        }
+
+        .quote-modal .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .quote-modal .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .quote-modal .radio-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .quote-modal .radio-group input[type="radio"] {
+            margin-right: 6px;
+            accent-color: #2196F3;
+        }
+
+        .quote-modal .submit-btn {
+            background: #2196F3;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 10px;
+        }
+
+        .quote-modal .submit-btn:hover {
+            background: #1976D2;
+        }
+
+        .quote-modal .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .quote-modal .submit-btn:disabled {
+            background: #90CAF9;
+            cursor: not-allowed;
+        }
+
+        .quote-modal #modalFormMessage {
+            padding: 12px 15px;
+            border-radius: 3px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .quote-modal #modalFormMessage.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .quote-modal #modalFormMessage.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .quote-modal .product-info {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 3px solid #2196F3;
+        }
+
+        .quote-modal .product-info strong {
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .quote-modal .product-info p {
+            margin: 5px 0 0;
+            color: #666;
+            font-size: 0.85rem;
+        }
+    </style>
+
+    <!-- Quote Modal Scripts -->
+    <script>
+        function openQuoteModal(productId, productName, productPower) {
+            document.getElementById('quoteModalOverlay').classList.add('active');
+            document.getElementById('quoteModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Set product info if available
+            if (productId) {
+                document.getElementById('modalProductId').value = productId;
+            }
+
+            if (productName) {
+                document.getElementById('productInfoBox').style.display = 'block';
+                document.getElementById('productNameDisplay').textContent = productName;
+                if (productPower) {
+                    document.getElementById('productPowerDisplay').textContent = productPower;
+                }
+            }
+        }
+
+        function closeQuoteModal() {
+            document.getElementById('quoteModalOverlay').classList.remove('active');
+            document.getElementById('quoteModal').classList.remove('active');
+            document.body.style.overflow = '';
+
+            // Reset form
+            document.getElementById('quoteModalForm').reset();
+            document.getElementById('modalFormMessage').style.display = 'none';
+            document.getElementById('productInfoBox').style.display = 'none';
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeQuoteModal();
+            }
+        });
+
+        // Form submission
+        document.getElementById('quoteModalForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const customerTypeEl = document.querySelector('#quoteModalForm input[name="customerType"]:checked');
+
+            const formData = {
+                fullName: document.getElementById('modalFullName').value,
+                phone: document.getElementById('modalPhone').value,
+                email: document.getElementById('modalEmail').value,
+                customerType: customerTypeEl ? customerTypeEl.value : 'ca-nhan',
+                requirements: document.getElementById('modalRequirements').value,
+                city: document.getElementById('modalCity').value,
+                productId: document.getElementById('modalProductId').value || null
+            };
+
+            const submitBtn = document.getElementById('modalSubmitBtn');
+            const formMessage = document.getElementById('modalFormMessage');
+
+            try {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Đang gửi...';
+
+                const response = await fetch('/api/quotes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    formMessage.className = 'success';
+                    formMessage.innerHTML = '<i class="fas fa-check-circle"></i> ' + result.message;
+                    formMessage.style.display = 'block';
+                    document.getElementById('quoteModalForm').reset();
+
+                    setTimeout(() => {
+                        closeQuoteModal();
+                    }, 2000);
+                } else {
+                    formMessage.className = 'error';
+                    formMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + result.message;
+                    formMessage.style.display = 'block';
+                }
+            } catch (error) {
+                formMessage.className = 'error';
+                formMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Có lỗi xảy ra. Vui lòng thử lại sau.';
+                formMessage.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Gửi yêu cầu';
+            }
+        });
+    </script>
+</div>
+
+</html>

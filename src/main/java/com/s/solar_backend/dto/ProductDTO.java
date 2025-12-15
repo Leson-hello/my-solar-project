@@ -20,4 +20,7 @@ public class ProductDTO {
     private String specifications;
     private Integer warranty;
     private String category;
+    private boolean active;
+    private boolean featured;
+    private Integer displayOrder;
 }

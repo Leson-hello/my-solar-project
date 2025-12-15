@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,252 +99,258 @@
         }
     </style>
 </head>
+
 <body>
-<div class="admin-wrapper">
-    <!-- Sidebar -->
-    <nav class="admin-sidebar">
-        <div class="sidebar-header">
-            <a th:href="@{/admin}" class="sidebar-brand">
-                <i class="fas fa-solar-panel"></i> DAT Admin
-            </a>
-            <small class="d-block text-white-50 mt-2">Content Management</small>
-        </div>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <a th:href="@{/admin}" class="sidebar-brand">
+                    <i class="fas fa-solar-panel"></i> DAT Admin
+                </a>
+                <small class="d-block text-white-50 mt-2">Content Management</small>
+            </div>
 
-        <ul class="sidebar-nav list-unstyled">
-            <li class="nav-item">
-                <a th:href="@{/admin}" class="nav-link">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a th:href="@{/admin/news}" class="nav-link">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Quản lý tin tức</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a th:href="@{/admin/news/create}" class="nav-link">
-                    <i class="fas fa-plus-circle"></i>
-                    <span>Tạo tin tức mới</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a th:href="@{/admin/products}" class="nav-link active">
-                    <i class="fas fa-boxes"></i>
-                    <span>Quản lý sản phẩm</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a th:href="@{/admin/quotes}" class="nav-link">
-                    <i class="fas fa-file-invoice"></i>
-                    <span>Yêu cầu báo giá</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-images"></i>
-                    <span>Quản lý hình ảnh</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-users"></i>
-                    <span>Người dùng</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-cog"></i>
-                    <span>Cài đặt</span>
-                </a>
-            </li>
-            <li class="nav-item mt-4">
-                <a th:href="@{/}" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    <span>Về trang chủ</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="admin-content">
-        <!-- Header -->
-        <header class="admin-header">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="h4 mb-0" th:text="${isEdit ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm mới'}">Sản phẩm</h1>
-                    <small class="text-muted">Quản lý thông tin sản phẩm</small>
-                </div>
-                <div>
-                    <a th:href="@{/admin/products}" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Quay lại
+            <ul class="sidebar-nav list-unstyled">
+                <li class="nav-item">
+                    <a th:href="@{/admin}" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/admin/news}" class="nav-link">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Quản lý tin tức</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/admin/news/create}" class="nav-link">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Tạo tin tức mới</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/admin/products}" class="nav-link active">
+                        <i class="fas fa-boxes"></i>
+                        <span>Quản lý sản phẩm</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/admin/quotes}" class="nav-link">
+                        <i class="fas fa-file-invoice"></i>
+                        <span>Yêu cầu báo giá</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-images"></i>
+                        <span>Quản lý hình ảnh</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Người dùng</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-4">
+                    <a th:href="@{/}" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Về trang chủ</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="admin-content">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h4 mb-0" th:text="${isEdit ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm mới'}">Sản phẩm
+                        </h1>
+                        <small class="text-muted">Quản lý thông tin sản phẩm</small>
+                    </div>
+                    <div>
+                        <a th:href="@{/admin/products}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
 
-        <!-- Content -->
-        <main class="main-content">
+            <!-- Content -->
+            <main class="main-content">
 
-            <div th:if="${success}" class="alert alert-success alert-dismissible fade show">
-                <i class="fas fa-check-circle"></i> <span th:text="${success}"></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
-                <i class="fas fa-exclamation-circle"></i> <span th:text="${error}"></span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
+                <div th:if="${success}" class="alert alert-success alert-dismissible fade show">
+                    <i class="fas fa-check-circle"></i> <span th:text="${success}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                <div th:if="${error}" class="alert alert-danger alert-dismissible fade show">
+                    <i class="fas fa-exclamation-circle"></i> <span th:text="${error}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
 
-            <form th:action="${isEdit ? '/admin/products/' + product.id + '/update' : '/admin/products/create'}"
-                  method="post" enctype="multipart/form-data" th:object="${product}">
+                <form th:action="${isEdit ? '/admin/products/' + product.id + '/update' : '/admin/products/create'}"
+                    method="post" enctype="multipart/form-data" th:object="${product}">
 
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h5>Thông tin cơ bản</h5>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5>Thông tin cơ bản</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Tên sản phẩm <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" th:field="*{name}" required>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Thương hiệu</label>
+                                            <input type="text" class="form-control" th:field="*{brand}">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Danh mục</label>
+                                            <select class="form-select" th:field="*{category}">
+                                                <option value="">-- Chọn danh mục --</option>
+                                                <option value="tam-pin">Tấm pin năng lượng mặt trời</option>
+                                                <option value="inverter">Inverter / Bộ hòa lưới</option>
+                                                <option value="pin-luu-tru">Pin lưu trữ</option>
+                                                <option value="phu-kien">Phụ kiện</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Công suất</label>
+                                            <input type="number" step="0.01" class="form-control" th:field="*{power}">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Đơn vị công suất</label>
+                                            <select class="form-select" th:field="*{powerUnit}">
+                                                <option value="W">W</option>
+                                                <option value="KW">KW</option>
+                                                <option value="KWh">KWh</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Loại</label>
+                                            <input type="text" class="form-control" th:field="*{type}"
+                                                placeholder="VD: Mono PERC">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Giá (VNĐ)</label>
+                                            <input type="number" step="1000" class="form-control" th:field="*{price}">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Bảo hành (năm)</label>
+                                            <input type="number" class="form-control" th:field="*{warranty}">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Mô tả ngắn</label>
+                                        <textarea class="form-control" rows="3" th:field="*{description}"></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Thông số kỹ thuật</label>
+                                        <textarea class="form-control" rows="6" th:field="*{specifications}"
+                                            placeholder="Nhập thông số kỹ thuật chi tiết..."></textarea>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label class="form-label">Tên sản phẩm <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" th:field="*{name}" required>
-                                </div>
+                        </div>
 
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Thương hiệu</label>
-                                        <input type="text" class="form-control" th:field="*{brand}">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Danh mục</label>
-                                        <select class="form-select" th:field="*{category}">
-                                            <option value="">-- Chọn danh mục --</option>
-                                            <option value="tam-pin">Tấm pin năng lượng mặt trời</option>
-                                            <option value="inverter">Inverter / Bộ hòa lưới</option>
-                                            <option value="pin-luu-tru">Pin lưu trữ</option>
-                                            <option value="phu-kien">Phụ kiện</option>
-                                        </select>
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5>Hình ảnh</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <div th:if="${product.imageUrl}" class="mb-2">
+                                            <img th:src="@{${product.imageUrl}}" alt="Current image" class="img-fluid"
+                                                id="previewImage">
+                                        </div>
+                                        <input type="file" class="form-control" name="imageFile" accept="image/*"
+                                            onchange="previewFile(this)">
+                                        <small class="text-muted">Chấp nhận: JPG, PNG. Tối đa: 5MB</small>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Công suất</label>
-                                        <input type="number" step="0.01" class="form-control" th:field="*{power}">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5>Tùy chọn</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" th:field="*{active}"
+                                            id="active">
+                                        <label class="form-check-label" for="active">
+                                            Hiển thị sản phẩm
+                                        </label>
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Đơn vị công suất</label>
-                                        <select class="form-select" th:field="*{powerUnit}">
-                                            <option value="W">W</option>
-                                            <option value="KW">KW</option>
-                                            <option value="KWh">KWh</option>
-                                        </select>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" th:field="*{featured}"
+                                            id="featured">
+                                        <label class="form-check-label" for="featured">
+                                            Sản phẩm nổi bật
+                                        </label>
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label class="form-label">Loại</label>
-                                        <input type="text" class="form-control" th:field="*{type}" 
-                                               placeholder="VD: Mono PERC">
+                                    <div class="mb-3">
+                                        <label class="form-label">Thứ tự hiển thị</label>
+                                        <input type="number" class="form-control" th:field="*{displayOrder}">
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Giá (VNĐ)</label>
-                                        <input type="number" step="1000" class="form-control" th:field="*{price}">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Bảo hành (năm)</label>
-                                        <input type="number" class="form-control" th:field="*{warranty}">
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Mô tả ngắn</label>
-                                    <textarea class="form-control" rows="3" th:field="*{description}"></textarea>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Thông số kỹ thuật</label>
-                                    <textarea class="form-control" rows="6" th:field="*{specifications}"
-                                              placeholder="Nhập thông số kỹ thuật chi tiết..."></textarea>
+                            <div class="card">
+                                <div class="card-body">
+                                    <button type="submit" class="btn btn-primary w-100 mb-2">
+                                        <i class="fas fa-save"></i> Lưu sản phẩm
+                                    </button>
+                                    <a th:if="${isEdit}" th:href="@{/products/{id}(id=${product.id})}" target="_blank"
+                                        class="btn btn-outline-info w-100">
+                                        <i class="fas fa-eye"></i> Xem sản phẩm
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-4">
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h5>Hình ảnh</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <div th:if="${product.imageUrl}" class="mb-2">
-                                        <img th:src="@{${product.imageUrl}}" alt="Current image" 
-                                             class="img-fluid" id="previewImage">
-                                    </div>
-                                    <input type="file" class="form-control" name="imageFile" 
-                                           accept="image/*" onchange="previewFile(this)">
-                                    <small class="text-muted">Chấp nhận: JPG, PNG. Tối đa: 5MB</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mb-3">
-                            <div class="card-header">
-                                <h5>Tùy chọn</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" th:field="*{isActive}" id="isActive">
-                                    <label class="form-check-label" for="isActive">
-                                        Hiển thị sản phẩm
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox" th:field="*{isFeatured}" id="isFeatured">
-                                    <label class="form-check-label" for="isFeatured">
-                                        Sản phẩm nổi bật
-                                    </label>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Thứ tự hiển thị</label>
-                                    <input type="number" class="form-control" th:field="*{displayOrder}">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <button type="submit" class="btn btn-primary w-100 mb-2">
-                                    <i class="fas fa-save"></i> Lưu sản phẩm
-                                </button>
-                                <a th:if="${isEdit}" th:href="@{/products/{id}(id=${product.id})}" 
-                                   target="_blank" class="btn btn-outline-info w-100">
-                                    <i class="fas fa-eye"></i> Xem sản phẩm
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </main>
+                </form>
+            </main>
+        </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function previewFile(input) {
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('previewImage').src = e.target.result;
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function previewFile(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('previewImage').src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
         }
-    }
-</script>
+    </script>
 </body>
+
 </html>

@@ -266,51 +266,80 @@
             <div class="col-md-6">
                 <div class="featured-products">
                     <div class="row">
-                        <div class="col-6 mb-3">
-                            <div class="product-card">
-                                <img th:src="@{/photo/anh31.jpg}"
-                                     alt="HiKu Panel" class="product-image">
-                                <div class="product-info">
-                                    <h6>HiKu</h6>
-                                    <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                    <span class="product-power">Công suất: 520W</span>
-                                    <span class="product-brand">Hãng: Canadian Solar</span>
+                        <!-- Dynamic Featured Products from Database -->
+                        <div th:if="${featuredProducts != null and !featuredProducts.isEmpty()}">
+                            <div class="row">
+                                <div class="col-6 mb-3" th:each="product, iterStat : ${featuredProducts}" th:if="${iterStat.index < 4}">
+                                    <a th:href="@{/products/{id}(id=${product.id})}" style="text-decoration: none; color: inherit;">
+                                        <div class="product-card">
+                                            <img th:src="@{${product.imageUrl != null ? product.imageUrl : '/photo/anh31.jpg'}}"
+                                                 th:alt="${product.name}" class="product-image">
+                                            <div class="product-info">
+                                                <h6 th:text="${product.name}">HiKu</h6>
+                                                <p th:text="${product.description != null ? product.description : 'TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO'}">TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
+                                                <span class="product-power" th:if="${product.power != null}">
+                                                    Công suất: <span th:text="${product.power + ' ' + (product.powerUnit != null ? product.powerUnit : 'W')}">520W</span>
+                                                </span>
+                                                <span class="product-brand" th:if="${product.brand != null}">
+                                                    Hãng: <span th:text="${product.brand}">Canadian Solar</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 mb-3">
-                            <div class="product-card">
-                                <img th:src="@{/photo/anh33.jpg}"
-                                     alt="HiKu Panel 2" class="product-image">
-                                <div class="product-info">
-                                    <h6>HiKu</h6>
-                                    <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                    <span class="product-power">Công suất: 540W</span>
-                                    <span class="product-brand">Hãng: Canadian Solar</span>
+                        
+                        <!-- Fallback: Static Products if no database products -->
+                        <div th:if="${featuredProducts == null or featuredProducts.isEmpty()}">
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <div class="product-card">
+                                        <img th:src="@{/photo/anh31.jpg}"
+                                             alt="HiKu Panel" class="product-image">
+                                        <div class="product-info">
+                                            <h6>HiKu</h6>
+                                            <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
+                                            <span class="product-power">Công suất: 520W</span>
+                                            <span class="product-brand">Hãng: Canadian Solar</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <div class="product-card">
-                                <img th:src="@{/photo/anh36.jpg}"
-                                     alt="HiKu Panel 3" class="product-image">
-                                <div class="product-info">
-                                    <h6>HiKu</h6>
-                                    <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                    <span class="product-power">Công suất: 545W</span>
-                                    <span class="product-brand">Hãng: Canadian Solar</span>
+                                <div class="col-6 mb-3">
+                                    <div class="product-card">
+                                        <img th:src="@{/photo/anh33.jpg}"
+                                             alt="HiKu Panel 2" class="product-image">
+                                        <div class="product-info">
+                                            <h6>HiKu</h6>
+                                            <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
+                                            <span class="product-power">Công suất: 540W</span>
+                                            <span class="product-brand">Hãng: Canadian Solar</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-6 mb-3">
-                            <div class="product-card">
-                                <img th:src="@{/photo/anh37.jpg}"
-                                     alt="HiKu Panel 4" class="product-image">
-                                <div class="product-info">
-                                    <h6>HiKu</h6>
-                                    <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                    <span class="product-power">Công suất: 535W</span>
-                                    <span class="product-brand">Hãng: Canadian Solar</span>
+                                <div class="col-6 mb-3">
+                                    <div class="product-card">
+                                        <img th:src="@{/photo/anh36.jpg}"
+                                             alt="HiKu Panel 3" class="product-image">
+                                        <div class="product-info">
+                                            <h6>HiKu</h6>
+                                            <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
+                                            <span class="product-power">Công suất: 545W</span>
+                                            <span class="product-brand">Hãng: Canadian Solar</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="product-card">
+                                        <img th:src="@{/photo/anh37.jpg}"
+                                             alt="HiKu Panel 4" class="product-image">
+                                        <div class="product-info">
+                                            <h6>HiKu</h6>
+                                            <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
+                                            <span class="product-power">Công suất: 535W</span>
+                                            <span class="product-brand">Hãng: Canadian Solar</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

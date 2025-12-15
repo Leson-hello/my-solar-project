@@ -1,7 +1,9 @@
 package com.s.solar_backend.controller;
 
 import com.s.solar_backend.dto.NewsDTO;
+import com.s.solar_backend.dto.ProductDTO;
 import com.s.solar_backend.service.NewsService;
+import com.s.solar_backend.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import java.util.List;
 public class HomeController {
 
     private final NewsService newsService;
+    private final ProductService productService;
 
     @GetMapping
     public String home(Model model) {
@@ -31,6 +34,10 @@ public class HomeController {
         List<NewsDTO> recentNews = newsService.getRecentNewsForHomepage();
         model.addAttribute("recentNews", recentNews);
 
+        // Add featured products for homepage
+        List<ProductDTO> featuredProducts = productService.getFeaturedProducts();
+        model.addAttribute("featuredProducts", featuredProducts);
+
         return "index";
     }
 
@@ -43,7 +50,6 @@ public class HomeController {
     public String services(Model model) {
         return "services";
     }
-
 
     @GetMapping("/projects")
     public String projects(Model model) {
