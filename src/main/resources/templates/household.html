@@ -739,10 +739,37 @@
                 const packageName = this.getAttribute('data-package');
                 if (packageName) {
                     document.getElementById('selectedPackage').value = packageName;
-                    // Pre-fill message
+
+                    // Pre-fill message with package name
                     const messageField = document.querySelector('#quoteModal input[name="message"]');
-                    if (messageField && !messageField.value) {
+                    if (messageField) {
                         messageField.value = 'Tư vấn gói ' + packageName;
+                    }
+
+                    // Pre-fill from estimation form data if available
+                    if (window.estimationData) {
+                        // Pre-fill name
+                        const nameField = document.querySelector('#quoteModal input[name="fullName"]');
+                        if (nameField && window.estimationData.name) {
+                            nameField.value = window.estimationData.name;
+                        }
+
+                        // Pre-fill email
+                        const emailField = document.querySelector('#quoteModal input[name="email"]');
+                        if (emailField && window.estimationData.email) {
+                            emailField.value = window.estimationData.email;
+                        }
+
+                        // Pre-fill monthly bill select
+                        const billSelect = document.getElementById('monthlyBillSelect');
+                        if (billSelect && window.estimationData.monthlyBillRange) {
+                            for (let i = 0; i < billSelect.options.length; i++) {
+                                if (billSelect.options[i].value === window.estimationData.monthlyBillRange) {
+                                    billSelect.selectedIndex = i;
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
             });
@@ -856,19 +883,35 @@
             // Logic: Map bill amount to power package
             // < 1,000,000 -> 3kWp, 1-2tr -> 5kWp, 2-4tr -> 10kWp, 4-6tr -> 15kWp, 6-8tr -> 20kWp, >8tr -> 30kWp
             let recommendedPackage;
+            let monthlyBillRange;
             if (billValue < 1000000) {
                 recommendedPackage = '3 kWp';
+                monthlyBillRange = 'Dưới 1.000.000 VNĐ';
             } else if (billValue < 2000000) {
                 recommendedPackage = '5 kWp';
+                monthlyBillRange = '1.000.000 - 2.000.000 VNĐ';
             } else if (billValue < 4000000) {
                 recommendedPackage = '10 kWp';
+                monthlyBillRange = '2.000.000 - 4.000.000 VNĐ';
             } else if (billValue < 6000000) {
                 recommendedPackage = '15 kWp';
+                monthlyBillRange = '4.000.000 - 6.000.000 VNĐ';
             } else if (billValue < 8000000) {
                 recommendedPackage = '20 kWp';
+                monthlyBillRange = '6.000.000 - 8.000.000 VNĐ';
             } else {
                 recommendedPackage = '30 kWp';
+                monthlyBillRange = 'Trên 8.000.000 VNĐ';
             }
+
+            // Store estimation data for later use in modal
+            window.estimationData = {
+                name: nameInput.value.trim(),
+                email: emailInput.value.trim(),
+                billValue: billValue,
+                monthlyBillRange: monthlyBillRange,
+                recommendedPackage: recommendedPackage.replace(' ', '')
+            };
 
             // Scroll directly to packages section and highlight matching package
 

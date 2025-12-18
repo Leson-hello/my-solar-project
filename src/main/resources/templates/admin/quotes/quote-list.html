@@ -242,11 +242,13 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Khách hàng</th>
-                                <th>Liên hệ</th>
-                                <th>Loại sản phẩm</th>
-                                <th>Công suất</th>
-                                <th>Loại hình</th>
+                                <th>Tên</th>
+                                <th>SĐT</th>
+                                <th>Email</th>
+                                <th>Yêu cầu</th>
+                                <th>Gói tư vấn</th>
+                                <th>Tiền điện/tháng</th>
+                                <th>Tỉnh/TP</th>
                                 <th>Trạng thái</th>
                                 <th>Ngày tạo</th>
                                 <th>Thao tác</th>
@@ -255,26 +257,30 @@
                         <tbody>
                             <tr th:each="quote : ${quotesPage.content}">
                                 <td th:text="${quote.id}">1</td>
+                                <td th:text="${quote.fullName}">Nguyễn Văn A</td>
                                 <td>
-                                    <strong th:text="${quote.fullName}">Nguyễn Văn A</strong><br>
-                                    <small th:text="${quote.address}">TP.HCM</small>
+                                    <small><i class="fas fa-phone"></i> <span
+                                            th:text="${quote.phone}">0123456789</span></small>
                                 </td>
                                 <td>
-                                    <small>
-                                        <i class="fas fa-phone"></i> <span
-                                            th:text="${quote.phone}">0123456789</span><br>
-                                        <i class="fas fa-envelope"></i> <span
-                                            th:text="${quote.email}">email@example.com</span>
-                                    </small>
+                                    <small><i class="fas fa-envelope"></i> <span
+                                            th:text="${quote.email}">email@example.com</span></small>
                                 </td>
-                                <td th:text="${quote.productType}">Tấm pin</td>
                                 <td>
-                                    <span th:if="${quote.estimatedPower != null}">
-                                        <span th:text="${quote.estimatedPower}">5</span> kW
-                                    </span>
-                                    <span th:unless="${quote.estimatedPower != null}">-</span>
+                                    <span th:if="${quote.message != null}" th:text="${quote.message}">-</span>
+                                    <span th:unless="${quote.message != null}">-</span>
                                 </td>
-                                <td th:text="${quote.installationType}">Hộ gia đình</td>
+                                <td>
+                                    <span th:if="${quote.recommendedPackage != null}" class="badge bg-info"
+                                        th:text="${quote.recommendedPackage}">5kWp</span>
+                                    <span th:unless="${quote.recommendedPackage != null}">-</span>
+                                </td>
+                                <td>
+                                    <span th:if="${quote.monthlyBill != null}"
+                                        th:text="${quote.monthlyBill}">1-2tr</span>
+                                    <span th:unless="${quote.monthlyBill != null}">-</span>
+                                </td>
+                                <td th:text="${quote.address}">TP.HCM</td>
                                 <td>
                                     <span th:if="${quote.status == 'PENDING'}" class="badge bg-warning text-dark">Chờ xử
                                         lý</span>
