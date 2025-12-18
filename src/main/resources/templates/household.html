@@ -66,19 +66,25 @@
                 <div class="col-lg-6">
                     <div class="estimation-form-container">
                         <h2 class="estimation-title">DỰ TOÁN HỆ THỐNG</h2>
-                        <form id="estimationForm" class="estimation-form">
+                        <form id="estimationForm" class="estimation-form" novalidate>
                             <div class="mb-3">
                                 <label class="form-label">Tên của bạn *</label>
-                                <input type="text" class="form-control" name="name" required>
+                                <input type="text" class="form-control" name="name" id="estName" required minlength="2"
+                                    placeholder="Nhập tên của bạn">
+                                <div class="invalid-feedback">Vui lòng nhập tên (ít nhất 2 ký tự).</div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Email *</label>
-                                <input type="email" class="form-control" name="email" required>
+                                <input type="email" class="form-control" name="email" id="estEmail" required
+                                    placeholder="example@email.com">
+                                <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Số tiền điện mỗi tháng</label>
-                                <input type="text" class="form-control" name="electricBill"
-                                    placeholder="VD: 2.000.000 VNĐ">
+                                <label class="form-label">Số tiền điện mỗi tháng (VNĐ) *</label>
+                                <input type="number" class="form-control" name="electricBill" id="estElectricBill"
+                                    required min="1" step="1000" placeholder="VD: 2000000">
+                                <div class="invalid-feedback">Vui lòng nhập số tiền điện (số dương).</div>
+                                <small class="text-muted">Chỉ nhập số, không cần chấm hoặc dấu phẩy</small>
                             </div>
                             <button type="submit" class="btn btn-estimate">XEM KẾT QUẢ</button>
                         </form>
@@ -199,9 +205,9 @@
                             </div>
                         </div>
                         <div class="pricing-footer">
-                            <button class="btn btn-primary btn-block" data-bs-toggle="modal"
+                            <button class="btn btn-outline-primary btn-block" data-bs-toggle="modal"
                                 data-bs-target="#quoteModal" data-package="5kWp" data-price="1391000">
-                                NHẬN TƯ VẤN VÀ BÁO GIÁ <i class="fas fa-arrow-right ms-2"></i>
+                                NHẬN TƯ VẤN VÀ BÁO GIÁ
                             </button>
                         </div>
                     </div>
@@ -800,12 +806,90 @@
                 });
         });
 
-        // Handle estimation form
+        // Handle estimation form - calculate and scroll to matching package
         document.getElementById('estimationForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            // Open quote modal with estimation data
-            const modal = new bootstrap.Modal(document.getElementById('quoteModal'));
-            modal.show();
+
+            // Get form fields
+            const nameInput = document.getElementById('estName');
+            const emailInput = document.getElementById('estEmail');
+            const billInput = document.getElementById('estElectricBill');
+
+            // Reset validation states
+            [nameInput, emailInput, billInput].forEach(input => {
+                input.classList.remove('is-invalid', 'is-valid');
+            });
+
+            let isValid = true;
+
+            // Validate name (min 2 characters)
+            if (!nameInput.value.trim() || nameInput.value.trim().length < 2) {
+                nameInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                nameInput.classList.add('is-valid');
+            }
+
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailInput.value.trim() || !emailRegex.test(emailInput.value.trim())) {
+                emailInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                emailInput.classList.add('is-valid');
+            }
+
+            // Validate electric bill (positive number)
+            const billValue = parseFloat(billInput.value);
+            if (!billInput.value || isNaN(billValue) || billValue <= 0) {
+                billInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                billInput.classList.add('is-valid');
+            }
+
+            if (!isValid) {
+                return;
+            }
+
+            // Calculate recommended package based on monthly bill
+            // Logic: Map bill amount to power package
+            // < 1,000,000 -> 3kWp, 1-2tr -> 5kWp, 2-4tr -> 10kWp, 4-6tr -> 15kWp, 6-8tr -> 20kWp, >8tr -> 30kWp
+            let recommendedPackage;
+            if (billValue < 1000000) {
+                recommendedPackage = '3 kWp';
+            } else if (billValue < 2000000) {
+                recommendedPackage = '5 kWp';
+            } else if (billValue < 4000000) {
+                recommendedPackage = '10 kWp';
+            } else if (billValue < 6000000) {
+                recommendedPackage = '15 kWp';
+            } else if (billValue < 8000000) {
+                recommendedPackage = '20 kWp';
+            } else {
+                recommendedPackage = '30 kWp';
+            }
+
+            // Scroll directly to packages section and highlight matching package
+
+            // Scroll to packages section
+            const packagesSection = document.getElementById('goi-giai-phap');
+            if (packagesSection) {
+                packagesSection.scrollIntoView({ behavior: 'smooth' });
+
+                // Highlight the recommended package card after scrolling
+                setTimeout(() => {
+                    const cards = document.querySelectorAll('.pricing-card');
+                    cards.forEach(card => {
+                        card.classList.remove('featured');
+                        const powerValue = card.querySelector('.pricing-value');
+                        if (powerValue && powerValue.textContent.trim() === recommendedPackage) {
+                            card.classList.add('featured');
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    });
+                }, 600);
+            }
         });
 
         // Smooth scroll for section navigation

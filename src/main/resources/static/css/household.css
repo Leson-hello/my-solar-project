@@ -232,6 +232,18 @@
 
 .pricing-card.featured {
     border: 2px solid #f7941d;
+    box-shadow: 0 4px 20px rgba(247, 148, 29, 0.25);
+}
+
+.pricing-card.featured .btn-outline-primary {
+    background: #f7941d;
+    border-color: #f7941d;
+    color: white;
+}
+
+.pricing-card.featured .btn-outline-primary:hover {
+    background: #e8850f;
+    border-color: #e8850f;
 }
 
 .pricing-card.featured::before {
