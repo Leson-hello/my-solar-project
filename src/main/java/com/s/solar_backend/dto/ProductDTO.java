@@ -16,10 +16,14 @@ public class ProductDTO {
     private String powerUnit;
     private String type;
     private String imageUrl;
+    private String galleryImages;
     private Double price;
     private String specifications;
+    private String detailContent;
     private Integer warranty;
     private String category;
+    private String documentUrl;
+    private String documents;
     private boolean active;
     private boolean featured;
     private Integer displayOrder;

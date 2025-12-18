@@ -39,17 +39,29 @@ public class Product {
     @Column(length = 500)
     private String imageUrl;
 
+    @Column(columnDefinition = "TEXT")
+    private String galleryImages; // Comma-separated URLs for multiple images
+
     @Column
     private Double price;
 
     @Column(columnDefinition = "TEXT")
     private String specifications;
 
+    @Column(columnDefinition = "LONGTEXT")
+    private String detailContent;
+
     @Column
     private Integer warranty;
 
     @Column(length = 100)
     private String category;
+
+    @Column(length = 500)
+    private String documentUrl;
+
+    @Column(columnDefinition = "TEXT")
+    private String documents; // JSON format: [{"name":"...","url":"..."}]
 
     @Column
     private Boolean isActive = true;

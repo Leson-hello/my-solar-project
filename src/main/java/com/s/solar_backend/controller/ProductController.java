@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,9 +60,9 @@ public class ProductController {
         }
 
         String category = product.get().getCategory();
-        List<ProductDTO> relatedProducts = category != null ?
-                productService.getActiveProductsByCategory(category, 0, 4).getContent() :
-                productService.getFeaturedProducts();
+        List<ProductDTO> relatedProducts = new ArrayList<>(
+                category != null ? productService.getActiveProductsByCategory(category, 0, 4).getContent()
+                        : productService.getFeaturedProducts());
 
         relatedProducts.removeIf(p -> p.getId().equals(id));
 

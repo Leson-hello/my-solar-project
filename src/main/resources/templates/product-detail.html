@@ -1,161 +1,715 @@
 <!DOCTYPE html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${product.name + ' - DAT Group'}">Chi tiết sản phẩm - DAT Group</title>
+    <title th:text="${product.name + ' - DAT Solar'}">Chi tiết sản phẩm - DAT Solar</title>
+    <meta name="description" th:content="${product.description}">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link th:href="@{/css/style.css}" rel="stylesheet">
     <link th:href="@{/css/products.css}" rel="stylesheet">
+
+    <style>
+        /* Simple Breadcrumb */
+        .breadcrumb-section {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb {
+            margin: 0;
+            background: transparent;
+        }
+
+        .breadcrumb-item a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .breadcrumb-item a:hover {
+            color: #f7931e;
+        }
+
+        .breadcrumb-item.active {
+            color: #999;
+        }
+
+        /* Main Product Section */
+        .product-main-section {
+            background: white;
+            padding: 2rem 0;
+        }
+
+        /* Image Gallery */
+        .product-gallery {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .main-image-wrapper {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .main-image {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        .thumbnail-list {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+        }
+
+        .thumbnail-item {
+            width: 70px;
+            height: 70px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            cursor: pointer;
+            overflow: hidden;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .thumbnail-item:hover,
+        .thumbnail-item.active {
+            border-color: #f7931e;
+        }
+
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Product Info */
+        .product-info {
+            padding-left: 1rem;
+        }
+
+        .product-main-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f7931e;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .product-short-desc {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .hotline-box {
+            margin-bottom: 1rem;
+        }
+
+        .hotline-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .hotline-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #e53935;
+        }
+
+        .social-share {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .social-btn.facebook {
+            background: #1877f2;
+        }
+
+        .social-btn.twitter {
+            background: #1da1f2;
+        }
+
+        .social-btn.pinterest {
+            background: #e60023;
+        }
+
+        .social-btn:hover {
+            opacity: 0.85;
+            color: white;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #f7931e, #ff6b35);
+            border: none;
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            box-shadow: 0 4px 15px rgba(247, 147, 30, 0.4);
+            color: white;
+        }
+
+        /* Tabs Section */
+        .product-tabs-section {
+            background: #f8f9fa;
+            padding: 2rem 0 3rem;
+        }
+
+        .product-tabs {
+            border-bottom: 2px solid #dee2e6;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-tabs .nav-link {
+            color: #666;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s;
+            background: transparent;
+        }
+
+        .product-tabs .nav-link:hover {
+            color: #f7931e;
+        }
+
+        .product-tabs .nav-link.active {
+            color: #f7931e;
+            border-bottom-color: #f7931e;
+            background: transparent;
+        }
+
+        /* Technical Specs Table */
+        .specs-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .specs-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .specs-table tr {
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .specs-table td {
+            padding: 0.75rem 1rem;
+        }
+
+        .specs-table td:first-child {
+            font-weight: 600;
+            color: #333;
+            width: 35%;
+            background: #f8f9fa;
+        }
+
+        .specs-table td:last-child {
+            color: #555;
+        }
+
+        /* Detail Content */
+        .detail-content {
+            line-height: 1.8;
+            color: #444;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .detail-content h2,
+        .detail-content h3 {
+            color: #333;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .detail-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        /* Sidebar */
+        .sidebar-widget {
+            background: white;
+            border-radius: 8px;
+            padding: 1.25rem;
+            border: 1px solid #e9ecef;
+            margin-bottom: 1.25rem;
+        }
+
+        .widget-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #f7931e;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f7931e;
+        }
+
+        .related-product-item {
+            display: flex;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .related-product-item:last-child {
+            border-bottom: none;
+        }
+
+        .related-product-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .related-product-info h6 {
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+            color: #333;
+            line-height: 1.3;
+        }
+
+        .related-product-info h6 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .related-product-info h6 a:hover {
+            color: #f7931e;
+        }
+
+        .related-product-power {
+            font-size: 0.8rem;
+            color: #1e88e5;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .product-info {
+                padding-left: 0;
+                margin-top: 1.5rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .product-main-title {
+                font-size: 1.25rem;
+            }
+
+            .product-tabs .nav-link {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<div th:replace="~{layout/header :: header}"></div>
+    <div th:replace="~{layout/header :: header}"></div>
 
-<section class="page-header">
-    <div class="container">
-        <h1 class="page-title" th:text="${product.name}">Tên sản phẩm</h1>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
-                <li class="breadcrumb-item"><a th:href="@{/products}">Sản phẩm</a></li>
-                <li class="breadcrumb-item active" th:text="${product.name}">Chi tiết</li>
-            </ol>
-        </nav>
-    </div>
-</section>
-
-<section class="product-detail-section py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="product-image-detail">
-                    <img th:src="@{${product.imageUrl != null ? product.imageUrl : '/photo/default-product.jpg'}}"
-                         th:alt="${product.name}" class="img-fluid">
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="product-detail-info">
-                    <div class="product-brand-detail mb-2" th:if="${product.brand != null}">
-                        <i class="fas fa-industry"></i>
-                        <span th:text="${product.brand}">Canadian Solar</span>
-                    </div>
-
-                    <h2 class="product-title-detail mb-3" th:text="${product.name}">
-                        HiKu - Tấm pin năng lượng mặt trời
-                    </h2>
-
-                    <div class="product-specs-detail mb-4">
-                        <div class="spec-row" th:if="${product.power != null}">
-                            <span class="spec-label">
-                                <i class="fas fa-bolt"></i> Công suất:
-                            </span>
-                            <span class="spec-value"
-                                  th:text="${product.power + ' ' + product.powerUnit}">520W</span>
-                        </div>
-                        <div class="spec-row" th:if="${product.type != null}">
-                            <span class="spec-label">
-                                <i class="fas fa-tag"></i> Loại:
-                            </span>
-                            <span class="spec-value" th:text="${product.type}">Mono PERC</span>
-                        </div>
-                        <div class="spec-row" th:if="${product.warranty != null}">
-                            <span class="spec-label">
-                                <i class="fas fa-shield-alt"></i> Bảo hành:
-                            </span>
-                            <span class="spec-value">
-                                <span th:text="${product.warranty}">25</span> năm
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="product-description-detail mb-4" th:if="${product.description != null}">
-                        <h5>Mô tả sản phẩm</h5>
-                        <p th:text="${product.description}">
-                            Tấm pin năng lượng mặt trời hiệu suất cao với công nghệ tiên tiến
-                        </p>
-                    </div>
-
-                    <div class="product-actions">
-                        <a th:href="@{/quote-request(productId=${product.id})}"
-                           class="btn btn-primary btn-lg">
-                            <i class="fas fa-file-invoice"></i> Yêu cầu báo giá
-                        </a>
-                        <a href="tel:0123456789" class="btn btn-outline-primary btn-lg">
-                            <i class="fas fa-phone"></i> Gọi tư vấn
-                        </a>
-                    </div>
-
-                    <div class="additional-info mt-4">
-                        <div class="info-item">
-                            <i class="fas fa-check-circle text-success"></i>
-                            <span>Chính hãng 100%</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-truck text-success"></i>
-                            <span>Vận chuyển toàn quốc</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-tools text-success"></i>
-                            <span>Hỗ trợ lắp đặt</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Simple Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/products}">Sản phẩm</a></li>
+                    <li class="breadcrumb-item" th:if="${product.category}">
+                        <a th:href="@{/products(category=${product.category})}" th:text="${product.category == 'tam-pin' ? 'Tấm pin' : 
+                                  product.category == 'inverter' ? 'Inverter' :
+                                  product.category == 'pin-luu-tru' ? 'Pin lưu trữ' :
+                                  product.category == 'den-nang-luong' ? 'Đèn năng lượng' : 'Phụ kiện'}">Danh mục</a>
+                    </li>
+                    <li class="breadcrumb-item active" th:text="${#strings.abbreviate(product.name, 40)}">Chi tiết</li>
+                </ol>
+            </nav>
         </div>
+    </section>
 
-        <div class="row mt-5" th:if="${product.specifications != null and !product.specifications.isEmpty()}">
-            <div class="col-12">
-                <div class="product-specifications">
-                    <h3 class="mb-4">Thông số kỹ thuật</h3>
-                    <div class="specifications-content" th:utext="${product.specifications}">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-5" th:if="${relatedProducts != null and !relatedProducts.isEmpty()}">
-            <div class="col-12">
-                <h3 class="mb-4">Sản phẩm liên quan</h3>
-                <div class="row">
-                    <div class="col-md-3 mb-4" th:each="relatedProduct : ${relatedProducts}">
-                        <div class="product-card">
-                            <div class="product-image-wrapper">
-                                <a th:href="@{/products/{id}(id=${relatedProduct.id})}">
-                                    <img th:src="@{${relatedProduct.imageUrl != null ? relatedProduct.imageUrl : '/photo/default-product.jpg'}}"
-                                         th:alt="${relatedProduct.name}" class="product-image">
-                                </a>
+    <!-- Main Product Section -->
+    <section class="product-main-section">
+        <div class="container">
+            <div class="row">
+                <!-- Product Gallery -->
+                <div class="col-lg-5 mb-4">
+                    <div class="product-gallery">
+                        <div class="main-image-wrapper">
+                            <img th:src="${product.imageUrl != null ? product.imageUrl : '/photo/default-product.jpg'}"
+                                th:alt="${product.name}" class="main-image" id="mainImage">
+                        </div>
+                        <div class="thumbnail-list">
+                            <!-- Main image thumbnail -->
+                            <div class="thumbnail-item active" th:if="${product.imageUrl != null}">
+                                <img th:src="${product.imageUrl}" th:alt="${product.name}">
                             </div>
-                            <div class="product-info">
-                                <div class="product-brand" th:text="${relatedProduct.brand}">Brand</div>
-                                <h6 class="product-name">
-                                    <a th:href="@{/products/{id}(id=${relatedProduct.id})}"
-                                       th:text="${relatedProduct.name}">
-                                        Product Name
-                                    </a>
-                                </h6>
-                                <div class="product-specs">
-                                    <span class="spec-item" th:if="${relatedProduct.power != null}">
+                            <!-- Gallery thumbnails -->
+                            <th:block th:if="${product.galleryImages != null and !product.galleryImages.isEmpty()}">
+                                <div th:each="imgUrl : ${#strings.arraySplit(product.galleryImages, ',')}"
+                                    class="thumbnail-item">
+                                    <img th:src="${imgUrl}" th:alt="${product.name}">
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="col-lg-7">
+                    <div class="product-info">
+                        <!-- Title -->
+                        <h1 class="product-main-title" th:text="${product.name}">Tên sản phẩm</h1>
+
+                        <!-- Short Description -->
+                        <p class="product-short-desc" th:if="${product.description}" th:text="${product.description}">
+                            Mô tả ngắn về sản phẩm...
+                        </p>
+
+                        <!-- Hotline -->
+                        <div class="hotline-box">
+                            <span class="hotline-label">Hotline: </span>
+                            <span class="hotline-number">1800 6567</span>
+                        </div>
+
+                        <!-- Social Share -->
+                        <div class="social-share">
+                            <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <a th:href="@{/quote-request(productId=${product.id})}" class="btn cta-button">
+                            <i class="fas fa-file-invoice me-2"></i>YÊU CẦU BÁO GIÁ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabs Section -->
+    <section class="product-tabs-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Tab Navigation -->
+                    <ul class="nav product-tabs" id="productTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
+                                data-bs-target="#overview" type="button">
+                                TỔNG QUAN
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="certs-tab" data-bs-toggle="tab" data-bs-target="#certs"
+                                type="button">
+                                CHỨNG CHỈ
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="policy-tab" data-bs-toggle="tab" data-bs-target="#policy"
+                                type="button">
+                                CHÍNH SÁCH
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="docs-tab" data-bs-toggle="tab" data-bs-target="#docs"
+                                type="button">
+                                TÀI LIỆU
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="productTabsContent">
+                        <!-- Overview Tab -->
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                            <!-- Technical Specs Table -->
+                            <div class="specs-section"
+                                th:if="${product.specifications != null or product.power != null}">
+                                <h3 class="specs-title">THÔNG SỐ KỸ THUẬT</h3>
+                                <table class="specs-table">
+                                    <tr th:if="${product.power != null}">
+                                        <td>Công suất:</td>
+                                        <td
+                                            th:text="${product.power + ' ' + (product.powerUnit != null ? product.powerUnit : 'W')}">
+                                            520W</td>
+                                    </tr>
+                                    <tr th:if="${product.brand != null}">
+                                        <td>Thương hiệu:</td>
+                                        <td th:text="${product.brand}">SOKOYO</td>
+                                    </tr>
+                                    <tr th:if="${product.type != null}">
+                                        <td>Dòng sản phẩm:</td>
+                                        <td th:text="${product.type}">Mono PERC</td>
+                                    </tr>
+                                    <tr th:if="${product.warranty != null}">
+                                        <td>Bảo hành:</td>
+                                        <td><span th:text="${product.warranty}">25</span> năm</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <!-- Detail Content -->
+                            <div class="detail-content" th:if="${product.detailContent != null}"
+                                th:utext="${product.detailContent}">
+                                Nội dung chi tiết sản phẩm...
+                            </div>
+
+                            <!-- Fallback -->
+                            <div th:if="${product.detailContent == null and product.description != null}"
+                                class="detail-content">
+                                <p th:text="${product.description}">Mô tả sản phẩm</p>
+                            </div>
+                        </div>
+
+                        <!-- Certificates Tab -->
+                        <div class="tab-pane fade" id="certs" role="tabpanel">
+                            <div class="detail-content">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3 text-center">
+                                        <div class="p-3 border rounded">
+                                            <i class="fas fa-certificate fa-3x text-warning mb-2"></i>
+                                            <h6>ISO 9001:2015</h6>
+                                            <small class="text-muted">Hệ thống quản lý chất lượng</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3 text-center">
+                                        <div class="p-3 border rounded">
+                                            <i class="fas fa-shield-alt fa-3x text-success mb-2"></i>
+                                            <h6>IEC 61215</h6>
+                                            <small class="text-muted">Tiêu chuẩn module quang điện</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3 text-center">
+                                        <div class="p-3 border rounded">
+                                            <i class="fas fa-check-circle fa-3x text-primary mb-2"></i>
+                                            <h6>CE Marking</h6>
+                                            <small class="text-muted">Tiêu chuẩn châu Âu</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Policy Tab -->
+                        <div class="tab-pane fade" id="policy" role="tabpanel">
+                            <div class="detail-content">
+                                <h5><i class="fas fa-shipping-fast text-primary me-2"></i>Chính sách vận chuyển</h5>
+                                <ul>
+                                    <li>Miễn phí vận chuyển toàn quốc cho đơn hàng trên 10 triệu</li>
+                                    <li>Giao hàng nhanh 24-48h tại các thành phố lớn</li>
+                                    <li>Đóng gói cẩn thận, bảo hiểm hàng hóa</li>
+                                </ul>
+
+                                <h5 class="mt-4"><i class="fas fa-shield-alt text-success me-2"></i>Chính sách bảo hành
+                                </h5>
+                                <ul>
+                                    <li>Bảo hành chính hãng theo tiêu chuẩn nhà sản xuất</li>
+                                    <li>Hỗ trợ kỹ thuật 24/7 qua hotline</li>
+                                    <li>Đổi mới sản phẩm lỗi trong 30 ngày đầu</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Documents Tab -->
+                        <div class="tab-pane fade" id="docs" role="tabpanel">
+                            <div class="detail-content">
+                                <h5 class="mb-3"><i class="fas fa-file-pdf text-danger me-2"></i>Tài liệu kỹ thuật</h5>
+
+                                <!-- Documents from JSON field -->
+                                <div th:if="${product.documents != null and !product.documents.isEmpty()}"
+                                    id="documentsContainer" class="row">
+                                    <!-- Will be populated by JavaScript -->
+                                </div>
+                                <input type="hidden" id="documentsJson" th:value="${product.documents}">
+
+                                <!-- Fallback message when no documents -->
+                                <div
+                                    th:if="${(product.documents == null or product.documents.isEmpty()) and product.documentUrl == null}">
+                                    <p class="text-muted"><i class="fas fa-file-pdf me-2"></i>Tài liệu kỹ thuật đang
+                                        được cập nhật...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Related Products -->
+                    <div class="sidebar-widget" th:if="${relatedProducts != null and !relatedProducts.isEmpty()}">
+                        <h5 class="widget-title">
+                            <i class="fas fa-eye me-1"></i> SẢN PHẨM ĐÃ XEM
+                        </h5>
+                        <div class="related-products-list">
+                            <div class="related-product-item" th:each="relatedProduct : ${relatedProducts}">
+                                <img th:src="@{${relatedProduct.imageUrl != null ? relatedProduct.imageUrl : '/photo/default-product.jpg'}}"
+                                    th:alt="${relatedProduct.name}" class="related-product-img">
+                                <div class="related-product-info">
+                                    <h6>
+                                        <a th:href="@{/products/{id}(id=${relatedProduct.id})}"
+                                            th:text="${relatedProduct.name}">Tên sản phẩm</a>
+                                    </h6>
+                                    <span class="related-product-power" th:if="${relatedProduct.power != null}">
                                         <i class="fas fa-bolt"></i>
-                                        <span th:text="${relatedProduct.power + ' ' + relatedProduct.powerUnit}">520W</span>
+                                        <span
+                                            th:text="${relatedProduct.power + ' ' + (relatedProduct.powerUnit != null ? relatedProduct.powerUnit : 'W')}">520W</span>
                                     </span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Widget -->
+                    <div class="sidebar-widget">
+                        <h5 class="widget-title">
+                            <i class="fas fa-headset me-1"></i> HỖ TRỢ TƯ VẤN
+                        </h5>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-phone-alt text-primary me-3" style="font-size: 1.25rem;"></i>
+                            <div>
+                                <small class="text-muted d-block">Hotline 24/7</small>
+                                <strong>1800 6567</strong>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-envelope text-primary me-3" style="font-size: 1.25rem;"></i>
+                            <div>
+                                <small class="text-muted d-block">Email</small>
+                                <strong>info@datsolar.vn</strong>
+                            </div>
+                        </div>
+                        <a th:href="@{/quote-request(productId=${product.id})}"
+                            class="btn btn-outline-primary btn-sm w-100">
+                            <i class="fas fa-paper-plane me-1"></i> Gửi yêu cầu tư vấn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products Section -->
+    <section class="py-4 bg-light" th:if="${relatedProducts != null and !relatedProducts.isEmpty()}">
+        <div class="container">
+            <h5 class="mb-3"><i class="fas fa-th-large text-primary me-2"></i>Sản phẩm cùng danh mục</h5>
+            <div class="row">
+                <div class="col-6 col-md-3 mb-3" th:each="relatedProduct : ${relatedProducts}">
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <a th:href="@{/products/{id}(id=${relatedProduct.id})}">
+                                <img th:src="@{${relatedProduct.imageUrl != null ? relatedProduct.imageUrl : '/photo/default-product.jpg'}}"
+                                    th:alt="${relatedProduct.name}" class="product-image">
+                            </a>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-brand" th:text="${relatedProduct.brand}">Brand</div>
+                            <h6 class="product-name">
                                 <a th:href="@{/products/{id}(id=${relatedProduct.id})}"
-                                   class="btn btn-outline-primary btn-sm w-100 mt-2">
-                                    Xem chi tiết
-                                </a>
+                                    th:text="${#strings.abbreviate(relatedProduct.name, 35)}">Product Name</a>
+                            </h6>
+                            <div class="product-specs">
+                                <span class="spec-item" th:if="${relatedProduct.power != null}">
+                                    <i class="fas fa-bolt"></i>
+                                    <span
+                                        th:text="${relatedProduct.power + ' ' + (relatedProduct.powerUnit != null ? relatedProduct.powerUnit : 'W')}">520W</span>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div th:replace="~{layout/footer :: footer}"></div>
+    <div th:replace="~{layout/footer :: footer}"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Image gallery functionality
+        document.querySelectorAll('.thumbnail-item').forEach(thumb => {
+            thumb.addEventListener('click', function () {
+                document.querySelectorAll('.thumbnail-item').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('mainImage').src = this.querySelector('img').src;
+            });
+        });
+
+        // Render documents from JSON
+        document.addEventListener('DOMContentLoaded', function () {
+            const docsJson = document.getElementById('documentsJson');
+            const container = document.getElementById('documentsContainer');
+            if (docsJson && docsJson.value && container) {
+                try {
+                    const docs = JSON.parse(docsJson.value);
+                    docs.forEach(doc => {
+                        const col = document.createElement('div');
+                        col.className = 'col-md-4 mb-3';
+                        col.innerHTML = `
+                            <div class="p-3 border rounded bg-light text-center">
+                                <i class="fas fa-file-pdf text-danger fa-3x mb-2"></i>
+                                <h6 class="mb-1" style="font-size: 0.85rem; word-break: break-word;">${doc.name}</h6>
+                                <a href="${doc.url}" target="_blank" class="btn btn-sm btn-primary mt-2">
+                                    <i class="fas fa-download me-1"></i> Tải xuống
+                                </a>
+                            </div>
+                        `;
+                        container.appendChild(col);
+                    });
+                } catch (e) {
+                    console.error('Error parsing documents:', e);
+                }
+            }
+        });
+    </script>
 </body>
+
 </html>

@@ -29,7 +29,7 @@ public class ProductService {
     public Page<ProductDTO> getActiveProductsByCategory(String category, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return productRepository.findByIsActiveTrueAndCategoryOrderByDisplayOrderAscCreatedAtDesc(
-                        category, pageable)
+                category, pageable)
                 .map(this::convertToDTO);
     }
 
@@ -120,10 +120,17 @@ public class ProductService {
         product.setPowerUnit(dto.getPowerUnit());
         product.setType(dto.getType());
         product.setImageUrl(dto.getImageUrl());
+        product.setGalleryImages(dto.getGalleryImages());
         product.setPrice(dto.getPrice());
         product.setSpecifications(dto.getSpecifications());
+        product.setDetailContent(dto.getDetailContent());
         product.setWarranty(dto.getWarranty());
         product.setCategory(dto.getCategory());
+        product.setDocumentUrl(dto.getDocumentUrl());
+        product.setDocuments(dto.getDocuments());
+        product.setIsActive(dto.isActive());
+        product.setIsFeatured(dto.isFeatured());
+        product.setDisplayOrder(dto.getDisplayOrder());
     }
 
     private ProductDTO convertToDTO(Product product) {
@@ -136,10 +143,17 @@ public class ProductService {
         dto.setPowerUnit(product.getPowerUnit());
         dto.setType(product.getType());
         dto.setImageUrl(product.getImageUrl());
+        dto.setGalleryImages(product.getGalleryImages());
         dto.setPrice(product.getPrice());
         dto.setSpecifications(product.getSpecifications());
+        dto.setDetailContent(product.getDetailContent());
         dto.setWarranty(product.getWarranty());
         dto.setCategory(product.getCategory());
+        dto.setDocumentUrl(product.getDocumentUrl());
+        dto.setDocuments(product.getDocuments());
+        dto.setActive(product.getIsActive() != null ? product.getIsActive() : true);
+        dto.setFeatured(product.getIsFeatured() != null ? product.getIsFeatured() : false);
+        dto.setDisplayOrder(product.getDisplayOrder());
         return dto;
     }
 }

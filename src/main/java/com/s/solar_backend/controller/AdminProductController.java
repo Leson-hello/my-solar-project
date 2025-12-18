@@ -62,12 +62,59 @@ public class AdminProductController {
     public String createProduct(
             @ModelAttribute ProductDTO productDTO,
             @RequestParam(required = false) MultipartFile imageFile,
+            @RequestParam(required = false) MultipartFile[] galleryFiles,
+            @RequestParam(required = false) MultipartFile[] documentFiles,
             RedirectAttributes redirectAttributes) {
 
         try {
+            // Main image
             if (imageFile != null && !imageFile.isEmpty()) {
                 String imageUrl = saveImage(imageFile);
                 productDTO.setImageUrl(imageUrl);
+            }
+
+            // Gallery images (multiple)
+            if (galleryFiles != null && galleryFiles.length > 0) {
+                StringBuilder galleryUrls = new StringBuilder();
+                for (MultipartFile file : galleryFiles) {
+                    if (file != null && !file.isEmpty()) {
+                        String url = saveImage(file);
+                        if (galleryUrls.length() > 0)
+                            galleryUrls.append(",");
+                        galleryUrls.append(url);
+                    }
+                }
+                // Append to existing gallery
+                String existing = productDTO.getGalleryImages();
+                if (existing != null && !existing.isEmpty()) {
+                    productDTO.setGalleryImages(existing + "," + galleryUrls.toString());
+                } else {
+                    productDTO.setGalleryImages(galleryUrls.toString());
+                }
+            }
+
+            // Documents (multiple)
+            if (documentFiles != null && documentFiles.length > 0) {
+                StringBuilder docsJson = new StringBuilder();
+                String existingDocs = productDTO.getDocuments();
+                if (existingDocs != null && !existingDocs.isEmpty() && existingDocs.startsWith("[")) {
+                    docsJson.append(existingDocs.substring(0, existingDocs.length() - 1));
+                } else {
+                    docsJson.append("[");
+                }
+                boolean first = docsJson.length() == 1;
+                for (MultipartFile file : documentFiles) {
+                    if (file != null && !file.isEmpty()) {
+                        String url = saveDocument(file);
+                        String name = file.getOriginalFilename();
+                        if (!first)
+                            docsJson.append(",");
+                        docsJson.append("{\"name\":\"").append(name).append("\",\"url\":\"").append(url).append("\"}");
+                        first = false;
+                    }
+                }
+                docsJson.append("]");
+                productDTO.setDocuments(docsJson.toString());
             }
 
             ProductDTO savedProduct = productService.createProduct(productDTO);
@@ -100,12 +147,58 @@ public class AdminProductController {
             @PathVariable Long id,
             @ModelAttribute ProductDTO productDTO,
             @RequestParam(required = false) MultipartFile imageFile,
+            @RequestParam(required = false) MultipartFile[] galleryFiles,
+            @RequestParam(required = false) MultipartFile[] documentFiles,
             RedirectAttributes redirectAttributes) {
 
         try {
+            // Main image
             if (imageFile != null && !imageFile.isEmpty()) {
                 String imageUrl = saveImage(imageFile);
                 productDTO.setImageUrl(imageUrl);
+            }
+
+            // Gallery images (multiple)
+            if (galleryFiles != null && galleryFiles.length > 0) {
+                StringBuilder galleryUrls = new StringBuilder();
+                for (MultipartFile file : galleryFiles) {
+                    if (file != null && !file.isEmpty()) {
+                        String url = saveImage(file);
+                        if (galleryUrls.length() > 0)
+                            galleryUrls.append(",");
+                        galleryUrls.append(url);
+                    }
+                }
+                String existing = productDTO.getGalleryImages();
+                if (existing != null && !existing.isEmpty()) {
+                    productDTO.setGalleryImages(existing + "," + galleryUrls.toString());
+                } else {
+                    productDTO.setGalleryImages(galleryUrls.toString());
+                }
+            }
+
+            // Documents (multiple)
+            if (documentFiles != null && documentFiles.length > 0) {
+                StringBuilder docsJson = new StringBuilder();
+                String existingDocs = productDTO.getDocuments();
+                if (existingDocs != null && !existingDocs.isEmpty() && existingDocs.startsWith("[")) {
+                    docsJson.append(existingDocs.substring(0, existingDocs.length() - 1));
+                } else {
+                    docsJson.append("[");
+                }
+                boolean first = docsJson.length() == 1;
+                for (MultipartFile file : documentFiles) {
+                    if (file != null && !file.isEmpty()) {
+                        String url = saveDocument(file);
+                        String name = file.getOriginalFilename();
+                        if (!first)
+                            docsJson.append(",");
+                        docsJson.append("{\"name\":\"").append(name).append("\",\"url\":\"").append(url).append("\"}");
+                        first = false;
+                    }
+                }
+                docsJson.append("]");
+                productDTO.setDocuments(docsJson.toString());
             }
 
             productService.updateProduct(id, productDTO);
@@ -180,5 +273,27 @@ public class AdminProductController {
         Files.copy(imageFile.getInputStream(), filePath);
 
         return "/photo/" + fileName;
+    }
+
+    private String saveDocument(MultipartFile documentFile) throws IOException {
+        String uploadsDir = "src/main/resources/static/document/";
+
+        String originalFilename = documentFile.getOriginalFilename();
+        if (originalFilename == null) {
+            originalFilename = "document.pdf";
+        }
+
+        // Keep original filename but add UUID prefix to avoid conflicts
+        String safeFilename = UUID.randomUUID().toString() + "_" + originalFilename.replaceAll("[^a-zA-Z0-9.-]", "_");
+
+        Path uploadPath = Paths.get(uploadsDir);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        Path filePath = uploadPath.resolve(safeFilename);
+        Files.copy(documentFile.getInputStream(), filePath);
+
+        return "/document/" + safeFilename;
     }
 }
