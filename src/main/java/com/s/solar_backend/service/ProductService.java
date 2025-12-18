@@ -119,15 +119,24 @@ public class ProductService {
         product.setPower(dto.getPower());
         product.setPowerUnit(dto.getPowerUnit());
         product.setType(dto.getType());
-        product.setImageUrl(dto.getImageUrl());
-        product.setGalleryImages(dto.getGalleryImages());
+        // Only update imageUrl if new one provided (preserve existing)
+        if (dto.getImageUrl() != null) {
+            product.setImageUrl(dto.getImageUrl());
+        }
+        // Only update galleryImages if new ones provided (preserve existing)
+        if (dto.getGalleryImages() != null) {
+            product.setGalleryImages(dto.getGalleryImages());
+        }
         product.setPrice(dto.getPrice());
         product.setSpecifications(dto.getSpecifications());
         product.setDetailContent(dto.getDetailContent());
         product.setWarranty(dto.getWarranty());
         product.setCategory(dto.getCategory());
         product.setDocumentUrl(dto.getDocumentUrl());
-        product.setDocuments(dto.getDocuments());
+        // Only update documents if new ones provided (preserve existing)
+        if (dto.getDocuments() != null) {
+            product.setDocuments(dto.getDocuments());
+        }
         product.setIsActive(dto.isActive());
         product.setIsFeatured(dto.isFeatured());
         product.setDisplayOrder(dto.getDisplayOrder());

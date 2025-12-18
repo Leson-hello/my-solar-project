@@ -1,118 +1,100 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <body>
-<header th:fragment="header" class="header-section">
-    <!-- Top Bar -->
-    <div class="top-bar bg-light py-2 d-none d-md-block">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="contact-info">
-                        <span class="me-3"><i class="fas fa-phone"></i> Hotline: 1900-XXX-XXX</span>
-                        <span><i class="fas fa-envelope"></i> info@datgroup.com.vn</span>
+    <header th:fragment="header" class="header-section">
+        <!-- Top Bar -->
+        <div class="top-bar bg-light py-2 d-none d-md-block">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="contact-info">
+                            <span class="me-3"><i class="fas fa-phone"></i> Hotline: 1900-XXX-XXX</span>
+                            <span><i class="fas fa-envelope"></i> info@datgroup.com.vn</span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 text-end">
-                    <div class="top-links">
-                        <a href="#" class="me-3">Giới thiệu</a>
-                        <a href="#" class="me-3">Tuyển dụng</a>
-                        <a href="#" class="me-3">Đối tác</a>
-                        <a href="#" class="me-3">Hỗ trợ</a>
-                        <a href="#" class="me-3">Tài liệu</a>
-                        <a href="#">Tuyến đường</a>
+                    <div class="col-md-6 text-end">
+                        <div class="top-links">
+                            <a href="#" class="me-3">Giới thiệu</a>
+                            <a href="#" class="me-3">Tuyển dụng</a>
+                            <a href="#" class="me-3">Đối tác</a>
+                            <a href="#" class="me-3">Hỗ trợ</a>
+                            <a href="#" class="me-3">Tài liệu</a>
+                            <a href="#">Tuyến đường</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Main Navigation -->
-    <nav class="navbar navbar-expand-lg main-nav">
-        <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand" th:href="@{/}">
-                <div class="logo-container">
-                    <div class="logo-circle">
-                        <span class="logo-text">DAT</span>
+        <!-- Main Navigation -->
+        <nav class="navbar navbar-expand-lg main-nav">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" th:href="@{/}">
+                    <div class="logo-container">
+                        <div class="logo-circle">
+                            <span class="logo-text">DAT</span>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
 
-            <!-- Mobile Menu Toggle -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <!-- Mobile Menu Toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <!-- Navigation Menu -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <!-- Navigation Menu -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+
+                        <a class="nav-link  " href="#" role="button" data-bs-toggle="dropdown">
                             DOANH NGHIỆP
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/about}">Giới thiệu</a></li>
-                            <li><a class="dropdown-item" href="#">Lịch sử phát triển</a></li>
-                            <li><a class="dropdown-item" href="#">Ban lãnh đạo</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            HỆ GIÁ ĐINH
+
+
+                        <a class="nav-link" th:href="@{/ho-gia-dinh}">
+                            HỘ GIA ĐÌNH
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Hệ thống gia đình</a></li>
-                            <li><a class="dropdown-item" href="#">Tư vấn lắp đặt</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+
+
+
+                        <a class="nav-link  " href="#" role="button" data-bs-toggle="dropdown">
                             DỰ ÁN
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/projects}">Tất cả dự án</a></li>
-                            <li><a class="dropdown-item" href="#">Dự án hoàn thành</a></li>
-                            <li><a class="dropdown-item" href="#">Dự án đang thực hiện</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+
+
+
+                        <a class="nav-link  " href="#" role="button" data-bs-toggle="dropdown">
                             GIẢI PHÁP
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/services}">Tất cả giải pháp</a></li>
-                            <li><a class="dropdown-item" href="#">Giải pháp doanh nghiệp</a></li>
-                            <li><a class="dropdown-item" href="#">Giải pháp nông nghiệp</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+
+
+
+                        <a class="nav-link" th:href="@{/products}">
                             SẢN PHẨM
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/products}">Tất cả sản phẩm</a></li>
-                            <li><a class="dropdown-item" href="#">Tấm pin mặt trời</a></li>
-                            <li><a class="dropdown-item" href="#">Inverter</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/contact}">LIÊN HỆ</a>
-                    </li>
-                </ul>
 
-                <!-- Search and Language -->
-                <div class="d-flex align-items-center ms-3">
-                    <button class="btn btn-link p-0 me-2" type="button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <div class="language-selector">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
-                             alt="VN" class="flag-icon">
+
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/contact}">LIÊN HỆ</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search and Language -->
+                    <div class="d-flex align-items-center ms-3">
+                        <button class="btn btn-link p-0 me-2" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="language-selector">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+                                alt="VN" class="flag-icon">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 </body>
+
 </html>

@@ -14,4 +14,13 @@ public interface QuoteRequestRepository extends JpaRepository<QuoteRequest, Long
     Page<QuoteRequest> findAllByOrderByCreatedAtDesc(Pageable pageable);
 
     long countByStatus(String status);
+
+    // Filter by quoteType
+    Page<QuoteRequest> findByQuoteTypeOrderByCreatedAtDesc(String quoteType, Pageable pageable);
+
+    Page<QuoteRequest> findByQuoteTypeAndStatusOrderByCreatedAtDesc(String quoteType, String status, Pageable pageable);
+
+    long countByQuoteType(String quoteType);
+
+    long countByQuoteTypeAndStatus(String quoteType, String status);
 }

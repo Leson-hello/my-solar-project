@@ -1,0 +1,662 @@
+/* Household Page Styles - Clean & Simple Design */
+
+/* Page Banner */
+.page-banner {
+    position: relative;
+    height: 300px;
+    background: url('/photo/household/banner-solar.jpg') center center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+}
+
+.banner-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: lowercase;
+}
+
+.breadcrumb-nav {
+    font-size: 14px;
+}
+
+.breadcrumb-nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.breadcrumb-nav a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-nav .separator {
+    margin: 0 8px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumb-nav .current {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Section Navigation Bar */
+.section-nav {
+    background: #4a4a4a;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.section-nav-list {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.section-nav-list li {
+    margin: 0;
+}
+
+.section-nav-list a {
+    display: block;
+    padding: 15px 30px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+}
+
+.section-nav-list a:hover,
+.section-nav-list a.active {
+    background: rgba(247, 148, 29, 0.1);
+    border-bottom-color: #f7941d;
+    color: #f7941d;
+}
+
+/* Hero Section */
+.household-hero {
+    background: #f9f9f9;
+    padding: 40px 0;
+}
+
+.min-vh-75 {
+    min-height: 70vh;
+}
+
+.hero-house-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.hero-image-container {
+    position: relative;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #ddd;
+}
+
+.play-button:hover {
+    background: white;
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.play-button i {
+    font-size: 1.5rem;
+    color: #f7941d;
+    margin-left: 3px;
+}
+
+/* Estimation Form */
+.estimation-form-container {
+    background: white;
+    padding: 35px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.estimation-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.estimation-form .form-label {
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+
+.estimation-form .form-control {
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.estimation-form .form-control:focus {
+    border-color: #f7941d;
+    box-shadow: none;
+}
+
+.btn-estimate {
+    width: 100%;
+    background: #f7941d;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-estimate:hover {
+    background: #e8850f;
+    color: white;
+}
+
+/* Solution Description */
+.solution-description {
+    background: white;
+    padding: 60px 0;
+}
+
+.solution-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+/* Pricing Section */
+.pricing-section {
+    background: #fafafa;
+    padding: 60px 0;
+}
+
+.pricing-section .section-title {
+    color: #333;
+    font-weight: 700;
+}
+
+.pricing-card {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eee;
+    height: 100%;
+}
+
+.pricing-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-card.featured {
+    border: 2px solid #f7941d;
+}
+
+.pricing-card.featured::before {
+    display: none;
+}
+
+.pricing-header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.pricing-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.pricing-item {
+    text-align: center;
+    flex: 1;
+}
+
+.pricing-label {
+    display: block;
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.pricing-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.pricing-value.highlight {
+    color: #f7941d;
+}
+
+.pricing-footer {
+    padding-top: 10px;
+}
+
+.pricing-footer .btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.pricing-footer .btn-primary {
+    background: #f7941d;
+    border: none;
+}
+
+.pricing-footer .btn-primary:hover {
+    background: #e8850f;
+}
+
+.pricing-footer .btn-outline-primary {
+    border-color: #ddd;
+    color: #666;
+}
+
+.pricing-footer .btn-outline-primary:hover {
+    background: #f7941d;
+    border-color: #f7941d;
+    color: white;
+}
+
+/* Importance Section */
+.importance-section {
+    background: white;
+    padding: 60px 0;
+}
+
+.stats-row {
+    margin-top: 30px;
+}
+
+.stat-box {
+    padding: 20px 15px;
+}
+
+.stat-box .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f7941d;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stat-box .stat-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+}
+
+/* About DAT Section */
+.about-dat-section {
+    background: #fafafa;
+    padding: 60px 0;
+}
+
+.about-dat-section p {
+    color: #666;
+    line-height: 1.8;
+}
+
+.experience-highlight {
+    background: #f7941d;
+    padding: 40px 30px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+}
+
+.experience-years {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.experience-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Brands Section */
+.brands-section {
+    background: white;
+    padding: 60px 0;
+}
+
+.brand-card {
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 25px;
+    height: 100%;
+    border: 1px solid #eee;
+}
+
+.brand-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.brand-product-img {
+    max-width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.brand-name {
+    color: #333;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.brand-description {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.brand-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.brand-features li {
+    padding: 4px 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.brand-features li i {
+    color: #f7941d;
+    width: 18px;
+    margin-right: 8px;
+    font-size: 12px;
+}
+
+/* Projects Section */
+.projects-section {
+    background: #fafafa;
+    padding: 60px 0;
+}
+
+.project-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eee;
+}
+
+.project-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-image {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-type {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(247, 148, 29, 0.9);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.project-info {
+    padding: 18px;
+}
+
+.project-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+.project-details .detail-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 13px;
+    color: #666;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.project-details .detail-item:last-child {
+    border-bottom: none;
+}
+
+.project-details .detail-item i {
+    width: 22px;
+    color: #f7941d;
+    font-size: 12px;
+}
+
+.project-details .detail-item strong {
+    color: #333;
+}
+
+/* CTA Section */
+.cta-section {
+    background: #2c3e50;
+    padding: 50px 0;
+}
+
+.cta-section h2 {
+    font-size: 1.5rem;
+}
+
+.cta-section .btn-warning {
+    background: #f7941d;
+    border: none;
+    padding: 12px 30px;
+    font-weight: 600;
+}
+
+.cta-section .btn-warning:hover {
+    background: #e8850f;
+}
+
+/* Quote Modal */
+#quoteModal .modal-content {
+    border-radius: 8px;
+    border: none;
+}
+
+#quoteModal .modal-header {
+    background: #333;
+    border-radius: 8px 8px 0 0;
+    padding: 20px 25px;
+}
+
+#quoteModal .modal-title-container {
+    text-align: center;
+    flex: 1;
+}
+
+#quoteModal .modal-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #f7941d;
+    margin-bottom: 3px;
+}
+
+#quoteModal .modal-subtitle {
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+#quoteModal .btn-close {
+    filter: invert(1);
+}
+
+#quoteModal .modal-body {
+    padding: 25px;
+}
+
+#quoteModal .form-label {
+    font-weight: 500;
+    font-size: 13px;
+    color: #333;
+}
+
+#quoteModal .form-label.text-danger {
+    color: #c00 !important;
+}
+
+#quoteModal .form-control,
+#quoteModal .form-select {
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+#quoteModal .form-control:focus,
+#quoteModal .form-select:focus {
+    border-color: #f7941d;
+    box-shadow: none;
+}
+
+.btn-submit {
+    background: #f7941d;
+    color: white;
+    padding: 10px 35px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btn-submit:hover {
+    background: #e8850f;
+    color: white;
+}
+
+/* Section Title Override */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+}
+
+/* Button Override */
+.btn-primary {
+    background: #f7941d;
+    border-color: #f7941d;
+}
+
+.btn-primary:hover {
+    background: #e8850f;
+    border-color: #e8850f;
+}
+
+.btn-outline-primary {
+    border-color: #f7941d;
+    color: #f7941d;
+}
+
+.btn-outline-primary:hover {
+    background: #f7941d;
+    border-color: #f7941d;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .household-hero {
+        padding: 30px 0;
+    }
+
+    .estimation-form-container {
+        margin-top: 30px;
+    }
+
+    .experience-highlight {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .estimation-title {
+        font-size: 1.3rem;
+    }
+
+    .pricing-row {
+        flex-direction: column;
+    }
+
+    .pricing-item {
+        margin-bottom: 10px;
+    }
+
+    .stat-box .stat-number {
+        font-size: 2rem;
+    }
+
+    .experience-years {
+        font-size: 3rem;
+    }
+}

@@ -425,9 +425,11 @@
                         </div>
 
                         <!-- CTA Button -->
-                        <a th:href="@{/quote-request(productId=${product.id})}" class="btn cta-button">
+                        <button type="button" class="btn cta-button quote-request-btn"
+                            th:data-product-id="${product.id}" th:data-product-name="${product.name}"
+                            th:data-product-power="${(product.power != null ? product.power : '') + ' ' + (product.powerUnit != null ? product.powerUnit : '')}">
                             <i class="fas fa-file-invoice me-2"></i>YÊU CẦU BÁO GIÁ
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -627,10 +629,11 @@
                                 <strong>info@datsolar.vn</strong>
                             </div>
                         </div>
-                        <a th:href="@{/quote-request(productId=${product.id})}"
-                            class="btn btn-outline-primary btn-sm w-100">
+                        <button type="button" class="btn btn-outline-primary btn-sm w-100 quote-request-btn"
+                            th:data-product-id="${product.id}" th:data-product-name="${product.name}"
+                            th:data-product-power="${(product.power != null ? product.power : '') + ' ' + (product.powerUnit != null ? product.powerUnit : '')}">
                             <i class="fas fa-paper-plane me-1"></i> Gửi yêu cầu tư vấn
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -672,6 +675,9 @@
 
     <div th:replace="~{layout/footer :: footer}"></div>
 
+    <!-- Quote Modal -->
+    <div th:replace="~{layout/quote-modal :: quoteModal}"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Image gallery functionality
@@ -708,6 +714,16 @@
                     console.error('Error parsing documents:', e);
                 }
             }
+        });
+
+        // Quote request button handler
+        document.querySelectorAll('.quote-request-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const productId = this.dataset.productId;
+                const productName = this.dataset.productName;
+                const productPower = this.dataset.productPower;
+                openQuoteModal(productId, productName, productPower);
+            });
         });
     </script>
 </body>

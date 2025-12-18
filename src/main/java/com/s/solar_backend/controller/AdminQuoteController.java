@@ -23,25 +23,39 @@ public class AdminQuoteController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(required = false) String status,
+            @RequestParam(required = false) String type,
             Model model) {
 
         Page<QuoteRequestDTO> quotesPage;
 
-        if (status != null && !status.isEmpty()) {
-            quotesPage = quoteRequestService.getQuoteRequestsByStatus(status, page, size);
-            model.addAttribute("selectedStatus", status);
+        if (type != null && !type.isEmpty()) {
+            if (status != null && !status.isEmpty()) {
+                quotesPage = quoteRequestService.getQuoteRequestsByTypeAndStatus(type, status, page, size);
+                model.addAttribute("selectedStatus", status);
+            } else {
+                quotesPage = quoteRequestService.getQuoteRequestsByType(type, page, size);
+            }
+            model.addAttribute("selectedType", type);
+            model.addAttribute("pendingCount", quoteRequestService.countByTypeAndStatus(type, "PENDING"));
+            model.addAttribute("contactedCount", quoteRequestService.countByTypeAndStatus(type, "CONTACTED"));
+            model.addAttribute("quotedCount", quoteRequestService.countByTypeAndStatus(type, "QUOTED"));
+            model.addAttribute("completedCount", quoteRequestService.countByTypeAndStatus(type, "COMPLETED"));
         } else {
-            quotesPage = quoteRequestService.getAllQuoteRequests(page, size);
+            if (status != null && !status.isEmpty()) {
+                quotesPage = quoteRequestService.getQuoteRequestsByStatus(status, page, size);
+                model.addAttribute("selectedStatus", status);
+            } else {
+                quotesPage = quoteRequestService.getAllQuoteRequests(page, size);
+            }
+            model.addAttribute("pendingCount", quoteRequestService.countByStatus("PENDING"));
+            model.addAttribute("contactedCount", quoteRequestService.countByStatus("CONTACTED"));
+            model.addAttribute("quotedCount", quoteRequestService.countByStatus("QUOTED"));
+            model.addAttribute("completedCount", quoteRequestService.countByStatus("COMPLETED"));
         }
 
         model.addAttribute("quotesPage", quotesPage);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", quotesPage.getTotalPages());
-
-        model.addAttribute("pendingCount", quoteRequestService.countByStatus("PENDING"));
-        model.addAttribute("contactedCount", quoteRequestService.countByStatus("CONTACTED"));
-        model.addAttribute("quotedCount", quoteRequestService.countByStatus("QUOTED"));
-        model.addAttribute("completedCount", quoteRequestService.countByStatus("COMPLETED"));
 
         return "admin/quotes/quote-list";
     }

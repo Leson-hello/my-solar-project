@@ -71,6 +71,23 @@ public class QuoteRequestService {
         return quoteRequestRepository.countByStatus(status);
     }
 
+    // Filter by quoteType
+    public Page<QuoteRequestDTO> getQuoteRequestsByType(String type, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return quoteRequestRepository.findByQuoteTypeOrderByCreatedAtDesc(type, pageable)
+                .map(this::convertToDTO);
+    }
+
+    public Page<QuoteRequestDTO> getQuoteRequestsByTypeAndStatus(String type, String status, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return quoteRequestRepository.findByQuoteTypeAndStatusOrderByCreatedAtDesc(type, status, pageable)
+                .map(this::convertToDTO);
+    }
+
+    public long countByTypeAndStatus(String type, String status) {
+        return quoteRequestRepository.countByQuoteTypeAndStatus(type, status);
+    }
+
     private void updateQuoteRequestFromDTO(QuoteRequest quoteRequest, QuoteRequestDTO dto) {
         quoteRequest.setFullName(dto.getFullName());
         quoteRequest.setEmail(dto.getEmail());
@@ -80,6 +97,15 @@ public class QuoteRequestService {
         quoteRequest.setEstimatedPower(dto.getEstimatedPower());
         quoteRequest.setInstallationType(dto.getInstallationType());
         quoteRequest.setMessage(dto.getMessage());
+        if (dto.getQuoteType() != null) {
+            quoteRequest.setQuoteType(dto.getQuoteType());
+        }
+        if (dto.getMonthlyBill() != null) {
+            quoteRequest.setMonthlyBill(dto.getMonthlyBill());
+        }
+        if (dto.getRecommendedPackage() != null) {
+            quoteRequest.setRecommendedPackage(dto.getRecommendedPackage());
+        }
     }
 
     private QuoteRequestDTO convertToDTO(QuoteRequest quoteRequest) {
@@ -95,6 +121,9 @@ public class QuoteRequestService {
         dto.setMessage(quoteRequest.getMessage());
         dto.setStatus(quoteRequest.getStatus());
         dto.setAdminNotes(quoteRequest.getAdminNotes());
+        dto.setQuoteType(quoteRequest.getQuoteType());
+        dto.setMonthlyBill(quoteRequest.getMonthlyBill());
+        dto.setRecommendedPackage(quoteRequest.getRecommendedPackage());
         dto.setCreatedAt(quoteRequest.getCreatedAt());
         dto.setUpdatedAt(quoteRequest.getUpdatedAt());
         return dto;

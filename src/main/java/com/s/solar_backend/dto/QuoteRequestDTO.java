@@ -21,6 +21,9 @@ public class QuoteRequestDTO {
     private String message;
     private String status;
     private String adminNotes;
+    private String quoteType;
+    private String monthlyBill;
+    private String recommendedPackage;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

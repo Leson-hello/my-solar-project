@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải pháp điện mặt trời cho Hộ Gia Đình - DAT Group</title>
+    <meta name="description"
+        content="Giải pháp hệ thống năng lượng mặt trời cho gia đình hiện đại giúp tiết kiệm điện, bảo vệ môi trường và nâng cao hiệu quả sử dụng năng lượng sạch.">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/household.css}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <!-- Page Banner with Background Image -->
+    <section class="page-banner">
+        <div class="banner-overlay"></div>
+        <div class="container">
+            <div class="banner-content">
+                <h1 class="banner-title">Hộ gia đình</h1>
+                <nav class="breadcrumb-nav">
+                    <a th:href="@{/}">Trang chủ</a>
+                    <span class="separator">-</span>
+                    <span class="current">Hộ gia đình</span>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Navigation Bar -->
+    <nav class="section-nav" id="sectionNav">
+        <div class="container">
+            <ul class="section-nav-list">
+                <li><a href="#gioi-thieu" class="active">GIỚI THIỆU</a></li>
+                <li><a href="#he-thong">HỆ THỐNG AN TOÀN</a></li>
+                <li><a href="#goi-giai-phap">CÁC GÓI GIẢI PHÁP</a></li>
+                <li><a href="#ly-do-chon-dat">LÝ DO CHỌN DAT</a></li>
+                <li><a href="#du-an-thuc-te">DỰ ÁN THỰC TẾ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Estimation Form -->
+    <section id="gioi-thieu"></section>
+    <section class="household-hero">
+        <div class="container">
+            <div class="row align-items-center min-vh-75">
+                <div class="col-lg-6">
+                    <div class="hero-image-container">
+                        <img th:src="@{/photo/household/hero-house.png}" alt="Hệ thống điện mặt trời gia đình"
+                            class="hero-house-image">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="estimation-form-container">
+                        <h2 class="estimation-title">DỰ TOÁN HỆ THỐNG</h2>
+                        <form id="estimationForm" class="estimation-form">
+                            <div class="mb-3">
+                                <label class="form-label">Tên của bạn *</label>
+                                <input type="text" class="form-control" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email *</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Số tiền điện mỗi tháng</label>
+                                <input type="text" class="form-control" name="electricBill"
+                                    placeholder="VD: 2.000.000 VNĐ">
+                            </div>
+                            <button type="submit" class="btn btn-estimate">XEM KẾT QUẢ</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Giải pháp cho hộ gia đình Section -->
+    <section id="he-thong"></section>
+    <section class="solution-description py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">GIẢI PHÁP cho hộ gia đình</h2>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <p class="solution-text">
+                        Hệ thống lắp điện năng lượng mặt trời cho hộ gia đình hòa lưới hoạt động bằng cách sử dụng các
+                        tấm pin
+                        năng lượng mặt trời hấp thụ ánh sáng, chuyển hóa thành dòng điện một chiều (DC). Dòng điện này
+                        được
+                        biến tần (inverter) chuyển đổi thành điện xoay chiều (AC) sạch, cung cấp trực tiếp cho các thiết
+                        bị trong nhà.
+                    </p>
+                    <p class="solution-text">
+                        Giải pháp lắp điện năng lượng mặt trời cho hộ gia đình giúp gia đình Việt tiết kiệm đáng kể chi
+                        phí điện năng
+                        hàng tháng. Đặc biệt, với những khách hàng chỉ có nhu cầu lắp pin năng lượng mặt trời cho hộ gia
+                        đình
+                        (thay vì cả hệ thống), việc lựa chọn dòng pin chất lượng, hiệu suất cao là yếu tố then chốt ảnh
+                        hưởng đến
+                        hiệu quả sử dụng lâu dài.
+                    </p>
+                    <p class="solution-text">
+                        Với thiết kế gọn nhẹ và linh hoạt, hệ thống lắp điện năng lượng mặt trời cho hộ gia đình có thể
+                        lắp đặt
+                        trên mái nhà hoặc sân thượng có diện tích nhỏ, không bị che bóng. Tấm pin năng lượng mặt trời
+                        hiện nay
+                        cũng được tối ưu theo tiêu chuẩn mới, giúp gia đình bạn tận hưởng nguồn năng lượng bền vững, chi
+                        phí thấp
+                        mà hiệu quả cao.
+                    </p>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#quoteModal">
+                            NHẬN TƯ VẤN VÀ BÁO GIÁ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Packages Section -->
+    <section id="goi-giai-phap"></section>
+    <section class="pricing-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-2">CÁC GÓI GIẢI PHÁP</h2>
+            <p class="text-center text-muted mb-5">LỰA CHỌN HỆ THỐNG PHÙ HỢP VỚI NHU CẦU CỦA BẠN</p>
+
+            <div class="row justify-content-center">
+                <!-- Package 1: 3 kWp -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">CÔNG SUẤT</span>
+                                    <span class="pricing-value">3 kWp</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TẤM PIN</span>
+                                    <span class="pricing-value">7</span>
+                                </div>
+                            </div>
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">ĐIỆN TẠO RA</span>
+                                    <span class="pricing-value highlight">360 kWh</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TIỀN TIẾT KIỆM</span>
+                                    <span class="pricing-value highlight">835.000đ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricing-footer">
+                            <button class="btn btn-outline-primary btn-block" data-bs-toggle="modal"
+                                data-bs-target="#quoteModal" data-package="3kWp" data-price="835000">
+                                NHẬN TƯ VẤN VÀ BÁO GIÁ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 2: 5 kWp -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card featured">
+                        <div class="pricing-header">
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">CÔNG SUẤT</span>
+                                    <span class="pricing-value">5 kWp</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TẤM PIN</span>
+                                    <span class="pricing-value">12</span>
+                                </div>
+                            </div>
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">ĐIỆN TẠO RA</span>
+                                    <span class="pricing-value highlight">600 kWh</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TIỀN TIẾT KIỆM</span>
+                                    <span class="pricing-value highlight">1.391.000đ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricing-footer">
+                            <button class="btn btn-primary btn-block" data-bs-toggle="modal"
+                                data-bs-target="#quoteModal" data-package="5kWp" data-price="1391000">
+                                NHẬN TƯ VẤN VÀ BÁO GIÁ <i class="fas fa-arrow-right ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 3: 10 kWp -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">CÔNG SUẤT</span>
+                                    <span class="pricing-value">10 kWp</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TẤM PIN</span>
+                                    <span class="pricing-value">24</span>
+                                </div>
+                            </div>
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">ĐIỆN TẠO RA</span>
+                                    <span class="pricing-value highlight">1.200 kWh</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TIỀN TIẾT KIỆM</span>
+                                    <span class="pricing-value highlight">2.783.000đ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricing-footer">
+                            <button class="btn btn-outline-primary btn-block" data-bs-toggle="modal"
+                                data-bs-target="#quoteModal" data-package="10kWp" data-price="2783000">
+                                NHẬN TƯ VẤN VÀ BÁO GIÁ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 4: 15 kWp -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">CÔNG SUẤT</span>
+                                    <span class="pricing-value">15 kWp</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TẤM PIN</span>
+                                    <span class="pricing-value">35</span>
+                                </div>
+                            </div>
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">ĐIỆN TẠO RA</span>
+                                    <span class="pricing-value highlight">1.800 kWh</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TIỀN TIẾT KIỆM</span>
+                                    <span class="pricing-value highlight">4.175.000đ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricing-footer">
+                            <button class="btn btn-outline-primary btn-block" data-bs-toggle="modal"
+                                data-bs-target="#quoteModal" data-package="15kWp" data-price="4175000">
+                                NHẬN TƯ VẤN VÀ BÁO GIÁ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 5: 20 kWp -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">CÔNG SUẤT</span>
+                                    <span class="pricing-value">20 kWp</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TẤM PIN</span>
+                                    <span class="pricing-value">46</span>
+                                </div>
+                            </div>
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">ĐIỆN TẠO RA</span>
+                                    <span class="pricing-value highlight">2.400 kWh</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TIỀN TIẾT KIỆM</span>
+                                    <span class="pricing-value highlight">5.566.000đ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricing-footer">
+                            <button class="btn btn-outline-primary btn-block" data-bs-toggle="modal"
+                                data-bs-target="#quoteModal" data-package="20kWp" data-price="5566000">
+                                NHẬN TƯ VẤN VÀ BÁO GIÁ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 6: 30 kWp -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">CÔNG SUẤT</span>
+                                    <span class="pricing-value">30 kWp</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TẤM PIN</span>
+                                    <span class="pricing-value">70</span>
+                                </div>
+                            </div>
+                            <div class="pricing-row">
+                                <div class="pricing-item">
+                                    <span class="pricing-label">ĐIỆN TẠO RA</span>
+                                    <span class="pricing-value highlight">3.600 kWh</span>
+                                </div>
+                                <div class="pricing-item">
+                                    <span class="pricing-label">SỐ TIỀN TIẾT KIỆM</span>
+                                    <span class="pricing-value highlight">8.350.000đ</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pricing-footer">
+                            <button class="btn btn-outline-primary btn-block" data-bs-toggle="modal"
+                                data-bs-target="#quoteModal" data-package="30kWp" data-price="8350000">
+                                NHẬN TƯ VẤN VÀ BÁO GIÁ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Importance Section -->
+    <section id="ly-do-chon-dat"></section>
+    <section class="importance-section py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">TẦM QUAN TRỌNG CỦA VIỆC LỰA CHỌN NHÀ CUNG CẤP UY TÍN</h2>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <p class="text-center mb-5">
+                        Hiện nay, thị trường điện năng lượng mặt trời gia đình có rất nhiều nhà cung cấp đa dạng, tạo
+                        nên sự cạnh tranh
+                        mạnh mẽ về giá cả. Tuy nhiên, với tuổi thọ trung bình của hệ thống lên tới 30 năm, không phải
+                        đơn vị nhỏ lẻ nào
+                        cũng đủ năng lực để đồng hành lâu dài, đảm bảo bảo hành, bảo trì và xử lý sự cố trong suốt vòng
+                        đời dự án.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="row text-center stats-row">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stat-box">
+                        <div class="stat-number" th:text="${yearsExperience}">20+</div>
+                        <div class="stat-label">NĂM<br>Kinh nghiệm</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stat-box">
+                        <div class="stat-number" th:text="${totalStaff}">350+</div>
+                        <div class="stat-label">Nhân sự</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stat-box">
+                        <div class="stat-number"><span th:text="${totalCapacity}">900</span>MW</div>
+                        <div class="stat-label">Tổng công suất</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stat-box">
+                        <div class="stat-number" th:text="${totalSystems}">10.000+</div>
+                        <div class="stat-label">HỆ THỐNG<br>ĐÃ LẮP ĐẶT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About DAT Solar Section -->
+    <section class="about-dat-section py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title mb-4">VỀ DAT SOLAR</h2>
+                    <p>
+                        DAT Solar là thương hiệu thành viên của Công ty Cổ phần Tập đoàn DAT. DAT được thành lập từ năm
+                        2006,
+                        là nhà cung cấp sản phẩm và phát triển giải pháp dẫn đầu thị trường Việt Nam trong lĩnh vực tự
+                        động hóa
+                        và năng lượng tái tạo.
+                    </p>
+                    <p>
+                        Đến hết năm 2024, DAT Solar đã cung cấp và triển khai hơn 10.000 hệ thống điện mặt trời có tổng
+                        công suất
+                        hơn 800MWp, mang đến cho khách hàng, đối tác và nhà đầu tư những giải pháp điện mặt trời thông
+                        minh,
+                        tối ưu chi phí đầu tư nhưng vẫn đảm bảo tính hiệu quả cao.
+                    </p>
+                    <a th:href="@{/about}" class="btn btn-outline-primary mt-3">Tìm hiểu thêm</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="experience-highlight">
+                        <div class="experience-years">19+</div>
+                        <div class="experience-text">NĂM KINH NGHIỆM<br>PHÁT TRIỂN BỀN VỮNG</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Partners Section -->
+    <section class="brands-section py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">SẢN PHẨM THUỘC THƯƠNG HIỆU HÀNG ĐẦU THẾ GIỚI</h2>
+
+            <div class="row">
+                <!-- Canadian Solar -->
+                <div class="col-lg-6 mb-4">
+                    <div class="brand-card">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 text-center">
+                                <img th:src="@{/photo/anh31.jpg}" alt="Canadian Solar" class="brand-product-img">
+                            </div>
+                            <div class="col-md-8">
+                                <h4 class="brand-name">CANADIAN SOLAR</h4>
+                                <p class="brand-description">
+                                    Thương hiệu thuộc top 3 thế giới, top 1 về chất lượng/giá (Đánh giá bởi IHS Markit
+                                    Customer Survey).
+                                </p>
+                                <ul class="brand-features">
+                                    <li><i class="fas fa-globe"></i> Thương hiệu đến từ Canada</li>
+                                    <li><i class="fas fa-shield-alt"></i> Bảo hành sản phẩm 12 năm</li>
+                                    <li><i class="fas fa-certificate"></i> Bảo hành hiệu suất 25 năm</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INVT -->
+                <div class="col-lg-6 mb-4">
+                    <div class="brand-card">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 text-center">
+                                <img th:src="@{/photo/anh33.jpg}" alt="INVT Inverter" class="brand-product-img">
+                            </div>
+                            <div class="col-md-8">
+                                <h4 class="brand-name">INVT</h4>
+                                <p class="brand-description">
+                                    Thành lập năm 2002, INVT là tập đoàn quốc tế công nghệ cao hàng đầu. Thương hiệu
+                                    inverter được sử dụng
+                                    rộng rãi trên 60 quốc gia.
+                                </p>
+                                <ul class="brand-features">
+                                    <li><i class="fas fa-map-marker-alt"></i> Trung tâm bảo hành tại Việt Nam</li>
+                                    <li><i class="fas fa-shield-alt"></i> Bảo hành 5 năm toàn cầu</li>
+                                    <li><i class="fas fa-plus-circle"></i> Tùy chọn mở rộng BH đến 10 năm</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sungrow -->
+                <div class="col-lg-6 mb-4">
+                    <div class="brand-card">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 text-center">
+                                <img th:src="@{/photo/anh36.jpg}" alt="Sungrow" class="brand-product-img">
+                            </div>
+                            <div class="col-md-8">
+                                <h4 class="brand-name">SUNGROW</h4>
+                                <p class="brand-description">
+                                    Sungrow là nhà sản xuất inverter năng lượng mặt trời lớn nhất thế giới với hơn 269GW
+                                    công suất
+                                    đã lắp đặt trên toàn cầu.
+                                </p>
+                                <ul class="brand-features">
+                                    <li><i class="fas fa-trophy"></i> Top 1 thế giới về inverter</li>
+                                    <li><i class="fas fa-shield-alt"></i> Bảo hành 5 năm</li>
+                                    <li><i class="fas fa-cogs"></i> Hiệu suất chuyển đổi 98.6%</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SMA -->
+                <div class="col-lg-6 mb-4">
+                    <div class="brand-card">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 text-center">
+                                <img th:src="@{/photo/anh44.jpg}" alt="SMA" class="brand-product-img">
+                            </div>
+                            <div class="col-md-8">
+                                <h4 class="brand-name">SMA</h4>
+                                <p class="brand-description">
+                                    Công ty Inverter SMA Solar Technology AG Đức xuất khẩu tiêu chuẩn toàn cầu trong
+                                    ngành công nghệ
+                                    năng lượng mặt trời.
+                                </p>
+                                <ul class="brand-features">
+                                    <li><i class="fas fa-flag"></i> Thương hiệu đến từ Đức</li>
+                                    <li><i class="fas fa-shield-alt"></i> Bảo hành 5 năm</li>
+                                    <li><i class="fas fa-star"></i> Tiêu chuẩn chất lượng cao nhất</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Projects Section -->
+    <section id="du-an-thuc-te"></section>
+    <section class="projects-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">DỰ ÁN THỰC TẾ</h2>
+
+            <div class="row">
+                <!-- Project 1 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img th:src="@{/photo/anh18.jpg}" alt="Dự án hộ gia đình">
+                            <span class="project-type">Hộ gia đình</span>
+                        </div>
+                        <div class="project-info">
+                            <h5 class="project-name">Anh Trí</h5>
+                            <div class="project-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Năm thi công: <strong>2019</strong></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>Công suất: <strong>5.4 kWp</strong></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Sản lượng/năm: <strong>10.2 MWh</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img th:src="@{/photo/anh9.jpg}" alt="Dự án hộ gia đình">
+                            <span class="project-type">Hộ gia đình</span>
+                        </div>
+                        <div class="project-info">
+                            <h5 class="project-name">Anh Minh</h5>
+                            <div class="project-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Năm thi công: <strong>2019</strong></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>Công suất: <strong>3.24 kWp</strong></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Sản lượng/năm: <strong>6.1 MWh</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img th:src="@{/photo/anh8.jpg}" alt="Dự án hộ gia đình">
+                            <span class="project-type">Hộ gia đình</span>
+                        </div>
+                        <div class="project-info">
+                            <h5 class="project-name">Anh Cảnh</h5>
+                            <div class="project-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-calendar"></i>
+                                    <span>Năm thi công: <strong>2019</strong></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>Công suất: <strong>3 kWp</strong></span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Sản lượng/năm: <strong>5.7 MWh</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container text-center">
+            <h2 class="text-white mb-4">BẠN MUỐN LẮP ĐẶT ĐIỆN MẶT TRỜI?</h2>
+            <p class="text-white-50 mb-4">Liên hệ ngay để được tư vấn miễn phí và nhận báo giá tốt nhất!</p>
+            <button class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#quoteModal">
+                <i class="fas fa-phone-alt me-2"></i> NHẬN TƯ VẤN NGAY
+            </button>
+        </div>
+    </section>
+
+    <!-- Quote Modal -->
+    <div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title-container">
+                        <h4 class="modal-title text-warning" id="quoteModalLabel">TƯ VẤN & BÁO GIÁ</h4>
+                        <h5 class="modal-subtitle">HỘ GIA ĐÌNH</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="quoteForm" th:action="@{/api/quotes}" method="post">
+                        <input type="hidden" name="installationType" value="Hộ gia đình">
+                        <input type="hidden" name="quoteType" value="HOUSEHOLD">
+                        <input type="hidden" name="selectedPackage" id="selectedPackage">
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-danger">Tên của bạn *</label>
+                                <input type="text" class="form-control" name="fullName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Số điện thoại *</label>
+                                <input type="tel" class="form-control" name="phone" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-danger">Email *</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Yêu cầu của bạn</label>
+                                <input type="text" class="form-control" name="message"
+                                    placeholder="VD: Tư vấn gói 5kWp">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-danger">Số tiền điện mỗi tháng*</label>
+                                <select class="form-select" name="monthlyBill" id="monthlyBillSelect" required>
+                                    <option value="">Chọn mức tiền điện</option>
+                                    <option value="Dưới 1.000.000 VNĐ" data-package="3kWp">Dưới 1.000.000 VNĐ</option>
+                                    <option value="1.000.000 - 2.000.000 VNĐ" data-package="5kWp">1.000.000 - 2.000.000
+                                        VNĐ</option>
+                                    <option value="2.000.000 - 4.000.000 VNĐ" data-package="10kWp">2.000.000 - 4.000.000
+                                        VNĐ</option>
+                                    <option value="4.000.000 - 6.000.000 VNĐ" data-package="15kWp">4.000.000 - 6.000.000
+                                        VNĐ</option>
+                                    <option value="6.000.000 - 8.000.000 VNĐ" data-package="20kWp">6.000.000 - 8.000.000
+                                        VNĐ</option>
+                                    <option value="Trên 8.000.000 VNĐ" data-package="30kWp">Trên 8.000.000 VNĐ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-danger">Tỉnh/Thành phố *</label>
+                                <select class="form-select" name="address" required>
+                                    <option value="">Chọn tỉnh/thành phố</option>
+                                    <option value="Thành phố Hà Nội">Thành phố Hà Nội</option>
+                                    <option value="Thành phố Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
+                                    <option value="Thành phố Đà Nẵng">Thành phố Đà Nẵng</option>
+                                    <option value="Thành phố Cần Thơ">Thành phố Cần Thơ</option>
+                                    <option value="Thành phố Hải Phòng">Thành phố Hải Phòng</option>
+                                    <option value="Bình Dương">Bình Dương</option>
+                                    <option value="Đồng Nai">Đồng Nai</option>
+                                    <option value="Long An">Long An</option>
+                                    <option value="Bình Thuận">Bình Thuận</option>
+                                    <option value="Khác">Khác</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-start mt-3">
+                            <button type="submit" class="btn btn-submit">
+                                GỬI THÔNG TIN
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{layout/footer :: footer}"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script th:src="@{/js/main.js}"></script>
+
+    <script>
+        // Handle package selection for modal
+        document.querySelectorAll('[data-bs-target="#quoteModal"]').forEach(button => {
+            button.addEventListener('click', function () {
+                const packageName = this.getAttribute('data-package');
+                if (packageName) {
+                    document.getElementById('selectedPackage').value = packageName;
+                    // Pre-fill message
+                    const messageField = document.querySelector('#quoteModal input[name="message"]');
+                    if (messageField && !messageField.value) {
+                        messageField.value = 'Tư vấn gói ' + packageName;
+                    }
+                }
+            });
+        });
+
+        // Handle quote form submission
+        document.getElementById('quoteForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+
+            // Get recommended package from electricity bill selection
+            const billSelect = document.getElementById('monthlyBillSelect');
+            const selectedOption = billSelect.options[billSelect.selectedIndex];
+            const recommendedPackage = selectedOption.getAttribute('data-package');
+            data.recommendedPackage = recommendedPackage;
+
+            fetch('/api/quotes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    // Close modal
+                    bootstrap.Modal.getInstance(document.getElementById('quoteModal')).hide();
+                    this.reset();
+
+                    // Redirect to matching package section
+                    if (recommendedPackage) {
+                        alert(`Cảm ơn bạn! Dựa vào mức tiền điện, chúng tôi đề xuất gói ${recommendedPackage} cho bạn.`);
+                        // Scroll to packages section
+                        const packagesSection = document.getElementById('goi-giai-phap');
+                        if (packagesSection) {
+                            packagesSection.scrollIntoView({ behavior: 'smooth' });
+
+                            // Highlight the recommended package card
+                            setTimeout(() => {
+                                const cards = document.querySelectorAll('.pricing-card');
+                                cards.forEach(card => {
+                                    card.classList.remove('featured');
+                                    const powerValue = card.querySelector('.pricing-value');
+                                    if (powerValue && powerValue.textContent.includes(recommendedPackage.replace('kWp', ' kWp'))) {
+                                        card.classList.add('featured');
+                                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    }
+                                });
+                            }, 500);
+                        }
+                    } else {
+                        alert('Cảm ơn bạn! Chúng tôi sẽ liên hệ sớm nhất.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
+                });
+        });
+
+        // Handle estimation form
+        document.getElementById('estimationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Open quote modal with estimation data
+            const modal = new bootstrap.Modal(document.getElementById('quoteModal'));
+            modal.show();
+        });
+
+        // Smooth scroll for section navigation
+        document.querySelectorAll('.section-nav-list a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const navHeight = document.querySelector('.section-nav').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+                // Update active state
+                document.querySelectorAll('.section-nav-list a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Update active nav on scroll
+        window.addEventListener('scroll', function () {
+            const sections = ['gioi-thieu', 'he-thong', 'goi-giai-phap', 'ly-do-chon-dat', 'du-an-thuc-te'];
+            const navHeight = document.querySelector('.section-nav')?.offsetHeight || 60;
+            let current = '';
+
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                if (section) {
+                    const sectionTop = section.offsetTop - navHeight - 100;
+                    if (window.scrollY >= sectionTop) {
+                        current = id;
+                    }
+                }
+            });
+
+            document.querySelectorAll('.section-nav-list a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

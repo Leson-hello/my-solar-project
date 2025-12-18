@@ -219,21 +219,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/admin/quotes}" class="nav-link">
+                    <a th:href="@{/admin/quotes(type=PRODUCT)}" class="nav-link">
                         <i class="fas fa-file-invoice"></i>
-                        <span>Yêu cầu báo giá</span>
+                        <span>Báo giá Sản phẩm</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-images"></i>
-                        <span>Quản lý hình ảnh</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-users"></i>
-                        <span>Người dùng</span>
+                    <a th:href="@{/admin/quotes(type=HOUSEHOLD)}" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Báo giá Hộ gia đình</span>
                     </a>
                 </li>
                 <li class="nav-item">
