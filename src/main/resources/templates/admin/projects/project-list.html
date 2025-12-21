@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý Sản phẩm - Admin DAT Group</title>
+    <title>Quản lý Dự án - Admin DAT Group</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -102,6 +102,13 @@
         .main-content {
             padding: 2rem;
         }
+
+        .project-thumbnail {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
     </style>
 </head>
 
@@ -130,19 +137,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/admin/news/create}" class="nav-link">
-                        <i class="fas fa-plus-circle"></i>
-                        <span>Tạo tin tức mới</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a th:href="@{/admin/products}" class="nav-link active">
+                    <a th:href="@{/admin/products}" class="nav-link">
                         <i class="fas fa-boxes"></i>
                         <span>Quản lý sản phẩm</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/admin/projects}" class="nav-link">
+                    <a th:href="@{/admin/projects}" class="nav-link active">
                         <i class="fas fa-project-diagram"></i>
                         <span>Quản lý dự án</span>
                     </a>
@@ -180,12 +181,12 @@
             <header class="admin-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h1 class="h4 mb-0">Quản lý Sản phẩm</h1>
-                        <small class="text-muted">Danh sách tất cả sản phẩm trong hệ thống</small>
+                        <h1 class="h4 mb-0">Quản lý Dự án</h1>
+                        <small class="text-muted">Danh sách tất cả dự án trong hệ thống</small>
                     </div>
                     <div>
-                        <a th:href="@{/admin/products/create}" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Thêm sản phẩm mới
+                        <a th:href="@{/admin/projects/create}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Thêm dự án mới
                         </a>
                     </div>
                 </div>
@@ -203,91 +204,67 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
 
-                <!-- Filters -->
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <form th:action="@{/admin/products}" method="get">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" th:value="${search}"
-                                    placeholder="Tìm kiếm sản phẩm...">
-                                <button class="btn btn-outline-secondary" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-select" onchange="filterByCategory(this.value)">
-                            <option value="">Tất cả danh mục</option>
-                            <option value="tam-pin" th:selected="${selectedCategory == 'tam-pin'}">Tấm pin</option>
-                            <option value="inverter" th:selected="${selectedCategory == 'inverter'}">Inverter</option>
-                            <option value="pin-luu-tru" th:selected="${selectedCategory == 'pin-luu-tru'}">Pin lưu trữ
-                            </option>
-                            <option value="phu-kien" th:selected="${selectedCategory == 'phu-kien'}">Phụ kiện</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Products table -->
+                <!-- Projects table -->
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Hình ảnh</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Thương hiệu</th>
+                                <th>Tên dự án</th>
                                 <th>Công suất</th>
-                                <th>Giá</th>
-                                <th>Danh mục</th>
+                                <th>Vị trí</th>
+                                <th>Ứng dụng</th>
+                                <th>Giải pháp</th>
                                 <th>Trạng thái</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="product : ${productsPage.content}">
-                                <td th:text="${product.id}">1</td>
+                            <tr th:each="project : ${projectsPage.content}">
+                                <td th:text="${project.id}">1</td>
                                 <td>
-                                    <img th:src="@{${product.imageUrl}}" alt="Product"
-                                        style="width: 50px; height: 50px; object-fit: cover;">
+                                    <img th:src="@{${project.imageUrl != null ? project.imageUrl : '/photo/default-project.jpg'}}"
+                                        alt="Project" class="project-thumbnail">
                                 </td>
-                                <td th:text="${product.name}">Product Name</td>
-                                <td th:text="${product.brand}">Brand</td>
                                 <td>
-                                    <span th:if="${product.power != null}">
-                                        <span th:text="${product.power}">520</span>
-                                        <span th:text="${product.powerUnit}">W</span>
+                                    <div th:text="${project.name}" class="fw-bold">Project Name</div>
+                                    <small class="text-muted" th:if="${project.investor}"
+                                        th:text="${'CĐT: ' + project.investor}">Chủ đầu tư</small>
+                                </td>
+                                <td>
+                                    <span th:if="${project.power != null}">
+                                        <span th:text="${project.power}">100</span> kWp
                                     </span>
                                 </td>
+                                <td th:text="${project.location}">Vị trí</td>
                                 <td>
-                                    <span th:if="${product.price != null}">
-                                        <span
-                                            th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}">3,500,000</span>
-                                        đ
-                                    </span>
+                                    <span class="badge bg-info" th:if="${project.application}"
+                                        th:text="${project.applicationDisplayName}">Hộ gia đình</span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-info" th:text="${product.category}">tam-pin</span>
+                                    <span class="badge bg-secondary" th:if="${project.solution}"
+                                        th:text="${project.solutionDisplayName}">Hòa lưới</span>
                                 </td>
                                 <td>
-                                    <span th:if="${product.isActive}" class="badge bg-success">Hoạt động</span>
-                                    <span th:unless="${product.isActive}" class="badge bg-secondary">Ẩn</span>
-                                    <span th:if="${product.isFeatured}" class="badge bg-warning text-dark">Nổi
+                                    <span th:if="${project.isActive}" class="badge bg-success">Hoạt động</span>
+                                    <span th:unless="${project.isActive}" class="badge bg-secondary">Ẩn</span>
+                                    <span th:if="${project.isFeatured}" class="badge bg-warning text-dark">Nổi
                                         bật</span>
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a th:href="@{/admin/products/{id}/edit(id=${product.id})}"
+                                        <a th:href="@{/admin/projects/{id}/edit(id=${project.id})}"
                                             class="btn btn-sm btn-outline-primary" title="Chỉnh sửa">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a th:href="@{/products/{id}(id=${product.id})}" target="_blank"
+                                        <a th:href="@{/projects/{id}(id=${project.id})}" target="_blank"
                                             class="btn btn-sm btn-outline-info" title="Xem">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <form th:action="@{/admin/products/{id}/delete(id=${product.id})}" method="post"
+                                        <form th:action="@{/admin/projects/{id}/delete(id=${project.id})}" method="post"
                                             style="display: inline;"
-                                            onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">
+                                            onsubmit="return confirm('Bạn có chắc muốn xóa dự án này?')">
                                             <button type="submit" class="btn btn-sm btn-outline-danger" title="Xóa">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -299,25 +276,31 @@
                     </table>
                 </div>
 
+                <!-- Empty State -->
+                <div th:if="${projectsPage.content.isEmpty()}" class="text-center py-5">
+                    <i class="fas fa-project-diagram fa-4x text-muted mb-3"></i>
+                    <h4 class="text-muted">Chưa có dự án nào</h4>
+                    <p class="text-muted">Bắt đầu bằng việc thêm dự án đầu tiên</p>
+                    <a th:href="@{/admin/projects/create}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Thêm dự án mới
+                    </a>
+                </div>
+
                 <!-- Pagination -->
-                <nav th:if="${productsPage.totalPages > 1}">
+                <nav th:if="${projectsPage.totalPages > 1}">
                     <ul class="pagination justify-content-center">
                         <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
-                            <a class="page-link"
-                                th:href="@{/admin/products(page=${currentPage - 1}, category=${selectedCategory}, search=${search})}">
+                            <a class="page-link" th:href="@{/admin/projects(page=${currentPage - 1})}">
                                 Trước
                             </a>
                         </li>
-                        <li class="page-item" th:each="i : ${#numbers.sequence(0, productsPage.totalPages - 1)}"
+                        <li class="page-item" th:each="i : ${#numbers.sequence(0, projectsPage.totalPages - 1)}"
                             th:classappend="${i == currentPage ? 'active' : ''}">
-                            <a class="page-link"
-                                th:href="@{/admin/products(page=${i}, category=${selectedCategory}, search=${search})}"
-                                th:text="${i + 1}">1</a>
+                            <a class="page-link" th:href="@{/admin/projects(page=${i})}" th:text="${i + 1}">1</a>
                         </li>
                         <li class="page-item"
-                            th:classappend="${currentPage + 1 >= productsPage.totalPages ? 'disabled' : ''}">
-                            <a class="page-link"
-                                th:href="@{/admin/products(page=${currentPage + 1}, category=${selectedCategory}, search=${search})}">
+                            th:classappend="${currentPage + 1 >= projectsPage.totalPages ? 'disabled' : ''}">
+                            <a class="page-link" th:href="@{/admin/projects(page=${currentPage + 1})}">
                                 Sau
                             </a>
                         </li>
@@ -329,11 +312,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function filterByCategory(category) {
-            window.location.href = '/admin/products?category=' + category;
-        }
-    </script>
 </body>
 
 </html>

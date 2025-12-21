@@ -51,10 +51,7 @@ public class HomeController {
         return "services";
     }
 
-    @GetMapping("/projects")
-    public String projects(Model model) {
-        return "projects";
-    }
+    // Removed: @GetMapping("/projects") - now handled by ProjectController
 
     @GetMapping("/contact")
     public String contact(Model model) {
