@@ -4,538 +4,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${project.name + ' - DAT Group'}">Chi tiết dự án - DAT Group</title>
-
-    <!-- SEO Meta Tags -->
+    <title th:text="${project.name + ' - DAT Group'}">Chi tiết dự án</title>
     <meta name="description" th:content="${project.description}">
-    <meta property="og:title" th:content="${project.name}">
-    <meta property="og:description" th:content="${project.description}">
-    <meta property="og:image" th:content="${project.imageUrl}">
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Lightbox CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Header -->
     <div th:replace="~{layout/header :: header}"></div>
 
-    <!-- Main Content Section - Layout giống datsolar.com -->
-    <section class="project-main" style="margin-top: 140px;">
-        <div class="container">
-            <div class="row">
-                <!-- Left: Images -->
-                <div class="col-lg-6 mb-4">
-                    <!-- Main Image -->
-                    <div class="main-image-wrapper mb-3">
-                        <a th:href="@{${project.imageUrl}}" data-lightbox="project-gallery"
-                            th:data-title="${project.name}">
-                            <img th:src="@{${project.imageUrl != null ? project.imageUrl : '/photo/default-project.jpg'}}"
-                                th:alt="${project.name}" class="main-project-img">
-                        </a>
-                    </div>
-                    <!-- Gallery thumbnails -->
-                    <div class="gallery-thumbs"
-                        th:if="${project.galleryImages != null and !project.galleryImages.isEmpty()}">
-                        <div th:each="imgUrl : ${#strings.arraySplit(project.galleryImages, ',')}" class="thumb-item">
-                            <a th:href="@{${imgUrl}}" data-lightbox="project-gallery" th:data-title="${project.name}">
-                                <img th:src="@{${imgUrl}}" th:alt="${project.name}">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Title & Description -->
-                <div class="col-lg-6 mb-4">
-                    <div class="project-info-content">
-                        <h1 class="project-title" th:text="${project.name}">Tên dự án</h1>
-                        <p class="project-desc" th:if="${project.description}" th:text="${project.description}">
-                            Mô tả về dự án...
-                        </p>
-
-                        <!-- Project Details -->
-                        <div class="project-details mt-4" th:if="${project.power != null or project.location != null}">
-                            <div class="detail-item" th:if="${project.power != null}">
-                                <i class="fas fa-bolt text-warning"></i>
-                                <span>Công suất: <strong th:text="${project.power + ' kWp'}">100 kWp</strong></span>
-                            </div>
-                            <div class="detail-item" th:if="${project.location}">
-                                <i class="fas fa-map-marker-alt text-danger"></i>
-                                <span th:text="${project.location}">Long An, Việt Nam</span>
-                            </div>
-                            <div class="detail-item" th:if="${project.investor}">
-                                <i class="fas fa-building text-primary"></i>
-                                <span>Chủ đầu tư: <strong th:text="${project.investor}">Công ty ABC</strong></span>
-                            </div>
-                        </div>
-
-                        <!-- Badges -->
-                        <div class="project-badges mt-4">
-                            <span class="badge bg-primary" th:if="${project.application}"
-                                th:text="${project.applicationDisplayName}">Doanh nghiệp</span>
-                            <span class="badge bg-success" th:if="${project.solution}"
-                                th:text="${project.solutionDisplayName}">Hòa lưới</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- HERO BANNER -->
+    <div class="hero-banner">
+        <img th:src="@{${project.imageUrl != null ? project.imageUrl : '/photo/default-project.jpg'}}" alt="">
+        <div class="hero-text-bar">
+            <span th:text="${project.name}">Tên dự án</span>
+            <span class="mx-3">|</span>
+            <span>Trang chủ &gt; Dự án &gt; <span th:text="${project.name}">Chi tiết</span></span>
         </div>
-    </section>
+    </div>
 
-
-
-    <!-- Detail Content Section -->
-    <section class="project-content py-5" th:if="${project.detailContent}">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <div class="content-body" th:utext="${project.detailContent}">
-                        <!-- Dynamic content from Summernote -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="project-cta py-5"
-        style="background: linear-gradient(135deg, var(--primary-color, #1e88e5), var(--secondary-color, #f39c12));">
-        <div class="container text-center">
-            <h3 class="text-white mb-3">Bạn muốn triển khai dự án tương tự?</h3>
-            <p class="text-white-50 mb-4">Liên hệ với chúng tôi để được tư vấn miễn phí</p>
-            <a th:href="@{/contact}" class="btn btn-light btn-lg">
-                <i class="fas fa-phone me-2"></i> Liên hệ tư vấn
-            </a>
-        </div>
-    </section>
-
-    <!-- Related Projects Section -->
-    <section class="related-projects py-5" th:if="${relatedProjects != null and !relatedProjects.isEmpty()}">
-        <div class="container">
-            <h3 class="section-title mb-4">
-                <i class="fas fa-project-diagram text-primary"></i> Dự án liên quan
-            </h3>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4" th:each="related : ${relatedProjects}">
-                    <article class="related-card">
-                        <div class="related-image">
-                            <a th:href="@{/projects/{id}(id=${related.id})}">
-                                <img th:src="@{${related.imageUrl != null ? related.imageUrl : '/photo/default-project.jpg'}}"
-                                    th:alt="${related.name}">
-                            </a>
-                        </div>
-                        <div class="related-body">
-                            <h6 class="related-title">
-                                <a th:href="@{/projects/{id}(id=${related.id})}" th:text="${related.name}"
-                                    class="text-decoration-none text-dark">
-                                    Tên dự án
-                                </a>
-                            </h6>
-                            <div class="related-meta">
-                                <span th:if="${related.power != null}">
-                                    <i class="fas fa-bolt text-warning"></i>
-                                    <span th:text="${related.power + ' kWp'}">100 kWp</span>
-                                </span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <a th:href="@{/projects}" class="btn btn-outline-primary">
-                    Xem tất cả dự án <i class="fas fa-arrow-right"></i>
+    <!-- MAIN CONTENT -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-5 col-md-6 mb-4">
+                <a th:href="@{${project.imageUrl}}" data-lightbox="gallery">
+                    <img th:src="@{${project.imageUrl}}" class="img-fluid rounded" alt="">
                 </a>
             </div>
+            <div class="col-lg-7 col-md-6 mb-4">
+                <h1 class="text-primary fw-bold mb-3" th:text="${project.name}">Tên dự án</h1>
+                <p class="text-muted" th:text="${project.description}">Mô tả...</p>
+            </div>
         </div>
-    </section>
 
-    <!-- Footer -->
+        <!-- GALLERY với nút trái/phải -->
+        <div class="gallery-wrapper mt-4" th:if="${project.galleryImages != null and !project.galleryImages.isEmpty()}">
+            <button class="gallery-btn" onclick="scrollGallery(-1)"><i class="fas fa-chevron-left"></i></button>
+            <div class="gallery-scroll" id="galleryScroll">
+                <th:block th:each="img : ${#strings.arraySplit(project.galleryImages, ',')}">
+                    <a th:href="@{${img}}" data-lightbox="gallery">
+                        <img th:src="@{${img}}" alt="">
+                    </a>
+                </th:block>
+            </div>
+            <button class="gallery-btn" onclick="scrollGallery(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <!-- DETAIL CONTENT - Full width -->
+    <div class="detail-content" th:if="${project.detailContent}" th:utext="${project.detailContent}">
+    </div>
+
     <div th:replace="~{layout/footer :: footer}"></div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Lightbox JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-    <!-- Custom JS -->
     <script th:src="@{/js/main.js}"></script>
-
     <script>
-        // Initialize lightbox
+        function scrollGallery(dir) {
+            const el = document.getElementById('galleryScroll');
+            if (el) el.scrollBy({ left: dir * 180, behavior: 'smooth' });
+        }
+
+        // Click overlay to close lightbox
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('lb-overlay') || e.target.id === 'lightbox') {
+                document.getElementById('lightbox').style.display = 'none';
+                document.querySelector('.lb-overlay').style.display = 'none';
+            }
+        });
+
+        // Lightbox options
         lightbox.option({
             'resizeDuration': 200,
             'wrapAround': true,
-            'albumLabel': 'Ảnh %1 / %2'
+            'albumLabel': 'Ảnh %1 / %2',
+            'disableScrolling': true
         });
-
-        // Gallery carousel scroll function
-        function scrollGallery(direction) {
-            const carousel = document.getElementById('galleryCarousel');
-            const scrollAmount = 280; // width of one slide + gap
-            carousel.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth'
-            });
-        }
     </script>
 
     <style>
-        /* Main Project Section - Layout giống datsolar.com */
-        .project-main {
-            padding: 40px 0;
+        .hero-banner {
+            position: relative;
+            height: 400px;
+            margin-top: 80px;
         }
 
-        /* Main Image */
-        .main-image-wrapper {
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .main-project-img {
+        .hero-banner img {
             width: 100%;
-            height: 350px;
+            height: 100%;
             object-fit: cover;
-            border-radius: 10px;
+        }
+
+        .hero-text-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .gallery-wrapper {
+            position: relative;
+        }
+
+        .gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
             cursor: pointer;
-            transition: transform 0.3s;
+            z-index: 10;
+            font-size: 12px;
         }
 
-        .main-project-img:hover {
-            transform: scale(1.02);
+        .gallery-btn:first-child {
+            left: 5px;
         }
 
-        /* Gallery Thumbnails */
-        .gallery-thumbs {
+        .gallery-btn:last-child {
+            right: 5px;
+        }
+
+        .gallery-btn:hover {
+            background: #000;
+        }
+
+        .gallery-scroll {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap;
+            overflow: hidden;
+            padding: 5px 35px;
         }
 
-        .thumb-item {
-            flex: 0 0 calc(25% - 8px);
-        }
-
-        .thumb-item img {
-            width: 100%;
-            height: 80px;
+        .gallery-scroll img {
+            width: calc(25% - 8px);
+            height: 90px;
             object-fit: cover;
             border-radius: 6px;
-            cursor: pointer;
-            transition: opacity 0.3s;
+            flex-shrink: 0;
         }
 
-        .thumb-item img:hover {
-            opacity: 0.8;
-        }
-
-        /* Project Info Content */
-        .project-info-content {
-            padding-left: 20px;
-        }
-
-        .project-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1a3c5e;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .project-desc {
-            font-size: 1rem;
+        .detail-content {
+            padding: 30px 40px;
             line-height: 1.8;
-            color: #555;
+            font-size: 1rem;
         }
 
-        /* Project Details */
-        .project-details {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        .detail-content img {
+            max-width: 100%;
+            height: auto;
         }
 
-        .detail-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
+        /* Xóa viền từ Summernote content */
+        .detail-content table,
+        .detail-content td,
+        .detail-content th,
+        .detail-content tr {
+            border: none !important;
+            border-collapse: collapse;
         }
 
-        .detail-item i {
-            width: 20px;
-            text-align: center;
+        .detail-content div,
+        .detail-content p {
+            border: none !important;
         }
 
-        /* Project Badges */
-        .project-badges .badge {
-            font-size: 0.85rem;
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin-right: 8px;
+        .detail-content thead,
+        .detail-content th {
+            background: transparent !important;
+            background-color: transparent !important;
         }
 
-        /* Info Card */
-        .info-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            height: 100%;
+        .detail-content .box_content {
+            display: none !important;
         }
 
-        .info-title {
-            font-size: 1.3rem;
-            color: var(--dark-color, #2c3e50);
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #e9ecef;
+        @media (max-width: 768px) {
+            .hero-banner {
+                height: 250px;
+                margin-top: 70px;
+            }
+
+            .hero-text-bar {
+                font-size: 0.75rem;
+            }
         }
 
-        .info-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        /* Lightbox Custom */
+        .lb-overlay {
+            cursor: pointer;
         }
 
-        .info-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px dashed #e9ecef;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
+        .lightbox .lb-image {
+            max-width: 70vw !important;
+            max-height: 70vh !important;
         }
 
-        .info-list li:last-child {
-            border-bottom: none;
-        }
-
-        .info-list li strong {
-            color: #666;
-        }
-
-        .info-list li span {
-            font-weight: 500;
-        }
-
-        /* Main Image */
-        .main-image-container {
+        .lb-container {
             position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .main-image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .main-image-container:hover .main-image {
-            transform: scale(1.02);
-        }
-
-        .image-overlay {
+        .lb-nav {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-            color: white;
         }
 
-        .main-image-container:hover .image-overlay {
-            opacity: 1;
+        .lb-nav a.lb-prev {
+            width: 50px !important;
+            left: -60px !important;
+            opacity: 1 !important;
         }
 
-        /* Section Title */
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--dark-color, #2c3e50);
-            font-weight: bold;
+        .lb-nav a.lb-next {
+            width: 50px !important;
+            right: -60px !important;
+            opacity: 1 !important;
         }
 
-        /* Gallery Carousel */
-        .gallery-carousel-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .gallery-carousel {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 10px 0;
-            scrollbar-width: none;
-        }
-
-        .gallery-carousel::-webkit-scrollbar {
-            display: none;
-        }
-
-        .gallery-slide {
-            flex: 0 0 auto;
-            width: 250px;
-        }
-
-        .gallery-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .gallery-img:hover {
-            transform: scale(1.03);
-        }
-
-        .gallery-nav {
+        .lb-data .lb-close {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            border: none;
-            border-radius: 50%;
+            top: -40px;
+            right: 0;
+            display: block !important;
+            width: 30px !important;
+            height: 30px !important;
+            background-size: contain !important;
             cursor: pointer;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .gallery-nav:hover {
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        .gallery-prev {
-            left: -20px;
-        }
-
-        .gallery-next {
-            right: -20px;
-        }
-
-        /* Content Body */
-        .content-body {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #333;
-        }
-
-        .content-body p {
-            margin-bottom: 1.5rem;
-        }
-
-        .content-body h1,
-        .content-body h2,
-        .content-body h3 {
-            color: var(--dark-color, #2c3e50);
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .content-body img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin: 1.5rem 0;
-        }
-
-        /* Related Projects */
-        .related-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .related-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .related-image {
-            height: 160px;
-            overflow: hidden;
-        }
-
-        .related-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .related-card:hover .related-image img {
-            transform: scale(1.05);
-        }
-
-        .related-body {
-            padding: 1rem;
-        }
-
-        .related-title {
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .related-title a:hover {
-            color: var(--primary-color, #1e88e5) !important;
-        }
-
-        .related-meta {
-            font-size: 0.85rem;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .hero-image-container {
-                height: 300px;
-            }
-
-            .hero-title {
-                font-size: 1.8rem;
-            }
-
-            .main-image {
-                height: 300px;
-            }
-
-            .gallery-image {
-                height: 150px;
-            }
-
-            .info-list li {
-                flex-direction: column;
-            }
-
-            .info-list li span {
-                margin-top: 0.25rem;
-            }
+        .lb-outerContainer {
+            margin: 0 auto;
         }
     </style>
 </body>
