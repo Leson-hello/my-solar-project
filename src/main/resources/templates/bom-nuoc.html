@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Bơm Nước Năng Lượng Mặt Trời - DAT Group</title>
+    <meta name="description"
+        content="Máy bơm nước năng lượng mặt trời là giải pháp tối ưu cho nông nghiệp, tiết kiệm chi phí, thân thiện môi trường">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <!-- Article Style Page -->
+    <main class="solution-article">
+        <div class="article-container">
+
+            <!-- Article Header -->
+            <header class="article-header">
+                <span class="article-date">Cập nhật 2024</span>
+                <h1 class="article-title">Hệ Thống Bơm Nước Năng Lượng Mặt Trời - Giải Pháp Tưới Tiêu Hiệu Quả</h1>
+            </header>
+
+            <!-- Section: Giới thiệu -->
+            <section class="article-section">
+                <h2>Giới thiệu về hệ thống bơm nước năng lượng mặt trời</h2>
+                <p>
+                    Hệ thống bơm nước năng lượng mặt trời là giải pháp sử dụng nguồn năng lượng mặt trời để vận hành
+                    máy bơm nước, phục vụ cho các hoạt động tưới tiêu nông nghiệp, cấp nước sinh hoạt và công nghiệp.
+                    Đây là giải pháp tối ưu cho các khu vực nông thôn, vùng sâu vùng xa, hải đảo - nơi không có điện
+                    lưới
+                    hoặc điện lưới không ổn định.
+                </p>
+                <p>
+                    Với ưu điểm tiết kiệm chi phí vận hành, không cần nhiên liệu, thân thiện môi trường và tuổi thọ cao,
+                    hệ thống bơm nước năng lượng mặt trời đang được ứng dụng ngày càng rộng rãi trong lĩnh vực nông
+                    nghiệp,
+                    chăn nuôi và các công trình dân dụng tại Việt Nam.
+                </p>
+                <figure class="article-figure">
+                    <img th:src="@{/photo/bom-nuoc-2.jpg}" alt="Hệ thống bơm nước năng lượng mặt trời"
+                        class="article-image">
+                    <figcaption>Hệ thống bơm nước năng lượng mặt trời cho trang trại nông nghiệp</figcaption>
+                </figure>
+            </section>
+
+            <!-- Section: Hệ thống độc lập -->
+            <section class="article-section">
+                <h2>Hệ thống bơm nước năng lượng mặt trời hệ độc lập</h2>
+                <p>
+                    Hệ thống điện mặt trời cho bơm nước hệ độc lập (Off-grid Solar Pump System) là giải pháp sử dụng
+                    nguồn năng lượng mặt trời để vận hành máy bơm nước mà <strong>không cần kết nối lưới điện quốc
+                        gia</strong>.
+                    Đây là hệ thống thiết kế riêng biệt, cung cấp điện thẳng từ tấm pin năng lượng mặt trời cho máy bơm,
+                    giúp bơm nước lên trực tiếp hoặc lưu trữ trong bể chứa để sử dụng bất cứ lúc nào.
+                </p>
+                <p>
+                    Hệ thống này đặc biệt phù hợp cho các khu vực vùng xa, vùng không có điện hoặc điện không ổn định.
+                    Máy bơm sẽ hoạt động khi có ánh nắng mặt trời, bơm nước vào bể chứa để sử dụng suốt ngày đêm.
+                </p>
+
+                <figure class="article-figure">
+                    <img th:src="@{/photo/bom-nuoc-so-do.png}" alt="Sơ đồ hệ thống bơm nước độc lập"
+                        class="article-image">
+                    <figcaption>Mô hình giải pháp hệ thống bơm tưới nước năng lượng mặt trời độc lập</figcaption>
+                </figure>
+
+                <h3>Ưu điểm của hệ bơm nước năng lượng mặt trời hệ độc lập</h3>
+                <ul class="article-list">
+                    <li><strong>Tiết kiệm chi phí vận hành:</strong> Không tốn tiền điện hay nhiên liệu như xăng dầu,
+                        giảm chi phí dài hạn đáng kể so với máy phát điện diesel.</li>
+                    <li><strong>Không cần lưới điện:</strong> Hoạt động hoàn toàn độc lập, phù hợp dùng trong vùng
+                        nông thôn, vùng xa không có điện hoặc điện yếu.</li>
+                    <li><strong>Bảo trì thấp:</strong> Hệ thống không dùng ắc quy hoặc máy phát điện nên ít hỏng hóc,
+                        vận hành bền bỉ theo tuổi thọ tấm pin (trên 25-30 năm).</li>
+                    <li><strong>Thân thiện môi trường:</strong> Không gây ô nhiễm, không phát thải CO2,
+                        góp phần phát triển bền vững.</li>
+                    <li><strong>Hoạt động tự động:</strong> Có thể kết hợp với các công nghệ điều khiển tự động,
+                        theo dõi từ xa qua smartphone, tăng hiệu quả quản lý.</li>
+                </ul>
+            </section>
+
+            <!-- Section: Thành phần chính -->
+            <section class="article-section">
+                <h2>Thành phần chính của hệ thống</h2>
+                <p>
+                    Hệ thống bơm nước năng lượng mặt trời bao gồm các thành phần chính sau:
+                </p>
+                <ul class="article-list">
+                    <li><strong>Tấm pin mặt trời (Solar Panel):</strong> Hấp thụ ánh sáng mặt trời và chuyển đổi
+                        thành điện năng. Công suất tấm pin được thiết kế phù hợp với công suất máy bơm và nhu cầu nước.
+                    </li>
+                    <li><strong>Bộ biến tần bơm nước (Solar Pump Inverter):</strong> Chuyển đổi điện DC từ tấm pin
+                        thành điện AC phù hợp cho máy bơm. Inverter còn có chức năng bảo vệ máy bơm và điều khiển
+                        tốc độ bơm theo cường độ ánh sáng.</li>
+                    <li><strong>Máy bơm nước:</strong> Có thể là loại 1 pha hoặc 3 pha, bơm chìm hoặc bơm hút,
+                        tùy thuộc vào độ sâu nguồn nước và lưu lượng cần bơm.</li>
+                    <li><strong>Bể chứa nước:</strong> Lưu trữ nước bơm lên để sử dụng khi cần, đặc biệt vào ban đêm
+                        hoặc những ngày ít nắng.</li>
+                    <li><strong>Bộ điều khiển và giám sát:</strong> Điều chỉnh hoạt động bơm, bảo vệ hệ thống,
+                        có thể kết nối điều khiển từ xa qua điện thoại thông minh.</li>
+                </ul>
+
+                <figure class="article-figure">
+                    <img th:src="@{/photo/bom-nuoc-1.png}" alt="Thành phần hệ thống bơm nước" class="article-image">
+                    <figcaption>Các thành phần chính của hệ thống bơm nước năng lượng mặt trời</figcaption>
+                </figure>
+            </section>
+
+            <!-- Section: Hệ thống kết hợp lưới -->
+            <section class="article-section">
+                <h2>Hệ thống bơm nước năng lượng mặt trời kết hợp lưới</h2>
+                <p>
+                    Hệ thống điện mặt trời cho bơm nước kết hợp lưới là giải pháp sử dụng nguồn năng lượng sạch
+                    từ mặt trời kết hợp với nguồn điện lưới quốc gia để vận hành máy bơm nước. Giải pháp này
+                    tối ưu hóa việc sử dụng năng lượng mặt trời khi có ánh sáng, đồng thời tự động chuyển sang
+                    dùng điện lưới khi trời tối hoặc năng lượng mặt trời không đủ.
+                </p>
+
+                <h3>Nguyên lý hoạt động</h3>
+                <p>
+                    Các tấm pin mặt trời hấp thụ bức xạ năng lượng mặt trời và chuyển đổi thành điện một chiều (DC).
+                    Dòng điện một chiều này được chuyển qua biến tần năng lượng mặt trời (inverter) để đổi thành
+                    điện xoay chiều (AC) phù hợp với máy bơm nước phổ biến hiện nay (1 pha 230V hoặc 3 pha 220V, 380V).
+                </p>
+                <p>
+                    Hệ thống ưu tiên sử dụng điện từ năng lượng mặt trời để vận hành máy bơm trong điều kiện có nắng.
+                    Khi trời không có nắng hoặc ban đêm, hệ thống tự động chuyển sang dùng nguồn điện lưới hoặc
+                    máy phát điện để đảm bảo nguồn nước tưới luôn dồi dào. Máy bơm có thể hoạt động liên tục 24/7
+                    mà không bị gián đoạn.
+                </p>
+
+                <h3>Ưu điểm của hệ thống bơm nước kết hợp lưới</h3>
+                <ul class="article-list">
+                    <li>Tiết kiệm chi phí điện năng tối đa khi ưu tiên sử dụng năng lượng mặt trời miễn phí,
+                        giảm gánh nặng chi phí điện lưới hoặc nhiên liệu cho máy phát.</li>
+                    <li>Hoạt động bền bỉ, tự động không cần can thiệp nhiều, giảm chi phí nhân công và bảo trì.</li>
+                    <li>Không gây ô nhiễm môi trường và tiếng ồn, so với máy bơm dùng dầu diesel truyền thống.</li>
+                    <li>Tăng hiệu quả sản xuất nông nghiệp do nguồn nước tưới luôn sẵn sàng, tăng năng suất cây trồng.
+                    </li>
+                    <li>Thời gian hoàn vốn nhanh do giảm chi phí nhiên liệu và điện năng.
+                        Các tấm pin năng lượng mặt trời cao cấp có tuổi thọ trên 30 năm.</li>
+                    <li>Hệ thống phù hợp với nhiều loại máy bơm có công suất từ nhỏ đến lớn,
+                        tùy theo mô hình và nhu cầu sử dụng.</li>
+                </ul>
+
+                <figure class="article-figure">
+                    <img th:src="@{/photo/bom-nuoc-3.jpg}" alt="Bơm nước tưới tiêu nông nghiệp" class="article-image">
+                    <figcaption>Ứng dụng bơm nước năng lượng mặt trời trong nông nghiệp</figcaption>
+                </figure>
+            </section>
+
+            <!-- Section: Ứng dụng -->
+            <section class="article-section">
+                <h2>Ứng dụng của hệ thống bơm nước năng lượng mặt trời</h2>
+                <ul class="article-list">
+                    <li><strong>Nông nghiệp:</strong> Tưới tiêu cho ruộng lúa, vườn cây ăn quả, rau màu, hoa...</li>
+                    <li><strong>Chăn nuôi:</strong> Cấp nước cho trang trại gia súc, gia cầm, thủy sản...</li>
+                    <li><strong>Lâm nghiệp:</strong> Tưới cây giống, cấp nước cho rừng trồng...</li>
+                    <li><strong>Sinh hoạt:</strong> Cấp nước cho các hộ gia đình vùng nông thôn, vùng xa...</li>
+                    <li><strong>Hải đảo:</strong> Giải pháp cấp nước cho các vùng hải đảo chưa có điện lưới.</li>
+                    <li><strong>Công nghiệp:</strong> Bơm nước làm mát, cấp nước cho nhà máy, xí nghiệp...</li>
+                </ul>
+            </section>
+
+            <!-- Section: Tại sao chọn DAT Solar -->
+            <section class="article-section">
+                <h2>Chọn DAT Solar - Chọn giải pháp bơm nước năng lượng mặt trời hiệu quả</h2>
+                <p>
+                    DAT Solar với hơn <strong>17 năm kinh nghiệm</strong> trong lĩnh vực điện mặt trời,
+                    tự hào là đối tác tin cậy của hàng ngàn khách hàng trên toàn quốc. Đối với giải pháp
+                    bơm nước năng lượng mặt trời, đội ngũ kỹ thuật, chuyên gia điện mặt trời của DAT Solar sẽ:
+                </p>
+                <ul class="article-list">
+                    <li>Khảo sát thực địa, đánh giá nhu cầu nước và điều kiện tự nhiên của khu vực.</li>
+                    <li>Tư vấn và thiết kế hệ thống phù hợp với công suất máy bơm và lưu lượng nước cần thiết.</li>
+                    <li>Cung cấp tấm pin và thiết bị chính hãng từ các thương hiệu uy tín toàn cầu.</li>
+                    <li>Thi công lắp đặt chuyên nghiệp, đảm bảo hệ thống hoạt động ổn định.</li>
+                    <li>Hỗ trợ kỹ thuật 24/7, bảo hành và bảo trì định kỳ.</li>
+                </ul>
+            </section>
+
+            <!-- Registration Form -->
+            <section id="register-form" class="article-section register-section">
+                <h2>ĐĂNG KÝ TƯ VẤN HỆ THỐNG BƠM NƯỚC</h2>
+                <p class="text-center text-muted">CHÚNG TÔI SẴN SÀNG ĐỒNG HÀNH CÙNG BẠN!</p>
+
+                <!-- Success/Error Messages -->
+                <div th:if="${success}" class="alert alert-success" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <span th:text="${success}">Đăng ký thành công!</span>
+                </div>
+                <div th:if="${error}" class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <span th:text="${error}">Có lỗi xảy ra!</span>
+                </div>
+
+                <form th:action="@{/giai-phap/bom-nuoc/register}" method="post" th:object="${quoteRequest}"
+                    class="register-form">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" th:field="*{fullName}" required
+                                placeholder="Nhập họ và tên">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Công ty</label>
+                            <input type="text" class="form-control" th:field="*{company}"
+                                placeholder="Tên công ty (nếu có)">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" th:field="*{email}" required
+                                placeholder="Email liên hệ">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" th:field="*{phone}" required
+                                placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tỉnh/Thành phố</label>
+                        <select class="form-select" th:field="*{province}">
+                            <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                            <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                            <option value="Hà Nội">Hà Nội</option>
+                            <option value="Đà Nẵng">Đà Nẵng</option>
+                            <option value="Bình Dương">Bình Dương</option>
+                            <option value="Đồng Nai">Đồng Nai</option>
+                            <option value="Long An">Long An</option>
+                            <option value="Cần Thơ">Cần Thơ</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Ghi chú</label>
+                        <textarea class="form-control" th:field="*{message}" rows="3"
+                            placeholder="Mô tả nhu cầu bơm nước, diện tích tưới tiêu, loại cây trồng, độ sâu nguồn nước..."></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-register">ĐĂNG KÝ</button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{layout/footer :: footer}"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+    <style>
+        .solution-article {
+            margin-top: 120px;
+            padding: 40px 0 80px;
+            background: #fff;
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .article-header {
+            margin-bottom: 40px;
+        }
+
+        .article-date {
+            display: block;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .article-figure {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .article-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .article-figure figcaption {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .article-section {
+            margin-bottom: 50px;
+        }
+
+        .article-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0073B7;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .article-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a365d;
+            margin: 25px 0 15px;
+        }
+
+        .article-section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .article-list {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        .article-list li {
+            padding: 8px 0;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .register-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: 60px;
+        }
+
+        .register-section h2 {
+            text-align: center;
+            color: #1a365d;
+            font-size: 1.4rem;
+        }
+
+        .register-form {
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+
+        .form-control,
+        .form-select {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #0073B7;
+            box-shadow: 0 0 0 3px rgba(0, 115, 183, 0.1);
+        }
+
+        .btn-register {
+            background: #333;
+            color: white;
+            padding: 12px 50px;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn-register:hover {
+            background: #1a365d;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .solution-article {
+                margin-top: 80px;
+                padding: 30px 0 60px;
+            }
+
+            .article-title {
+                font-size: 1.5rem;
+            }
+
+            .register-section {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</body>
+
+</html>

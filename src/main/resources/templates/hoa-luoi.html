@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Điện mặt trời Hòa lưới - DAT Group</title>
+    <meta name="description"
+        content="Hệ thống điện mặt trời hòa lưới giúp tiết kiệm chi phí, ổn định nguồn điện, bảo vệ môi trường">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <!-- Article Style Page -->
+    <main class="solution-article">
+        <div class="article-container">
+
+            <!-- Article Header -->
+            <header class="article-header">
+                <span class="article-date">Cập nhật 2024</span>
+                <h1 class="article-title">Hệ Thống Điện Mặt Trời Hòa Lưới - Giải Pháp Tiết Kiệm Điện Tối Ưu</h1>
+            </header>
+
+            <!-- Section: Giới thiệu -->
+            <section class="article-section">
+                <h2>Hệ thống điện mặt trời hòa lưới là gì?</h2>
+                <p>
+                    Hệ thống điện mặt trời hòa lưới (On-grid Solar System) là giải pháp sử dụng năng lượng mặt trời
+                    để tạo ra điện, hoạt động song song và đồng bộ hoàn toàn với lưới điện quốc gia. Đây là loại hệ
+                    thống
+                    điện mặt trời phổ biến nhất hiện nay, được ứng dụng rộng rãi từ hộ gia đình cho đến các doanh
+                    nghiệp,
+                    nhà máy công nghiệp.
+                </p>
+                <p>
+                    Điện năng sản xuất từ hệ thống sẽ được ưu tiên cấp cho các thiết bị trong gia đình hoặc doanh nghiệp
+                    sử dụng trước. Nếu sản lượng điện mặt trời dư thừa, phần điện này sẽ tự động hòa vào lưới điện quốc
+                    gia
+                    thông qua công tơ hai chiều, giúp người dùng có thể "bán điện" lại cho công ty điện lực hoặc bù trừ
+                    vào hóa đơn tiền điện.
+                </p>
+                <figure class="article-figure">
+                    <img th:src="@{/photo/hoa-luoi-1.jpg}" alt="Hệ thống điện mặt trời hòa lưới" class="article-image">
+                    <figcaption>Hệ thống điện mặt trời hòa lưới cho doanh nghiệp - DAT Solar</figcaption>
+                </figure>
+            </section>
+
+            <!-- Section: Nguyên lý hoạt động -->
+            <section class="article-section">
+                <h2>Nguyên lý hoạt động của hệ thống điện mặt trời hòa lưới</h2>
+                <p>
+                    Quá trình vận hành hệ thống điện mặt trời hòa lưới luôn linh hoạt tùy theo điều kiện ánh sáng,
+                    nhu cầu sử dụng và trạng thái kết nối với lưới điện quốc gia. Dưới đây là các trường hợp phổ biến
+                    minh họa sự hiệu quả và ổn định của giải pháp này:
+                </p>
+
+                <h3>Trường hợp 1: Ánh sáng mặt trời mạnh, điện mặt trời tạo ra vượt nhu cầu sử dụng</h3>
+                <p>
+                    Khi trời nắng gắt, hệ thống tấm pin điện năng lượng mặt trời hấp thụ ánh sáng và chuyển hóa tối đa
+                    thành dòng điện một chiều (DC). Bộ biến tần hòa lưới (Grid-tied Inverter) chuyển đổi dòng DC này
+                    thành điện xoay chiều (AC), đồng bộ hoàn toàn với lưới điện quốc gia về tần số và pha.
+                </p>
+                <p>
+                    Toàn bộ điện năng sản xuất ưu tiên cấp cho thiết bị trong gia đình, doanh nghiệp. Phần dư thừa sẽ
+                    tự động hòa vào lưới điện nhờ công tơ hai chiều – theo cơ chế net metering, giúp người dùng bán điện
+                    lại cho công ty điện lực, tăng lợi ích kinh tế đáng kể.
+                </p>
+
+                <figure class="article-figure">
+                    <img th:src="@{/photo/hoa-luoi-2.jpg}" alt="Nguyên lý hoạt động hệ thống hòa lưới"
+                        class="article-image">
+                    <figcaption>Tấm pin năng lượng mặt trời lắp mái nhà</figcaption>
+                </figure>
+
+                <h3>Trường hợp 2: Ánh sáng mặt trời vừa phải, điện mặt trời cân bằng đúng nhu cầu</h3>
+                <p>
+                    Ở điều kiện thời tiết ổn định, lượng điện do hệ thống sản xuất vừa đủ đáp ứng nhu cầu tiêu thụ.
+                    Lúc này, toàn bộ hệ thống vận hành hoàn toàn tự chủ, giúp tối ưu chi phí mà không cần lấy thêm
+                    điện từ lưới quốc gia. Giải pháp này phát huy tối đa tính linh hoạt, tận dụng nguồn năng lượng
+                    sạch, an toàn từ mặt trời.
+                </p>
+
+                <h3>Trường hợp 3: Ánh sáng mặt trời yếu hoặc trời tối</h3>
+                <p>
+                    Trong những ngày mưa kéo dài hoặc ban đêm, sản lượng điện mặt trời sụt giảm hoặc không còn.
+                    Hệ thống điện mặt trời sẽ tự động lấy phần điện còn thiếu từ lưới điện quốc gia để đảm bảo
+                    nguồn điện luôn ổn định, không gián đoạn cho các thiết bị sử dụng. Điều này giúp duy trì sinh hoạt,
+                    sản xuất liên tục dù điều kiện ánh sáng không thuận lợi.
+                </p>
+
+                <h3>Trường hợp 4: Hệ thống ngừng hoạt động do bảo trì hoặc sự cố</h3>
+                <p>
+                    Trong quá trình bảo trì hoặc khi phát sinh sự cố, nguồn điện cung cấp hoàn toàn từ lưới điện quốc
+                    gia.
+                    Đội ngũ kỹ thuật của DAT Solar sẽ nhanh chóng kiểm tra, khắc phục và đảm bảo hệ thống vận hành trở
+                    lại,
+                    giúp người dùng yên tâm về sự liên tục của nguồn năng lượng và quá trình sử dụng không bị gián đoạn.
+                </p>
+            </section>
+
+            <!-- Section: Ưu điểm -->
+            <section class="article-section">
+                <h2>Ưu điểm vượt trội của hệ thống điện mặt trời hòa lưới</h2>
+
+                <h3>Tiết kiệm chi phí tiền điện đến 70-90%</h3>
+                <p>
+                    Hệ thống điện mặt trời hòa lưới giúp giảm đáng kể hóa đơn tiền điện hàng tháng. Với hệ thống
+                    được thiết kế phù hợp, người dùng có thể tiết kiệm từ 70-90% chi phí tiền điện, đặc biệt trong
+                    bối cảnh giá điện liên tục tăng như hiện nay.
+                </p>
+
+                <figure class="article-figure">
+                    <img th:src="@{/photo/hoa-luoi-3.jpg}" alt="Tiết kiệm chi phí với điện mặt trời"
+                        class="article-image">
+                    <figcaption>Điện mặt trời giúp tiết kiệm chi phí điện năng</figcaption>
+                </figure>
+
+                <h3>Chi phí đầu tư thấp, không cần pin lưu trữ</h3>
+                <p>
+                    So với hệ thống độc lập (Off-grid) hoặc Hybrid, hệ thống hòa lưới không cần trang bị pin ắc quy
+                    lưu trữ - bộ phận chiếm đến 30-40% tổng chi phí hệ thống. Điều này giúp chi phí đầu tư ban đầu
+                    thấp hơn đáng kể, thời gian hoàn vốn nhanh hơn, thường từ 4-6 năm cho hộ gia đình và 3-5 năm
+                    cho doanh nghiệp.
+                </p>
+
+                <h3>Nguồn điện ổn định, liên tục 24/7</h3>
+                <p>
+                    Nhờ kết nối với lưới điện quốc gia, hệ thống luôn đảm bảo cung cấp điện liên tục. Khi điện mặt trời
+                    không đủ, hệ thống tự động lấy điện từ lưới bổ sung. Người dùng không lo lắng về việc thiếu điện
+                    trong mọi điều kiện thời tiết.
+                </p>
+
+                <h3>Bảo vệ môi trường, phát triển bền vững</h3>
+                <p>
+                    Mỗi kWh điện mặt trời sản xuất ra giúp giảm khoảng 0.88kg CO2 phát thải. Một hệ thống 5kWp
+                    có thể giảm khoảng 5.3 tấn CO2/năm, tương đương với việc trồng gần 280 cây xanh. Đây là đóng góp
+                    thiết thực cho môi trường và ứng phó với biến đổi khí hậu.
+                </p>
+
+                <h3>Tuổi thọ cao, bảo hành dài hạn</h3>
+                <p>
+                    Tấm pin mặt trời có tuổi thọ trên 25-30 năm, hiệu suất vẫn đảm bảo trên 80% sau 25 năm sử dụng.
+                    Bộ biến tần (inverter) có tuổi thọ 10-15 năm. DAT Solar cung cấp chế độ bảo hành lên đến 12 năm
+                    cho tấm pin và 5-10 năm cho inverter, đồng hành cùng khách hàng suốt vòng đời sản phẩm.
+                </p>
+            </section>
+
+            <!-- Section: Đối tượng phù hợp -->
+            <section class="article-section">
+                <h2>Hệ thống điện mặt trời hòa lưới phù hợp với ai?</h2>
+
+                <h3>Hộ gia đình</h3>
+                <p>
+                    Với các hộ gia đình có hóa đơn tiền điện từ 1-3 triệu đồng/tháng, hệ thống từ 3-10 kWp là lựa chọn
+                    phù hợp. Hệ thống 5 kWp điển hình có thể sản xuất khoảng 600 kWh điện/tháng, tiết kiệm đáng kể
+                    chi phí sinh hoạt hàng tháng. Thời gian hoàn vốn khoảng 4-6 năm, sau đó gia đình sẽ được sử dụng
+                    điện gần như miễn phí trong 20-25 năm tiếp theo.
+                </p>
+
+                <h3>Doanh nghiệp, nhà xưởng công nghiệp</h3>
+                <p>
+                    Các doanh nghiệp có mái nhà xưởng rộng là đối tượng lý tưởng cho hệ thống hòa lưới công suất lớn
+                    từ 100 kWp đến hàng MWp. Với giá điện sản xuất thường cao hơn điện sinh hoạt, việc lắp đặt
+                    điện mặt trời giúp doanh nghiệp tiết kiệm hàng tỷ đồng mỗi năm. Một hệ thống 1 MWp có thể
+                    sản xuất khoảng 120 MWh điện/tháng, giảm phát thải hơn 100 tấn CO2/tháng.
+                </p>
+
+                <figure class="article-figure">
+                    <img th:src="@{/photo/hoa-luoi-4.jpg}" alt="Điện mặt trời cho doanh nghiệp" class="article-image">
+                    <figcaption>Hệ thống điện mặt trời quy mô lớn</figcaption>
+                </figure>
+            </section>
+
+            <!-- Section: Tại sao chọn DAT Solar -->
+            <section class="article-section">
+                <h2>Tại sao nên chọn DAT Solar?</h2>
+                <p>
+                    DAT Solar tự hào là một trong những đơn vị tiên phong trong lĩnh vực điện mặt trời tại Việt Nam
+                    với hơn <strong>17 năm kinh nghiệm</strong> và đã cung cấp, triển khai hơn <strong>10.000 hệ
+                        thống</strong>
+                    với tổng công suất trên <strong>800 MWp</strong> trên toàn quốc.
+                </p>
+                <ul class="article-list">
+                    <li><strong>Đội ngũ chuyên nghiệp:</strong> Hơn 350 nhân viên với 41% là kỹ sư chuyên môn cao,
+                        giàu kinh nghiệm trong thiết kế và thi công điện mặt trời.</li>
+                    <li><strong>Sản phẩm chính hãng:</strong> Là đối tác ủy quyền chính thức của các thương hiệu
+                        hàng đầu thế giới như Longi, Canadian Solar, Huawei, SMA...</li>
+                    <li><strong>Kho hàng sẵn sàng:</strong> 3 kho hàng lớn tại TP.HCM, Hà Nội, Cần Thơ với hàng chục
+                        MWp tấm pin và hàng ngàn inverter sẵn sàng giao hàng.</li>
+                    <li><strong>Hỗ trợ 24/7:</strong> Hotline 1800 6567 miễn phí, đội ngũ kỹ thuật sẵn sàng hỗ trợ
+                        khách hàng mọi lúc mọi nơi.</li>
+                    <li><strong>Bảo hành toàn diện:</strong> Chế độ bảo hành dài hạn, bảo trì định kỳ, cam kết
+                        đồng hành suốt vòng đời dự án.</li>
+                </ul>
+            </section>
+
+            <!-- Registration Form -->
+            <section id="register-form" class="article-section register-section">
+                <h2>ĐĂNG KÝ TƯ VẤN HỆ THỐNG HÒA LƯỚI</h2>
+                <p class="text-center text-muted">CHÚNG TÔI SẴN SÀNG ĐỒNG HÀNH CÙNG BẠN!</p>
+
+                <!-- Success/Error Messages -->
+                <div th:if="${success}" class="alert alert-success" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <span th:text="${success}">Đăng ký thành công!</span>
+                </div>
+                <div th:if="${error}" class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <span th:text="${error}">Có lỗi xảy ra!</span>
+                </div>
+
+                <form th:action="@{/giai-phap/hoa-luoi/register}" method="post" th:object="${quoteRequest}"
+                    class="register-form">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" th:field="*{fullName}" required
+                                placeholder="Nhập họ và tên">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Công ty</label>
+                            <input type="text" class="form-control" th:field="*{company}"
+                                placeholder="Tên công ty (nếu có)">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" th:field="*{email}" required
+                                placeholder="Email liên hệ">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" th:field="*{phone}" required
+                                placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tỉnh/Thành phố</label>
+                        <select class="form-select" th:field="*{province}">
+                            <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                            <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                            <option value="Hà Nội">Hà Nội</option>
+                            <option value="Đà Nẵng">Đà Nẵng</option>
+                            <option value="Bình Dương">Bình Dương</option>
+                            <option value="Đồng Nai">Đồng Nai</option>
+                            <option value="Long An">Long An</option>
+                            <option value="Cần Thơ">Cần Thơ</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Ghi chú</label>
+                        <textarea class="form-control" th:field="*{message}" rows="3"
+                            placeholder="Mô tả nhu cầu sử dụng điện, diện tích mái, hóa đơn tiền điện hiện tại..."></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-register">ĐĂNG KÝ</button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{layout/footer :: footer}"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+    <style>
+        .solution-article {
+            margin-top: 120px;
+            padding: 40px 0 80px;
+            background: #fff;
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .article-header {
+            margin-bottom: 40px;
+        }
+
+        .article-date {
+            display: block;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .article-figure {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .article-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .article-figure figcaption {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .article-section {
+            margin-bottom: 50px;
+        }
+
+        .article-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0073B7;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .article-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a365d;
+            margin: 25px 0 15px;
+        }
+
+        .article-section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .article-list {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        .article-list li {
+            padding: 8px 0;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .register-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: 60px;
+        }
+
+        .register-section h2 {
+            text-align: center;
+            color: #1a365d;
+            font-size: 1.4rem;
+        }
+
+        .register-form {
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+
+        .form-control,
+        .form-select {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #0073B7;
+            box-shadow: 0 0 0 3px rgba(0, 115, 183, 0.1);
+        }
+
+        .btn-register {
+            background: #333;
+            color: white;
+            padding: 12px 50px;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn-register:hover {
+            background: #1a365d;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .solution-article {
+                margin-top: 80px;
+                padding: 30px 0 60px;
+            }
+
+            .article-title {
+                font-size: 1.5rem;
+            }
+
+            .register-section {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</body>
+
+</html>

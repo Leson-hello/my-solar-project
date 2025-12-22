@@ -120,6 +120,18 @@
         .badge-ess {
             background: #9b59b6;
         }
+
+        .badge-hoa-luoi {
+            background: #3498db;
+        }
+
+        .badge-bom-nuoc {
+            background: #1abc9c;
+        }
+
+        .badge-chieu-sang {
+            background: #f39c12;
+        }
     </style>
 </head>
 
@@ -256,8 +268,14 @@
                                 <select class="form-select" id="solution" name="solution" onchange="this.form.submit()">
                                     <option value="">Tất cả giải pháp</option>
                                     <option value="ESCO" th:selected="${selectedSolution == 'ESCO'}">ESCO</option>
+                                    <option value="HOA_LUOI" th:selected="${selectedSolution == 'HOA_LUOI'}">Hòa lưới
+                                    </option>
                                     <option value="HYBRID" th:selected="${selectedSolution == 'HYBRID'}">Hybrid</option>
+                                    <option value="BOM_NUOC" th:selected="${selectedSolution == 'BOM_NUOC'}">Bơm nước
+                                    </option>
                                     <option value="ESS" th:selected="${selectedSolution == 'ESS'}">ESS</option>
+                                    <option value="CHIEU_SANG" th:selected="${selectedSolution == 'CHIEU_SANG'}">Chiếu
+                                        sáng</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -299,6 +317,7 @@
                                         <th>Email</th>
                                         <th>Tỉnh/TP</th>
                                         <th>Giải pháp</th>
+                                        <th>Ghi chú</th>
                                         <th>Trạng thái</th>
                                         <th>Ngày tạo</th>
                                         <th>Thao tác</th>
@@ -332,7 +351,21 @@
                                             <span th:if="${item.solution == 'HYBRID'}"
                                                 class="badge badge-hybrid">Hybrid</span>
                                             <span th:if="${item.solution == 'ESS'}" class="badge badge-ess">ESS</span>
+                                            <span th:if="${item.solution == 'HOA_LUOI'}"
+                                                class="badge badge-hoa-luoi">Hòa lưới</span>
+                                            <span th:if="${item.solution == 'BOM_NUOC'}"
+                                                class="badge badge-bom-nuoc">Bơm nước</span>
+                                            <span th:if="${item.solution == 'CHIEU_SANG'}"
+                                                class="badge badge-chieu-sang">Chiếu sáng</span>
                                             <span th:if="${item.solution == null}">-</span>
+                                        </td>
+                                        <td>
+                                            <span th:if="${item.message != null and item.message.length() > 50}"
+                                                th:text="${item.message.substring(0, 50) + '...'}"
+                                                th:title="${item.message}"></span>
+                                            <span th:if="${item.message != null and item.message.length() <= 50}"
+                                                th:text="${item.message}"></span>
+                                            <span th:if="${item.message == null or item.message == ''}">-</span>
                                         </td>
                                         <td>
                                             <span th:if="${item.status == 'PENDING'}"

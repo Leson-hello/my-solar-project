@@ -93,24 +93,24 @@ public class QuoteRequestService {
         return quoteRequestRepository.countByQuoteTypeAndStatus(type, status);
     }
 
-    // Filter by solution (ESCO, HYBRID, ESS)
+    // Filter by solution (ESCO, HYBRID, ESS, HOA_LUOI, BOM_NUOC, CHIEU_SANG)
+    private static final java.util.List<String> ALL_SOLUTIONS = java.util.Arrays.asList(
+            "ESCO", "HYBRID", "ESS", "HOA_LUOI", "BOM_NUOC", "CHIEU_SANG");
+
     public Page<QuoteRequestDTO> getAllSolutionQuotes(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return quoteRequestRepository.findBySolutionInOrderByCreatedAtDesc(
-                java.util.Arrays.asList("ESCO", "HYBRID", "ESS"), pageable)
+        return quoteRequestRepository.findBySolutionInOrderByCreatedAtDesc(ALL_SOLUTIONS, pageable)
                 .map(this::convertToDTO);
     }
 
     public Page<QuoteRequestDTO> getQuoteRequestsBySolution(String status, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return quoteRequestRepository.findBySolutionInAndStatusOrderByCreatedAtDesc(
-                java.util.Arrays.asList("ESCO", "HYBRID", "ESS"), status, pageable)
+        return quoteRequestRepository.findBySolutionInAndStatusOrderByCreatedAtDesc(ALL_SOLUTIONS, status, pageable)
                 .map(this::convertToDTO);
     }
 
     public long countSolutionByStatus(String status) {
-        return quoteRequestRepository.countBySolutionInAndStatus(
-                java.util.Arrays.asList("ESCO", "HYBRID", "ESS"), status);
+        return quoteRequestRepository.countBySolutionInAndStatus(ALL_SOLUTIONS, status);
     }
 
     // Filter by specific solution type
