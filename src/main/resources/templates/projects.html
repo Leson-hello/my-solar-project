@@ -18,171 +18,91 @@
     <!-- Header -->
     <div th:replace="~{layout/header :: header}"></div>
 
-    <!-- Hero Section -->
-    <section class="projects-hero py-5"
-        style="background: linear-gradient(135deg, #1e88e5, #2c3e50); margin-top: 120px;">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h1 class="text-white mb-3">DỰ ÁN ĐIỆN MẶT TRỜI</h1>
-                    <p class="text-white-50">Khám phá các dự án năng lượng mặt trời tiêu biểu của DAT Group</p>
-                </div>
-                <div class="col-md-4 text-end">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb justify-content-md-end">
-                            <li class="breadcrumb-item"><a th:href="@{/}" class="text-white-50">Trang chủ</a></li>
-                            <li class="breadcrumb-item text-white" aria-current="page">Dự án</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Projects Section - New Design -->
+    <section class="projects-page-new">
+        <div class="projects-container">
+            <!-- Centered Heading -->
+            <h1 class="projects-heading">DỰ ÁN</h1>
 
-    <!-- Filter Section -->
-    <section class="filter-section py-4 bg-light">
-        <div class="container">
-            <!-- Application Filter -->
-            <div class="filter-group mb-3">
-                <label class="filter-label me-3"><strong>ỨNG DỤNG:</strong></label>
-                <div class="btn-group flex-wrap" role="group">
-                    <a th:href="@{/projects(solution=${selectedSolution})}" class="btn btn-filter"
-                        th:classappend="${selectedApplication == null} ? 'active' : ''">
-                        Tất cả
-                    </a>
-                    <a th:each="app : ${applications}"
-                        th:href="@{/projects(application=${app.name()}, solution=${selectedSolution})}"
-                        class="btn btn-filter" th:classappend="${selectedApplication == app.name()} ? 'active' : ''"
-                        th:text="${app.getDisplayName()}">
-                        Hộ gia đình
-                    </a>
-                </div>
+            <!-- Search Bar -->
+            <div class="projects-search-bar">
+                <form th:action="@{/projects}" method="get" class="search-form">
+                    <select name="application" class="search-input">
+                        <option value="">Ứng dụng</option>
+                        <option th:each="app : ${applications}" th:value="${app.name()}"
+                            th:text="${app.getDisplayName()}" th:selected="${selectedApplication == app.name()}">
+                        </option>
+                    </select>
+                    <select name="solution" class="search-input">
+                        <option value="">Giải pháp</option>
+                        <option th:each="sol : ${solutions}" th:value="${sol.name()}" th:text="${sol.getDisplayName()}"
+                            th:selected="${selectedSolution == sol.name()}">
+                        </option>
+                    </select>
+                    <input type="text" name="keyword" class="search-input search-input-text"
+                        placeholder="Nội dung cần tìm" th:value="${keyword}">
+                    <button type="submit" class="search-btn">TÌM KIẾM</button>
+                </form>
             </div>
 
-            <!-- Solution Filter -->
-            <div class="filter-group">
-                <label class="filter-label me-3"><strong>GIẢI PHÁP:</strong></label>
-                <div class="btn-group flex-wrap" role="group">
-                    <a th:href="@{/projects(application=${selectedApplication})}" class="btn btn-filter"
-                        th:classappend="${selectedSolution == null} ? 'active' : ''">
-                        Tất cả
-                    </a>
-                    <a th:each="sol : ${solutions}"
-                        th:href="@{/projects(application=${selectedApplication}, solution=${sol.name()})}"
-                        class="btn btn-filter" th:classappend="${selectedSolution == sol.name()} ? 'active' : ''"
-                        th:text="${sol.getDisplayName()}">
-                        Hòa lưới
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Grid -->
-    <section class="projects-section py-5">
-        <div class="container">
-            <!-- Results info -->
-            <div class="results-info mb-4" th:if="${projectsPage != null}">
-                <p class="text-muted mb-0">
-                    Hiển thị <span th:text="${projectsPage.numberOfElements}">9</span>
-                    trong tổng số <span th:text="${projectsPage.totalElements}">45</span> dự án
-                </p>
-            </div>
-
-            <!-- Projects Grid -->
-            <div class="row" th:if="${projectsPage != null and !projectsPage.isEmpty()}">
-                <div class="col-lg-4 col-md-6 mb-4" th:each="project : ${projectsPage.content}">
-                    <article class="project-card h-100">
-                        <div class="project-image">
-                            <a th:href="@{/projects/{id}(id=${project.id})}">
-                                <img th:src="@{${project.imageUrl != null ? project.imageUrl : '/photo/default-project.jpg'}}"
-                                    th:alt="${project.name}" class="card-img-top">
+            <!-- Projects Grid - 4 columns -->
+            <div class="projects-grid" th:if="${projectsPage != null and !projectsPage.isEmpty()}">
+                <article class="project-card-new" th:each="project : ${projectsPage.content}">
+                    <div class="card-thumbnail">
+                        <a th:href="@{/projects/{id}(id=${project.id})}">
+                            <img th:src="@{${project.imageUrl != null ? project.imageUrl : '/photo/default-project.jpg'}}"
+                                th:alt="${project.name}">
+                        </a>
+                        <div class="dat-watermark">DAT</div>
+                    </div>
+                    <div class="card-body-new">
+                        <h3 class="card-title-new">
+                            <a th:href="@{/projects/{id}(id=${project.id})}" th:text="${project.name}">
+                                Tên dự án
                             </a>
-                            <div class="project-badges">
-                                <span class="badge bg-primary" th:if="${project.application}"
-                                    th:text="${project.applicationDisplayName}">Doanh nghiệp</span>
-                                <span class="badge bg-info" th:if="${project.solution}"
-                                    th:text="${project.solutionDisplayName}">Hòa lưới</span>
-                            </div>
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="project-title mb-2">
-                                <a th:href="@{/projects/{id}(id=${project.id})}" th:text="${project.name}"
-                                    class="text-decoration-none text-dark">
-                                    Tên dự án
-                                </a>
-                            </h5>
-                            <div class="project-meta mb-2">
-                                <span class="me-3" th:if="${project.power != null}">
-                                    <i class="fas fa-bolt text-warning"></i>
-                                    <span th:text="${project.power + ' kWp'}">100 kWp</span>
-                                </span>
-                                <span th:if="${project.location}">
-                                    <i class="fas fa-map-marker-alt text-danger"></i>
-                                    <span th:text="${project.location}">Long An</span>
-                                </span>
-                            </div>
-                            <p class="project-excerpt text-muted mb-3 flex-grow-1" th:if="${project.description}"
-                                th:text="${#strings.abbreviate(project.description, 120)}">
-                                Mô tả ngắn về dự án...
-                            </p>
-                            <div class="project-footer">
-                                <a th:href="@{/projects/{id}(id=${project.id})}" class="btn btn-outline-primary btn-sm">
-                                    Xem chi tiết <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+                        </h3>
+                        <a th:href="@{/projects/{id}(id=${project.id})}" class="view-more-btn">
+                            Xem thêm <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
             </div>
+
 
             <!-- Empty State -->
-            <div th:if="${projectsPage == null or projectsPage.isEmpty()}" class="empty-state text-center py-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <i class="fas fa-project-diagram fa-5x text-muted mb-4"></i>
-                        <h3 class="text-muted mb-3">Không có dự án nào</h3>
-                        <p class="text-muted mb-4">
-                            Hiện tại chưa có dự án nào phù hợp với bộ lọc.
-                        </p>
-                        <a th:href="@{/projects}" class="btn btn-primary">Xem tất cả dự án</a>
-                    </div>
-                </div>
+            <div th:if="${projectsPage == null or projectsPage.isEmpty()}" class="empty-state-new">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Không có dự án nào</h3>
+                <p>Hiện tại chưa có dự án nào phù hợp với bộ lọc.</p>
+                <a th:href="@{/projects}" class="view-more-btn">Xem tất cả dự án</a>
             </div>
 
-            <!-- Pagination -->
-            <nav aria-label="Projects pagination" th:if="${projectsPage != null and totalPages > 1}">
-                <ul class="pagination justify-content-center">
-                    <!-- Previous Button -->
-                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled' : ''">
-                        <a class="page-link" th:if="${currentPage > 0}"
-                            th:href="@{/projects(page=${currentPage - 1}, application=${selectedApplication}, solution=${selectedSolution})}">
-                            <i class="fas fa-chevron-left"></i>
-                        </a>
-                        <span class="page-link" th:unless="${currentPage > 0}">
-                            <i class="fas fa-chevron-left"></i>
-                        </span>
-                    </li>
+            <!-- Pagination - New Style -->
+            <nav class="pagination-new" th:if="${projectsPage != null and totalPages > 1}">
+                <!-- Previous -->
+                <a th:if="${currentPage > 0}"
+                    th:href="@{/projects(page=${currentPage - 1}, application=${selectedApplication}, solution=${selectedSolution}, keyword=${keyword})}"
+                    class="page-arrow">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+                <span th:unless="${currentPage > 0}" class="page-arrow disabled">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
 
-                    <!-- Page Numbers -->
-                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-                        th:classappend="${i == currentPage} ? 'active' : ''">
-                        <a class="page-link"
-                            th:href="@{/projects(page=${i}, application=${selectedApplication}, solution=${selectedSolution})}"
-                            th:text="${i + 1}">1</a>
-                    </li>
+                <!-- Page Numbers -->
+                <a th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:href="@{/projects(page=${i}, application=${selectedApplication}, solution=${selectedSolution}, keyword=${keyword})}"
+                    th:text="${i + 1}" th:classappend="${i == currentPage} ? 'active' : ''" class="page-number">1</a>
 
-                    <!-- Next Button -->
-                    <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled' : ''">
-                        <a class="page-link" th:if="${currentPage + 1 < totalPages}"
-                            th:href="@{/projects(page=${currentPage + 1}, application=${selectedApplication}, solution=${selectedSolution})}">
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                        <span class="page-link" th:unless="${currentPage + 1 < totalPages}">
-                            <i class="fas fa-chevron-right"></i>
-                        </span>
-                    </li>
-                </ul>
+                <!-- Next -->
+                <a th:if="${currentPage + 1 < totalPages}"
+                    th:href="@{/projects(page=${currentPage + 1}, application=${selectedApplication}, solution=${selectedSolution}, keyword=${keyword})}"
+                    class="page-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                <span th:unless="${currentPage + 1 < totalPages}" class="page-arrow disabled">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
             </nav>
         </div>
     </section>
@@ -196,133 +116,298 @@
     <script th:src="@{/js/main.js}"></script>
 
     <style>
-        .projects-hero {
-            position: relative;
+        /* Projects Page - New Design */
+        .projects-page-new {
+            background: #fff;
+            padding: 40px 0 80px;
+            margin-top: 120px;
         }
 
-        .filter-section {
-            border-bottom: 1px solid #e9ecef;
+        .projects-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .filter-group {
+        .projects-heading {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        /* Search Bar */
+        .projects-search-bar {
+            margin-bottom: 50px;
+        }
+
+        .search-form {
             display: flex;
-            align-items: center;
+            justify-content: center;
+            gap: 15px;
             flex-wrap: wrap;
-            gap: 0.5rem;
         }
 
-        .filter-label {
+        .search-input {
+            background: #f2f2f2;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 0.95rem;
             color: #666;
-            white-space: nowrap;
-        }
-
-        .btn-filter {
-            background: white;
-            border: 1px solid #dee2e6;
-            color: #666;
-            border-radius: 20px;
-            padding: 0.4rem 1rem;
-            font-size: 0.9rem;
+            min-width: 200px;
+            outline: none;
             transition: all 0.3s;
         }
 
-        .btn-filter:hover,
-        .btn-filter.active {
-            background: var(--primary-color, #1e88e5);
-            border-color: var(--primary-color, #1e88e5);
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(247, 148, 29, 0.2);
+        }
+
+        .search-input-text {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .search-btn {
+            background: #F7941D;
             color: white;
-        }
-
-        .project-card {
             border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            padding: 15px 35px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .search-btn:hover {
+            background: #e8850a;
+            transform: translateY(-2px);
+        }
+
+        /* Projects Grid - 4 columns */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        /* Project Card New */
+        .project-card-new {
+            background: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
-            overflow: hidden;
-            background: white;
         }
 
-        .project-card:hover {
+        .project-card-new:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .project-image {
+        .card-thumbnail {
             position: relative;
-            height: 220px;
+            height: 180px;
             overflow: hidden;
         }
 
-        .project-image img {
+        .card-thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s;
         }
 
-        .project-card:hover .project-image img {
+        .project-card-new:hover .card-thumbnail img {
             transform: scale(1.05);
         }
 
-        .project-badges {
+        .dat-watermark {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .project-badges .badge {
-            font-size: 0.75rem;
-            padding: 0.4rem 0.8rem;
-            border-radius: 15px;
-        }
-
-        .project-title a {
-            transition: color 0.3s;
-        }
-
-        .project-title a:hover {
-            color: var(--primary-color, #1e88e5) !important;
-        }
-
-        .project-meta {
+            top: 10px;
+            right: 10px;
+            color: #0073B7;
             font-size: 0.9rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4px 10px;
+            border-radius: 3px;
+        }
+
+        .card-body-new {
+            padding: 20px;
+        }
+
+        .card-title-new {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 60px;
+        }
+
+        .card-title-new a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .card-title-new a:hover {
+            color: #0073B7;
+        }
+
+        .view-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #0073B7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .view-more-btn:hover {
+            background: #005a92;
+            color: white;
+        }
+
+        .view-more-btn i {
+            font-size: 0.8rem;
+        }
+
+        /* Empty State */
+        .empty-state-new {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state-new i {
+            font-size: 4rem;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .empty-state-new h3 {
             color: #666;
+            margin-bottom: 10px;
         }
 
-        .project-excerpt {
-            font-size: 0.9rem;
-            line-height: 1.6;
+        .empty-state-new p {
+            color: #999;
+            margin-bottom: 20px;
         }
 
-        .pagination .page-link {
-            border: none;
-            color: var(--primary-color, #1e88e5);
-            padding: 0.75rem 1rem;
-            margin: 0 2px;
-            border-radius: 8px;
+        /* Pagination New */
+        .pagination-new {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
 
-        .pagination .page-item.active .page-link {
-            background: var(--primary-color, #1e88e5);
-            border-color: var(--primary-color, #1e88e5);
+        .page-arrow {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f2f2f2;
+            border-radius: 50%;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .page-arrow:hover {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .page-arrow.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .page-number {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f2f2f2;
+            border-radius: 50%;
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .page-number:hover {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .page-number.active {
+            background: #F7941D;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
-            .filter-group {
-                flex-direction: column;
-                align-items: flex-start;
+            .projects-page-new {
+                margin-top: 80px;
+                padding: 30px 0 60px;
             }
 
-            .btn-group {
+            .projects-heading {
+                font-size: 2rem;
+            }
+
+            .search-form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .search-input {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .search-input-text {
+                max-width: 100%;
+            }
+
+            .search-btn {
                 width: 100%;
             }
 
-            .btn-filter {
-                flex: 1;
-                text-align: center;
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
