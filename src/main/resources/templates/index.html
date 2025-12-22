@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,332 +13,521 @@
     <!-- Custom CSS -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
+
 <body>
-<!-- Header -->
-<div th:replace="~{layout/header :: header}"></div>
+    <!-- Header -->
+    <div th:replace="~{layout/header :: header}"></div>
 
-<!-- Hero Section -->
-<section class="hero-section position-relative">
-    <div class="hero-background">
-        <img th:src="@{/photo/anh7.jpg}"
-             alt="DAT Solar Farm" class="hero-image">
-    </div>
-    <div class="hero-overlay">
-        <div class="container">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-12 text-center">
-                    <div class="hero-content text-white">
-                        <h1 class="hero-title mb-4">
-                            CHÚNG TÔI LÀ ĐƠN VỊ HỮU HIỆU TRONG LĨNH VỰC NĂNG LƯỢNG MẶT TRỜI
-                        </h1>
-                        <div class="hero-button-container">
-                            <button class="btn hero-btn">KHÁM PHÁ TẤM THẾ GIỚI NĂNG LƯỢNG XANH CÙNG DAT GROUP</button>
+    <!-- Hero Section -->
+    <section class="hero-section position-relative">
+        <div class="hero-background">
+            <img th:src="@{/photo/anh7.jpg}" alt="DAT Solar Farm" class="hero-image">
+        </div>
+        <div class="hero-overlay">
+            <div class="container">
+                <div class="row align-items-center min-vh-100">
+                    <div class="col-12 text-center">
+                        <div class="hero-content text-white">
+                            <h1 class="hero-title mb-4">
+                                CHÚNG TÔI LÀ ĐƠN VỊ HỮU HIỆU TRONG LĨNH VỰC NĂNG LƯỢNG MẶT TRỜI
+                            </h1>
+                            <div class="hero-button-container">
+                                <button class="btn hero-btn">KHÁM PHÁ TẤM THẾ GIỚI NĂNG LƯỢNG XANH CÙNG DAT
+                                    GROUP</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Statistics Cards -->
-    <div class="statistics-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="stat-card text-center">
-                        <div class="stat-icon">
-                            <i class="fas fa-solar-panel"></i>
+        <!-- Statistics Cards -->
+        <div class="statistics-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="stat-card text-center">
+                            <div class="stat-icon">
+                                <i class="fas fa-solar-panel"></i>
+                            </div>
+                            <div class="stat-number" th:text="${totalCapacity}">1+</div>
+                            <div class="stat-unit" th:text="${totalCapacityUnit}">GWP</div>
+                            <div class="stat-label">TỔNG CÔNG SUẤT</div>
                         </div>
-                        <div class="stat-number" th:text="${totalCapacity}">1+</div>
-                        <div class="stat-unit" th:text="${totalCapacityUnit}">GWP</div>
-                        <div class="stat-label">TỔNG CÔNG SUẤT</div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card text-center">
-                        <div class="stat-icon">
-                            <i class="fas fa-building"></i>
+                    <div class="col-md-4">
+                        <div class="stat-card text-center">
+                            <div class="stat-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="stat-number" th:text="${totalProjects}">12.000+</div>
+                            <div class="stat-unit" th:text="${projectsUnit}">HỆ THỐNG</div>
+                            <div class="stat-label">HỆ THỐNG ĐÃ LẮP ĐẶT</div>
                         </div>
-                        <div class="stat-number" th:text="${totalProjects}">12.000+</div>
-                        <div class="stat-unit" th:text="${projectsUnit}">HỆ THỐNG</div>
-                        <div class="stat-label">HỆ THỐNG ĐÃ LẮP ĐẶT</div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card text-center">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
+                    <div class="col-md-4">
+                        <div class="stat-card text-center">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-number" th:text="${totalEmployees}">2.000+</div>
+                            <div class="stat-unit" th:text="${employeesUnit}">ĐỐI TÁC NHÂN SỰ</div>
+                            <div class="stat-label">ĐỐI TÁC NHÂN SỰ</div>
                         </div>
-                        <div class="stat-number" th:text="${totalEmployees}">2.000+</div>
-                        <div class="stat-unit" th:text="${employeesUnit}">ĐỐI TÁC NHÂN SỰ</div>
-                        <div class="stat-label">ĐỐI TÁC NHÂN SỰ</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- About DAT Group Section -->
-<section class="about-section py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="about-content">
-                    <h2 class="section-title mb-4">VỀ DAT GROUP</h2>
-                    <p class="mb-4">
-                        DAT Group là tập đoàn công nghệ - thương mại dịch vụ có quy mô,
-                        uy tín hàng đầu Việt Nam trong lĩnh vực hạ tầng hòa cộng nghiệp và
-                        năng lượng tái tạo. Trải qua nhiều năm hoạt động, DAT Group chuyên cung cấp các giải
-                        pháp năng lượng mặt trời hiện đại, tiên tiến từ tư vấn, thiết kế, lắp đặt,
-                        vận hành bảo trì tới hậu mãi và nâng cấp.
-                    </p>
-                    <div class="highlight-box">
-                        <h4>DAT Group đã cung cấp và triển khai hơn <strong>12.000 hệ thống</strong> điện năng lượng mặt
-                            trời có tổng công suất hơn <strong>1+ GWP</strong>, mang đến cho khách hàng, đối tác những
-                            công trình và sản phẩm từ những ứng dụng đa dạng, tiết kiệm chi phí cao.</h4>
-                    </div>
-                    <div class="experience-badge">
-                        <span class="badge-number">19+</span>
-                        <span class="badge-text">NĂM KINH NGHIỆM PHÁT TRIỂN ĐỐN NGÀNH</span>
-                    </div>
-                    <button class="btn btn-primary mt-3">TÌM HIỂU THÊM</button>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="about-image">
-                    <img th:src="@{/photo/anh8.jpg}"
-                         alt="DAT Group Office" class="img-fluid rounded">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Solutions Section -->
-<section class="solutions-section py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="solution-content">
-                    <h2 class="section-title mb-4">
-                        GIẢI PHÁP ĐIỆN NĂNG LƯỢNG MẶT TRỜI
-                    </h2>
-                    <p class="mb-4">
-                        DAT Group chuyên phát triển và triển khai lắp đặt, vận hành
-                        nghiên cứu năng lượng mặt trời tích hợp nhiều loại
-                        vật khác nhau của cộng đồng.
+    <!-- About DAT Group Section -->
+    <section class="about-section-new">
+        <div class="about-container">
+            <div class="about-grid">
+                <!-- Left Side - Content -->
+                <div class="about-left">
+                    <h2 class="about-title"><span class="title-underline">VỀ DAT GROUP</span></h2>
+                    <p class="about-description">
+                        DAT Group là Tập đoàn công nghệ – thương mại dịch vụ có quy mô, uy tín dẫn đầu Việt Nam trong
+                        lĩnh vực tự động hóa công nghiệp và năng lượng tái tạo. Trong đó, DAT Group chuyên cung cấp các
+                        giải pháp năng lượng mặt trời như: <em>Điện năng lượng mặt trời; tấm pin năng lượng mặt trời;
+                            pin lưu trữ năng lượng mặt trời; đèn năng lượng mặt trời.</em> Chúng tôi không ngừng tiên
+                        phong kiến tạo Hệ sinh thái, gia tăng hiệu quả, mang đến giá trị tối ưu cho khách hàng, đối tác.
                     </p>
 
-                    <div class="solution-categories">
-                        <div class="category-item mb-3">
-                            <div class="category-icon">
-                                <i class="fas fa-industry"></i>
-                            </div>
-                            <div class="category-info">
-                                <h5>Doanh nghiệp</h5>
-                            </div>
-                        </div>
-                        <div class="category-item mb-3">
-                            <div class="category-icon">
-                                <i class="fas fa-home"></i>
-                            </div>
-                            <div class="category-info">
-                                <h5>Hộ gia đình</h5>
-                            </div>
-                        </div>
-                        <div class="category-item mb-3">
-                            <div class="category-icon">
-                                <i class="fas fa-seedling"></i>
-                            </div>
-                            <div class="category-info">
-                                <h5>Nông nghiệp</h5>
-                            </div>
-                        </div>
+                    <div class="about-highlight-box">
+                        <p>
+                            DAT Group đã cung cấp và triển khai hơn <strong>12.000 hệ thống</strong> điện năng lượng mặt
+                            trời có tổng công suất hơn <strong>1+ GWP</strong>, mang đến cho khách hàng, đối tác và nhà
+                            đầu tư những giải pháp điện mặt trời thông minh, <em>tối ưu chi phí đầu tư nhưng vẫn đảm bảo
+                                tính hiệu quả cao.</em>
+                        </p>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="solution-image-container">
-                    <div class="solution-card">
-                        <img th:src="@{/photo/anh9.jpg}"
-                             alt="Solar Solution for Families" class="img-fluid">
-                        <div class="solution-overlay">
-                            <div class="solution-info">
-                                <h4 class="text-white">ĐIỆN MẶT TRỜI CHO HỘ GIA ĐÌNH</h4>
-                                <p class="text-white">
-                                    Giải pháp điện mặt trời dành riêng cho nhu cầu gia đình và các tiện ích sinh
-                                    hoạt trong gia đình với sự an toàn và tiện lợi và tiết kiệm 80% chi phí điện
-                                    hàng tháng.
-                                </p>
-                                <div class="solution-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-label">SỬ DỤNG</span>
-                                        <span class="stat-value">30</span>
-                                        <span class="stat-unit">Năm</span>
+
+                <!-- Right Side - Image with Badge -->
+                <div class="about-right">
+                    <div class="about-image-container">
+                        <div class="about-image-wrapper">
+                            <img th:src="@{/photo/anh8.jpg}" alt="DAT Group Solar Engineers" class="about-main-image">
+                            <div class="dat-logo-overlay">
+                                <span class="dat-logo-text">DAT</span>
+                            </div>
+                        </div>
+
+                        <!-- Orange Overlay Box - positioned to overlap -->
+                        <div class="experience-orange-box">
+                            <div class="circle-pattern"></div>
+                            <div class="orange-box-content">
+                                <span class="big-number">19<sup>+</sup></span>
+                                <div class="box-text">
+                                    <span>NĂM KINH NGHIỆM PHÁT</span>
+                                    <span>TRIỂN BỀN VỮNG</span>
+                                </div>
+                                <a href="#" class="cta-link">
+                                    <span>HỒ SƠ NĂNG LỰC</span>
+                                    <div class="plus-icon-circle">
+                                        <i class="fas fa-plus"></i>
                                     </div>
-                                    <div class="stat-item">
-                                        <span class="stat-label">HOÀN VỐN</span>
-                                        <span class="stat-value">5-6</span>
-                                        <span class="stat-unit">Năm</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="solutions-section-new">
+        <div class="solutions-container">
+            <div class="solutions-grid">
+                <!-- Left Side - Categories -->
+                <div class="solutions-left">
+                    <h2 class="solutions-main-title">
+                        GIẢI PHÁP ĐIỆN<br>
+                        NĂNG LƯỢNG<br>
+                        MẶT TRỜI
+                    </h2>
+                    <p class="solutions-description">
+                        DAT hiểu rõ những lợi ích của việc ứng dụng nguồn năng lượng mặt trời vào nhiều lĩnh vực khác
+                        nhau của cuộc sống.
+                    </p>
+
+                    <!-- Categories Grid -->
+                    <div class="solution-categories-grid">
+                        <!-- Doanh nghiệp -->
+                        <div class="solution-cat-item active" data-category="business">
+                            <span class="cat-title">Doanh nghiệp</span>
+                            <div class="cat-icon-wrapper">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2942/2942813.png" alt="Doanh nghiệp">
+                            </div>
+                            <i class="fas fa-chevron-right cat-arrow"></i>
+                        </div>
+
+                        <!-- Hộ gia đình -->
+                        <div class="solution-cat-item" data-category="household">
+                            <span class="cat-title">Hộ gia đình</span>
+                            <div class="cat-icon-wrapper">
+                                <img src="https://cdn-icons-png.flaticon.com/512/619/619153.png" alt="Hộ gia đình">
+                            </div>
+                            <i class="fas fa-chevron-right cat-arrow"></i>
+                        </div>
+
+                        <!-- Nông nghiệp -->
+                        <div class="solution-cat-item" data-category="agriculture">
+                            <span class="cat-title">Nông nghiệp</span>
+                            <div class="cat-icon-wrapper">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3514/3514337.png" alt="Nông nghiệp">
+                            </div>
+                            <i class="fas fa-chevron-right cat-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Solution Detail -->
+                <div class="solutions-right">
+                    <div class="solution-detail-card">
+                        <div class="solution-detail-header">
+                            <span class="detail-label">GIẢI PHÁP</span>
+                            <h3 class="detail-title">ĐIỆN MẶT TRỜI CHO<br>DOANH NGHIỆP</h3>
+                            <p class="detail-desc">
+                                Điện mặt trời giúp doanh nghiệp tiết kiệm đến hàng tỷ đồng tiền điện mỗi năm, nâng cao
+                                uy tín, giá trị thương hiệu, hướng đến hình ảnh doanh nghiệp xanh thân thiện với môi
+                                trường.
+                            </p>
+                        </div>
+
+                        <div class="solution-stats-section">
+                            <div class="solution-stat-item">
+                                <span class="stat-upper">SỬ DỤNG</span>
+                                <span class="stat-number" id="statUsage">30</span>
+                                <span class="stat-lower">Năm</span>
+                            </div>
+                            <div class="solution-stat-item">
+                                <span class="stat-upper">HOÀN VỐN</span>
+                                <span class="stat-number" id="statPayback">4 – 5</span>
+                                <span class="stat-lower">Năm</span>
+                            </div>
+                        </div>
+
+                        <a href="#" class="solution-cta-btn" id="solutionCtaBtn">
+                            <i class="fas fa-cog" id="ctaIcon"></i>
+                            <span id="ctaText">GIẢI PHÁP<br><strong>ESCO</strong></span>
+                        </a>
+
+                        <div class="solution-detail-image">
+                            <img th:src="@{/photo/anh10.jpg}" alt="Solar Panel" id="solutionImage">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const catItems = document.querySelectorAll('.solution-cat-item');
+            const detailTitle = document.querySelector('.detail-title');
+            const detailDesc = document.querySelector('.detail-desc');
+            const statUsage = document.getElementById('statUsage');
+            const statPayback = document.getElementById('statPayback');
+            const ctaBtn = document.getElementById('solutionCtaBtn');
+            const ctaIcon = document.getElementById('ctaIcon');
+            const ctaText = document.getElementById('ctaText');
+            const solutionImage = document.getElementById('solutionImage');
+
+            const categoryData = {
+                business: {
+                    title: 'ĐIỆN MẶT TRỜI CHO<br>DOANH NGHIỆP',
+                    desc: 'Điện mặt trời giúp doanh nghiệp tiết kiệm đến hàng tỷ đồng tiền điện mỗi năm, nâng cao uy tín, giá trị thương hiệu, hướng đến hình ảnh doanh nghiệp xanh thân thiện với môi trường.',
+                    usage: '30',
+                    payback: '4 – 5',
+                    ctaHtml: 'GIẢI PHÁP<br><strong>ESCO</strong>',
+                    ctaIcon: 'fas fa-cog',
+                    image: '/photo/anh10.jpg'
+                },
+                household: {
+                    title: 'ĐIỆN MẶT TRỜI CHO<br>HỘ GIA ĐÌNH',
+                    desc: 'Giải pháp không chỉ mang đến nguồn năng lượng sạch thân thiện với môi trường mà còn tạo ra hiệu quả kinh tế cao cho gia đình Việt, tiết kiệm đáng kể chi phí tiền điện hàng tháng.',
+                    usage: '30',
+                    payback: '5 – 6',
+                    ctaHtml: 'XEM CHI TIẾT <i class="fas fa-arrow-right"></i>',
+                    ctaIcon: '',
+                    image: '/photo/anh9.jpg'
+                },
+                agriculture: {
+                    title: 'ĐIỆN MẶT TRỜI CHO<br>NÔNG NGHIỆP',
+                    desc: 'Ứng dụng cho lĩnh vực nông nghiệp, đảm bảo nguồn nước cho việc tưới tiêu, các trạm bơm cấp nước.',
+                    usage: '30',
+                    payback: '4 – 5',
+                    ctaHtml: 'XEM CHI TIẾT <i class="fas fa-arrow-right"></i>',
+                    ctaIcon: '',
+                    image: '/photo/anh11.jpg'
+                }
+            };
+
+            catItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    catItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const category = this.dataset.category;
+                    if (categoryData[category]) {
+                        const data = categoryData[category];
+                        detailTitle.innerHTML = data.title;
+                        detailDesc.textContent = data.desc;
+                        statUsage.textContent = data.usage;
+                        statPayback.textContent = data.payback;
+                        ctaText.innerHTML = data.ctaHtml;
+                        ctaIcon.className = data.ctaIcon;
+                        solutionImage.src = data.image;
+
+                        // Change button style for non-business categories
+                        if (category === 'business') {
+                            ctaBtn.classList.remove('detail-btn');
+                        } else {
+                            ctaBtn.classList.add('detail-btn');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Featured Projects Section -->
+    <section class="projects-section-new">
+        <div class="projects-container">
+            <h2 class="projects-title">DỰ ÁN ĐÃ THỰC HIỆN</h2>
+            <p class="projects-subtitle">
+                Chúng tôi cam kết phục vụ khách hàng bằng cả "trái tim" của sự nhiệt huyết và tinh thần trách nhiệm cao!
+            </p>
+
+            <!-- Filter Buttons -->
+            <div class="project-filter-buttons">
+                <button class="filter-btn active" data-filter="all">DOANH NGHIỆP</button>
+                <button class="filter-btn" data-filter="household">HỘ GIA ĐÌNH</button>
+                <button class="filter-btn" data-filter="agriculture">NÔNG NGHIỆP</button>
+            </div>
+
+            <!-- Projects Slider -->
+            <div class="projects-slider-wrapper">
+                <!-- Left Arrow -->
+                <button class="project-nav-btn project-prev" id="projectPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <!-- Slider Container -->
+                <div class="projects-slider" id="projectsSlider">
+                    <!-- Project 1 -->
+                    <div class="project-slide side-slide">
+                        <img th:src="@{/photo/anh10.jpg}" alt="Dự án 1">
+                    </div>
+
+                    <!-- Main Project (Center) -->
+                    <div class="project-slide main-slide">
+                        <img th:src="@{/photo/anh18.jpg}" alt="Nhà máy giày Đại Lộc">
+                        <div class="project-slide-overlay">
+                            <span class="project-category">DOANH NGHIỆP</span>
+                            <h3 class="project-name">NHÀ MÁY GIÀY ĐẠI LỘC – BÌNH DƯƠNG</h3>
+                            <div class="project-stats-row">
+                                <div class="stat-box">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span class="stat-label">Năm thi công</span>
+                                    <span class="stat-value">2020</span>
+                                </div>
+                                <div class="stat-box">
+                                    <i class="fas fa-bolt"></i>
+                                    <span class="stat-label">Công suất</span>
+                                    <span class="stat-value">1 MWp</span>
+                                </div>
+                                <div class="stat-box">
+                                    <i class="fas fa-sun"></i>
+                                    <span class="stat-label">Sản lượng/năm</span>
+                                    <span class="stat-value">1.440 MWh</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-slide side-slide">
+                        <img th:src="@{/photo/anh19.jpg}" alt="Dự án 3">
+                    </div>
+                </div>
+
+                <!-- Right Arrow -->
+                <button class="project-nav-btn project-next" id="projectNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const projectSlider = document.getElementById('projectsSlider');
+            const projectPrev = document.getElementById('projectPrev');
+            const projectNext = document.getElementById('projectNext');
+
+            // Project data for rotation
+            const projects = [
+                { img: '/photo/anh10.jpg', name: 'CÔNG TY TNHH ABC - ĐỒNG NAI', category: 'DOANH NGHIỆP', year: '2019', power: '800 kWp', production: '1.150 MWh' },
+                { img: '/photo/anh18.jpg', name: 'NHÀ MÁY GIÀY ĐẠI LỘC – BÌNH DƯƠNG', category: 'DOANH NGHIỆP', year: '2020', power: '1 MWp', production: '1.440 MWh' },
+                { img: '/photo/anh19.jpg', name: 'NHÀ MÁY THỰC PHẨM - LONG AN', category: 'DOANH NGHIỆP', year: '2021', power: '1.2 MWp', production: '1.680 MWh' },
+                { img: '/photo/anh20.jpg', name: 'KHU CÔNG NGHIỆP VSIP - BÌNH DƯƠNG', category: 'DOANH NGHIỆP', year: '2022', power: '2 MWp', production: '2.800 MWh' },
+                { img: '/photo/anh21.jpg', name: 'TRANG TRẠI NĂNG LƯỢNG - TÂY NINH', category: 'NÔNG NGHIỆP', year: '2023', power: '5 MWp', production: '7.200 MWh' }
+            ];
+
+            let currentIndex = 1;
+
+            function updateSlider() {
+                const slides = projectSlider.querySelectorAll('.project-slide');
+                const prevIdx = (currentIndex - 1 + projects.length) % projects.length;
+                const nextIdx = (currentIndex + 1) % projects.length;
+
+                // Update side slides
+                slides[0].querySelector('img').src = projects[prevIdx].img;
+                slides[2].querySelector('img').src = projects[nextIdx].img;
+
+                // Update main slide
+                const mainSlide = slides[1];
+                mainSlide.querySelector('img').src = projects[currentIndex].img;
+                mainSlide.querySelector('.project-category').textContent = projects[currentIndex].category;
+                mainSlide.querySelector('.project-name').textContent = projects[currentIndex].name;
+                mainSlide.querySelectorAll('.stat-value')[0].textContent = projects[currentIndex].year;
+                mainSlide.querySelectorAll('.stat-value')[1].textContent = projects[currentIndex].power;
+                mainSlide.querySelectorAll('.stat-value')[2].textContent = projects[currentIndex].production;
+            }
+
+            if (projectPrev && projectNext) {
+                projectPrev.addEventListener('click', function () {
+                    currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+                    updateSlider();
+                });
+
+                projectNext.addEventListener('click', function () {
+                    currentIndex = (currentIndex + 1) % projects.length;
+                    updateSlider();
+                });
+            }
+
+            // Filter buttons
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+
+    <!-- Products Section -->
+    <section class="products-section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">SẢN PHẨM NỔI BẬT</h2>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="product-categories">
+                        <div class="category-grid">
+                            <div class="category-item">
+                                <i class="fas fa-solar-panel"></i>
+                                <span>Tấm pin năng lượng mặt trời</span>
+                            </div>
+                            <div class="category-item">
+                                <i class="fas fa-battery-full"></i>
+                                <span>Bộ hòa lưới</span>
+                            </div>
+                            <div class="category-item">
+                                <i class="fas fa-plug"></i>
+                                <span>Hybrid Inverter</span>
+                            </div>
+                            <div class="category-item">
+                                <i class="fas fa-tools"></i>
+                                <span>Đèn năng lượng mặt trời</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="featured-products">
+                        <div class="row">
+                            <!-- Dynamic Featured Products from Database -->
+                            <div th:if="${featuredProducts != null and !featuredProducts.isEmpty()}">
+                                <div class="row">
+                                    <div class="col-6 mb-3" th:each="product, iterStat : ${featuredProducts}"
+                                        th:if="${iterStat.index < 4}">
+                                        <a th:href="@{/products/{id}(id=${product.id})}"
+                                            style="text-decoration: none; color: inherit;">
+                                            <div class="product-card">
+                                                <img th:src="@{${product.imageUrl != null ? product.imageUrl : '/photo/anh31.jpg'}}"
+                                                    th:alt="${product.name}" class="product-image">
+                                                <div class="product-info">
+                                                    <h6 th:text="${product.name}">HiKu</h6>
+                                                    <p
+                                                        th:text="${product.description != null ? product.description : 'TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO'}">
+                                                        TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
+                                                    <span class="product-power" th:if="${product.power != null}">
+                                                        Công suất: <span
+                                                            th:text="${product.power + ' ' + (product.powerUnit != null ? product.powerUnit : 'W')}">520W</span>
+                                                    </span>
+                                                    <span class="product-brand" th:if="${product.brand != null}">
+                                                        Hãng: <span th:text="${product.brand}">Canadian Solar</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
-                                <button class="btn btn-warning mt-3">XEM CHI TIẾT</button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Featured Projects Section -->
-<section class="projects-section py-5">
-    <div class="container">
-        <h2 class="text-center mb-5">DỰ ÁN ĐÃ THỰC HIỆN</h2>
-        <p class="text-center mb-4">
-            Chúng tôi cam kết phục vụ khách hàng bằng các "hạt lúa" của nghị tuyến và
-            kinh hành khổng mạnh cảnh trị và tối ưu hóa gia năng tối
-        </p>
-
-        <div class="project-buttons text-center mb-4">
-            <button class="btn btn-outline-primary me-2">DOANH NGHIỆP</button>
-            <button class="btn btn-outline-primary me-2">HỘ GIA ĐÌNH</button>
-            <button class="btn btn-outline-primary">HOANG NGHIỆP</button>
-        </div>
-
-        <div class="featured-project">
-            <div class="project-image-container">
-                <img th:src="@{/photo/anh18.jpg}"
-                     alt="Featured Project" class="img-fluid">
-                <div class="project-overlay">
-                    <div class="project-info">
-                        <h4 class="text-white">NHAG OMT BẺ</h4>
-                        <div class="project-stats">
-                            <div class="stat-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>BÌNH THUẬN</span>
-                            </div>
-                            <div class="stat-item">
-                                <i class="fas fa-calendar"></i>
-                                <span>CÔNG SUẤT: 993 kWP</span>
-                            </div>
-                            <div class="stat-item">
-                                <i class="fas fa-bolt"></i>
-                                <span>SẢN LƯỢNG: 1428 MWh</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Products Section -->
-<section class="products-section py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5">SẢN PHẨM NỔI BẬT</h2>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="product-categories">
-                    <div class="category-grid">
-                        <div class="category-item">
-                            <i class="fas fa-solar-panel"></i>
-                            <span>Tấm pin năng lượng mặt trời</span>
-                        </div>
-                        <div class="category-item">
-                            <i class="fas fa-battery-full"></i>
-                            <span>Bộ hòa lưới</span>
-                        </div>
-                        <div class="category-item">
-                            <i class="fas fa-plug"></i>
-                            <span>Hybrid Inverter</span>
-                        </div>
-                        <div class="category-item">
-                            <i class="fas fa-tools"></i>
-                            <span>Đèn năng lượng mặt trời</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="featured-products">
-                    <div class="row">
-                        <!-- Dynamic Featured Products from Database -->
-                        <div th:if="${featuredProducts != null and !featuredProducts.isEmpty()}">
-                            <div class="row">
-                                <div class="col-6 mb-3" th:each="product, iterStat : ${featuredProducts}" th:if="${iterStat.index < 4}">
-                                    <a th:href="@{/products/{id}(id=${product.id})}" style="text-decoration: none; color: inherit;">
+                            <!-- Fallback: Static Products if no database products -->
+                            <div th:if="${featuredProducts == null or featuredProducts.isEmpty()}">
+                                <div class="row">
+                                    <div class="col-6 mb-3">
                                         <div class="product-card">
-                                            <img th:src="@{${product.imageUrl != null ? product.imageUrl : '/photo/anh31.jpg'}}"
-                                                 th:alt="${product.name}" class="product-image">
+                                            <img th:src="@{/photo/anh31.jpg}" alt="HiKu Panel" class="product-image">
                                             <div class="product-info">
-                                                <h6 th:text="${product.name}">HiKu</h6>
-                                                <p th:text="${product.description != null ? product.description : 'TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO'}">TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                                <span class="product-power" th:if="${product.power != null}">
-                                                    Công suất: <span th:text="${product.power + ' ' + (product.powerUnit != null ? product.powerUnit : 'W')}">520W</span>
-                                                </span>
-                                                <span class="product-brand" th:if="${product.brand != null}">
-                                                    Hãng: <span th:text="${product.brand}">Canadian Solar</span>
-                                                </span>
+                                                <h6>HiKu</h6>
+                                                <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
+                                                <span class="product-power">Công suất: 520W</span>
+                                                <span class="product-brand">Hãng: Canadian Solar</span>
                                             </div>
                                         </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Fallback: Static Products if no database products -->
-                        <div th:if="${featuredProducts == null or featuredProducts.isEmpty()}">
-                            <div class="row">
-                                <div class="col-6 mb-3">
-                                    <div class="product-card">
-                                        <img th:src="@{/photo/anh31.jpg}"
-                                             alt="HiKu Panel" class="product-image">
-                                        <div class="product-info">
-                                            <h6>HiKu</h6>
-                                            <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                            <span class="product-power">Công suất: 520W</span>
-                                            <span class="product-brand">Hãng: Canadian Solar</span>
+                                    </div>
+                                    <div class="col-6 mb-3">
+                                        <div class="product-card">
+                                            <img th:src="@{/photo/anh33.jpg}" alt="HiKu Panel 2" class="product-image">
+                                            <div class="product-info">
+                                                <h6>HiKu</h6>
+                                                <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
+                                                <span class="product-power">Công suất: 540W</span>
+                                                <span class="product-brand">Hãng: Canadian Solar</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <div class="product-card">
-                                        <img th:src="@{/photo/anh33.jpg}"
-                                             alt="HiKu Panel 2" class="product-image">
-                                        <div class="product-info">
-                                            <h6>HiKu</h6>
-                                            <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                            <span class="product-power">Công suất: 540W</span>
-                                            <span class="product-brand">Hãng: Canadian Solar</span>
+                                    <div class="col-6 mb-3">
+                                        <div class="product-card">
+                                            <img th:src="@{/photo/anh36.jpg}" alt="HiKu Panel 3" class="product-image">
+                                            <div class="product-info">
+                                                <h6>HiKu</h6>
+                                                <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
+                                                <span class="product-power">Công suất: 545W</span>
+                                                <span class="product-brand">Hãng: Canadian Solar</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <div class="product-card">
-                                        <img th:src="@{/photo/anh36.jpg}"
-                                             alt="HiKu Panel 3" class="product-image">
-                                        <div class="product-info">
-                                            <h6>HiKu</h6>
-                                            <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                            <span class="product-power">Công suất: 545W</span>
-                                            <span class="product-brand">Hãng: Canadian Solar</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <div class="product-card">
-                                        <img th:src="@{/photo/anh37.jpg}"
-                                             alt="HiKu Panel 4" class="product-image">
-                                        <div class="product-info">
-                                            <h6>HiKu</h6>
-                                            <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                            <span class="product-power">Công suất: 535W</span>
-                                            <span class="product-brand">Hãng: Canadian Solar</span>
+                                    <div class="col-6 mb-3">
+                                        <div class="product-card">
+                                            <img th:src="@{/photo/anh37.jpg}" alt="HiKu Panel 4" class="product-image">
+                                            <div class="product-info">
+                                                <h6>HiKu</h6>
+                                                <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
+                                                <span class="product-power">Công suất: 535W</span>
+                                                <span class="product-brand">Hãng: Canadian Solar</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -347,225 +537,239 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- News Section -->
-<section class="news-section py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="section-header">
-                    <h2 class="section-title">TIN TỨC & SỰ KIỆN</h2>
-                    <a th:href="@{/news}" class="view-all-btn">TẤT CẢ TIN TỨC →</a>
-                </div>
+    <!-- News Section -->
+    <section class="news-section-new">
+        <div class="news-container">
+            <!-- Header -->
+            <div class="news-header">
+                <h2 class="news-section-title">TIN TỨC & SỰ KIỆN</h2>
+                <a th:href="@{/news}" class="news-view-all-btn">
+                    TẤT CẢ TIN TỨC <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
 
-                <div class="news-list" th:if="${recentNews != null and !recentNews.isEmpty()}">
-                    <!-- Featured News Item -->
-                    <div class="news-item mb-4" th:if="${recentNews.size() > 0}">
-                        <div class="row" th:with="featuredNews=${recentNews[0]}">
-                            <div class="col-4">
-                                <img th:src="@{${featuredNews.imageUrl != null ? featuredNews.imageUrl : '/photo/anh39.jpg'}}"
-                                     th:alt="${featuredNews.title}" class="img-fluid">
-                            </div>
-                            <div class="col-8">
-                                <div class="news-content">
-                                    <span class="news-date"
-                                          th:text="${featuredNews.publishedDateFormatted}">03.03.2024</span>
-                                    <h6 class="news-title">
-                                        <a th:href="@{/news/{id}(id=${featuredNews.id})}"
-                                           th:text="${featuredNews.title}"
-                                           style="text-decoration: none; color: inherit;">
-                                            DAT Group Hợp Tác Với Lithium Valley - Lưu Trữ Điện Dân Dụng
-                                        </a>
-                                    </h6>
-                                    <p class="news-excerpt" th:text="${featuredNews.shortDescription}">
-                                        Trong bối cảnh nhu cầu lưu trữ điện mặt trời ngày càng tăng, DAT
-                                        Group và Lithium Valley thời gian qua tích cực hợp tác để đem lại...
-                                    </p>
-                                    <a th:href="@{/news/{id}(id=${featuredNews.id})}" class="read-more">ĐỌC THÊM</a>
-                                </div>
-                            </div>
-                        </div>
+            <div class="news-content-wrapper" th:if="${recentNews != null and !recentNews.isEmpty()}">
+                <!-- Featured News (Left Side) -->
+                <div class="news-featured" th:if="${recentNews.size() > 0}" th:with="featuredNews=${recentNews[0]}">
+                    <div class="featured-text">
+                        <span class="featured-date" th:text="${featuredNews.publishedDateFormatted}">01.07.2025</span>
+                        <h3 class="featured-title">
+                            <a th:href="@{/news/{id}(id=${featuredNews.id})}" th:text="${featuredNews.title}">
+                                DAT Group Hợp Tác Với Lithium Valley – Lưu Trữ Điện Dân Dụng
+                            </a>
+                        </h3>
+                        <p class="featured-excerpt" th:text="${featuredNews.shortDescription}">
+                            Trong bối cảnh nhu cầu sử dụng điện mặt trời dân dụng ngày càng gia tăng, DAT Group tự hào
+                            chính thức hợp tác chiến lược...
+                        </p>
+                        <a th:href="@{/news/{id}(id=${featuredNews.id})}" class="featured-cta">
+                            XEM THÊM <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
-
-                    <!-- Mini News Grid -->
-                    <div class="news-grid" th:if="${recentNews.size() > 1}">
-                        <div class="row">
-                            <div class="col-6" th:if="${recentNews.size() > 1}">
-                                <div class="mini-news-item" th:with="news=${recentNews[1]}">
-                                    <a th:href="@{/news/{id}(id=${news.id})}">
-                                        <img th:src="@{${news.imageUrl != null ? news.imageUrl : '/photo/anh40.jpg'}}"
-                                             th:alt="${news.title}" class="img-fluid mb-2">
-                                    </a>
-                                    <span class="mini-news-date"
-                                          th:text="${news.publishedDateFormatted}">19.03.2024</span>
-                                    <h6 class="mini-news-title">
-                                        <a th:href="@{/news/{id}(id=${news.id})}"
-                                           th:text="${news.title}"
-                                           style="text-decoration: none; color: inherit;">
-                                            Năng lượng mặt trời là tương lai năm 2024
-                                        </a>
-                                    </h6>
-                                </div>
-                            </div>
-                            <div class="col-6" th:if="${recentNews.size() > 2}">
-                                <div class="mini-news-item" th:with="news=${recentNews[2]}">
-                                    <a th:href="@{/news/{id}(id=${news.id})}">
-                                        <img th:src="@{${news.imageUrl != null ? news.imageUrl : '/photo/anh41.jpg'}}"
-                                             th:alt="${news.title}" class="img-fluid mb-2">
-                                    </a>
-                                    <span class="mini-news-date"
-                                          th:text="${news.publishedDateFormatted}">15.03.2024</span>
-                                    <h6 class="mini-news-title">
-                                        <a th:href="@{/news/{id}(id=${news.id})}"
-                                           th:text="${news.title}"
-                                           style="text-decoration: none; color: inherit;">
-                                            Năng lượng tái tạo là đối thủ chính
-                                        </a>
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-6" th:if="${recentNews.size() > 3}">
-                                <div class="mini-news-item" th:with="news=${recentNews[3]}">
-                                    <a th:href="@{/news/{id}(id=${news.id})}">
-                                        <img th:src="@{${news.imageUrl != null ? news.imageUrl : '/photo/anh42.jpg'}}"
-                                             th:alt="${news.title}" class="img-fluid mb-2">
-                                    </a>
-                                    <span class="mini-news-date"
-                                          th:text="${news.publishedDateFormatted}">12.03.2024</span>
-                                    <h6 class="mini-news-title">
-                                        <a th:href="@{/news/{id}(id=${news.id})}"
-                                           th:text="${news.title}"
-                                           style="text-decoration: none; color: inherit;">
-                                            Solar Light có gì? Cần tìm hiểu về nguồn ánh sáng tự nhiên
-                                        </a>
-                                    </h6>
-                                </div>
-                            </div>
-                            <div class="col-6" th:if="${recentNews.size() > 4}">
-                                <div class="mini-news-item" th:with="news=${recentNews[4]}">
-                                    <a th:href="@{/news/{id}(id=${news.id})}">
-                                        <img th:src="@{${news.imageUrl != null ? news.imageUrl : '/photo/anh43.jpg'}}"
-                                             th:alt="${news.title}" class="img-fluid mb-2">
-                                    </a>
-                                    <span class="mini-news-date"
-                                          th:text="${news.publishedDateFormatted}">10.03.2024</span>
-                                    <h6 class="mini-news-title">
-                                        <a th:href="@{/news/{id}(id=${news.id})}"
-                                           th:text="${news.title}"
-                                           style="text-decoration: none; color: inherit;">
-                                            Tin tức mới nhất về năng lượng mặt trời
-                                        </a>
-                                    </h6>
-                                </div>
-                            </div>
+                    <div class="featured-image">
+                        <img th:src="@{${featuredNews.imageUrl != null ? featuredNews.imageUrl : '/photo/anh39.jpg'}}"
+                            th:alt="${featuredNews.title}">
+                        <div class="featured-image-overlay">
+                            <span class="overlay-link">TÌM HIỂU NGAY</span>
+                            <span class="overlay-hotline">www.datsolar.com | Hotline: 1800 6567</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Fallback if no news -->
-                <div th:if="${recentNews == null or recentNews.isEmpty()}" class="alert alert-info">
-                    <p>Chưa có tin tức nào được đăng. <a th:href="@{/admin}">Đăng nhập admin</a> để thêm tin tức.</p>
+                <!-- News Grid (Right Side) -->
+                <div class="news-grid-new">
+                    <!-- News Item 1 -->
+                    <div class="news-grid-item" th:if="${recentNews.size() > 1}" th:with="news=${recentNews[1]}">
+                        <div class="grid-item-image">
+                            <a th:href="@{/news/{id}(id=${news.id})}">
+                                <img th:src="@{${news.imageUrl != null ? news.imageUrl : '/photo/anh40.jpg'}}"
+                                    th:alt="${news.title}">
+                            </a>
+                        </div>
+                        <div class="grid-item-content">
+                            <span class="grid-item-date" th:text="${news.publishedDateFormatted}">13.06.2025</span>
+                            <h4 class="grid-item-title">
+                                <a th:href="@{/news/{id}(id=${news.id})}" th:text="${news.title}">
+                                    Năng lượng mặt trời là gì? Khám phá nguồn năng lượng sạch
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <!-- News Item 2 -->
+                    <div class="news-grid-item" th:if="${recentNews.size() > 2}" th:with="news=${recentNews[2]}">
+                        <div class="grid-item-image">
+                            <a th:href="@{/news/{id}(id=${news.id})}">
+                                <img th:src="@{${news.imageUrl != null ? news.imageUrl : '/photo/anh41.jpg'}}"
+                                    th:alt="${news.title}">
+                            </a>
+                        </div>
+                        <div class="grid-item-content">
+                            <span class="grid-item-date" th:text="${news.publishedDateFormatted}">07.08.2025</span>
+                            <h4 class="grid-item-title">
+                                <a th:href="@{/news/{id}(id=${news.id})}" th:text="${news.title}">
+                                    Solar Light là gì? Cấu tạo và nguyên lý hoạt động chi tiết.
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <!-- News Item 3 -->
+                    <div class="news-grid-item" th:if="${recentNews.size() > 3}" th:with="news=${recentNews[3]}">
+                        <div class="grid-item-image">
+                            <a th:href="@{/news/{id}(id=${news.id})}">
+                                <img th:src="@{${news.imageUrl != null ? news.imageUrl : '/photo/anh42.jpg'}}"
+                                    th:alt="${news.title}">
+                            </a>
+                        </div>
+                        <div class="grid-item-content">
+                            <span class="grid-item-date" th:text="${news.publishedDateFormatted}">07.07.2025</span>
+                            <h4 class="grid-item-title">
+                                <a th:href="@{/news/{id}(id=${news.id})}" th:text="${news.title}">
+                                    Năng lượng tái tạo là gì? Khái niệm, định nghĩa và lợi ích
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <!-- News Item 4 -->
+                    <div class="news-grid-item" th:if="${recentNews.size() > 4}" th:with="news=${recentNews[4]}">
+                        <div class="grid-item-image">
+                            <a th:href="@{/news/{id}(id=${news.id})}">
+                                <img th:src="@{${news.imageUrl != null ? news.imageUrl : '/photo/anh43.jpg'}}"
+                                    th:alt="${news.title}">
+                            </a>
+                        </div>
+                        <div class="grid-item-content">
+                            <span class="grid-item-date" th:text="${news.publishedDateFormatted}">01.10.2025</span>
+                            <h4 class="grid-item-title">
+                                <a th:href="@{/news/{id}(id=${news.id})}" th:text="${news.title}">
+                                    Bảng giá chi phí lắp điện năng lượng mặt trời giá mới nhất...
+                                </a>
+                            </h4>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="section-header">
-                    <h2 class="section-title">BÁO CHÍ VIẾT</h2>
-                </div>
-
-                <div class="press-logos">
-                    <div class="press-item">
-                        <img src="https://vnexpress.net/img/logo/vnexpress-logo-default.svg" alt="VnExpress"
-                             class="press-logo">
-                    </div>
-                    <div class="press-item">
-                        <img src="https://dantri.com.vn/Content/images/DanTri/logo-dantri.png" alt="Dân trí"
-                             class="press-logo">
-                    </div>
-                    <div class="press-item">
-                        <img src="https://www.htv.com.vn/uploads/images/logo-htv.png" alt="HTV" class="press-logo">
-                    </div>
-                    <div class="press-item">
-                        <img src="https://cafef.vn/content/images/logo-black.svg" alt="CafeF" class="press-logo">
-                    </div>
-                    <div class="press-item">
-                        <img src="https://thanhnien.vn/App_Themes/Thanhnien/images/tn-logo.svg" alt="Thanh Niên"
-                             class="press-logo">
-                    </div>
-                    <div class="press-item">
-                        <img src="https://vgea.org.vn/images/logo.png" alt="VGEA" class="press-logo">
-                    </div>
-                </div>
+            <!-- Fallback if no news -->
+            <div th:if="${recentNews == null or recentNews.isEmpty()}" class="news-fallback">
+                <p>Chưa có tin tức nào được đăng. <a th:href="@{/admin}">Đăng nhập admin</a> để thêm tin tức.</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Strategic Partners Section -->
-<section class="partners-section py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5">ĐỐI TÁC CHIẾN LƯỢC</h2>
-        <p class="text-center mb-4">
-            Chúng tôi hợp tác với các nhà sản xuất điện tử và nhà phân phối hàng đầu
-            toàn thế giới để mang đến cho khách hàng những sản phẩm năng lượng tối ưu
-        </p>
+    <!-- Strategic Partners Section -->
+    <section class="strategic-partners-section">
+        <div class="strategic-partners-container">
+            <h2 class="strategic-title">ĐỐI TÁC CHIẾN LƯỢC</h2>
+            <p class="strategic-subtitle">
+                Chúng tôi hợp tác với các nhà sản xuất điện tử và nhà phân phối hàng đầu
+                toàn thế giới để mang đến cho khách hàng những sản phẩm năng lượng tối ưu.
+            </p>
 
-        <div class="row">
-            <div class="col-lg-6 mb-4">
-                <div class="partner-card">
-                    <div class="row align-items-center">
-                        <div class="col-4">
-                            <img th:src="@{/photo/anh44.jpg}"
-                                 alt="SMA Partner" class="img-fluid">
+            <div class="strategic-slider-wrapper">
+                <!-- Left Arrow -->
+                <button class="strategic-nav-btn strategic-prev" id="strategicPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <!-- Slider Container -->
+                <div class="strategic-slider" id="strategicSlider">
+                    <!-- Partner 1 - SMA -->
+                    <div class="strategic-card">
+                        <div class="strategic-card-image">
+                            <img th:src="@{/photo/anh44.jpg}" alt="SMA Partner">
                         </div>
-                        <div class="col-8">
-                            <div class="partner-info">
-                                <h5>SMA</h5>
-                                <p>
-                                    Công ty Inverter SMA Solar Technology AG Đức xuành tiêu chuẩn toàn cầu trong
-                                    hơn 2,000 nhân viên hoạt động về kỹ thuật năng điện mặt trời
-                                </p>
-                            </div>
+                        <div class="strategic-card-content">
+                            <h4 class="strategic-partner-name">SMA</h4>
+                            <p class="strategic-partner-desc">
+                                Công ty Inverter SMA Solar Technology AG Đức xuất tiêu chuẩn toàn cầu trong
+                                hơn 2,000 nhân viên hoạt động về kỹ thuật năng điện mặt trời
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Partner 2 - GoodWe -->
+                    <div class="strategic-card">
+                        <div class="strategic-card-image">
+                            <img th:src="@{/photo/anh45.jpg}" alt="GoodWe Partner">
+                        </div>
+                        <div class="strategic-card-content">
+                            <h4 class="strategic-partner-name">GOODWE</h4>
+                            <p class="strategic-partner-desc">
+                                GoodWe là một trong những nhà sản xuất inverter điện mặt trời hàng đầu thế giới,
+                                được GE Renewable Energy tin chọn và service Machinery Corporation.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Partner 3 - Canadian Solar -->
+                    <div class="strategic-card">
+                        <div class="strategic-card-image">
+                            <img th:src="@{/photo/anh46.jpg}" alt="Canadian Solar Partner">
+                        </div>
+                        <div class="strategic-card-content">
+                            <h4 class="strategic-partner-name">CANADIAN SOLAR</h4>
+                            <p class="strategic-partner-desc">
+                                Canadian Solar là một trong những công ty năng lượng mặt trời lớn nhất thế giới,
+                                chuyên sản xuất tấm pin chất lượng cao.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Partner 4 - INVT -->
+                    <div class="strategic-card">
+                        <div class="strategic-card-image">
+                            <img th:src="@{/photo/anh47.jpg}" alt="INVT Partner">
+                        </div>
+                        <div class="strategic-card-content">
+                            <h4 class="strategic-partner-name">INVT</h4>
+                            <p class="strategic-partner-desc">
+                                Thành lập 2002, INVT là Tập đoàn quốc tế công nghệ cao trong lĩnh vực lý động hóa
+                                công nghiệp, năng lượng điện, điều khiển xe điện và tàu điện cao...
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 mb-4">
-                <div class="partner-card">
-                    <div class="row align-items-center">
-                        <div class="col-4">
-                            <img th:src="@{/photo/anh45.jpg}"
-                                 alt="GoodWe Partner" class="img-fluid">
-                        </div>
-                        <div class="col-8">
-                            <div class="partner-info">
-                                <h5>GOODWE</h5>
-                                <p>
-                                    GoodWe là một trong những nhà sản xuất inverter điện mặt
-                                    trời hàng đầu thế giới, được GE
-                                    Renewable Energy tin chọn và
-                                    service Machinery Corporation.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                <!-- Right Arrow -->
+                <button class="strategic-nav-btn strategic-next" id="strategicNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Footer -->
-<div th:replace="~{layout/footer :: footer}"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slider = document.getElementById('strategicSlider');
+            const prevBtn = document.getElementById('strategicPrev');
+            const nextBtn = document.getElementById('strategicNext');
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Custom JS -->
-<script th:src="@{/js/main.js}"></script>
+            if (slider && prevBtn && nextBtn) {
+                const cardWidth = 420; // width + gap
+
+                prevBtn.addEventListener('click', function () {
+                    slider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+                });
+
+                nextBtn.addEventListener('click', function () {
+                    slider.scrollBy({ left: cardWidth, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <div th:replace="~{layout/footer :: footer}"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script th:src="@{/js/main.js}"></script>
 </body>
+
 </html>
