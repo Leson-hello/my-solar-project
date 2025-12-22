@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải pháp Lưu trữ Điện ESS - DAT Group</title>
+    <meta name="description"
+        content="Giải pháp lưu trữ điện ESS cho doanh nghiệp, nhà máy điện - Tiết kiệm chi phí, chủ động nguồn điện">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <!-- Article Style ESS Page -->
+    <main class="ess-article">
+        <div class="article-container">
+
+            <!-- Article Header -->
+            <header class="article-header">
+                <span class="article-date">12.04.2021</span>
+                <h1 class="article-title">Giải Pháp Lưu Trữ Điện ESS Cho Doanh Nghiệp, Nhà Máy Điện</h1>
+            </header>
+
+            <!-- Section: Nhu cầu -->
+            <section class="article-section">
+                <h2>Nhu cầu lưu trữ điện tăng cao, cần có một giải pháp hiệu quả</h2>
+                <p>
+                    Phát triển năng lượng tái tạo, đặc biệt là điện mặt trời vẫn đang là giải pháp hiệu quả để
+                    đảm bảo an ninh năng lượng, thay thế cho các nguồn nhiên liệu hóa thạch dần cạn kiệt.
+                </p>
+                <p>
+                    Tuy nhiên, sự phát triển "bùng nổ" của điện mặt trời đã dẫn đến tình trạng dư nguồn cung vào
+                    thời điểm buổi trưa do phụ tải thấp và bức xạ điện mặt trời tốt nhất trong ngày. Trong khi đó,
+                    giờ cao điểm sử dụng điện lại rơi vào khoảng thời gian chiều tối và lúc này không còn ánh nắng.
+                </p>
+                <figure class="article-figure">
+                    <img th:src="@{/photo/ess/ess_image1.jpeg}" alt="Nhu cầu lưu trữ điện ESS" class="article-image">
+                </figure>
+                <p>
+                    Vì thế, cần phải có các <strong>giải pháp lưu trữ điện</strong> để gia tăng hiệu quả đầu tư,
+                    giúp sử dụng tối đa nguồn điện mặt trời, tránh lãng phí năng lượng và giảm tải cho lưới điện Quốc
+                    gia.
+                </p>
+                <p>
+                    Các giải pháp lưu trữ điện hiệu quả hơn, ít phát thải hơn các nguồn điện từ than, dầu.
+                    Điều này giúp Việt Nam theo đuổi mục tiêu giảm phát thải trong khi vẫn quản lý được nguồn
+                    năng lượng hiệu quả, đảm bảo phát triển kinh tế.
+                </p>
+            </section>
+
+            <!-- Section: ESS là gì -->
+            <section class="article-section">
+                <h2>Vậy, giải pháp lưu trữ điện ESS là gì?</h2>
+                <p>
+                    Giải pháp lưu trữ điện ESS là <strong>hệ thống lưu trữ năng lượng bằng pin với dung lượng
+                        lớn</strong>
+                    cho doanh nghiệp và nhà máy điện, sử dụng tối đa nguồn điện năng lượng mặt trời, lưu trữ điện
+                    vào giờ bình thường để phát ra sử dụng vào giờ cao điểm giúp tiết kiệm tiền điện.
+                </p>
+                <p>
+                    Hệ thống cung cấp nguồn điện kể cả khi điện lưới gặp sự cố và có thể sử dụng ở các khu vực
+                    điện yếu, điện chập chờn hoặc huyện đảo chưa có điện lưới.
+                </p>
+            </section>
+
+            <!-- Section: Nguyên lý hoạt động -->
+            <section class="article-section">
+                <h2>Nguyên lý hoạt động của giải pháp lưu trữ điện ESS</h2>
+                <figure class="article-figure">
+                    <img th:src="@{/photo/ess/ess_image2.png}" alt="Nguyên lý hoạt động ESS" class="article-image">
+                </figure>
+                <h3>Nếu kết hợp với điện mặt trời:</h3>
+                <p>
+                    Hệ thống ESS sẽ lưu trữ điện mặt trời dư thừa để có thể sử dụng vào thời điểm khác,
+                    tăng tỷ lệ điện tự dùng và giảm điện mua từ lưới hoặc không phát công suất lên lưới điện
+                    theo yêu cầu của EVN.
+                </p>
+                <h3>Nếu không kết hợp với điện mặt trời:</h3>
+                <p>
+                    Hệ thống ESS có thể lưu trữ điện từ nguồn điện lưới vào thời điểm giá điện thấp và
+                    phát ra sử dụng vào khung giờ giá điện cao (lưu vào bao nhiêu, phát ra bấy nhiêu)
+                    để tiết kiệm chi phí tiền điện. Ngoài ra, hệ thống cũng lưu trữ điện như một nguồn
+                    cấp điện dự phòng khi mất điện.
+                </p>
+            </section>
+
+            <!-- Section: Ưu điểm -->
+            <section class="article-section">
+                <h2>Ưu điểm vượt trội của hệ thống</h2>
+
+                <h3>+ Lưu trữ năng lượng mặt trời để tự chủ động về nguồn điện</h3>
+                <p>
+                    Hệ thống lưu trữ nguồn điện mặt trời vào pin lưu trữ để có thể sử dụng vào ban đêm hoặc
+                    lúc mất điện, duy trì hoạt động ổn định cho các thiết bị điện. Do có pin lưu trữ là nguồn
+                    điện dự phòng nên hệ thống không phụ thuộc quá nhiều vào lưới điện Quốc gia, chủ động
+                    quản lý nguồn điện hiệu quả.
+                </p>
+
+                <h3>+ Dải công suất lớn, cung cấp điện liên tục từ 2 - 5 giờ</h3>
+                <figure class="article-figure">
+                    <img th:src="@{/photo/ess/ess_image3.png}" alt="Dải công suất ESS" class="article-image">
+                </figure>
+                <p>
+                    Hệ thống ESS cho doanh nghiệp do DAT cung cấp có dải công suất từ <strong>50kW - 1MW</strong>,
+                    khả năng cung cấp điện liên tục từ <strong>2 - 5 giờ</strong>.
+                </p>
+
+                <h3>+ Có thể sử dụng trên đảo và khu vực chưa có điện lưới</h3>
+                <p>
+                    Giải pháp này có thể kết hợp với điện mặt trời hoặc máy phát để sử dụng trên các huyện đảo,
+                    khu vực chưa có lưới điện.
+                </p>
+
+                <h3>+ Chế độ sạc/xả nhanh và thông minh, tiết kiệm tiền điện</h3>
+                <figure class="article-figure">
+                    <img th:src="@{/photo/ess/ess_image4.jpeg}" alt="Chế độ sạc/xả ESS" class="article-image">
+                </figure>
+                <p>
+                    Với nhiều cơ chế hoạt động, lưu chuyển năng lượng linh hoạt, hệ thống được cấu hình chức năng
+                    sạc/xả theo thời gian và nhu cầu thực tế, cho phép sạc lưu trữ vào giờ hệ thống điện mặt trời
+                    phát công suất đỉnh và xả vào thời gian nhu cầu phụ tải cao hoặc theo yêu cầu của EVN,
+                    tiết kiệm nhiều chi phí tiền điện.
+                </p>
+
+                <h3>+ Chuẩn cấp độ bảo vệ IP54 & C5 an toàn khi lắp đặt ngoài trời</h3>
+                <p>
+                    Hệ thống được thiết kế dạng module có thể dễ dàng nâng cấp, bảo trì. Đồng thời, đạt chuẩn
+                    cấp độ bảo vệ <strong>IP54</strong> và chống ăn mòn <strong>C5</strong> an toàn khi lắp đặt
+                    ngoài trời, an tâm sử dụng mà không phải lo lắng về vấn đề thời tiết diễn biến thất thường.
+                </p>
+            </section>
+
+            <!-- Section: Hạn chế -->
+            <section class="article-section">
+                <h2>Điểm hạn chế hệ thống</h2>
+                <p>
+                    Do công suất hệ thống phụ thuộc nhiều vào công suất tải và thời gian dự phòng; vì thế,
+                    để hệ thống đáp ứng nhu cầu của tải thiết bị trong gia đình và doanh nghiệp vận hành ổn định
+                    khi không có lưới điện, khách hàng cần phải được các đơn vị chuyên cung cấp giải pháp
+                    lưu trữ điện ESS <strong>khảo sát, tư vấn</strong> để chọn lựa hệ thống có công suất và
+                    lưu trữ nguồn điện dự phòng phù hợp.
+                </p>
+            </section>
+
+            <!-- Section: DAT Solar -->
+            <section class="article-section">
+                <h2>Chọn DAT Solar - Chọn giải pháp lưu trữ điện ESS hiệu quả</h2>
+                <p>
+                    Hơn 15 năm qua, DAT Solar không ngừng phát triển Hệ sinh thái toàn diện, tinh chọn những
+                    sản phẩm chất lượng toàn cầu và nghiên cứu các giải pháp gia tăng sự hiệu quả cho khách hàng,
+                    đối tác và nhà đầu tư điện mặt trời.
+                </p>
+                <figure class="article-figure">
+                    <img th:src="@{/photo/ess/ess_image5.png}" alt="DAT Solar ESS" class="article-image">
+                </figure>
+                <p>
+                    Đặc biệt, đối với giải pháp lưu trữ điện ESS cho doanh nghiệp và nhà máy điện, đội ngũ kỹ thuật,
+                    chuyên gia điện mặt trời của DAT Solar sẽ khảo sát thông số tải tiêu thụ, cấu trúc hệ thống
+                    điện hiện hữu và nhu cầu back-up nguồn điện cho các tải quan trọng, thời gian tải sử dụng...
+                    để tư vấn và đưa ra các phương án triển khai, thiết kế hệ thống điện mặt trời lưu trữ ESS phù hợp.
+                </p>
+            </section>
+
+            <!-- Section: Lý do chọn DAT -->
+            <section class="article-section">
+                <h2>Thêm lý do để khách hàng, đối tác đồng hành cùng DAT Solar</h2>
+                <figure class="article-figure">
+                    <img th:src="@{/photo/ess/ess_image6.png}" alt="Đối tác DAT Solar" class="article-image">
+                </figure>
+                <ul class="article-checklist">
+                    <li><i class="fas fa-check"></i> Mua sản phẩm/giải pháp của DAT Solar sẽ được đào tạo, huấn luyện
+                        kiến thức về giải pháp, kỹ thuật triển khai với sự tham gia trực tiếp của đội ngũ chuyên gia, kỹ
+                        sư DAT Solar có kinh nghiệm cung cấp, thiết kế, triển khai gần 10.000 hệ thống điện mặt trời.
+                    </li>
+                    <li><i class="fas fa-check"></i> Trở thành đối tác: DAT Solar cam kết cung cấp trọn gói sản
+                        phẩm/giải pháp, đồng hành và hỗ trợ về chính sách, công cụ, đào tạo, khách hàng và kỹ thuật.
+                    </li>
+                </ul>
+                <figure class="article-figure">
+                    <img th:src="@{/photo/ess/ess_image7.jpeg}" alt="Kho hàng DAT Solar" class="article-image">
+                </figure>
+                <ul class="article-checklist">
+                    <li><i class="fas fa-check"></i> <strong>Kho hàng lớn, hàng hóa sẵn sàng:</strong> DAT Solar đầu tư
+                        kho hàng lớn tại TP. Hồ Chí Minh, Hà Nội, Cần Thơ luôn có sẵn khoảng 10MWp pin cùng hàng chục
+                        ngàn bộ inverter sẵn sàng cung cấp với mức giá cạnh tranh.</li>
+                    <li><i class="fas fa-check"></i> Các trung tâm dịch vụ kỹ thuật DAT Solar được các hãng ủy quyền bảo
+                        hành sản phẩm chính hãng tại Hồ Chí Minh, Hà Nội, Cần Thơ.</li>
+                    <li><i class="fas fa-check"></i> Tất cả sản phẩm do DAT Solar cung cấp đều được bảo hành điện tử
+                        chính hãng. Khách hàng có thể cài đặt và kiểm tra thời gian, chính sách bảo hành tại App DAT
+                        Portal.</li>
+                </ul>
+                <figure class="article-figure">
+                    <img th:src="@{/photo/ess/ess_image8.png}" alt="Hỗ trợ 24/7" class="article-image">
+                </figure>
+                <p>
+                    Với hơn <strong>350 nhân sự</strong> giàu kinh nghiệm luôn sẵn sàng hỗ trợ <strong>24/7</strong>
+                    trước và sau bán hàng, DAT Solar cam kết đảm bảo chất lượng toàn bộ sản phẩm phân phối trên toàn
+                    quốc.
+                </p>
+                <p>
+                    Để được tư vấn và hỗ trợ 24/7, nhanh tay gọi ngay đến hotline <strong>1800 6567</strong>
+                    (miễn phí cuộc gọi) hoặc chat trực tiếp với nhân viên tư vấn.
+                </p>
+            </section>
+
+            <!-- Registration Form -->
+            <section id="register-form" class="article-section register-section">
+                <h2>ĐĂNG KÝ TƯ VẤN GIẢI PHÁP ESS</h2>
+                <p class="text-center text-muted">CHÚNG TÔI SẴN SÀNG ĐỒNG HÀNH CÙNG BẠN!</p>
+
+                <!-- Success/Error Messages -->
+                <div th:if="${success}" class="alert alert-success" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <span th:text="${success}">Đăng ký thành công!</span>
+                </div>
+                <div th:if="${error}" class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <span th:text="${error}">Có lỗi xảy ra!</span>
+                </div>
+
+                <form th:action="@{/giai-phap/ess/register}" method="post" th:object="${quoteRequest}"
+                    class="register-form">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" th:field="*{fullName}" required
+                                placeholder="Nhập họ và tên">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Công ty <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" th:field="*{company}" required
+                                placeholder="Tên công ty">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" th:field="*{email}" required
+                                placeholder="Email liên hệ">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" th:field="*{phone}" required
+                                placeholder="Số điện thoại">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tỉnh/Thành phố</label>
+                        <select class="form-select" th:field="*{province}">
+                            <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                            <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                            <option value="Hà Nội">Hà Nội</option>
+                            <option value="Đà Nẵng">Đà Nẵng</option>
+                            <option value="Bình Dương">Bình Dương</option>
+                            <option value="Đồng Nai">Đồng Nai</option>
+                            <option value="Long An">Long An</option>
+                            <option value="Cần Thơ">Cần Thơ</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Ghi chú</label>
+                        <textarea class="form-control" th:field="*{message}" rows="3"
+                            placeholder="Mô tả nhu cầu lưu trữ điện, thời gian backup cần thiết..."></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-register">ĐĂNG KÝ</button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{layout/footer :: footer}"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script th:src="@{/js/main.js}"></script>
+
+    <style>
+        /* Article Style - Clean Blog Layout */
+        .ess-article {
+            margin-top: 120px;
+            padding: 40px 0 80px;
+            background: #fff;
+        }
+
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Article Header */
+        .article-header {
+            margin-bottom: 40px;
+        }
+
+        .article-date {
+            display: block;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a365d;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        /* Article Figures */
+        .article-figure {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .article-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Article Sections */
+        .article-section {
+            margin-bottom: 50px;
+        }
+
+        .article-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0073B7;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .article-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a365d;
+            margin: 25px 0 15px;
+        }
+
+        .article-section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Checklist */
+        .article-checklist {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .article-checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .article-checklist li i {
+            position: absolute;
+            left: 0;
+            top: 13px;
+            color: #F7941D;
+        }
+
+        /* Register Form Section */
+        .register-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: 60px;
+        }
+
+        .register-section h2 {
+            text-align: center;
+            color: #1a365d;
+            font-size: 1.4rem;
+        }
+
+        .register-form {
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+
+        .form-control,
+        .form-select {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #0073B7;
+            box-shadow: 0 0 0 3px rgba(0, 115, 183, 0.1);
+        }
+
+        .btn-register {
+            background: #333;
+            color: white;
+            padding: 12px 50px;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn-register:hover {
+            background: #1a365d;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ess-article {
+                margin-top: 80px;
+                padding: 30px 0 60px;
+            }
+
+            .article-title {
+                font-size: 1.5rem;
+            }
+
+            .article-section h2 {
+                font-size: 1.3rem;
+            }
+
+            .register-section {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</body>
+
+</html>

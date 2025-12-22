@@ -294,7 +294,8 @@
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button type="button" class="btn btn-outline-danger" title="Xóa"
-                                                        th:onclick="|confirmDelete('${news.title}', ${news.id})|">
+                                                        th:data-title="${news.title}" th:data-id="${news.id}"
+                                                        onclick="confirmDelete(this.dataset.title, this.dataset.id)">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </div>

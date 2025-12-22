@@ -29,17 +29,35 @@ public class AdminQuoteController {
         Page<QuoteRequestDTO> quotesPage;
 
         if (type != null && !type.isEmpty()) {
-            if (status != null && !status.isEmpty()) {
+            // Handle SOLUTION type - filter by ESCO, HYBRID, ESS
+            if ("SOLUTION".equals(type)) {
+                if (status != null && !status.isEmpty()) {
+                    quotesPage = quoteRequestService.getQuoteRequestsBySolution(status, page, size);
+                    model.addAttribute("selectedStatus", status);
+                } else {
+                    quotesPage = quoteRequestService.getAllSolutionQuotes(page, size);
+                }
+                model.addAttribute("selectedType", type);
+                model.addAttribute("pendingCount", quoteRequestService.countSolutionByStatus("PENDING"));
+                model.addAttribute("contactedCount", quoteRequestService.countSolutionByStatus("CONTACTED"));
+                model.addAttribute("quotedCount", quoteRequestService.countSolutionByStatus("QUOTED"));
+                model.addAttribute("completedCount", quoteRequestService.countSolutionByStatus("COMPLETED"));
+            } else if (status != null && !status.isEmpty()) {
                 quotesPage = quoteRequestService.getQuoteRequestsByTypeAndStatus(type, status, page, size);
                 model.addAttribute("selectedStatus", status);
+                model.addAttribute("selectedType", type);
+                model.addAttribute("pendingCount", quoteRequestService.countByTypeAndStatus(type, "PENDING"));
+                model.addAttribute("contactedCount", quoteRequestService.countByTypeAndStatus(type, "CONTACTED"));
+                model.addAttribute("quotedCount", quoteRequestService.countByTypeAndStatus(type, "QUOTED"));
+                model.addAttribute("completedCount", quoteRequestService.countByTypeAndStatus(type, "COMPLETED"));
             } else {
                 quotesPage = quoteRequestService.getQuoteRequestsByType(type, page, size);
+                model.addAttribute("selectedType", type);
+                model.addAttribute("pendingCount", quoteRequestService.countByTypeAndStatus(type, "PENDING"));
+                model.addAttribute("contactedCount", quoteRequestService.countByTypeAndStatus(type, "CONTACTED"));
+                model.addAttribute("quotedCount", quoteRequestService.countByTypeAndStatus(type, "QUOTED"));
+                model.addAttribute("completedCount", quoteRequestService.countByTypeAndStatus(type, "COMPLETED"));
             }
-            model.addAttribute("selectedType", type);
-            model.addAttribute("pendingCount", quoteRequestService.countByTypeAndStatus(type, "PENDING"));
-            model.addAttribute("contactedCount", quoteRequestService.countByTypeAndStatus(type, "CONTACTED"));
-            model.addAttribute("quotedCount", quoteRequestService.countByTypeAndStatus(type, "QUOTED"));
-            model.addAttribute("completedCount", quoteRequestService.countByTypeAndStatus(type, "COMPLETED"));
         } else {
             if (status != null && !status.isEmpty()) {
                 quotesPage = quoteRequestService.getQuoteRequestsByStatus(status, page, size);

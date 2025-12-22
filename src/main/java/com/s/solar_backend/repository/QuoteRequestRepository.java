@@ -23,4 +23,19 @@ public interface QuoteRequestRepository extends JpaRepository<QuoteRequest, Long
     long countByQuoteType(String quoteType);
 
     long countByQuoteTypeAndStatus(String quoteType, String status);
+
+    // Filter by solution (ESCO, HYBRID, ESS)
+    Page<QuoteRequest> findBySolutionInOrderByCreatedAtDesc(java.util.List<String> solutions, Pageable pageable);
+
+    Page<QuoteRequest> findBySolutionInAndStatusOrderByCreatedAtDesc(java.util.List<String> solutions, String status,
+            Pageable pageable);
+
+    long countBySolutionInAndStatus(java.util.List<String> solutions, String status);
+
+    // Filter by specific solution
+    Page<QuoteRequest> findBySolutionOrderByCreatedAtDesc(String solution, Pageable pageable);
+
+    Page<QuoteRequest> findBySolutionAndStatusOrderByCreatedAtDesc(String solution, String status, Pageable pageable);
+
+    long countBySolutionAndStatus(String solution, String status);
 }

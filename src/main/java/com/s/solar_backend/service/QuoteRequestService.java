@@ -67,6 +67,11 @@ public class QuoteRequestService {
         quoteRequestRepository.deleteById(id);
     }
 
+    @Transactional
+    public QuoteRequest save(QuoteRequest quoteRequest) {
+        return quoteRequestRepository.save(quoteRequest);
+    }
+
     public long countByStatus(String status) {
         return quoteRequestRepository.countByStatus(status);
     }
@@ -86,6 +91,44 @@ public class QuoteRequestService {
 
     public long countByTypeAndStatus(String type, String status) {
         return quoteRequestRepository.countByQuoteTypeAndStatus(type, status);
+    }
+
+    // Filter by solution (ESCO, HYBRID, ESS)
+    public Page<QuoteRequestDTO> getAllSolutionQuotes(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return quoteRequestRepository.findBySolutionInOrderByCreatedAtDesc(
+                java.util.Arrays.asList("ESCO", "HYBRID", "ESS"), pageable)
+                .map(this::convertToDTO);
+    }
+
+    public Page<QuoteRequestDTO> getQuoteRequestsBySolution(String status, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return quoteRequestRepository.findBySolutionInAndStatusOrderByCreatedAtDesc(
+                java.util.Arrays.asList("ESCO", "HYBRID", "ESS"), status, pageable)
+                .map(this::convertToDTO);
+    }
+
+    public long countSolutionByStatus(String status) {
+        return quoteRequestRepository.countBySolutionInAndStatus(
+                java.util.Arrays.asList("ESCO", "HYBRID", "ESS"), status);
+    }
+
+    // Filter by specific solution type
+    public Page<QuoteRequestDTO> getQuoteRequestsBySolutionType(String solution, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return quoteRequestRepository.findBySolutionOrderByCreatedAtDesc(solution, pageable)
+                .map(this::convertToDTO);
+    }
+
+    public Page<QuoteRequestDTO> getQuoteRequestsBySolutionTypeAndStatus(String solution, String status, int page,
+            int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return quoteRequestRepository.findBySolutionAndStatusOrderByCreatedAtDesc(solution, status, pageable)
+                .map(this::convertToDTO);
+    }
+
+    public long countBySolutionAndStatus(String solution, String status) {
+        return quoteRequestRepository.countBySolutionAndStatus(solution, status);
     }
 
     private void updateQuoteRequestFromDTO(QuoteRequest quoteRequest, QuoteRequestDTO dto) {
@@ -124,6 +167,9 @@ public class QuoteRequestService {
         dto.setQuoteType(quoteRequest.getQuoteType());
         dto.setMonthlyBill(quoteRequest.getMonthlyBill());
         dto.setRecommendedPackage(quoteRequest.getRecommendedPackage());
+        dto.setSolution(quoteRequest.getSolution());
+        dto.setCompany(quoteRequest.getCompany());
+        dto.setProvince(quoteRequest.getProvince());
         dto.setCreatedAt(quoteRequest.getCreatedAt());
         dto.setUpdatedAt(quoteRequest.getUpdatedAt());
         return dto;

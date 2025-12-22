@@ -57,6 +57,15 @@ public class QuoteRequest {
     @Column(columnDefinition = "TEXT")
     private String adminNotes;
 
+    @Column(length = 100)
+    private String solution; // ESCO, HOA_LUOI, HYBRID, LUU_TRU, DOC_LAP
+
+    @Column(length = 200)
+    private String company; // Company name for business customers
+
+    @Column(length = 100)
+    private String province; // Province/City
+
     @Column(updatable = false)
     private LocalDateTime createdAt;
 

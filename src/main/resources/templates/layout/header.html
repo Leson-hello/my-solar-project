@@ -65,12 +65,21 @@
                         </a>
 
 
-
-                        <a class="nav-link  " href="#" role="button" data-bs-toggle="dropdown">
-                            GIẢI PHÁP
-                        </a>
-
-
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                GIẢI PHÁP
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/giai-phap/esco}">ESCO</a></li>
+                                <li><a class="dropdown-item" href="#">Hệ thống ĐMT hòa lưới</a></li>
+                                <li><a class="dropdown-item" th:href="@{/giai-phap/hybrid}">Hệ thống ĐMT có lưu trữ
+                                        (Hybrid)</a></li>
+                                <li><a class="dropdown-item" href="#">Hệ thống ĐMT cho bơm nước</a></li>
+                                <li><a class="dropdown-item" th:href="@{/giai-phap/ess}">Giải pháp lưu trữ điện ESS</a>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Giải pháp chiếu sáng NLMT</a></li>
+                            </ul>
+                        </li>
 
                         <a class="nav-link" th:href="@{/products}">
                             SẢN PHẨM

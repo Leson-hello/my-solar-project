@@ -148,6 +148,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a th:href="@{/admin/solutions}" class="nav-link">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Giải pháp</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-cog"></i>
                         <span>Cài đặt</span>
@@ -243,12 +249,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên</th>
+                                <th>Công ty</th>
                                 <th>SĐT</th>
                                 <th>Email</th>
-                                <th>Yêu cầu</th>
+                                <th>Giải pháp</th>
                                 <th>Gói tư vấn</th>
-                                <th>Tiền điện/tháng</th>
-                                <th>Tỉnh/TP</th>
                                 <th>Trạng thái</th>
                                 <th>Ngày tạo</th>
                                 <th>Thao tác</th>
@@ -259,6 +264,10 @@
                                 <td th:text="${quote.id}">1</td>
                                 <td th:text="${quote.fullName}">Nguyễn Văn A</td>
                                 <td>
+                                    <span th:if="${quote.company != null}" th:text="${quote.company}">Công ty ABC</span>
+                                    <span th:unless="${quote.company != null}">-</span>
+                                </td>
+                                <td>
                                     <small><i class="fas fa-phone"></i> <span
                                             th:text="${quote.phone}">0123456789</span></small>
                                 </td>
@@ -267,20 +276,15 @@
                                             th:text="${quote.email}">email@example.com</span></small>
                                 </td>
                                 <td>
-                                    <span th:if="${quote.message != null}" th:text="${quote.message}">-</span>
-                                    <span th:unless="${quote.message != null}">-</span>
+                                    <span th:if="${quote.solution != null}" class="badge bg-primary"
+                                        th:text="${quote.solution}">ESCO</span>
+                                    <span th:unless="${quote.solution != null}">-</span>
                                 </td>
                                 <td>
                                     <span th:if="${quote.recommendedPackage != null}" class="badge bg-info"
                                         th:text="${quote.recommendedPackage}">5kWp</span>
                                     <span th:unless="${quote.recommendedPackage != null}">-</span>
                                 </td>
-                                <td>
-                                    <span th:if="${quote.monthlyBill != null}"
-                                        th:text="${quote.monthlyBill}">1-2tr</span>
-                                    <span th:unless="${quote.monthlyBill != null}">-</span>
-                                </td>
-                                <td th:text="${quote.address}">TP.HCM</td>
                                 <td>
                                     <span th:if="${quote.status == 'PENDING'}" class="badge bg-warning text-dark">Chờ xử
                                         lý</span>
