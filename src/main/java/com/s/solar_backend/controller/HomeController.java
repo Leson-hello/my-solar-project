@@ -53,10 +53,7 @@ public class HomeController {
 
     // Removed: @GetMapping("/projects") - now handled by ProjectController
 
-    @GetMapping("/contact")
-    public String contact(Model model) {
-        return "contact";
-    }
+    // Removed: @GetMapping("/contact") - now handled by ContactController
 
     @GetMapping("/test-images")
     public String testImages(Model model) {

@@ -7,50 +7,128 @@
 
 <body>
     <!-- Admin Sidebar Fragment -->
-    <nav th:fragment="sidebar" class="col-md-2 d-md-block bg-dark sidebar">
-        <div class="position-sticky pt-3">
-            <h5 class="text-white px-3 mb-4">
+    <nav th:fragment="sidebar" class="admin-sidebar">
+        <div class="sidebar-header">
+            <a th:href="@{/admin}" class="sidebar-brand">
                 <i class="fas fa-solar-panel"></i> DAT Admin
-            </h5>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/admin}"
-                        th:classappend="${#httpServletRequest.requestURI == '/admin' ? 'active' : ''}">
-                        <i class="fas fa-dashboard"></i> Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/admin/news}"
-                        th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/admin/news') ? 'active' : ''}">
-                        <i class="fas fa-newspaper"></i> Tin tức
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/admin/products}"
-                        th:classappend="${#strings.startsWith(#httpServletRequest.requestURI, '/admin/products') ? 'active' : ''}">
-                        <i class="fas fa-boxes"></i> Sản phẩm
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/admin/quotes(type=PRODUCT)}"
-                        th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/quotes') && #strings.contains(#httpServletRequest.queryString ?: '', 'PRODUCT') ? 'active' : ''}">
-                        <i class="fas fa-file-invoice"></i> Báo giá Sản phẩm
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/admin/quotes(type=HOUSEHOLD)}"
-                        th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/admin/quotes') && #strings.contains(#httpServletRequest.queryString ?: '', 'HOUSEHOLD') ? 'active' : ''}">
-                        <i class="fas fa-home"></i> Báo giá Hộ gia đình
-                    </a>
-                </li>
-                <li class="nav-item mt-4">
-                    <a class="nav-link text-white" th:href="@{/}">
-                        <i class="fas fa-home"></i> Về trang chủ
-                    </a>
-                </li>
-            </ul>
+            </a>
+            <small class="d-block text-white-50 mt-2">Content Management</small>
         </div>
+
+        <ul class="sidebar-nav list-unstyled">
+            <li class="nav-item">
+                <a th:href="@{/admin}" class="nav-link">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/news}" class="nav-link">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Quản lý tin tức</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/products}" class="nav-link">
+                    <i class="fas fa-boxes"></i>
+                    <span>Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/projects}" class="nav-link">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Quản lý dự án</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/quotes(type=PRODUCT)}" class="nav-link">
+                    <i class="fas fa-file-invoice"></i>
+                    <span>Báo giá Sản phẩm</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/quotes(type=HOUSEHOLD)}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Báo giá Hộ gia đình</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/contacts}" class="nav-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Tin nhắn liên hệ</span>
+                </a>
+            </li>
+            <li class="nav-item mt-4">
+                <a th:href="@{/}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Về trang chủ</span>
+                </a>
+            </li>
+        </ul>
     </nav>
+
+    <style>
+        .admin-sidebar {
+            width: 260px;
+            background: #2c3e50;
+            color: white;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .sidebar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-link i {
+            margin-right: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+    </style>
 </body>
 
 </html>
