@@ -1727,7 +1727,7 @@ body {
 }
 
 .main-footer {
-    background: rgba(0, 0, 0, 0.2);
+    background: #1e5f8c;
 }
 
 .footer-widget h5 {
@@ -1771,11 +1771,14 @@ body {
 }
 
 .newsletter-form .btn {
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
+    border-radius: 0 25px 25px 0;
+    width: auto;
+    height: auto;
+    padding: 12px 20px;
     border: none;
-    background: var(--accent-color);
+    background: #f7b731;
+    color: #1a365d;
+    font-weight: bold;
 }
 
 .footer-bottom {
@@ -2223,5 +2226,70 @@ body {
 
     .strategic-partner-desc {
         font-size: 0.85rem;
+    }
+}
+
+/* Footer Address Section */
+.footer-address {
+    background: #1e5f8c;
+}
+
+.footer-address h6 {
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.address-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.address-list li {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.address-list li i {
+    width: 18px;
+    margin-right: 8px;
+}
+
+/* Social Icons in Footer */
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    color: white;
+    transition: all 0.3s;
+}
+
+.social-icon:hover {
+    background: #f7b731;
+    border-color: #f7b731;
+    color: #1a365d;
+}
+
+/* Newsletter Form Update */
+.newsletter-form .btn-warning {
+    border-radius: 0 25px 25px 0;
+    padding: 12px 25px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .footer-address h6 {
+        font-size: 0.85rem;
+    }
+
+    .address-list li {
+        font-size: 0.8rem;
     }
 }
