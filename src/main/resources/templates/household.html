@@ -549,96 +549,115 @@
         </div>
     </section>
 
-    <!-- Real Projects Section -->
+    <!-- Real Projects Section - Same as Homepage -->
     <section id="du-an-thuc-te"></section>
-    <section class="projects-section py-5 bg-light">
-        <div class="container">
-            <h2 class="section-title text-center mb-5">DỰ ÁN THỰC TẾ</h2>
+    <section class="projects-section-new">
+        <div class="projects-container">
+            <h2 class="projects-title">DỰ ÁN THỰC TẾ</h2>
+            <p class="projects-subtitle">
+                Chúng tôi cam kết phục vụ khách hàng bằng cả "trái tim" của sự nhiệt huyết và tinh thần trách nhiệm cao!
+            </p>
 
-            <div class="row">
-                <!-- Project 1 -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img th:src="@{/photo/anh18.jpg}" alt="Dự án hộ gia đình">
-                            <span class="project-type">Hộ gia đình</span>
-                        </div>
-                        <div class="project-info">
-                            <h5 class="project-name">Anh Trí</h5>
-                            <div class="project-details">
-                                <div class="detail-item">
-                                    <i class="fas fa-calendar"></i>
-                                    <span>Năm thi công: <strong>2019</strong></span>
+            <!-- Projects Slider -->
+            <div class="projects-slider-wrapper">
+                <!-- Left Arrow -->
+                <button class="project-nav-btn project-prev" id="projectPrevHousehold">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <!-- Slider Container -->
+                <div class="projects-slider" id="projectsSliderHousehold">
+                    <!-- Project 1 -->
+                    <div class="project-slide side-slide">
+                        <img th:src="@{/photo/anh10.jpg}" alt="Dự án 1">
+                    </div>
+
+                    <!-- Main Project (Center) -->
+                    <div class="project-slide main-slide">
+                        <img th:src="@{/photo/anh18.jpg}" alt="Anh Trí">
+                        <div class="project-slide-overlay">
+                            <span class="project-category">HỘ GIA ĐÌNH</span>
+                            <h3 class="project-name">ANH TRÍ – TP. HỒ CHÍ MINH</h3>
+                            <div class="project-stats-row">
+                                <div class="stat-box">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span class="stat-label">Năm thi công</span>
+                                    <span class="stat-value">2019</span>
                                 </div>
-                                <div class="detail-item">
+                                <div class="stat-box">
                                     <i class="fas fa-bolt"></i>
-                                    <span>Công suất: <strong>5.4 kWp</strong></span>
+                                    <span class="stat-label">Công suất</span>
+                                    <span class="stat-value">5.4 kWp</span>
                                 </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Sản lượng/năm: <strong>10.2 MWh</strong></span>
+                                <div class="stat-box">
+                                    <i class="fas fa-sun"></i>
+                                    <span class="stat-label">Sản lượng/năm</span>
+                                    <span class="stat-value">10.2 MWh</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Project 2 -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img th:src="@{/photo/anh9.jpg}" alt="Dự án hộ gia đình">
-                            <span class="project-type">Hộ gia đình</span>
-                        </div>
-                        <div class="project-info">
-                            <h5 class="project-name">Anh Minh</h5>
-                            <div class="project-details">
-                                <div class="detail-item">
-                                    <i class="fas fa-calendar"></i>
-                                    <span>Năm thi công: <strong>2019</strong></span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-bolt"></i>
-                                    <span>Công suất: <strong>3.24 kWp</strong></span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Sản lượng/năm: <strong>6.1 MWh</strong></span>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Project 3 -->
+                    <div class="project-slide side-slide">
+                        <img th:src="@{/photo/anh9.jpg}" alt="Dự án 3">
                     </div>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img th:src="@{/photo/anh8.jpg}" alt="Dự án hộ gia đình">
-                            <span class="project-type">Hộ gia đình</span>
-                        </div>
-                        <div class="project-info">
-                            <h5 class="project-name">Anh Cảnh</h5>
-                            <div class="project-details">
-                                <div class="detail-item">
-                                    <i class="fas fa-calendar"></i>
-                                    <span>Năm thi công: <strong>2019</strong></span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-bolt"></i>
-                                    <span>Công suất: <strong>3 kWp</strong></span>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Sản lượng/năm: <strong>5.7 MWh</strong></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Right Arrow -->
+                <button class="project-nav-btn project-next" id="projectNextHousehold">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const projectSlider = document.getElementById('projectsSliderHousehold');
+            const projectPrev = document.getElementById('projectPrevHousehold');
+            const projectNext = document.getElementById('projectNextHousehold');
+
+            const householdProjects = [
+                { img: '/photo/anh10.jpg', name: 'ANH LONG – BÌNH DƯƠNG', category: 'HỘ GIA ĐÌNH', year: '2018', power: '4.2 kWp', production: '7.9 MWh' },
+                { img: '/photo/anh18.jpg', name: 'ANH TRÍ – TP. HỒ CHÍ MINH', category: 'HỘ GIA ĐÌNH', year: '2019', power: '5.4 kWp', production: '10.2 MWh' },
+                { img: '/photo/anh9.jpg', name: 'ANH MINH – ĐỒNG NAI', category: 'HỘ GIA ĐÌNH', year: '2019', power: '3.24 kWp', production: '6.1 MWh' },
+                { img: '/photo/anh8.jpg', name: 'ANH CẢNH – LONG AN', category: 'HỘ GIA ĐÌNH', year: '2019', power: '3 kWp', production: '5.7 MWh' },
+                { img: '/photo/anh19.jpg', name: 'ANH HÙNG – TÂY NINH', category: 'HỘ GIA ĐÌNH', year: '2020', power: '6 kWp', production: '11.3 MWh' }
+            ];
+
+            let currentIdx = 1;
+
+            function updateHouseholdSlider() {
+                const slides = projectSlider.querySelectorAll('.project-slide');
+                const prevIdx = (currentIdx - 1 + householdProjects.length) % householdProjects.length;
+                const nextIdx = (currentIdx + 1) % householdProjects.length;
+
+                slides[0].querySelector('img').src = householdProjects[prevIdx].img;
+                slides[2].querySelector('img').src = householdProjects[nextIdx].img;
+
+                const mainSlide = slides[1];
+                mainSlide.querySelector('img').src = householdProjects[currentIdx].img;
+                mainSlide.querySelector('.project-category').textContent = householdProjects[currentIdx].category;
+                mainSlide.querySelector('.project-name').textContent = householdProjects[currentIdx].name;
+                mainSlide.querySelectorAll('.stat-value')[0].textContent = householdProjects[currentIdx].year;
+                mainSlide.querySelectorAll('.stat-value')[1].textContent = householdProjects[currentIdx].power;
+                mainSlide.querySelectorAll('.stat-value')[2].textContent = householdProjects[currentIdx].production;
+            }
+
+            if (projectPrev && projectNext) {
+                projectPrev.addEventListener('click', function () {
+                    currentIdx = (currentIdx - 1 + householdProjects.length) % householdProjects.length;
+                    updateHouseholdSlider();
+                });
+
+                projectNext.addEventListener('click', function () {
+                    currentIdx = (currentIdx + 1) % householdProjects.length;
+                    updateHouseholdSlider();
+                });
+            }
+        });
+    </script>
 
     <!-- CTA Section -->
     <section class="cta-section py-5">

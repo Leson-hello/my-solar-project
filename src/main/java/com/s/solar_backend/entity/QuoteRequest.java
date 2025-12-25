@@ -46,7 +46,7 @@ public class QuoteRequest {
     private String status = "PENDING";
 
     @Column(length = 20)
-    private String quoteType = "PRODUCT"; // PRODUCT or HOUSEHOLD
+    private String quoteType = "PRODUCT"; // PRODUCT, HOUSEHOLD, or ENTERPRISE
 
     @Column(length = 100)
     private String monthlyBill; // For household: electricity bill range

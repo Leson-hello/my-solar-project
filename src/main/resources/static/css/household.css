@@ -828,3 +828,9 @@
         width: 100%;
     }
 }
+
+/* CTA Section - cùng màu với footer */
+.cta-section {
+    margin-top: 100px;
+    background: #1e5f8c;
+}
