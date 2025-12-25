@@ -18,6 +18,19 @@
     <!-- Header -->
     <div th:replace="~{layout/header :: header}"></div>
 
+    <!-- Page Banner -->
+    <section class="projects-banner">
+        <div class="banner-overlay"></div>
+        <div class="banner-content">
+            <h1 class="banner-title">Dự án</h1>
+            <nav class="breadcrumb-nav">
+                <a th:href="@{/}">Trang chủ</a>
+                <span class="separator">-</span>
+                <span class="current">Dự án</span>
+            </nav>
+        </div>
+    </section>
+
     <!-- Projects Section - New Design -->
     <section class="projects-page-new">
         <div class="projects-container">
@@ -116,11 +129,70 @@
     <script th:src="@{/js/main.js}"></script>
 
     <style>
+        /* Projects Banner */
+        .projects-banner {
+            position: relative;
+            height: 600px;
+            background: url('/photo/projects-banner.jpg') center center/cover no-repeat;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            width: 100%;
+            padding-bottom: 20px;
+            padding-left: 50px;
+        }
+
+        .projects-banner .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, rgba(50, 50, 50, 0.85) 0%, rgba(50, 50, 50, 0.6) 60%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .projects-banner .banner-content {
+            position: relative;
+            z-index: 2;
+            text-align: left;
+            color: white;
+        }
+
+        .projects-banner .banner-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .projects-banner .breadcrumb-nav {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .projects-banner .breadcrumb-nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .projects-banner .breadcrumb-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .projects-banner .breadcrumb-nav .separator {
+            margin: 0 8px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .projects-banner .breadcrumb-nav .current {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
         /* Projects Page - New Design */
         .projects-page-new {
             background: #fff;
             padding: 40px 0 80px;
-            margin-top: 120px;
+            margin-top: 0;
         }
 
         .projects-container {
