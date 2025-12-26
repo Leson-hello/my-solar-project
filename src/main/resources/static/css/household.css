@@ -373,6 +373,11 @@
     text-transform: uppercase;
 }
 
+/* Override for project slider overlay - white text for readability */
+.project-slide-overlay .stat-box .stat-label {
+    color: white;
+}
+
 /* About DAT Section */
 .about-dat-section {
     background: #fafafa;
@@ -511,6 +516,11 @@
     color: #333;
     margin-bottom: 12px;
     font-size: 1rem;
+}
+
+/* Override for project slider overlay - white text for readability */
+.project-slide-overlay .project-name {
+    color: white;
 }
 
 .project-details .detail-item {
