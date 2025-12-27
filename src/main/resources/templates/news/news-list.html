@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,276 +13,273 @@
     <!-- Custom CSS -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
 </head>
+
 <body>
-<!-- Header -->
-<div th:replace="~{layout/header :: header}"></div>
+    <!-- Header -->
+    <div th:replace="~{layout/header :: header}"></div>
 
-<!-- News Hero Section -->
-<section class="news-hero py-5" style="background: linear-gradient(135deg, #1e88e5, #2c3e50); margin-top: 120px;">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <h1 class="text-white mb-3" th:text="${pageTitle}">TIN TỨC & SỰ KIỆN</h1>
-                <p class="text-white-50">Cập nhật những tin tức mới nhất về năng lượng mặt trời và hoạt động của DAT
-                    Group</p>
-            </div>
-            <div class="col-md-4 text-end">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a th:href="@{/}" class="text-white-50">Trang chủ</a></li>
-                        <li class="breadcrumb-item text-white" aria-current="page">Tin tức</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- News Filter & Content Section -->
-<section class="news-content py-5">
-    <div class="container">
-        <!-- Filter Tabs -->
-        <div class="news-filter mb-5">
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <ul class="nav nav-pills justify-content-center" id="newsFilter">
-                        <li class="nav-item">
-                            <a class="nav-link"
-                               th:classappend="${selectedCategory == null and search == null} ? 'active' : ''"
-                               th:href="@{/news}">TẤT CẢ</a>
-                        </li>
-                        <li class="nav-item" th:each="category : ${categories}">
-                            <a class="nav-link"
-                               th:classappend="${selectedCategory == category.name()} ? 'active' : ''"
-                               th:href="@{/news(category=${category.name()})}"
-                               th:text="${category.getDisplayName()}">TIN CÔNG TY</a>
-                        </li>
-                    </ul>
+    <!-- News Hero Section -->
+    <section class="news-hero py-5" style="background: linear-gradient(135deg, #1e88e5, #2c3e50);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="text-white mb-3" th:text="${pageTitle}">TIN TỨC & SỰ KIỆN</h1>
+                    <p class="text-white-50">Cập nhật những tin tức mới nhất về năng lượng mặt trời và hoạt động của
+                        HBMP
+                        Solar</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a th:href="@{/}" class="text-white-50">Trang chủ</a></li>
+                            <li class="breadcrumb-item text-white" aria-current="page">Tin tức</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Search Bar -->
-        <div class="search-bar mb-4">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <form th:action="@{/news}" method="get" class="d-flex">
-                        <input type="search" class="form-control me-2" name="search"
-                               placeholder="Tìm kiếm tin tức..." th:value="${search}">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- News Results -->
-        <div class="news-results mb-4" th:if="${newsPage != null}">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="text-muted mb-0">
-                        Hiển thị <span th:text="${newsPage.numberOfElements}">9</span>
-                        trong tổng số <span th:text="${newsPage.totalElements}">45</span> tin tức
-                    </p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <p class="text-muted mb-0">
-                        Trang <span th:text="${currentPage + 1}">1</span>
-                        / <span th:text="${totalPages}">5</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- News Grid -->
-        <div class="news-grid" th:if="${newsPage != null and !newsPage.isEmpty()}">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4" th:each="news : ${newsPage.content}">
-                    <article class="news-card h-100">
-                        <div class="news-image">
-                            <a th:href="@{/news/{id}(id=${news.id})}">
-                                <img th:src="@{${news.imageUrl != null ? news.imageUrl : '/photo/anh39.jpg'}}"
-                                     th:alt="${news.title}" class="card-img-top">
-                            </a>
-                            <div class="news-category-badge" th:text="${news.categoryDisplayName}">
-                                Tin công ty
-                            </div>
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <div class="news-meta mb-2">
-                                    <span class="news-date text-muted">
-                                        <i class="fas fa-calendar-alt"></i> 
-                                        <span th:text="${news.publishedDateFormatted}">03.12.2025</span>
-                                    </span>
-                                <span class="news-views text-muted ms-3">
-                                        <i class="fas fa-eye"></i> 
-                                        <span th:text="${news.views}">150</span>
-                                    </span>
-                            </div>
-                            <h5 class="news-title mb-3">
-                                <a th:href="@{/news/{id}(id=${news.id})}"
-                                   th:text="${news.title}"
-                                   class="text-decoration-none text-dark">
-                                    Tiêu đề tin tức
-                                </a>
-                            </h5>
-                            <p class="news-excerpt text-muted mb-3 flex-grow-1"
-                               th:text="${news.shortDescription}">
-                                Mô tả ngắn về tin tức...
-                            </p>
-                            <div class="news-footer">
-                                <a th:href="@{/news/{id}(id=${news.id})}"
-                                   class="btn btn-outline-primary btn-sm">
-                                    Xem chi tiết <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </div>
-
-        <!-- Empty State -->
-        <div th:if="${newsPage == null or newsPage.isEmpty()}" class="empty-state text-center py-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <i class="fas fa-newspaper fa-5x text-muted mb-4"></i>
-                    <h3 class="text-muted mb-3">Không có tin tức nào</h3>
-                    <p class="text-muted mb-4" th:if="${search != null and !search.isEmpty()}">
-                        Không tìm thấy tin tức nào với từ khóa "<span th:text="${search}"></span>"
-                    </p>
-                    <p class="text-muted mb-4" th:if="${search == null or search.isEmpty()}">
-                        Hiện tại chưa có tin tức nào được đăng tải.
-                    </p>
-                    <div>
-                        <a th:href="@{/news}" class="btn btn-primary me-2">Xem tất cả tin tức</a>
-                        <a th:href="@{/}" class="btn btn-outline-secondary">Về trang chủ</a>
+    <!-- News Filter & Content Section -->
+    <section class="news-content py-5">
+        <div class="container">
+            <!-- Filter Tabs -->
+            <div class="news-filter mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <ul class="nav nav-pills justify-content-center" id="newsFilter">
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    th:classappend="${selectedCategory == null and search == null} ? 'active' : ''"
+                                    th:href="@{/news}">TẤT CẢ</a>
+                            </li>
+                            <li class="nav-item" th:each="category : ${categories}">
+                                <a class="nav-link"
+                                    th:classappend="${selectedCategory == category.name()} ? 'active' : ''"
+                                    th:href="@{/news(category=${category.name()})}"
+                                    th:text="${category.getDisplayName()}">TIN CÔNG TY</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Pagination -->
-        <nav aria-label="News pagination" th:if="${newsPage != null and totalPages > 1}">
-            <ul class="pagination justify-content-center">
-                <!-- Previous Button -->
-                <li class="page-item" th:classappend="${!hasPrevious} ? 'disabled' : ''">
-                    <a class="page-link" th:if="${hasPrevious}"
-                       th:href="@{/news(page=${currentPage - 1}, category=${selectedCategory}, search=${search})}">
-                        <i class="fas fa-chevron-left"></i>
-                    </a>
-                    <span class="page-link" th:unless="${hasPrevious}">
+            <!-- Search Bar -->
+            <div class="search-bar mb-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <form th:action="@{/news}" method="get" class="d-flex">
+                            <input type="search" class="form-control me-2" name="search"
+                                placeholder="Tìm kiếm tin tức..." th:value="${search}">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Results -->
+            <div class="news-results mb-4" th:if="${newsPage != null}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-muted mb-0">
+                            Hiển thị <span th:text="${newsPage.numberOfElements}">9</span>
+                            trong tổng số <span th:text="${newsPage.totalElements}">45</span> tin tức
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <p class="text-muted mb-0">
+                            Trang <span th:text="${currentPage + 1}">1</span>
+                            / <span th:text="${totalPages}">5</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Grid -->
+            <div class="news-grid" th:if="${newsPage != null and !newsPage.isEmpty()}">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4" th:each="news : ${newsPage.content}">
+                        <article class="news-card h-100">
+                            <div class="news-image">
+                                <a th:href="@{/news/{id}(id=${news.id})}">
+                                    <img th:src="@{${news.imageUrl != null ? news.imageUrl : '/photo/anh39.jpg'}}"
+                                        th:alt="${news.title}" class="card-img-top">
+                                </a>
+                                <div class="news-category-badge" th:text="${news.categoryDisplayName}">
+                                    Tin công ty
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div class="news-meta mb-2">
+                                    <span class="news-date text-muted">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span th:text="${news.publishedDateFormatted}">03.12.2025</span>
+                                    </span>
+                                    <span class="news-views text-muted ms-3">
+                                        <i class="fas fa-eye"></i>
+                                        <span th:text="${news.views}">150</span>
+                                    </span>
+                                </div>
+                                <h5 class="news-title mb-3">
+                                    <a th:href="@{/news/{id}(id=${news.id})}" th:text="${news.title}"
+                                        class="text-decoration-none text-dark">
+                                        Tiêu đề tin tức
+                                    </a>
+                                </h5>
+                                <p class="news-excerpt text-muted mb-3 flex-grow-1" th:text="${news.shortDescription}">
+                                    Mô tả ngắn về tin tức...
+                                </p>
+                                <div class="news-footer">
+                                    <a th:href="@{/news/{id}(id=${news.id})}" class="btn btn-outline-primary btn-sm">
+                                        Xem chi tiết <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div th:if="${newsPage == null or newsPage.isEmpty()}" class="empty-state text-center py-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <i class="fas fa-newspaper fa-5x text-muted mb-4"></i>
+                        <h3 class="text-muted mb-3">Không có tin tức nào</h3>
+                        <p class="text-muted mb-4" th:if="${search != null and !search.isEmpty()}">
+                            Không tìm thấy tin tức nào với từ khóa "<span th:text="${search}"></span>"
+                        </p>
+                        <p class="text-muted mb-4" th:if="${search == null or search.isEmpty()}">
+                            Hiện tại chưa có tin tức nào được đăng tải.
+                        </p>
+                        <div>
+                            <a th:href="@{/news}" class="btn btn-primary me-2">Xem tất cả tin tức</a>
+                            <a th:href="@{/}" class="btn btn-outline-secondary">Về trang chủ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="News pagination" th:if="${newsPage != null and totalPages > 1}">
+                <ul class="pagination justify-content-center">
+                    <!-- Previous Button -->
+                    <li class="page-item" th:classappend="${!hasPrevious} ? 'disabled' : ''">
+                        <a class="page-link" th:if="${hasPrevious}"
+                            th:href="@{/news(page=${currentPage - 1}, category=${selectedCategory}, search=${search})}">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                        <span class="page-link" th:unless="${hasPrevious}">
                             <i class="fas fa-chevron-left"></i>
                         </span>
-                </li>
+                    </li>
 
-                <!-- Page Numbers -->
-                <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
-                    th:classappend="${i == currentPage} ? 'active' : ''">
-                    <a class="page-link"
-                       th:href="@{/news(page=${i}, category=${selectedCategory}, search=${search})}"
-                       th:text="${i + 1}">1</a>
-                </li>
+                    <!-- Page Numbers -->
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:classappend="${i == currentPage} ? 'active' : ''">
+                        <a class="page-link"
+                            th:href="@{/news(page=${i}, category=${selectedCategory}, search=${search})}"
+                            th:text="${i + 1}">1</a>
+                    </li>
 
-                <!-- Next Button -->
-                <li class="page-item" th:classappend="${!hasNext} ? 'disabled' : ''">
-                    <a class="page-link" th:if="${hasNext}"
-                       th:href="@{/news(page=${currentPage + 1}, category=${selectedCategory}, search=${search})}">
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                    <span class="page-link" th:unless="${hasNext}">
+                    <!-- Next Button -->
+                    <li class="page-item" th:classappend="${!hasNext} ? 'disabled' : ''">
+                        <a class="page-link" th:if="${hasNext}"
+                            th:href="@{/news(page=${currentPage + 1}, category=${selectedCategory}, search=${search})}">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <span class="page-link" th:unless="${hasNext}">
                             <i class="fas fa-chevron-right"></i>
                         </span>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</section>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
 
-<!-- Footer -->
-<div th:replace="~{layout/footer :: footer}"></div>
+    <!-- Footer -->
+    <div th:replace="~{layout/footer :: footer}"></div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Custom JS -->
-<script th:src="@{/js/main.js}"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script th:src="@{/js/main.js}"></script>
 
-<style>
-    .news-card {
-        border: none;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
-        overflow: hidden;
-    }
+    <style>
+        .news-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
 
-    .news-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    }
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
 
-    .news-image {
-        position: relative;
-        height: 200px;
-        overflow: hidden;
-    }
+        .news-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
 
-    .news-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s;
-    }
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
 
-    .news-card:hover .news-image img {
-        transform: scale(1.05);
-    }
+        .news-card:hover .news-image img {
+            transform: scale(1.05);
+        }
 
-    .news-category-badge {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        background: var(--secondary-color);
-        color: white;
-        padding: 0.25rem 0.75rem;
-        border-radius: 15px;
-        font-size: 0.875rem;
-        font-weight: 600;
-    }
+        .news-category-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
 
-    .news-filter .nav-pills .nav-link {
-        color: #666;
-        background: transparent;
-        border: 2px solid #e9ecef;
-        margin: 0 5px;
-        border-radius: 25px;
-        padding: 0.5rem 1.5rem;
-        transition: all 0.3s;
-    }
+        .news-filter .nav-pills .nav-link {
+            color: #666;
+            background: transparent;
+            border: 2px solid #e9ecef;
+            margin: 0 5px;
+            border-radius: 25px;
+            padding: 0.5rem 1.5rem;
+            transition: all 0.3s;
+        }
 
-    .news-filter .nav-pills .nav-link:hover,
-    .news-filter .nav-pills .nav-link.active {
-        color: white;
-        background: var(--primary-color);
-        border-color: var(--primary-color);
-    }
+        .news-filter .nav-pills .nav-link:hover,
+        .news-filter .nav-pills .nav-link.active {
+            color: white;
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
 
-    .pagination .page-link {
-        border: none;
-        color: var(--primary-color);
-        padding: 0.75rem 1rem;
-        margin: 0 2px;
-        border-radius: 8px;
-    }
+        .pagination .page-link {
+            border: none;
+            color: var(--primary-color);
+            padding: 0.75rem 1rem;
+            margin: 0 2px;
+            border-radius: 8px;
+        }
 
-    .pagination .page-item.active .page-link {
-        background: var(--primary-color);
-        border-color: var(--primary-color);
-    }
-</style>
+        .pagination .page-item.active .page-link {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+    </style>
 </body>
+
 </html>
-
-
-

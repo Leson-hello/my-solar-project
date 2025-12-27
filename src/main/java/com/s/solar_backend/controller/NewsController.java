@@ -79,6 +79,7 @@ public class NewsController {
 
         model.addAttribute("news", news);
         model.addAttribute("relatedNews", relatedNewsPage.getContent());
+        model.addAttribute("categories", News.NewsCategory.values());
 
         return "news/news-detail";
     }
