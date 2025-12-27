@@ -1,4 +1,4 @@
-// DAT Solar Website JavaScript
+// HBMP Solar Website JavaScript
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (email) {
                 // Here you can add AJAX call to submit email
-                alert('Cảm ơn bạn đã đăng ký nhận tin tức từ DAT Group!');
+                alert('Cảm ơn bạn đã đăng ký nhận tin tức từ HBMP Solar!');
                 this.querySelector('input[type="email"]').value = '';
             }
         });
@@ -292,5 +292,5 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.classList.add('loaded');
     });
 
-    console.log('DAT Solar website initialized successfully');
+    console.log('HBMP Solar website initialized successfully');
 });

@@ -3,8 +3,10 @@ package com.s.solar_backend.controller;
 import com.s.solar_backend.dto.NewsDTO;
 import com.s.solar_backend.entity.News;
 import com.s.solar_backend.service.NewsService;
+import com.s.solar_backend.repository.NewsletterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,7 @@ import java.util.UUID;
 public class AdminController {
 
     private final NewsService newsService;
+    private final NewsletterRepository newsletterRepository;
 
     // Dashboard
     @GetMapping
@@ -223,6 +226,38 @@ public class AdminController {
         }
 
         return "redirect:/admin/news/" + id + "/edit";
+    }
+
+    // Newsletter Management
+    @GetMapping("/newsletter")
+    public String adminNewsletterPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            Model model) {
+
+        Page<?> newsletterPage = newsletterRepository.findAll(PageRequest.of(page, size));
+
+        model.addAttribute("newsletterPage", newsletterPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", newsletterPage.getTotalPages());
+
+        return "admin/newsletter/list";
+    }
+
+    @PostMapping("/newsletter/{id}/delete")
+    public String deleteNewsletter(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        if (id == null) {
+            redirectAttributes.addFlashAttribute("error", "ID không hợp lệ!");
+            return "redirect:/admin/newsletter";
+        }
+        try {
+            newsletterRepository.deleteById(id);
+            redirectAttributes.addFlashAttribute("success", "Email đã được xóa khỏi danh sách nhận tin!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Lỗi khi xóa email: " + e.getMessage());
+        }
+
+        return "redirect:/admin/newsletter";
     }
 
     // Helper method to get success message based on action

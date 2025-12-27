@@ -2,6 +2,7 @@ package com.s.solar_backend.controller;
 
 import com.s.solar_backend.dto.ProductDTO;
 import com.s.solar_backend.service.ProductService;
+import com.s.solar_backend.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService productService;
+    private final ProjectService projectService;
 
     @GetMapping("/products")
     public String productsPage(
@@ -60,14 +62,47 @@ public class ProductController {
         }
 
         String category = product.get().getCategory();
-        List<ProductDTO> relatedProducts = new ArrayList<>(
-                category != null ? productService.getActiveProductsByCategory(category, 0, 4).getContent()
-                        : productService.getFeaturedProducts());
+        List<ProductDTO> relatedProducts = new ArrayList<>();
+        if (category != null && !category.trim().isEmpty()) {
+            relatedProducts.addAll(productService.getActiveProductsByCategory(category, 0, 7).getContent());
+        }
 
         relatedProducts.removeIf(p -> p.getId().equals(id));
 
+        // Fallback 1: Featured Products
+        if (relatedProducts.size() < 6) {
+            List<ProductDTO> featured = productService.getFeaturedProducts();
+            for (ProductDTO f : featured) {
+                if (relatedProducts.size() >= 6)
+                    break;
+                if (!f.getId().equals(id) && relatedProducts.stream().noneMatch(p -> p.getId().equals(f.getId()))) {
+                    relatedProducts.add(f);
+                }
+            }
+        }
+
+        // Fallback 2: Any Active Products (if still not enough)
+        if (relatedProducts.size() < 6) {
+            List<ProductDTO> allActive = productService.getActiveProducts(0, 10).getContent();
+            for (ProductDTO a : allActive) {
+                if (relatedProducts.size() >= 6)
+                    break;
+                if (!a.getId().equals(id) && relatedProducts.stream().noneMatch(p -> p.getId().equals(a.getId()))) {
+                    relatedProducts.add(a);
+                }
+            }
+        }
+
+        if (relatedProducts.size() > 6) {
+            relatedProducts = relatedProducts.subList(0, 6);
+        }
+
+        // Fetch recent projects
+        List<?> recentProjects = projectService.getActiveProjects(0, 6).getContent();
+
         model.addAttribute("product", product.get());
         model.addAttribute("relatedProducts", relatedProducts);
+        model.addAttribute("recentProjects", recentProjects);
 
         return "product-detail";
     }

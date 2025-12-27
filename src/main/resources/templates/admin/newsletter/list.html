@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Newsletter - Admin HBMP</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --admin-primary: #2c3e50;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--admin-primary);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .admin-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .sidebar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .nav-link i {
+            margin-right: 1rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <nav th:replace="~{admin/layout/admin-sidebar :: sidebar}"></nav>
+
+        <!-- Main Content -->
+        <div class="admin-content">
+            <!-- Header -->
+            <header class="admin-header">
+                <div>
+                    <h1 class="h4 mb-0">Quản lý Newsletter</h1>
+                    <small class="text-muted">Danh sách email đăng ký nhận tin tức</small>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <main class="main-content">
+                <!-- Flash Messages -->
+                <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle me-2"></i> <span th:text="${success}">Thành công!</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+
+                <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i> <span th:text="${error}">Có lỗi xảy ra!</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+
+                <!-- Newsletter List -->
+                <div class="card">
+                    <div class="card-body">
+                        <div th:if="${newsletterPage != null and #lists.size(newsletterPage.content) > 0}">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Email</th>
+                                            <th>Ngày đăng ký</th>
+                                            <th class="text-end">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="item : ${newsletterPage.content}">
+                                            <td th:text="${item.id}">1</td>
+                                            <td>
+                                                <div class="fw-bold" th:text="${item.email}">email@example.com</div>
+                                            </td>
+                                            <td th:text="${#temporals.format(item.subscribedAt, 'dd/MM/yyyy HH:mm')}">
+                                                01/01/2024
+                                            </td>
+                                            <td class="text-end">
+                                                <button type="button" class="btn btn-sm btn-outline-danger" title="Xóa"
+                                                    th:data-email="${item.email}" th:data-id="${item.id}"
+                                                    onclick="confirmDelete(this.dataset.email, this.dataset.id)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Pagination -->
+                            <div th:if="${newsletterPage.totalPages > 1}" class="d-flex justify-content-center mt-4">
+                                <nav aria-label="Newsletter pagination">
+                                    <ul class="pagination">
+                                        <li class="page-item"
+                                            th:classappend="${!newsletterPage.hasPrevious} ? 'disabled'">
+                                            <a class="page-link"
+                                                th:href="@{/admin/newsletter(page=${newsletterPage.number - 1})}">
+                                                Trước
+                                            </a>
+                                        </li>
+
+                                        <li th:each="pageNum : ${#numbers.sequence(0, newsletterPage.totalPages - 1)}"
+                                            class="page-item"
+                                            th:classappend="${pageNum == newsletterPage.number} ? 'active'">
+                                            <a class="page-link" th:href="@{/admin/newsletter(page=${pageNum})}"
+                                                th:text="${pageNum + 1}">1</a>
+                                        </li>
+
+                                        <li class="page-item" th:classappend="${!newsletterPage.hasNext} ? 'disabled'">
+                                            <a class="page-link"
+                                                th:href="@{/admin/newsletter(page=${newsletterPage.number + 1})}">
+                                                Sau
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <!-- Empty state -->
+                        <div th:if="${newsletterPage == null or #lists.size(newsletterPage.content) == 0}"
+                            class="text-center py-5">
+                            <i class="fas fa-envelope-open-text fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Chưa có ai đăng ký nhận tin</h5>
+                            <p class="text-muted">Danh sách email sẽ xuất hiện ở đây khi có người đăng ký qua form.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa email "<span id="displayEmail"></span>" khỏi danh sách?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <form id="deleteForm" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger">Xóa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function confirmDelete(email, id) {
+            document.getElementById('displayEmail').textContent = email;
+            document.getElementById('deleteForm').action = '/admin/newsletter/' + id + '/delete';
+
+            const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            modal.show();
+        }
+    </script>
+</body>
+
+</html>

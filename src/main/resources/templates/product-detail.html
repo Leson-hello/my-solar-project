@@ -582,7 +582,7 @@
                     <!-- Related Products -->
                     <div class="sidebar-widget" th:if="${relatedProducts != null and !relatedProducts.isEmpty()}">
                         <h5 class="widget-title">
-                            <i class="fas fa-eye me-1"></i> SẢN PHẨM ĐÃ XEM
+                            <i class="fas fa-eye me-1"></i> SẢN PHẨM NỔI BẬT
                         </h5>
                         <div class="related-products-list">
                             <div class="related-product-item" th:each="relatedProduct : ${relatedProducts}">
@@ -645,31 +645,58 @@
     </section>
 
     <!-- Related Products Section -->
-    <section class="py-4 bg-light" th:if="${relatedProducts != null and !relatedProducts.isEmpty()}">
+    <section class="product_relate bg-light" th:if="${relatedProducts != null and !relatedProducts.isEmpty()}">
         <div class="container">
-            <h5 class="mb-3"><i class="fas fa-th-large text-primary me-2"></i>Sản phẩm cùng danh mục</h5>
+            <h2 class="heading_h2">SẢN PHẨM LIÊN QUAN</h2>
             <div class="row">
-                <div class="col-6 col-md-3 mb-3" th:each="relatedProduct : ${relatedProducts}">
-                    <div class="product-card">
-                        <div class="product-image-wrapper">
+                <div class="col-6 col-md-4 col-lg-3 mb-4" th:each="relatedProduct : ${relatedProducts}">
+                    <div class="item_product">
+                        <div class="box_img">
                             <a th:href="@{/products/{id}(id=${relatedProduct.id})}">
                                 <img th:src="@{${relatedProduct.imageUrl != null ? relatedProduct.imageUrl : '/photo/default-product.jpg'}}"
-                                    th:alt="${relatedProduct.name}" class="product-image">
+                                    th:alt="${relatedProduct.name}">
                             </a>
                         </div>
-                        <div class="product-info">
-                            <div class="product-brand" th:text="${relatedProduct.brand}">Brand</div>
-                            <h6 class="product-name">
-                                <a th:href="@{/products/{id}(id=${relatedProduct.id})}"
-                                    th:text="${#strings.abbreviate(relatedProduct.name, 35)}">Product Name</a>
-                            </h6>
-                            <div class="product-specs">
-                                <span class="spec-item" th:if="${relatedProduct.power != null}">
-                                    <i class="fas fa-bolt"></i>
-                                    <span
-                                        th:text="${relatedProduct.power + ' ' + (relatedProduct.powerUnit != null ? relatedProduct.powerUnit : 'W')}">520W</span>
-                                </span>
-                            </div>
+                        <div class="box_content">
+                            <a th:href="@{/products/{id}(id=${relatedProduct.id})}">
+                                <h3 th:text="${relatedProduct.name}">Product Name</h3>
+                                <div class="content">
+                                    <ul>
+                                        <li th:if="${relatedProduct.power != null}">Công suất: <b
+                                                th:text="${relatedProduct.power + ' ' + (relatedProduct.powerUnit != null ? relatedProduct.powerUnit : 'W')}">520W</b>
+                                        </li>
+                                        <li th:if="${relatedProduct.brand != null}">Hãng: <b
+                                                th:text="${relatedProduct.brand}">Brand</b></li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Projects Section -->
+    <section class="practical_project section" th:if="${recentProjects != null and !recentProjects.isEmpty()}">
+        <div class="container">
+            <h2 class="heading_h2">DỰ ÁN THỰC TẾ</h2>
+            <div class="row">
+                <div class="col-md-4 col-lg-3 mb-4" th:each="project : ${recentProjects}">
+                    <div class="item">
+                        <div class="box_img">
+                            <a th:href="@{/projects/{id}(id=${project.id})}">
+                                <img th:src="@{${project.imageUrl != null ? project.imageUrl : '/photo/anh18.jpg'}}"
+                                    th:alt="${project.name}">
+                            </a>
+                        </div>
+                        <div class="box_content">
+                            <a th:href="@{/projects/{id}(id=${project.id})}">
+                                <h3 th:text="${project.name}">Tên dự án thực tế</h3>
+                            </a>
+                            <a th:href="@{/projects/{id}(id=${project.id})}" class="view-more-link">
+                                Xem thêm<i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
