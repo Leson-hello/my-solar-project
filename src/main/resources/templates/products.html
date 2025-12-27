@@ -79,6 +79,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a th:href="@{/products(category='den-nang-luong')}"
+                                            th:class="${category == 'den-nang-luong' ? 'active' : ''}">
+                                            <i class="fas fa-lightbulb"></i> Đèn năng lượng mặt trời
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a th:href="@{/products(category='phu-kien')}"
                                             th:class="${category == 'phu-kien' ? 'active' : ''}">
                                             <i class="fas fa-tools"></i> Phụ kiện
@@ -119,6 +125,12 @@
                 </div>
 
                 <div class="col-lg-9">
+                    <!-- Category Top Content (Bảng giá) -->
+                    <div th:if="${categoryContent != null and categoryContent.topContent != null and !categoryContent.topContent.isEmpty()}"
+                        class="category-top-content mb-4">
+                        <div th:utext="${categoryContent.topContent}"></div>
+                    </div>
+
                     <div class="filter-bar mb-4">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="results-info">
@@ -137,7 +149,7 @@
                     </div>
 
                     <div class="row products-grid" id="productsContainer">
-                        <div class="col-md-4 mb-4" th:each="product : ${products}">
+                        <div class="col-md-4 mb-4 product-col" th:each="product : ${products}">
                             <div class="product-card">
                                 <div class="product-image-wrapper">
                                     <a th:href="@{/products/{id}(id=${product.id})}">
@@ -221,6 +233,12 @@
                             </li>
                         </ul>
                     </nav>
+
+                    <!-- Category Bottom Content (Mô tả chi tiết) -->
+                    <div th:if="${categoryContent != null and categoryContent.bottomContent != null and !categoryContent.bottomContent.isEmpty()}"
+                        class="category-bottom-content mt-5">
+                        <div th:utext="${categoryContent.bottomContent}"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -233,22 +251,29 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById('gridView').addEventListener('click', function () {
-            document.querySelectorAll('.col-md-4').forEach(el => {
+        const productsContainer = document.getElementById('productsContainer');
+        const gridViewBtn = document.getElementById('gridView');
+        const listViewBtn = document.getElementById('listView');
+        const productCols = document.querySelectorAll('.product-col');
+
+        gridViewBtn.addEventListener('click', function () {
+            productsContainer.classList.remove('list-view-active');
+            productCols.forEach(el => {
                 el.classList.remove('col-md-12');
                 el.classList.add('col-md-4');
             });
             this.classList.add('active');
-            document.getElementById('listView').classList.remove('active');
+            listViewBtn.classList.remove('active');
         });
 
-        document.getElementById('listView').addEventListener('click', function () {
-            document.querySelectorAll('.col-md-4').forEach(el => {
+        listViewBtn.addEventListener('click', function () {
+            productsContainer.classList.add('list-view-active');
+            productCols.forEach(el => {
                 el.classList.remove('col-md-4');
                 el.classList.add('col-md-12');
             });
             this.classList.add('active');
-            document.getElementById('gridView').classList.remove('active');
+            gridViewBtn.classList.remove('active');
         });
 
         // Event listener for quote buttons

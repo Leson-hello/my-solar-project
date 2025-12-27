@@ -1,6 +1,7 @@
 package com.s.solar_backend.controller;
 
 import com.s.solar_backend.dto.ProductDTO;
+import com.s.solar_backend.service.CategoryContentService;
 import com.s.solar_backend.service.ProductService;
 import com.s.solar_backend.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class ProductController {
 
     private final ProductService productService;
     private final ProjectService projectService;
+    private final CategoryContentService categoryService;
 
     @GetMapping("/products")
     public String productsPage(
@@ -38,6 +40,11 @@ public class ProductController {
         } else if (category != null && !category.trim().isEmpty()) {
             productsPage = productService.getActiveProductsByCategory(category, page, size);
             model.addAttribute("category", category);
+
+            // Fetch CategoryContent
+            categoryService.getByCategoryCode(category).ifPresent(content -> {
+                model.addAttribute("categoryContent", content);
+            });
         } else {
             productsPage = productService.getActiveProducts(page, size);
         }

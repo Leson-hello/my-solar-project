@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý nội dung danh mục - Admin</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --admin-primary: #2c3e50;
+            --admin-secondary: #3498db;
+            --admin-success: #27ae60;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+        }
+
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e9ecef;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-icon {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f4f8;
+            color: var(--admin-secondary);
+            font-size: 2rem;
+        }
+
+        .category-body {
+            padding: 1.5rem;
+        }
+
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .admin-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <div th:replace="~{admin/layout/admin-sidebar :: sidebar}"></div>
+
+        <!-- Main Content -->
+        <div class="admin-content">
+            <header class="admin-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h4 mb-0">Quản lý nội dung danh mục</h1>
+                        <small class="text-muted">Quản lý bảng giá và nội dung mô tả cho từng danh mục sản phẩm</small>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div th:if="${success}" class="alert alert-success alert-dismissible fade show">
+                    <i class="fas fa-check-circle me-2"></i> <span th:text="${success}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4" th:each="cat : ${categories}">
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i
+                                    th:class="${cat.code == 'tam-pin'} ? 'fas fa-solar-panel' : 
+                                           (${cat.code == 'inverter'} ? 'fas fa-microchip' : 
+                                           (${cat.code == 'pin-luu-tru'} ? 'fas fa-battery-full' : 
+                                           (${cat.code == 'den-nang-luong'} ? 'fas fa-lightbulb' : 'fas fa-tools')))"></i>
+                            </div>
+                            <div class="category-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="mb-0" th:text="${cat.name}">Category Name</h5>
+                                    <span th:if="${cat.exists}" class="badge bg-success status-badge">Đã có nội
+                                        dung</span>
+                                    <span th:unless="${cat.exists}" class="badge bg-secondary status-badge">Chưa có nội
+                                        dung</span>
+                                </div>
+                                <p class="text-muted small mb-3">
+                                    Mã: <code th:text="${cat.code}">code</code><br>
+                                    Cập nhật: <span
+                                        th:text="${cat.updatedAt != null ? #temporals.format(cat.updatedAt, 'dd/MM/yyyy HH:mm') : 'N/A'}"></span>
+                                </p>
+                                <a th:href="@{/admin/category-contents/edit/{code}(code=${cat.code})}"
+                                    class="btn btn-outline-primary w-100">
+                                    <i class="fas fa-edit me-1"></i> Chỉnh sửa nội dung
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Auto-hide alerts
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+    </script>
+</body>
+
+</html>

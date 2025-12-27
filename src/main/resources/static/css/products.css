@@ -564,6 +564,59 @@
     }
 }
 
+/* Category Dynamic Content Styles */
+.category-top-content,
+.category-bottom-content {
+    background: white;
+    line-height: 1.6;
+    color: #444;
+}
+
+.category-top-content table,
+.category-bottom-content table {
+    width: 100% !important;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.category-top-content table th,
+.category-top-content table td,
+.category-bottom-content table th,
+.category-bottom-content table td {
+    padding: 0.75rem;
+    border: 1px solid #eee;
+}
+
+.category-top-content table th,
+.category-bottom-content table th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+.category-top-content h1,
+.category-top-content h2,
+.category-top-content h3,
+.category-bottom-content h1,
+.category-bottom-content h2,
+.category-bottom-content h3 {
+    color: #1a237e;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.category-top-content img,
+.category-bottom-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.category-bottom-content {
+    font-size: 1.05rem;
+}
+
 @media (max-width: 767px) {
     .page-title {
         font-size: 1.75rem;
@@ -576,5 +629,54 @@
 
     .product-footer {
         flex-direction: column;
+    }
+}
+
+/* List View Specific Styles */
+.list-view-active .product-col {
+    transition: all 0.3s ease;
+}
+
+.list-view-active .product-card {
+    flex-direction: row;
+    height: auto;
+    max-height: 280px;
+}
+
+.list-view-active .product-image-wrapper {
+    width: 280px;
+    padding-top: 0;
+    flex-shrink: 0;
+}
+
+.list-view-active .product-image {
+    position: relative;
+    height: 100%;
+}
+
+.list-view-active .product-info {
+    padding: 1.5rem;
+}
+
+.list-view-active .product-footer {
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+.list-view-active .product-footer .btn {
+    flex: 0 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@media (max-width: 991px) {
+    .list-view-active .product-card {
+        flex-direction: column;
+        max-height: none;
+    }
+
+    .list-view-active .product-image-wrapper {
+        width: 100%;
+        padding-top: 75%;
     }
 }

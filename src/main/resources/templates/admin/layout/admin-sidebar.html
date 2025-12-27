@@ -7,7 +7,7 @@
 
 <body>
     <!-- Admin Sidebar Fragment -->
-    <nav th:fragment="sidebar" class="admin-sidebar">
+    <nav th:fragment="sidebar" id="adminSidebar" class="admin-sidebar">
         <div class="sidebar-header">
             <a th:href="@{/admin}" class="sidebar-brand">
                 <i class="fas fa-solar-panel"></i> HBMP Admin
@@ -38,6 +38,12 @@
                 <a th:href="@{/admin/products}" class="nav-link">
                     <i class="fas fa-boxes"></i>
                     <span>Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/category-contents}" class="nav-link">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Nội dung danh mục</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -89,70 +95,136 @@
                 </a>
             </li>
         </ul>
+
+        <!-- Overlay inside fragment to be easily manageable -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <style>
+            :root {
+                --sidebar-width: 260px;
+                --sidebar-bg: #2c3e50;
+            }
+
+            .admin-sidebar {
+                width: var(--sidebar-width);
+                background: var(--sidebar-bg);
+                color: white;
+                position: fixed;
+                height: 100vh;
+                left: 0;
+                top: 0;
+                overflow-y: auto;
+                z-index: 1001;
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar-header {
+                padding: 2rem 1.5rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+            }
+
+            .sidebar-brand {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: white;
+                text-decoration: none;
+            }
+
+            .sidebar-nav {
+                padding: 1rem 0;
+            }
+
+            .nav-item {
+                margin-bottom: 0.5rem;
+            }
+
+            .nav-link {
+                color: rgba(255, 255, 255, 0.8);
+                padding: 0.75rem 1.5rem;
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                transition: all 0.3s;
+            }
+
+            .nav-link:hover,
+            .nav-link.active {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+            }
+
+            .nav-link i {
+                margin-right: 1rem;
+                width: 20px;
+                text-align: center;
+            }
+
+            /* Overlay styling */
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            /* Responsive Media Queries */
+            @media (max-width: 992px) {
+                .admin-sidebar {
+                    transform: translateX(-100%);
+                }
+
+                .admin-sidebar.active {
+                    transform: translateX(0);
+                }
+
+                /* Ensure content area is full width when sidebar is hidden */
+                .admin-content {
+                    margin-left: 0 !important;
+                }
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const sidebar = document.getElementById('adminSidebar');
+                const overlay = document.getElementById('sidebarOverlay');
+                const toggleBtn = document.getElementById('sidebarToggle');
+
+                function toggleSidebar() {
+                    sidebar.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                }
+
+                if (toggleBtn) {
+                    toggleBtn.addEventListener('click', toggleSidebar);
+                }
+
+                if (overlay) {
+                    overlay.addEventListener('click', toggleSidebar);
+                }
+
+                // Close sidebar on link click (mobile)
+                if (window.innerWidth < 992) {
+                    const links = sidebar.querySelectorAll('.nav-link');
+                    links.forEach(link => {
+                        link.addEventListener('click', () => {
+                            sidebar.classList.remove('active');
+                            overlay.classList.remove('active');
+                        });
+                    });
+                }
+            });
+        </script>
     </nav>
-
-    <style>
-        .admin-sidebar {
-            width: 260px;
-            background: #2c3e50;
-            color: white;
-            position: fixed;
-            height: 100vh;
-            left: 0;
-            top: 0;
-            overflow-y: auto;
-            z-index: 1000;
-        }
-
-        .sidebar-header {
-            padding: 2rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        .sidebar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-        }
-
-        .sidebar-nav {
-            padding: 1rem 0;
-        }
-
-        .nav-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.75rem 1.5rem;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .nav-link i {
-            margin-right: 1rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .main-content {
-            margin-left: 260px;
-            padding: 2rem;
-            min-height: 100vh;
-            background: #f8f9fa;
-        }
-    </style>
 </body>
 
 </html>

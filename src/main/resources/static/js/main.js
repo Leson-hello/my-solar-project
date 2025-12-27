@@ -119,12 +119,35 @@ document.addEventListener('DOMContentLoaded', function () {
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            const submitBtn = this.querySelector('button[type="submit"]');
 
             if (email) {
-                // Here you can add AJAX call to submit email
-                alert('Cảm ơn bạn đã đăng ký nhận tin tức từ HBMP Solar!');
-                this.querySelector('input[type="email"]').value = '';
+                submitBtn.disabled = true;
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = 'ĐANG GỬI...';
+
+                fetch('/api/newsletter/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message || 'Cảm ơn bạn đã đăng ký nhận tin tức từ HBMP Solar!');
+                        emailInput.value = '';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Có lỗi xảy ra, vui lòng thử lại sau.');
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalBtnText;
+                    });
             }
         });
     }

@@ -96,8 +96,24 @@
                                             trời</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/products}">SẢN PHẨM</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">SẢN PHẨM</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" th:href="@{/products(category='tam-pin')}">Tấm pin năng
+                                            lượng mặt trời</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/products(category='inverter')}">Inverter /
+                                            Bộ hòa lưới</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/products(category='pin-luu-tru')}">Pin lưu
+                                            trữ</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/products(category='den-nang-luong')}">Đèn
+                                            năng lượng mặt trời</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/products(category='phu-kien')}">Phụ
+                                            kiện</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" th:href="@{/products}">Tất cả sản phẩm</a></li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" th:href="@{/news}">TIN TỨC</a>
