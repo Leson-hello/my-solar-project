@@ -5,6 +5,8 @@ import com.s.solar_backend.entity.News;
 import com.s.solar_backend.repository.NewsRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +26,7 @@ public class NewsService {
 
     // Public methods for frontend
 
+    @Cacheable(value = "news", key = "'published_' + #page + '_' + #size")
     public Page<NewsDTO> getPublishedNews(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return newsRepository.findByIsPublishedTrueOrderByPublishedAtDesc(pageable)
@@ -36,6 +39,7 @@ public class NewsService {
                 .map(NewsDTO::new);
     }
 
+    @Cacheable(value = "news", key = "'featured'")
     public List<NewsDTO> getFeaturedNews() {
         return newsRepository.findByIsPublishedTrueAndIsFeaturedTrueOrderByPublishedAtDesc()
                 .stream()
@@ -43,6 +47,7 @@ public class NewsService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value = "news", key = "'homepage_recent'")
     public List<NewsDTO> getRecentNewsForHomepage() {
         return newsRepository.findTop6ByIsPublishedTrueOrderByPublishedAtDesc()
                 .stream()
@@ -91,6 +96,7 @@ public class NewsService {
     }
 
     @Transactional
+    @CacheEvict(value = "news", allEntries = true)
     public NewsDTO createNews(NewsDTO newsDTO) {
         News news = new News();
         updateNewsFromDTO(news, newsDTO);
@@ -101,6 +107,7 @@ public class NewsService {
     }
 
     @Transactional
+    @CacheEvict(value = "news", allEntries = true)
     public NewsDTO updateNews(Long id, NewsDTO newsDTO) {
         News news = newsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("News not found with id: " + id));
@@ -113,6 +120,7 @@ public class NewsService {
     }
 
     @Transactional
+    @CacheEvict(value = "news", allEntries = true)
     public void deleteNews(Long id) {
         if (!newsRepository.existsById(id)) {
             throw new RuntimeException("News not found with id: " + id);
@@ -121,6 +129,7 @@ public class NewsService {
     }
 
     @Transactional
+    @CacheEvict(value = "news", allEntries = true)
     public NewsDTO publishNews(Long id) {
         News news = newsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("News not found with id: " + id));
@@ -133,6 +142,7 @@ public class NewsService {
     }
 
     @Transactional
+    @CacheEvict(value = "news", allEntries = true)
     public NewsDTO unpublishNews(Long id) {
         News news = newsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("News not found with id: " + id));

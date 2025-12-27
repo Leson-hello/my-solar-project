@@ -7,10 +7,10 @@
         <section class="partners-section">
             <!-- Hero Banner -->
             <div class="partners-hero">
-                <img th:src="@{/photo/anh40.jpg}" alt="DAT Group Factory" class="partners-hero-bg">
+                <img th:src="@{/photo/anh40.jpg}" alt="HBMP Factory" class="partners-hero-bg">
                 <div class="partners-hero-overlay">
                     <h2 class="partners-title">ĐỐI TÁC PHÂN PHỐI</h2>
-                    <p class="partners-subtitle">DAT GROUP TÌM KIẾM ĐỐI TÁC, ĐẠI LÝ PHÂN PHỐI ĐÈN NĂNG LƯỢNG MẶT TRỜI
+                    <p class="partners-subtitle">HBMP TÌM KIẾM ĐỐI TÁC, ĐẠI LÝ PHÂN PHỐI ĐÈN NĂNG LƯỢNG MẶT TRỜI
                     </p>
                 </div>
             </div>
@@ -18,30 +18,30 @@
             <!-- Partner Cards -->
             <div class="partners-cards">
                 <div class="partner-card-new">
-                    <img th:src="@{/photo/anh6.jpg}" alt="DAT Group" class="partner-bg-img">
+                    <img th:src="@{/photo/anh6.jpg}" alt="HBMP" class="partner-bg-img">
                     <div class="partner-content">
                         <div class="partner-logo">
-                            <span class="logo-dat">DAT</span>
+                            <span class="logo-hbmp">HBMP</span>
                         </div>
-                        <p class="partner-website">datgroup.com.vn</p>
+                        <p class="partner-website">hbmp.com.vn</p>
                     </div>
                 </div>
                 <div class="partner-card-new">
                     <img th:src="@{/photo/anh7.jpg}" alt="DAT Tech" class="partner-bg-img">
                     <div class="partner-content">
                         <div class="partner-logo">
-                            <span class="logo-dat">DAT</span>
+                            <span class="logo-hbmp">HBMP</span>
                         </div>
-                        <p class="partner-website">dattech.com.vn</p>
+                        <p class="partner-website">hbmptech.com.vn</p>
                     </div>
                 </div>
                 <div class="partner-card-new">
                     <img th:src="@{/photo/anh8.jpg}" alt="DAT Power" class="partner-bg-img">
                     <div class="partner-content">
                         <div class="partner-logo">
-                            <span class="logo-dat">DAT</span>
+                            <span class="logo-hbmp">HBMP</span>
                         </div>
-                        <p class="partner-website">datpower.com.vn</p>
+                        <p class="partner-website">hbmppower.com.vn</p>
                     </div>
                 </div>
             </div>
@@ -56,14 +56,17 @@
                         <div class="footer-widget">
                             <div class="footer-logo mb-3">
                                 <div class="logo-container">
-                                    <div class="logo-circle">
-                                        <span class="logo-text">DAT</span>
-                                    </div>
-                                    <small class="d-block text-white-50 mt-1">KẾT NỐI VỚI DAT GROUP</small>
+                                    <img th:src="@{/photo/logo-hbmp.png}" alt="HBMP Logo" class="logo-image">
+                                    <small class="d-block text-white-50 mt-1">KẾT NỐI VỚI HBMP</small>
                                 </div>
                             </div>
-                            <div class="social-links mt-3">
-                                <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
+                            <div class="social-links mt-3 d-flex align-items-center">
+                                <a href="https://www.facebook.com/hbmpsolar" class="social-icon me-2" target="_blank"><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a href="https://zalo.me/0376639868" class="social-icon me-2" target="_blank"
+                                    title="Zalo HBMP">
+                                    <img th:src="@{/photo/icon-zalo.png}" alt="Zalo" class="zalo-footer-icon">
+                                </a>
                                 <a href="#" class="social-icon me-2"><i class="fab fa-youtube"></i></a>
                                 <a href="#" class="social-icon me-2"><i class="fab fa-linkedin-in"></i></a>
                             </div>
@@ -75,12 +78,12 @@
                         <div class="footer-widget">
                             <h5 class="widget-title text-white mb-3">SẢN PHẨM</h5>
                             <ul class="footer-links">
-                                <li><a href="/products">TẤM PIN</a></li>
-                                <li><a href="/hoa-luoi">BỘ HÒA LƯỚI</a></li>
-                                <li><a href="/bom-nuoc">ĐIỆN TÁN BƠM</a></li>
-                                <li><a href="/hybrid">HYBRID INVERTER</a></li>
+                                <li><a th:href="@{/products}">TẤM PIN</a></li>
+                                <li><a th:href="@{/giai-phap/hoa-luoi}">BỘ HÒA LƯỚI</a></li>
+                                <li><a th:href="@{/giai-phap/bom-nuoc}">ĐIỆN TÁN BƠM</a></li>
+                                <li><a th:href="@{/giai-phap/hybrid}">HYBRID INVERTER</a></li>
                                 <li><a href="#">SOLAR LIGHT</a></li>
-                                <li><a href="/ess">PIN LƯU TRỮ ĐIỆN</a></li>
+                                <li><a th:href="@{/ess}">PIN LƯU TRỮ ĐIỆN</a></li>
                             </ul>
                         </div>
                     </div>
@@ -90,12 +93,12 @@
                         <div class="footer-widget">
                             <h5 class="widget-title text-white mb-3">GIẢI PHÁP</h5>
                             <ul class="footer-links">
-                                <li><a href="/esco">ESCO</a></li>
-                                <li><a href="/hoa-luoi">HỆ THỐNG ĐMT HÒA LƯỚI</a></li>
-                                <li><a href="/hybrid">HỆ THỐNG ĐMT CÓ LƯU TRỮ (HYBRID)</a></li>
-                                <li><a href="/bom-nuoc">HỆ THỐNG ĐMT CHO BƠM NƯỚC</a></li>
-                                <li><a href="/ess">GIẢI PHÁP LƯU TRỮ ĐIỆN ESS</a></li>
-                                <li><a href="/chieu-sang">GIẢI PHÁP CHIẾU SÁNG NLMT</a></li>
+                                <li><a th:href="@{/giai-phap/esco}">ESCO</a></li>
+                                <li><a th:href="@{/giai-phap/hoa-luoi}">HỆ THỐNG ĐMT HÒA LƯỚI</a></li>
+                                <li><a th:href="@{/giai-phap/hybrid}">HỆ THỐNG ĐMT CÓ LƯU TRỮ (HYBRID)</a></li>
+                                <li><a th:href="@{/giai-phap/bom-nuoc}">HỆ THỐNG ĐMT CHO BƠM NƯỚC</a></li>
+                                <li><a th:href="@{/ess}">GIẢI PHÁP LƯU TRỮ ĐIỆN ESS</a></li>
+                                <li><a href="#">GIẢI PHÁP CHIẾU SÁNG NLMT</a></li>
                             </ul>
                         </div>
                     </div>
@@ -104,7 +107,7 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="footer-widget">
                             <h5 class="widget-title text-white mb-3">NHẬN THÔNG TIN</h5>
-                            <p class="text-white-50">Đăng ký để nhận tin tức về sản phẩm và giải pháp mới nhất từ DAT
+                            <p class="text-white-50">Đăng ký để nhận tin tức về sản phẩm và giải pháp mới nhất từ HBMP
                                 Solar</p>
                             <form class="newsletter-form">
                                 <div class="input-group">
@@ -130,7 +133,7 @@
                                 Hưng Thuận, TP.HCM</li>
                             <li><i class="fas fa-phone text-warning me-2"></i>(+84) 283 715 7567</li>
                             <li><i class="fas fa-fax text-warning me-2"></i>(+84) 283 891 6586</li>
-                            <li><i class="fas fa-envelope text-warning me-2"></i>info@datgroup.com.vn</li>
+                            <li><i class="fas fa-envelope text-warning me-2"></i>info@hbmp.com.vn</li>
                         </ul>
                     </div>
 
@@ -142,7 +145,7 @@
                                 Mai, Hà Nội</li>
                             <li><i class="fas fa-phone text-warning me-2"></i>(+84) 243 252 5000</li>
                             <li><i class="fas fa-fax text-warning me-2"></i>(+84) 243 253 5000</li>
-                            <li><i class="fas fa-envelope text-warning me-2"></i>info@datgroup.com.vn</li>
+                            <li><i class="fas fa-envelope text-warning me-2"></i>info@hbmp.com.vn</li>
                         </ul>
                     </div>
 
@@ -154,7 +157,7 @@
                                 Phú, TP. Cần Thơ</li>
                             <li><i class="fas fa-phone text-warning me-2"></i>(+84) 292 3917137</li>
                             <li><i class="fas fa-fax text-warning me-2"></i>(+84) 292 3917337</li>
-                            <li><i class="fas fa-envelope text-warning me-2"></i>info@datgroup.com.vn</li>
+                            <li><i class="fas fa-envelope text-warning me-2"></i>info@hbmp.com.vn</li>
                         </ul>
                     </div>
                 </div>
@@ -184,6 +187,22 @@
                             style="max-height: 60px; opacity: 0.9;" onerror="this.style.display='none'">
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Floating Social Contact Popup (Available on all pages) -->
+        <div class="floating-social-popup">
+            <div class="social-icons-container">
+                <a href="https://zalo.me/0376639868" target="_blank" rel="noopener noreferrer"
+                    class="social-icon-btn zalo-btn" title="Liên hệ qua Zalo"
+                    style="display: flex; align-items: center; justify-content: center; padding: 0;">
+                    <img th:src="@{/photo/icon-zalo.png}" alt="Zalo"
+                        style="width: 100%; height: 100%; border-radius: 50%;">
+                </a>
+                <a href="https://www.facebook.com/hbmpsolar" target="_blank" rel="noopener noreferrer"
+                    class="social-icon-btn facebook-btn" title="Liên hệ qua Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
             </div>
         </div>
     </footer>

@@ -4,142 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Admin DAT Group</title>
+    <title>Dashboard - Admin HBMP</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <style>
-        :root {
-            --admin-primary: #2c3e50;
-            --admin-secondary: #3498db;
-            --admin-success: #27ae60;
-            --admin-warning: #f39c12;
-            --admin-danger: #e74c3c;
-            --sidebar-width: 260px;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-        }
-
-        .admin-wrapper {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .admin-sidebar {
-            width: var(--sidebar-width);
-            background: var(--admin-primary);
-            color: white;
-            position: fixed;
-            height: 100vh;
-            left: 0;
-            top: 0;
-            overflow-y: auto;
-            transition: all 0.3s;
-            z-index: 1000;
-        }
-
-        .admin-content {
-            flex: 1;
-            margin-left: var(--sidebar-width);
-            min-height: 100vh;
-        }
-
-        .sidebar-header {
-            padding: 2rem 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        .sidebar-brand {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-        }
-
-        .sidebar-nav {
-            padding: 1rem 0;
-        }
-
-        .nav-item {
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.75rem 1.5rem;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .nav-link i {
-            margin-right: 1rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .admin-header {
-            background: white;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid #e9ecef;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .main-content {
-            padding: 2rem;
-        }
-
-        .stats-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .stats-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stats-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .stats-number {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-    </style>
+    <!-- Custom Admin CSS -->
+    <link th:href="@{/css/admin-style.css}" rel="stylesheet">
 </head>
 
 <body>
     <div class="admin-wrapper">
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
         <!-- Sidebar -->
-        <nav class="admin-sidebar">
+        <nav class="admin-sidebar" id="adminSidebar">
             <div class="sidebar-header">
                 <a th:href="@{/admin}" class="sidebar-brand">
-                    <i class="fas fa-solar-panel"></i> DAT Admin
+                    <i class="fas fa-solar-panel"></i> HBMP Admin
                 </a>
                 <small class="d-block text-white-50 mt-2">Content Management</small>
             </div>
-
+            <!-- ... Sidebar Nav ... -->
             <ul class="sidebar-nav list-unstyled">
                 <li class="nav-item">
                     <a th:href="@{/admin}" class="nav-link active">
@@ -209,12 +97,23 @@
             <!-- Header -->
             <header class="admin-header">
                 <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h1 class="h4 mb-0">Dashboard</h1>
-                        <small class="text-muted">Tổng quan hệ thống quản lý nội dung</small>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-link text-dark me-3 d-md-none" id="sidebarToggle">
+                            <i class="fas fa-bars fa-lg"></i>
+                        </button>
+                        <div>
+                            <h1 class="h4 mb-0">Dashboard</h1>
+                            <small class="text-muted d-none d-md-block">Tổng quan hệ thống quản lý nội dung</small>
+                        </div>
                     </div>
                     <div>
-                        <span class="text-muted">Xin chào, Admin!</span>
+                        <span class="text-muted me-2">Xin chào, Admin!</span>
+                        <!-- Logout Form (Hidden but accessible via JS/CSS if needed, or simple link) -->
+                        <form th:action="@{/logout}" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </header>
@@ -346,6 +245,21 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('adminSidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+            function toggleSidebar() {
+                sidebar.classList.toggle('active');
+                sidebarOverlay.classList.toggle('active');
+            }
+
+            sidebarToggle.addEventListener('click', toggleSidebar);
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+        });
+    </script>
 </body>
 
 </html>

@@ -24,6 +24,8 @@ public class ProductDTO {
     private String category;
     private String documentUrl;
     private String documents;
+    private String certificates;
+    private String policies;
     private boolean active;
     private boolean featured;
     private Integer displayOrder;

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sản Phẩm - DAT Group</title>
+    <title>Sản Phẩm - HBMP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link th:href="@{/css/style.css}" rel="stylesheet">
@@ -31,78 +31,88 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="sidebar">
-                        <div class="sidebar-widget">
-                            <h5 class="widget-title">Tìm kiếm</h5>
-                            <form th:action="@{/products}" method="get">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="search" th:value="${search}"
-                                        placeholder="Tìm sản phẩm...">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                        <!-- Mobile Filter Toggle -->
+                        <button class="btn btn-primary d-lg-none w-100 mb-3" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#sidebarContent" aria-expanded="false" aria-controls="sidebarContent">
+                            <i class="fas fa-filter"></i> Hiện bộ lọc & Tìm kiếm
+                        </button>
 
-                        <div class="sidebar-widget">
-                            <h5 class="widget-title">Danh mục</h5>
-                            <ul class="category-list">
-                                <li>
-                                    <a th:href="@{/products}" th:class="${category == null ? 'active' : ''}">
-                                        <i class="fas fa-th-large"></i> Tất cả sản phẩm
-                                    </a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/products(category='tam-pin')}"
-                                        th:class="${category == 'tam-pin' ? 'active' : ''}">
-                                        <i class="fas fa-solar-panel"></i> Tấm pin năng lượng mặt trời
-                                    </a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/products(category='inverter')}"
-                                        th:class="${category == 'inverter' ? 'active' : ''}">
-                                        <i class="fas fa-microchip"></i> Inverter / Bộ hòa lưới
-                                    </a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/products(category='pin-luu-tru')}"
-                                        th:class="${category == 'pin-luu-tru' ? 'active' : ''}">
-                                        <i class="fas fa-battery-full"></i> Pin lưu trữ
-                                    </a>
-                                </li>
-                                <li>
-                                    <a th:href="@{/products(category='phu-kien')}"
-                                        th:class="${category == 'phu-kien' ? 'active' : ''}">
-                                        <i class="fas fa-tools"></i> Phụ kiện
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        <!-- Sidebar Content Wrapper -->
+                        <div class="collapse d-lg-block" id="sidebarContent">
+                            <div class="sidebar-widget">
+                                <h5 class="widget-title">Tìm kiếm</h5>
+                                <form th:action="@{/products}" method="get">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="search" th:value="${search}"
+                                            placeholder="Tìm sản phẩm...">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
 
-                        <div class="sidebar-widget" th:if="${featuredProducts != null and !featuredProducts.isEmpty()}">
-                            <h5 class="widget-title">Sản phẩm nổi bật</h5>
-                            <div class="featured-products-sidebar">
-                                <div class="featured-product-item" th:each="product : ${featuredProducts}">
-                                    <a th:href="@{/products/{id}(id=${product.id})}" class="d-flex">
-                                        <img th:src="@{${product.imageUrl != null ? product.imageUrl : '/photo/default-product.jpg'}}"
-                                            th:alt="${product.name}" class="featured-product-image">
-                                        <div class="featured-product-info">
-                                            <h6 th:text="${product.name}">Product Name</h6>
-                                            <span class="product-power"
-                                                th:text="${product.power + ' ' + product.powerUnit}">520W</span>
-                                        </div>
-                                    </a>
+                            <div class="sidebar-widget">
+                                <h5 class="widget-title">Danh mục</h5>
+                                <ul class="category-list">
+                                    <li>
+                                        <a th:href="@{/products}" th:class="${category == null ? 'active' : ''}">
+                                            <i class="fas fa-th-large"></i> Tất cả sản phẩm
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/products(category='tam-pin')}"
+                                            th:class="${category == 'tam-pin' ? 'active' : ''}">
+                                            <i class="fas fa-solar-panel"></i> Tấm pin năng lượng mặt trời
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/products(category='inverter')}"
+                                            th:class="${category == 'inverter' ? 'active' : ''}">
+                                            <i class="fas fa-microchip"></i> Inverter / Bộ hòa lưới
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/products(category='pin-luu-tru')}"
+                                            th:class="${category == 'pin-luu-tru' ? 'active' : ''}">
+                                            <i class="fas fa-battery-full"></i> Pin lưu trữ
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/products(category='phu-kien')}"
+                                            th:class="${category == 'phu-kien' ? 'active' : ''}">
+                                            <i class="fas fa-tools"></i> Phụ kiện
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="sidebar-widget"
+                                th:if="${featuredProducts != null and !featuredProducts.isEmpty()}">
+                                <h5 class="widget-title">Sản phẩm nổi bật</h5>
+                                <div class="featured-products-sidebar">
+                                    <div class="featured-product-item" th:each="product : ${featuredProducts}">
+                                        <a th:href="@{/products/{id}(id=${product.id})}" class="d-flex">
+                                            <img th:src="@{${product.imageUrl != null ? product.imageUrl : '/photo/default-product.jpg'}}"
+                                                th:alt="${product.name}" class="featured-product-image">
+                                            <div class="featured-product-info">
+                                                <h6 th:text="${product.name}">Product Name</h6>
+                                                <span class="product-power"
+                                                    th:text="${product.power + ' ' + product.powerUnit}">520W</span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="sidebar-widget cta-widget">
-                            <div class="cta-content">
-                                <i class="fas fa-file-invoice fa-3x mb-3"></i>
-                                <h5>Cần báo giá?</h5>
-                                <p>Để lại thông tin, chúng tôi sẽ tư vấn chi tiết</p>
-                                <button type="button" class="btn btn-warning" onclick="openQuoteModal()">Yêu cầu báo
-                                    giá</button>
+                            <div class="sidebar-widget cta-widget">
+                                <div class="cta-content">
+                                    <i class="fas fa-file-invoice fa-3x mb-3"></i>
+                                    <h5>Cần báo giá?</h5>
+                                    <p>Để lại thông tin, chúng tôi sẽ tư vấn chi tiết</p>
+                                    <button type="button" class="btn btn-warning" onclick="openQuoteModal()">Yêu cầu báo
+                                        giá</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -139,9 +149,11 @@
                                     </span>
                                 </div>
                                 <div class="product-info">
-                                    <div class="product-brand" th:text="${product.brand}">Canadian Solar</div>
+                                    <div class="product-brand"><b>Hãng:</b> <span th:text="${product.brand}">Canadian
+                                            Solar</span></div>
                                     <h5 class="product-name">
-                                        <a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}">
+                                        <a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}"
+                                            style="font-weight: bold;">
                                             HiKu - Tấm pin năng lượng mặt trời
                                         </a>
                                     </h5>
@@ -152,11 +164,14 @@
                                     <div class="product-specs">
                                         <span class="spec-item" th:if="${product.power != null}">
                                             <i class="fas fa-bolt"></i>
-                                            <span th:text="${product.power + ' ' + product.powerUnit}">520W</span>
+                                            <b style="font-weight: 700;">Công suất:</b>&nbsp;<span
+                                                th:text="${product.power + ' ' + product.powerUnit}"
+                                                style="font-weight: 400;">520W</span>
                                         </span>
                                         <span class="spec-item" th:if="${product.type != null}">
                                             <i class="fas fa-tag"></i>
-                                            <span th:text="${product.type}">Mono PERC</span>
+                                            <b style="font-weight: 700;">Dòng:</b>&nbsp;<span th:text="${product.type}"
+                                                style="font-weight: 400;">Mono PERC</span>
                                         </span>
                                     </div>
                                     <div class="product-footer">

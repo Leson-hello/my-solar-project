@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${isEdit ? 'Chỉnh sửa tin tức' : 'Tạo tin tức mới'} + ' - Admin DAT Group'">Tạo tin tức - Admin DAT
+    <title th:text="${isEdit ? 'Chỉnh sửa tin tức' : 'Tạo tin tức mới'} + ' - Admin HBMP'">Tạo tin tức - Admin HBMP
         Group</title>
 
     <!-- Bootstrap CSS -->
@@ -209,7 +209,7 @@
         <nav class="admin-sidebar">
             <div class="sidebar-header">
                 <a th:href="@{/admin}" class="sidebar-brand">
-                    <i class="fas fa-solar-panel"></i> DAT Admin
+                    <i class="fas fa-solar-panel"></i> HBMP Admin
                 </a>
                 <small class="d-block text-white-50 mt-2">Content Management</small>
             </div>
@@ -387,7 +387,7 @@
                                     <div class="mb-3">
                                         <label for="author" class="form-label">Tác giả</label>
                                         <input type="text" class="form-control" id="author" name="author"
-                                            th:value="${news.author ?: 'Admin DAT'}" placeholder="Tên tác giả">
+                                            th:value="${news.author ?: 'Admin HBMP'}" placeholder="Tên tác giả">
                                     </div>
 
                                     <!-- Status -->
@@ -638,7 +638,7 @@
                 title: $('#title').val() || 'Tin tức mới',
                 shortDescription: $('#shortDescription').val() || 'Mô tả ngắn',
                 content: $('#content').summernote('code') || '<p>Nội dung tin tức</p>',
-                author: $('#author').val() || 'Admin DAT',
+                author: $('#author').val() || 'Admin HBMP',
                 category: $('#category').val() || 'COMPANY_NEWS',
                 isPublished: false,
                 isFeatured: false
@@ -722,7 +722,7 @@
             const shortDesc = $('#shortDescription').val();
             const content = $('#content').summernote('code');
             const category = $('#category option:selected').text();
-            const author = $('#author').val() || 'Admin DAT';
+            const author = $('#author').val() || 'Admin HBMP';
 
             if (!title.trim()) {
                 alert('Vui lòng nhập tiêu đề trước khi xem trước');
@@ -887,3 +887,6 @@
 </body>
 
 </html>
+
+
+

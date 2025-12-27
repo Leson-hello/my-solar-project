@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${news.title + ' - DAT Group'}">Chi tiết tin tức - DAT Group</title>
+    <title th:text="${news.title + ' - HBMP'}">Chi tiết tin tức - HBMP</title>
 
     <!-- SEO Meta Tags -->
     <meta name="description" th:content="${news.shortDescription}">
@@ -61,15 +61,15 @@
                         </div>
 
                         <h1 class="article-title mb-4" th:text="${news.title}">
-                            CẢNH BÁO: CẨN TRỌNG CHIỀU TRÒ LỪA ĐẢO, GIẢ MAO TUYỂN DỤNG DAT GROUP!
+                            CẢNH BÁO: CẨN TRỌNG CHIỀU TRÒ LỪA ĐẢO, GIẢ MAO TUYỂN DỤNG HBMP!
                         </h1>
 
                         <div class="article-summary p-4 mb-4"
                              style="background: #f8f9fa; border-left: 4px solid var(--primary-color); border-radius: 10px;"
                              th:if="${news.shortDescription != null and !news.shortDescription.isEmpty()}">
                             <p class="lead mb-0" th:text="${news.shortDescription}">
-                                Thời gian gần đây qua sự thật thông tin mạng xã hội, DAT Group phát hiện nhiều Email,
-                                tài khoản Facebook, Fanpage giả mao tuyển dụng DAT Group với mục tiêu lợi nhuận...
+                                Thời gian gần đây qua sự thật thông tin mạng xã hội, HBMP phát hiện nhiều Email,
+                                tài khoản Facebook, Fanpage giả mao tuyển dụng HBMP với mục tiêu lợi nhuận...
                             </p>
                         </div>
                     </header>
@@ -118,7 +118,7 @@
                             <h6 class="mb-2">Tags:</h6>
                             <span class="badge bg-light text-dark me-2" th:text="${news.categoryDisplayName}">Tin công ty</span>
                             <span class="badge bg-light text-dark me-2">Năng lượng mặt trời</span>
-                            <span class="badge bg-light text-dark me-2">DAT Group</span>
+                            <span class="badge bg-light text-dark me-2">HBMP</span>
                         </div>
 
                         <!-- Navigation to Previous/Next -->
@@ -339,3 +339,6 @@
 </style>
 </body>
 </html>
+
+
+

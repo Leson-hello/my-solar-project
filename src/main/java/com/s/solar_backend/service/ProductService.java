@@ -137,6 +137,12 @@ public class ProductService {
         if (dto.getDocuments() != null) {
             product.setDocuments(dto.getDocuments());
         }
+        if (dto.getCertificates() != null) {
+            product.setCertificates(dto.getCertificates());
+        }
+        if (dto.getPolicies() != null) {
+            product.setPolicies(dto.getPolicies());
+        }
         product.setIsActive(dto.isActive());
         product.setIsFeatured(dto.isFeatured());
         product.setDisplayOrder(dto.getDisplayOrder());
@@ -160,6 +166,8 @@ public class ProductService {
         dto.setCategory(product.getCategory());
         dto.setDocumentUrl(product.getDocumentUrl());
         dto.setDocuments(product.getDocuments());
+        dto.setCertificates(product.getCertificates());
+        dto.setPolicies(product.getPolicies());
         dto.setActive(product.getIsActive() != null ? product.getIsActive() : true);
         dto.setFeatured(product.getIsFeatured() != null ? product.getIsFeatured() : false);
         dto.setDisplayOrder(product.getDisplayOrder());

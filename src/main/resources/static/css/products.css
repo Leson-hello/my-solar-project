@@ -19,7 +19,7 @@
     padding: 0;
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb-item+.breadcrumb-item::before {
     color: rgba(255, 255, 255, 0.7);
 }
 
@@ -224,6 +224,7 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    text-align: left;
 }
 
 .product-brand {
@@ -270,6 +271,11 @@
     align-items: center;
     font-size: 0.85rem;
     color: #666;
+}
+
+.spec-item b {
+    font-weight: 600;
+    margin-right: 4px;
 }
 
 .spec-item i {
@@ -336,8 +342,8 @@
 }
 
 .spec-label {
-    color: #666;
-    font-weight: 500;
+    color: #333;
+    font-weight: 600;
 }
 
 .spec-label i {
@@ -346,8 +352,8 @@
 }
 
 .spec-value {
-    font-weight: 600;
-    color: #333;
+    font-weight: 400;
+    color: #555;
     font-size: 1.1rem;
 }
 

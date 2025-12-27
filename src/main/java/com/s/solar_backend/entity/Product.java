@@ -63,6 +63,12 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String documents; // JSON format: [{"name":"...","url":"..."}]
 
+    @Column(columnDefinition = "TEXT")
+    private String certificates; // JSON format: [{"name":"...","url":"..."}]
+
+    @Column(columnDefinition = "TEXT")
+    private String policies; // JSON format: [{"name":"...","url":"..."}]
+
     @Column
     private Boolean isActive = true;
 

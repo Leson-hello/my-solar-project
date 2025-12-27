@@ -121,4 +121,4 @@ CREATE DATABASE solar_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 ---
 
-**Developed with ❤️ for DAT Group Solar Energy**
+**Developed with ❤️ for Group Solar Energy**

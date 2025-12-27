@@ -4,7 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAT Group - Năng Lượng Mặt Trời</title>
+    <title>HBMP - Năng Lượng Mặt Trời | Giải Pháp Điện Mặt Trời Uy Tín</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="HBMP Solar chuyên cung cấp giải pháp điện năng lượng mặt trời uy tín, chất lượng cao. Lắp đặt hệ thống điện mặt trời áp mái, hòa lưới, hybrid cho gia đình và doanh nghiệp.">
+    <meta name="keywords"
+        content="điện mặt trời, năng lượng mặt trời, HBMP solar, pin mặt trời, inverter solar, điện mặt trời áp mái, lắp đặt điện mặt trời">
+    <meta name="author" content="HBMP Solar">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hbmp.com.vn/">
+    <meta property="og:title" content="HBMP - Giải Pháp Năng Lượng Mặt Trời Toàn Diện">
+    <meta property="og:description"
+        content="Đối tác tin cậy cung cấp thiết bị và giải pháp điện năng lượng mặt trời hàng đầu Việt Nam.">
+    <meta property="og:image" content="/photo/anh7.jpg">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "HBMP Solar",
+      "url": "https://hbmp.com.vn",
+      "logo": "https://hbmp.com.vn/photo/logo-hbmp.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+84-0915-060-789",
+        "contactType": "customer service"
+      }
+    }
+    </script>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,78 +50,67 @@
     <!-- Header -->
     <div th:replace="~{layout/header :: header}"></div>
 
-    <!-- Hero Section -->
-    <section class="hero-section position-relative">
-        <div class="hero-background">
-            <img th:src="@{/photo/anh7.jpg}" alt="DAT Solar Farm" class="hero-image">
-        </div>
-        <div class="hero-overlay">
-            <div class="container">
-                <div class="row align-items-center min-vh-100">
-                    <div class="col-12 text-center">
-                        <div class="hero-content text-white">
-                            <h1 class="hero-title mb-4">
-                                CHÚNG TÔI LÀ ĐƠN VỊ HỮU HIỆU TRONG LĨNH VỰC NĂNG LƯỢNG MẶT TRỜI
-                            </h1>
-                            <div class="hero-button-container">
-                                <button class="btn hero-btn">KHÁM PHÁ TẤM THẾ GIỚI NĂNG LƯỢNG XANH CÙNG DAT
-                                    GROUP</button>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Banner Slider (datsolar format) -->
+    <section class="banner_slider section">
+        <div class="banner">
+            <img th:src="@{/photo/anh7.1.jpg}" alt="HBMP Solar Farm">
+            <div class="container grid-container">
+                <div class="content_banner">
+                    <h2>CHÚNG TÔI LÀ ĐƠN VỊ HỮU HIỆU TRONG LĨNH VỰC NĂNG LƯỢNG MẶT TRỜI</h2>
+                    <a href="#" class="button_style">KHÁM PHÁ THẾ GIỚI NĂNG LƯỢNG XANH CÙNG HBMP SOLAR</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Statistics Cards -->
-        <div class="statistics-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="stat-card text-center">
-                            <div class="stat-icon">
-                                <i class="fas fa-solar-panel"></i>
-                            </div>
-                            <div class="stat-number" th:text="${totalCapacity}">1+</div>
-                            <div class="stat-unit" th:text="${totalCapacityUnit}">GWP</div>
-                            <div class="stat-label">TỔNG CÔNG SUẤT</div>
+    <!-- Statistics Section (Separate from Banner) -->
+    <section class="statistics-section-new py-5 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stat-card text-center border-0 shadow-sm p-4">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-solar-panel text-warning fa-3x"></i>
                         </div>
+                        <div class="stat-number h2 fw-bold text-primary" th:text="${totalCapacity}">1+</div>
+                        <div class="stat-unit fw-bold" th:text="${totalCapacityUnit}">GWP</div>
+                        <div class="stat-label text-muted">TỔNG CÔNG SUẤT</div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="stat-card text-center">
-                            <div class="stat-icon">
-                                <i class="fas fa-building"></i>
-                            </div>
-                            <div class="stat-number" th:text="${totalProjects}">12.000+</div>
-                            <div class="stat-unit" th:text="${projectsUnit}">HỆ THỐNG</div>
-                            <div class="stat-label">HỆ THỐNG ĐÃ LẮP ĐẶT</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card text-center border-0 shadow-sm p-4">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-building text-warning fa-3x"></i>
                         </div>
+                        <div class="stat-number h2 fw-bold text-primary" th:text="${totalProjects}">12.000+</div>
+                        <div class="stat-unit fw-bold" th:text="${projectsUnit}">HỆ THỐNG</div>
+                        <div class="stat-label text-muted">HỆ THỐNG ĐÃ LẮP ĐẶT</div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="stat-card text-center">
-                            <div class="stat-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="stat-number" th:text="${totalEmployees}">2.000+</div>
-                            <div class="stat-unit" th:text="${employeesUnit}">ĐỐI TÁC NHÂN SỰ</div>
-                            <div class="stat-label">ĐỐI TÁC NHÂN SỰ</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card text-center border-0 shadow-sm p-4">
+                        <div class="stat-icon mb-3">
+                            <i class="fas fa-users text-warning fa-3x"></i>
                         </div>
+                        <div class="stat-number h2 fw-bold text-primary" th:text="${totalEmployees}">2.000+</div>
+                        <div class="stat-unit fw-bold" th:text="${employeesUnit}">ĐỐI TÁC</div>
+                        <div class="stat-label text-muted">ĐỐI TÁC PHÂN PHỐI</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About DAT Group Section -->
+    <!-- About HBMP Section -->
     <section class="about-section-new">
         <div class="about-container">
             <div class="about-grid">
                 <!-- Left Side - Content -->
                 <div class="about-left">
-                    <h2 class="about-title"><span class="title-underline">VỀ DAT GROUP</span></h2>
+                    <h2 class="about-title"><span class="title-underline">VỀ HBMP</span></h2>
                     <p class="about-description">
-                        DAT Group là Tập đoàn công nghệ – thương mại dịch vụ có quy mô, uy tín dẫn đầu Việt Nam trong
-                        lĩnh vực tự động hóa công nghiệp và năng lượng tái tạo. Trong đó, DAT Group chuyên cung cấp các
+                        HBMP là Tập đoàn công nghệ – thương mại dịch vụ có quy mô, uy tín dẫn đầu Việt Nam trong
+                        lĩnh vực tự động hóa công nghiệp và năng lượng tái tạo. Trong đó, HBMP chuyên cung cấp các
                         giải pháp năng lượng mặt trời như: <em>Điện năng lượng mặt trời; tấm pin năng lượng mặt trời;
                             pin lưu trữ năng lượng mặt trời; đèn năng lượng mặt trời.</em> Chúng tôi không ngừng tiên
                         phong kiến tạo Hệ sinh thái, gia tăng hiệu quả, mang đến giá trị tối ưu cho khách hàng, đối tác.
@@ -97,7 +118,7 @@
 
                     <div class="about-highlight-box">
                         <p>
-                            DAT Group đã cung cấp và triển khai hơn <strong>12.000 hệ thống</strong> điện năng lượng mặt
+                            HBMP đã cung cấp và triển khai hơn <strong>12.000 hệ thống</strong> điện năng lượng mặt
                             trời có tổng công suất hơn <strong>1+ GWP</strong>, mang đến cho khách hàng, đối tác và nhà
                             đầu tư những giải pháp điện mặt trời thông minh, <em>tối ưu chi phí đầu tư nhưng vẫn đảm bảo
                                 tính hiệu quả cao.</em>
@@ -109,9 +130,9 @@
                 <div class="about-right">
                     <div class="about-image-container">
                         <div class="about-image-wrapper">
-                            <img th:src="@{/photo/anh8.jpg}" alt="DAT Group Solar Engineers" class="about-main-image">
-                            <div class="dat-logo-overlay">
-                                <span class="dat-logo-text">DAT</span>
+                            <img th:src="@{/photo/anh8.jpg}" alt="HBMP Solar Engineers" class="about-main-image">
+                            <div class="hbmp-logo-overlay">
+                                <span class="hbmp-logo-text">HBMP</span>
                             </div>
                         </div>
 
@@ -296,7 +317,8 @@
     </script>
 
     <!-- Featured Projects Section -->
-    <section class="projects-section-new">
+    <section class="projects-section-new"
+        style="background-image: url('/photo/2-layersfse.jpg'); background-size: cover; background-attachment: fixed;">
         <div class="projects-container">
             <h2 class="projects-title">DỰ ÁN ĐÃ THỰC HIỆN</h2>
             <p class="projects-subtitle">
@@ -423,114 +445,116 @@
         });
     </script>
 
-    <!-- Products Section -->
-    <section class="products-section bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">SẢN PHẨM NỔI BẬT</h2>
+    <!-- Products Section (Refactored to Datsolar Layout with Specific Categories) -->
+    <section class="products-section section" style="padding: 50px 0;">
+        <div class="container datsolar-grid-container">
+            <h2 class="text-center mb-5"
+                style="font-weight: bold; font-size: 30px; color: #222; text-transform: uppercase;">SẢN PHẨM NỔI BẬT
+            </h2>
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="product-categories">
-                        <div class="category-grid">
-                            <div class="category-item">
-                                <i class="fas fa-solar-panel"></i>
-                                <span>Tấm pin năng lượng mặt trời</span>
+                <!-- Left Side: Category Grid (Navigation) -->
+                <div class="col-lg-4 col-md-12 mb-4">
+                    <div class="product-category-grid">
+                        <div class="product_tab_box">
+                            <!-- Category 1: Tấm pin năng lượng mặt trời -->
+                            <div class="product_tab_icon active"
+                                onclick="switchProductCategory('Tấm pin năng lượng mặt trời', this)">
+                                <div class="button_tab_box">
+                                    <h4>Tấm pin năng lượng mặt trời</h4>
+                                    <img th:src="@{/photo/icon-solar-panel.png}"
+                                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3514/3514337.png'"
+                                        alt="Solar Panel">
+                                </div>
                             </div>
-                            <div class="category-item">
-                                <i class="fas fa-battery-full"></i>
-                                <span>Bộ hòa lưới</span>
+
+                            <!-- Category 2: Inverter hòa lưới -->
+                            <div class="product_tab_icon" onclick="switchProductCategory('Inverter hòa lưới', this)">
+                                <div class="button_tab_box">
+                                    <h4>Inverter hòa lưới</h4>
+                                    <img th:src="@{/photo/icon-inverter.png}"
+                                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3514/3514343.png'"
+                                        alt="Inverter">
+                                </div>
                             </div>
-                            <div class="category-item">
-                                <i class="fas fa-plug"></i>
-                                <span>Hybrid Inverter</span>
+
+                            <!-- Category 3: Inverter Hybrid & Lưu trữ -->
+                            <div class="product_tab_icon"
+                                onclick="switchProductCategory('Inverter Hybrid & Lưu trữ', this)">
+                                <div class="button_tab_box">
+                                    <h4>Inverter Hybrid & Lưu trữ</h4>
+                                    <img th:src="@{/photo/icon-hybrid.png}"
+                                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3514/3514343.png'"
+                                        alt="Hybrid">
+                                </div>
                             </div>
-                            <div class="category-item">
-                                <i class="fas fa-tools"></i>
-                                <span>Đèn năng lượng mặt trời</span>
+
+                            <!-- Category 4: Đèn năng lượng mặt trời -->
+                            <div class="product_tab_icon"
+                                onclick="switchProductCategory('Đèn năng lượng mặt trời', this)">
+                                <div class="button_tab_box">
+                                    <h4>Đèn năng lượng mặt trời</h4>
+                                    <img th:src="@{/photo/icon-light.png}"
+                                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3514/3514309.png'"
+                                        alt="Light">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="featured-products">
-                        <div class="row">
-                            <!-- Dynamic Featured Products from Database -->
-                            <div th:if="${featuredProducts != null and !featuredProducts.isEmpty()}">
-                                <div class="row">
-                                    <div class="col-6 mb-3" th:each="product, iterStat : ${featuredProducts}"
-                                        th:if="${iterStat.index < 4}">
-                                        <a th:href="@{/products/{id}(id=${product.id})}"
-                                            style="text-decoration: none; color: inherit;">
-                                            <div class="product-card">
-                                                <img th:src="@{${product.imageUrl != null ? product.imageUrl : '/photo/anh31.jpg'}}"
-                                                    th:alt="${product.name}" class="product-image">
-                                                <div class="product-info">
-                                                    <h6 th:text="${product.name}">HiKu</h6>
-                                                    <p
-                                                        th:text="${product.description != null ? product.description : 'TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO'}">
-                                                        TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                                    <span class="product-power" th:if="${product.power != null}">
-                                                        Công suất: <span
-                                                            th:text="${product.power + ' ' + (product.powerUnit != null ? product.powerUnit : 'W')}">520W</span>
-                                                    </span>
-                                                    <span class="product-brand" th:if="${product.brand != null}">
-                                                        Hãng: <span th:text="${product.brand}">Canadian Solar</span>
-                                                    </span>
-                                                </div>
-                                            </div>
+
+                <!-- Right Side: Product Display Area -->
+                <div class="col-lg-8 col-md-12">
+                    <div class="product-display-area">
+                        <!-- Products Grid -->
+                        <div class="row" id="productGridContainer">
+                            <!-- Dynamic Products Loop -->
+                            <div th:each="product : ${featuredProducts}" class="col-md-4 col-sm-6 mb-4 product-item"
+                                style="display: block;"
+                                th:data-category="${(product.category != null && !product.category.isEmpty()) ? product.category : ((product.type != null) ? product.type : 'other')}"
+                                th:data-name="${product.name}">
+                                <div class="product_tab_item_box">
+                                    <div class="product_tab_item_img">
+                                        <a th:href="@{/products/{id}(id=${product.id})}">
+                                            <img th:src="@{${product.imageUrl != null ? product.imageUrl : '/photo/anh31.jpg'}}"
+                                                th:alt="${product.name}" onerror="this.src='/photo/anh31.jpg'">
                                         </a>
+                                    </div>
+                                    <div class="product_tab_item_content">
+                                        <h4>
+                                            <a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}"
+                                                style="font-weight: bold; color: #222; font-size: 1.1rem;">Product
+                                                Name</a>
+                                        </h4>
+                                        <p class="mb-2" th:text="${product.description}"
+                                            style="display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.9em; color: #555;">
+                                            Description</p>
+                                        <div class="product-specs-home">
+                                            <p class="mb-1" style="color: #444;">
+                                                <b style="font-weight: 700;">Công suất:</b> <span
+                                                    th:text="${product.power + ' ' + (product.powerUnit != null ? product.powerUnit : 'W')}"
+                                                    style="font-weight: 400;">450W</span>
+                                            </p>
+                                            <p class="mb-1" style="color: #444;">
+                                                <b style="font-weight: 700;">Hãng:</b> <span th:text="${product.brand}"
+                                                    style="font-weight: 400;">Canadian Solar</span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Fallback: Static Products if no database products -->
-                            <div th:if="${featuredProducts == null or featuredProducts.isEmpty()}">
-                                <div class="row">
-                                    <div class="col-6 mb-3">
-                                        <div class="product-card">
-                                            <img th:src="@{/photo/anh31.jpg}" alt="HiKu Panel" class="product-image">
-                                            <div class="product-info">
-                                                <h6>HiKu</h6>
-                                                <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                                <span class="product-power">Công suất: 520W</span>
-                                                <span class="product-brand">Hãng: Canadian Solar</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <div class="product-card">
-                                            <img th:src="@{/photo/anh33.jpg}" alt="HiKu Panel 2" class="product-image">
-                                            <div class="product-info">
-                                                <h6>HiKu</h6>
-                                                <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                                <span class="product-power">Công suất: 540W</span>
-                                                <span class="product-brand">Hãng: Canadian Solar</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <div class="product-card">
-                                            <img th:src="@{/photo/anh36.jpg}" alt="HiKu Panel 3" class="product-image">
-                                            <div class="product-info">
-                                                <h6>HiKu</h6>
-                                                <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                                <span class="product-power">Công suất: 545W</span>
-                                                <span class="product-brand">Hãng: Canadian Solar</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                        <div class="product-card">
-                                            <img th:src="@{/photo/anh37.jpg}" alt="HiKu Panel 4" class="product-image">
-                                            <div class="product-info">
-                                                <h6>HiKu</h6>
-                                                <p>TẤM PIN NĂNG LƯỢNG MẶT TRỜI HIỆU SUẤT CAO</p>
-                                                <span class="product-power">Công suất: 535W</span>
-                                                <span class="product-brand">Hãng: Canadian Solar</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <!-- No match in category message -->
+                            <div id="noMatchMessage" class="col-12 text-center py-5 d-none">
+                                <p class="text-muted">Chưa có sản phẩm nào trong danh mục này.</p>
+                            </div>
+
+                            <!-- Fallback if no products in database -->
+                            <div th:if="${featuredProducts == null or featuredProducts.isEmpty()}"
+                                class="col-12 text-center py-5">
+                                <p class="mb-2">Chưa tìm thấy sản phẩm nổi bật nào.</p>
+                                <small class="text-muted d-block">Lưu ý: Sản phẩm phải được tích chọn <strong>"Hoạt
+                                        động"</strong> VÀ <strong>"Sản phẩm nổi bật"</strong> để hiển thị ở đây.</small>
                             </div>
                         </div>
                     </div>
@@ -539,8 +563,62 @@
         </div>
     </section>
 
+    <script>
+        function switchProductCategory(categoryName, element) {
+            // 1. Visual Tab State
+            document.querySelectorAll('.product_tab_icon').forEach(el => el.classList.remove('active'));
+            if (element) element.classList.add('active');
+
+            // 2. Filter Logic
+            const items = document.querySelectorAll('.product-item');
+            const noMatchMsg = document.getElementById('noMatchMessage');
+
+            const targetKeywords = categoryName.toLowerCase().split(/[ \s&]+/).filter(k => k.length > 2);
+
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const itemCat = (item.getAttribute('data-category') || '').toLowerCase();
+                const itemName = (item.getAttribute('data-name') || '').toLowerCase();
+
+                let match = false;
+                if (targetKeywords.length === 0) {
+                    match = itemCat.includes(categoryName.toLowerCase()) || itemName.includes(categoryName.toLowerCase());
+                } else {
+                    match = targetKeywords.some(kw => itemCat.includes(kw) || itemName.includes(kw));
+                }
+
+                if (match) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            if (noMatchMsg) {
+                if (visibleCount === 0 && items.length > 0) {
+                    noMatchMsg.classList.remove('d-none');
+                } else {
+                    noMatchMsg.classList.add('d-none');
+                }
+            }
+        }
+
+        // Initialize: Show ALL featured products by default on load
+        document.addEventListener('DOMContentLoaded', () => {
+            // We don't filter on load anymore to ensure products are visible if categories mismatch
+            // But we still want to keep the "Active" visual state if we can't show all
+            // Let's just leaved it as is - all items have style="display: block" in HTML above.
+
+            // Optional: if you want a specific tab active but showing all:
+            // document.querySelectorAll('.product_tab_icon').forEach(el => el.classList.remove('active'));
+        });
+    </script>
+
     <!-- News Section -->
-    <section class="news-section-new">
+    <section class="news-section-new"
+        style="background-image: url('/photo/2-layersfse.jpg'); background-size: cover; background-attachment: fixed;">
         <div class="news-container">
             <!-- Header -->
             <div class="news-header">
@@ -557,11 +635,11 @@
                         <span class="featured-date" th:text="${featuredNews.publishedDateFormatted}">01.07.2025</span>
                         <h3 class="featured-title">
                             <a th:href="@{/news/{id}(id=${featuredNews.id})}" th:text="${featuredNews.title}">
-                                DAT Group Hợp Tác Với Lithium Valley – Lưu Trữ Điện Dân Dụng
+                                HBMP Hợp Tác Với Lithium Valley – Lưu Trữ Điện Dân Dụng
                             </a>
                         </h3>
                         <p class="featured-excerpt" th:text="${featuredNews.shortDescription}">
-                            Trong bối cảnh nhu cầu sử dụng điện mặt trời dân dụng ngày càng gia tăng, DAT Group tự hào
+                            Trong bối cảnh nhu cầu sử dụng điện mặt trời dân dụng ngày càng gia tăng, HBMP tự hào
                             chính thức hợp tác chiến lược...
                         </p>
                         <a th:href="@{/news/{id}(id=${featuredNews.id})}" class="featured-cta">
@@ -573,7 +651,7 @@
                             th:alt="${featuredNews.title}">
                         <div class="featured-image-overlay">
                             <span class="overlay-link">TÌM HIỂU NGAY</span>
-                            <span class="overlay-hotline">www.datsolar.com | Hotline: 1800 6567</span>
+                            <span class="overlay-hotline">www.hbmp.com.vn | Hotline: 1800 6567</span>
                         </div>
                     </div>
                 </div>
@@ -770,6 +848,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script th:src="@{/js/main.js}"></script>
+
 </body>
 
 </html>

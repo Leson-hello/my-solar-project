@@ -97,7 +97,7 @@ public class AdminController {
 
             // Set default values
             if (newsDTO.getAuthor() == null || newsDTO.getAuthor().trim().isEmpty()) {
-                newsDTO.setAuthor("Admin DAT");
+                newsDTO.setAuthor("Admin HBMP");
             }
 
             // Handle different actions

@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     statsObserver.unobserve(entry.target);
                 }
             });
-        }, {threshold: 0.5});
+        }, { threshold: 0.5 });
 
         statsObserver.observe(statsSection);
     }
@@ -262,17 +262,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const socialLinks = document.querySelectorAll('.social-links a');
     socialLinks.forEach(link => {
         link.addEventListener('click', function (e) {
-            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (!href || href === '#' || href.includes('zalo.me')) return; // Allow normal links
+
             const url = encodeURIComponent(window.location.href);
             const title = encodeURIComponent(document.title);
 
             let shareUrl = '';
 
-            if (this.href.includes('facebook')) {
+            if (href.includes('facebook') && !href.includes('sharer')) {
+                e.preventDefault();
                 shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-            } else if (this.href.includes('twitter')) {
+            } else if (href.includes('twitter')) {
+                e.preventDefault();
                 shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
-            } else if (this.href.includes('linkedin')) {
+            } else if (href.includes('linkedin')) {
+                e.preventDefault();
                 shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
             }
 

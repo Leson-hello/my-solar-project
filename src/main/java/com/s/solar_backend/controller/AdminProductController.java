@@ -64,6 +64,8 @@ public class AdminProductController {
             @RequestParam(required = false) MultipartFile imageFile,
             @RequestParam(required = false) MultipartFile[] galleryFiles,
             @RequestParam(required = false) MultipartFile[] documentFiles,
+            @RequestParam(required = false) MultipartFile[] certificateFiles,
+            @RequestParam(required = false) MultipartFile[] policyFiles,
             RedirectAttributes redirectAttributes) {
 
         try {
@@ -95,26 +97,20 @@ public class AdminProductController {
 
             // Documents (multiple)
             if (documentFiles != null && documentFiles.length > 0) {
-                StringBuilder docsJson = new StringBuilder();
-                String existingDocs = productDTO.getDocuments();
-                if (existingDocs != null && !existingDocs.isEmpty() && existingDocs.startsWith("[")) {
-                    docsJson.append(existingDocs.substring(0, existingDocs.length() - 1));
-                } else {
-                    docsJson.append("[");
-                }
-                boolean first = docsJson.length() == 1;
-                for (MultipartFile file : documentFiles) {
-                    if (file != null && !file.isEmpty()) {
-                        String url = saveDocument(file);
-                        String name = file.getOriginalFilename();
-                        if (!first)
-                            docsJson.append(",");
-                        docsJson.append("{\"name\":\"").append(name).append("\",\"url\":\"").append(url).append("\"}");
-                        first = false;
-                    }
-                }
-                docsJson.append("]");
-                productDTO.setDocuments(docsJson.toString());
+                String docsJson = processDocuments(documentFiles, productDTO.getDocuments());
+                productDTO.setDocuments(docsJson);
+            }
+
+            // Certificates (multiple)
+            if (certificateFiles != null && certificateFiles.length > 0) {
+                String certsJson = processDocuments(certificateFiles, productDTO.getCertificates());
+                productDTO.setCertificates(certsJson);
+            }
+
+            // Policies (multiple)
+            if (policyFiles != null && policyFiles.length > 0) {
+                String policiesJson = processDocuments(policyFiles, productDTO.getPolicies());
+                productDTO.setPolicies(policiesJson);
             }
 
             ProductDTO savedProduct = productService.createProduct(productDTO);
@@ -126,6 +122,28 @@ public class AdminProductController {
             redirectAttributes.addFlashAttribute("error", "Lỗi khi tạo sản phẩm: " + e.getMessage());
             return "redirect:/admin/products/create";
         }
+    }
+
+    private String processDocuments(MultipartFile[] files, String existingJson) throws IOException {
+        StringBuilder json = new StringBuilder();
+        if (existingJson != null && !existingJson.isEmpty() && existingJson.startsWith("[")) {
+            json.append(existingJson.substring(0, existingJson.length() - 1));
+        } else {
+            json.append("[");
+        }
+        boolean first = json.length() == 1;
+        for (MultipartFile file : files) {
+            if (file != null && !file.isEmpty()) {
+                String url = saveDocument(file);
+                String name = file.getOriginalFilename();
+                if (!first)
+                    json.append(",");
+                json.append("{\"name\":\"").append(name).append("\",\"url\":\"").append(url).append("\"}");
+                first = false;
+            }
+        }
+        json.append("]");
+        return json.toString();
     }
 
     @GetMapping("/{id}/edit")
@@ -149,6 +167,8 @@ public class AdminProductController {
             @RequestParam(required = false) MultipartFile imageFile,
             @RequestParam(required = false) MultipartFile[] galleryFiles,
             @RequestParam(required = false) MultipartFile[] documentFiles,
+            @RequestParam(required = false) MultipartFile[] certificateFiles,
+            @RequestParam(required = false) MultipartFile[] policyFiles,
             RedirectAttributes redirectAttributes) {
 
         try {
@@ -179,26 +199,20 @@ public class AdminProductController {
 
             // Documents (multiple)
             if (documentFiles != null && documentFiles.length > 0) {
-                StringBuilder docsJson = new StringBuilder();
-                String existingDocs = productDTO.getDocuments();
-                if (existingDocs != null && !existingDocs.isEmpty() && existingDocs.startsWith("[")) {
-                    docsJson.append(existingDocs.substring(0, existingDocs.length() - 1));
-                } else {
-                    docsJson.append("[");
-                }
-                boolean first = docsJson.length() == 1;
-                for (MultipartFile file : documentFiles) {
-                    if (file != null && !file.isEmpty()) {
-                        String url = saveDocument(file);
-                        String name = file.getOriginalFilename();
-                        if (!first)
-                            docsJson.append(",");
-                        docsJson.append("{\"name\":\"").append(name).append("\",\"url\":\"").append(url).append("\"}");
-                        first = false;
-                    }
-                }
-                docsJson.append("]");
-                productDTO.setDocuments(docsJson.toString());
+                String docsJson = processDocuments(documentFiles, productDTO.getDocuments());
+                productDTO.setDocuments(docsJson);
+            }
+
+            // Certificates (multiple)
+            if (certificateFiles != null && certificateFiles.length > 0) {
+                String certsJson = processDocuments(certificateFiles, productDTO.getCertificates());
+                productDTO.setCertificates(certsJson);
+            }
+
+            // Policies (multiple)
+            if (policyFiles != null && policyFiles.length > 0) {
+                String policiesJson = processDocuments(policyFiles, productDTO.getPolicies());
+                productDTO.setPolicies(policiesJson);
             }
 
             productService.updateProduct(id, productDTO);

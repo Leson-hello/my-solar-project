@@ -188,7 +188,7 @@
         <nav class="admin-sidebar">
             <div class="sidebar-header">
                 <a th:href="@{/admin}" class="sidebar-brand">
-                    <i class="fas fa-solar-panel"></i> DAT Admin
+                    <i class="fas fa-solar-panel"></i> HBMP Admin
                 </a>
                 <small class="d-block text-white-50 mt-2">Content Management</small>
             </div>
@@ -477,9 +477,68 @@
                                         <small class="text-muted">Có thể chọn nhiều file PDF cùng lúc</small>
                                         <input type="file" id="documentFiles" name="documentFiles"
                                             accept=".pdf,application/pdf" multiple style="display: none;"
-                                            onchange="previewDocuments(this)">
+                                            onchange="previewDocuments(this, 'documentPreview')">
                                     </div>
                                     <div id="documentPreview" class="mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Certificate Upload Card -->
+                            <div class="form-card">
+                                <div class="form-header">
+                                    <h5 class="mb-0"><i class="fas fa-certificate"></i> Chứng chỉ sản phẩm</h5>
+                                </div>
+                                <div class="form-body">
+                                    <!-- Existing Certificates -->
+                                    <div th:if="${product.certificates != null and !product.certificates.isEmpty()}"
+                                        class="mb-3">
+                                        <label class="form-label">Chứng chỉ hiện tại:</label>
+                                        <div id="existingCerts" class="small">
+                                            <!-- Will be populated by JS -->
+                                        </div>
+                                        <input type="hidden" id="certificatesHidden" name="certificates"
+                                            th:value="${product.certificates}">
+                                    </div>
+
+                                    <div class="image-upload-area"
+                                        onclick="document.getElementById('certificateFiles').click()">
+                                        <i class="fas fa-award fa-2x text-muted mb-2"></i>
+                                        <p class="text-muted mb-2">Click để tải lên chứng chỉ</p>
+                                        <small class="text-muted">Có thể chọn nhiều file cùng lúc</small>
+                                        <input type="file" id="certificateFiles" name="certificateFiles" multiple
+                                            style="display: none;"
+                                            onchange="previewDocuments(this, 'certificatePreview')">
+                                    </div>
+                                    <div id="certificatePreview" class="mt-2"></div>
+                                </div>
+                            </div>
+
+                            <!-- Policy Upload Card -->
+                            <div class="form-card">
+                                <div class="form-header">
+                                    <h5 class="mb-0"><i class="fas fa-shield-alt"></i> Chính sách bảo hành</h5>
+                                </div>
+                                <div class="form-body">
+                                    <!-- Existing Policies -->
+                                    <div th:if="${product.policies != null and !product.policies.isEmpty()}"
+                                        class="mb-3">
+                                        <label class="form-label">Chính sách hiện tại:</label>
+                                        <div id="existingPolicies" class="small">
+                                            <!-- Will be populated by JS -->
+                                        </div>
+                                        <input type="hidden" id="policiesHidden" name="policies"
+                                            th:value="${product.policies}">
+                                    </div>
+
+                                    <div class="image-upload-area"
+                                        onclick="document.getElementById('policyFiles').click()">
+                                        <i class="fas fa-file-contract fa-2x text-muted mb-2"></i>
+                                        <p class="text-muted mb-2">Click để tải lên chính sách</p>
+                                        <small class="text-muted">Có thể chọn nhiều file cùng lúc</small>
+                                        <input type="file" id="policyFiles" name="policyFiles" multiple
+                                            style="display: none;" onchange="previewDocuments(this, 'policyPreview')">
+                                    </div>
+                                    <div id="policyPreview" class="mt-2"></div>
                                 </div>
                             </div>
 
@@ -633,8 +692,8 @@
         }
 
         // Documents preview (multiple)
-        function previewDocuments(input) {
-            const preview = document.getElementById('documentPreview');
+        function previewDocuments(input, previewId) {
+            const preview = document.getElementById(previewId);
             preview.innerHTML = '';
             if (input.files) {
                 Array.from(input.files).forEach(file => {
@@ -648,22 +707,31 @@
 
         // Display existing documents from JSON
         $(document).ready(function () {
-            const docsHidden = document.getElementById('documentsHidden');
-            if (docsHidden && docsHidden.value) {
+            // Documents
+            renderExistingFiles('documentsHidden', 'existingDocs', 'fa-file-pdf', 'text-danger');
+            // Certificates
+            renderExistingFiles('certificatesHidden', 'existingCerts', 'fa-certificate', 'text-info');
+            // Policies
+            renderExistingFiles('policiesHidden', 'existingPolicies', 'fa-shield-alt', 'text-success');
+        });
+
+        function renderExistingFiles(hiddenId, containerId, iconClass, textClass) {
+            const hiddenInput = document.getElementById(hiddenId);
+            if (hiddenInput && hiddenInput.value) {
                 try {
-                    const docs = JSON.parse(docsHidden.value);
-                    const container = document.getElementById('existingDocs');
-                    if (container && docs.length > 0) {
-                        docs.forEach(doc => {
+                    const files = JSON.parse(hiddenInput.value);
+                    const container = document.getElementById(containerId);
+                    if (container && files.length > 0) {
+                        files.forEach(file => {
                             const div = document.createElement('div');
                             div.className = 'd-flex align-items-center p-2 border rounded bg-light mb-1';
-                            div.innerHTML = '<i class="fas fa-file-pdf text-danger me-2"></i><a href="' + doc.url + '" target="_blank">' + doc.name + '</a>';
+                            div.innerHTML = `<i class="fas ${iconClass} ${textClass} me-2"></i><a href="${file.url}" target="_blank">${file.name}</a>`;
                             container.appendChild(div);
                         });
                     }
                 } catch (e) { }
             }
-        });
+        }
 
         // Auto-hide alerts
         setTimeout(() => {
