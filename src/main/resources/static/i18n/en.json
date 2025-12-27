@@ -1,0 +1,79 @@
+{
+    "nav": {
+        "enterprise": "ENTERPRISE",
+        "household": "HOUSEHOLD",
+        "agriculture": "AGRICULTURE",
+        "projects": "PROJECTS",
+        "solutions": "SOLUTIONS",
+        "products": "PRODUCTS",
+        "news": "NEWS",
+        "contact": "CONTACT",
+        "intro": "About Us",
+        "careers": "Careers",
+        "partners": "Partners",
+        "support": "Support",
+        "docs": "Documents"
+    },
+    "solutions_menu": {
+        "esco": "ESCO",
+        "grid_tied": "Grid-tied Solar System",
+        "hybrid": "Hybrid System",
+        "pump": "Solar Water Pump"
+    },
+    "products_menu": {
+        "panels": "Solar Panels",
+        "inverter": "Inverter / Grid-tied",
+        "battery": "Energy Storage",
+        "lights": "Solar Lights",
+        "accessories": "Accessories",
+        "all": "All Products"
+    },
+    "common": {
+        "search_placeholder": "Search...",
+        "hotline": "Hotline",
+        "connect": "CONNECT WITH HBMP",
+        "read_more": "VIEW DETAILS",
+        "contact_now": "GET ADVICE NOW"
+    },
+    "home": {
+        "banner": {
+            "title": "WE ARE THE EFFECTIVE UNIT IN THE FIELD OF SOLAR ENERGY",
+            "cta": "EXPLORE THE GREEN ENERGY WORLD WITH HBMP SOLAR"
+        },
+        "stats": {
+            "capacity": "TOTAL CAPACITY",
+            "capacity_unit": "GWP",
+            "systems": "INSTALLED SYSTEMS",
+            "systems_unit": "SYSTEMS",
+            "partners": "DISTRIBUTION PARTNERS",
+            "partners_unit": "PARTNERS"
+        },
+        "about": {
+            "title": "ABOUT HBMP",
+            "desc": "HBMP is a technology - trading service group with leading scale and reputation in Vietnam in the field of industrial automation and renewable energy.",
+            "exp_years": "YEARS OF SUSTAINABLE",
+            "exp_sustainable": "DEVELOPMENT EXPERIENCE",
+            "profile_cta": "CAPABILITY PROFILE"
+        },
+        "solutions_title": "SOLAR ENERGY SOLUTIONS",
+        "solutions_subtitle": "HBMP understands the benefits of applying solar energy sources to many different areas of life.",
+        "solutions_detail": {
+            "label": "SOLUTIONS",
+            "usage": "USAGE",
+            "payback": "PAYBACK",
+            "year": "Years"
+        },
+        "projects_title": "REALIZED PROJECTS",
+        "projects_subtitle": "We are committed to serving customers with the \"heart\" of enthusiasm and high sense of responsibility!",
+        "project_card": {
+            "year": "Year",
+            "power": "Capacity",
+            "production": "Output/Year"
+        },
+        "products_title": "FEATURED PRODUCTS",
+        "news_title": "NEWS & EVENTS",
+        "news_view_all": "ALL NEWS",
+        "partners_title": "STRATEGIC PARTNERS",
+        "partners_subtitle": "We cooperate with leading electronics manufacturers and distributors worldwide to bring customers optimal energy products."
+    }
+}

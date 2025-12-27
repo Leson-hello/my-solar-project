@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải Pháp Điện Mặt Trời Cho Nông Nghiệp - HBMP Solar</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Giải pháp bơm nước năng lượng mặt trời cho nông nghiệp từ HBMP Solar. Tiết kiệm chi phí, chủ động nguồn nước, tăng năng suất cây trồng.">
+    <meta name="keywords" content="điện mặt trời nông nghiệp, bơm năng lượng mặt trời, solar pump, HBMP solar">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+    <style>
+        /* Custom styles for this page extracted/adapted from reference */
+        .solution-banner {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-image: url('https://datsolar.com/wp-content/uploads/2020/09/Solar-Panels-Sunset-shutterstock-219491350.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .solution-banner-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .solution-banner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .about-solution-box {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin: 50px 0;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .about-solution-content {
+            padding: 40px;
+            flex: 1;
+        }
+
+        .about-solution-img {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-solution-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .system-types-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .system-type-btn {
+            padding: 10px 30px;
+            background: #f1f1f1;
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .system-type-btn.active {
+            background: #FF6600;
+            color: white;
+        }
+
+        .system-content {
+            display: none;
+        }
+
+        .system-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .benefit-section {
+            background-image: url('https://datsolar.com/wp-content/uploads/2020/09/bg_befiness.jpg');
+            background-size: cover;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            height: 100%;
+        }
+
+        .benefit-item h3 {
+            font-size: 1.2rem;
+            color: #FF6600;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .stats-box {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .stat-item h3 {
+            color: #FF6600;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #FF6600;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background: #cc5200;
+            color: white;
+        }
+
+        .customer-story-item {
+            position: relative;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+
+        .customer-story-item img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .why-choose-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .why-item {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .why-icon {
+            width: 60px;
+            margin-right: 20px;
+        }
+
+        .why-content {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <!-- Banner -->
+    <div class="solution-banner">
+        <div class="solution-banner-overlay"></div>
+        <div class="solution-banner-content container">
+            <h1 class="display-4 fw-bold">GIẢI PHÁP BƠM NĂNG LƯỢNG MẶT TRỜI</h1>
+            <p class="lead">Hiệu quả cao - Tiết kiệm chi phí - Thân thiện môi trường</p>
+        </div>
+    </div>
+
+    <!-- Introduction Section -->
+    <section class="container py-5">
+        <div class="about-solution-box">
+            <div class="about-solution-content">
+                <h2 class="section-title text-start" style="color: #FF6600;">Giới thiệu về bơm năng lượng mặt trời</h2>
+                <p>
+                    Bơm năng lượng mặt trời (solar pump) là thiết bị sử dụng nguồn điện được tạo ra từ các tấm pin mặt
+                    trời để vận hành máy bơm, thay thế hoàn toàn nguồn điện lưới truyền thống.
+                    Nguyên lý hoạt động dựa trên việc chuyển đổi ánh sáng mặt trời thành điện năng thông qua các tế bào
+                    quang điện, sau đó cung cấp cho motor bơm hoạt động.
+                </p>
+                <p>
+                    Việc sử dụng máy bơm nước năng lượng mặt trời không chỉ giúp tiết kiệm chi phí điện năng mà còn góp
+                    phần bảo vệ môi trường nhờ hạn chế phát thải khí nhà kính.
+                    Đây là giải pháp tối ưu cho các vùng nông thôn, khu vực thiếu hoặc không có điện lưới, phục vụ tưới
+                    tiêu, cấp nước sinh hoạt và các ứng dụng công nghiệp.
+                </p>
+                <a href="#contact-form" class="cta-button">NHẬN TƯ VẤN VÀ BÁO GIÁ</a>
+            </div>
+            <div class="about-solution-img">
+                <img src="https://datsolar.com/wp-content/uploads/2020/10/he-thong-dien-mat-troi-cho-bom-nuoc-h11110.png"
+                    alt="Sơ đồ bơm năng lượng mặt trời">
+            </div>
+        </div>
+    </section>
+
+    <!-- System Config Section -->
+    <section class="container py-5 bg-light">
+        <h2 class="section-title">HỆ THỐNG ĐIỆN MẶT TRỜI CHO BƠM NƯỚC</h2>
+
+        <div class="system-types-nav">
+            <button class="system-type-btn active" onclick="showSystem('independent', this)">Hệ độc lập</button>
+            <button class="system-type-btn" onclick="showSystem('grid-connected', this)">Kết hợp lưới</button>
+        </div>
+
+        <!-- Independent System -->
+        <div id="independent" class="system-content active">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <p>Hệ thống điện mặt trời cho bơm nước hệ độc lập là giải pháp sử dụng nguồn năng lượng mặt trời để
+                        vận hành máy bơm nước mà không cần kết nối lưới điện quốc gia.
+                        Đây là hệ thống thiết kế riêng biệt, cung cấp điện thẳng từ tấm pin năng lượng mặt trời cho máy
+                        bơm, giúp bơm nước lên trực tiếp hoặc lưu trữ trong bể chứa.</p>
+
+                    <h5 class="mt-4 fw-bold">Ưu điểm:</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-success me-2"></i> <strong>Tiết kiệm chi phí vận hành:</strong>
+                            Không tốn tiền điện hay nhiên liệu.</li>
+                        <li><i class="fas fa-check text-success me-2"></i> <strong>Không cần lưới điện:</strong> Phù hợp
+                            vùng nông thôn, vùng xa.</li>
+                        <li><i class="fas fa-check text-success me-2"></i> <strong>Bảo trì thấp:</strong> Vận hành bền
+                            bỉ trên 25-30 năm.</li>
+                        <li><i class="fas fa-check text-success me-2"></i> <strong>Tự động hóa:</strong> Có thể kết hợp
+                            điều khiển từ xa.</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://datsolar.com/wp-content/uploads/2020/10/he-thong-dien-mat-troi-cho-bom-nuoc-h11110.png"
+                        class="img-fluid" alt="Hệ độc lập">
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid Connected System -->
+        <div id="grid-connected" class="system-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <p>Hệ thống kết hợp lưới sử dụng nguồn năng lượng sạch từ mặt trời kết hợp với nguồn điện lưới quốc
+                        gia.
+                        Tối ưu hóa việc sử dụng năng lượng mặt trời khi có nắng, tự động chuyển sang điện lưới khi trời
+                        tối hoặc thiếu nắng.</p>
+
+                    <h5 class="mt-4 fw-bold">Ưu điểm:</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-success me-2"></i> <strong>Hoạt động 24/7:</strong> Không gián
+                            đoạn nhờ nguồn điện lưới dự phòng.</li>
+                        <li><i class="fas fa-check text-success me-2"></i> <strong>Tiết kiệm tối đa:</strong> Ưu tiên
+                            dùng điện mặt trời miễn phí.</li>
+                        <li><i class="fas fa-check text-success me-2"></i> <strong>Ổn định cao:</strong> Phù hợp mô hình
+                            nông nghiệp công nghệ cao.</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://datsolar.com/wp-content/uploads/2020/10/he-thong-dien-mat-troi-cho-bom-nuoc-h21110.png"
+                        class="img-fluid" alt="Hệ kết hợp lưới">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefit-section">
+        <div class="container">
+            <h2 class="section-title text-white">LỢI ÍCH DÀI HẠN</h2>
+            <div class="benefit-grid">
+                <div class="benefit-item">
+                    <h3>Chủ động nguồn nước</h3>
+                    <p>Điện mặt trời điều khiển trực tiếp máy bơm, giúp chủ động tưới tiêu bất kỳ thời điểm nào trong
+                        ngày. Lý tưởng cho trang trại trồng rau, cây ăn trái, cafe, cao su...</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Tiết kiệm chi phí</h3>
+                    <p>Hệ thống vận hành tự động, không tốn nhiên liệu (xăng, dầu) giá cao, không tốn nhân công vận hành
+                        thủ công.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Tăng năng suất</h3>
+                    <p>Nguồn nước ổn định giúp cây trồng phát triển tốt, tăng năng suất nông sản và thu nhập cho nông
+                        dân.</p>
+                </div>
+                <div class="benefit-item">
+                    <h3>Nông nghiệp xanh</h3>
+                    <p>Giúp đạt tiêu chuẩn xanh (VietGAP), nâng cao giá trị thương hiệu và nhận được nhiều chính sách hỗ
+                        trợ.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose HBMP -->
+    <section class="container py-5">
+        <h2 class="section-title">TẠI SAO CHỌN HBMP SOLAR</h2>
+        <div class="why-choose-grid">
+            <div class="why-item">
+                <div class="why-icon"><i class="fas fa-award fa-3x text-primary"></i></div>
+                <div class="why-content">
+                    <h5>Đối tác uy tín</h5>
+                    <p>HBMP Solar là đối tác chiến lược của các thương hiệu hàng đầu như Canadian Solar, SMA, INVT, đảm
+                        bảo thiết bị chính hãng chất lượng cao.</p>
+                </div>
+            </div>
+            <div class="why-item">
+                <div class="why-icon"><i class="fas fa-tools fa-3x text-primary"></i></div>
+                <div class="why-content">
+                    <h5>Kinh nghiệm dày dạn</h5>
+                    <p>Đội ngũ kỹ sư giàu kinh nghiệm, đã triển khai hàng nghìn hệ thống điện mặt trời trên toàn quốc.
+                    </p>
+                </div>
+            </div>
+            <div class="why-item">
+                <div class="why-icon"><i class="fas fa-headset fa-3x text-primary"></i></div>
+                <div class="why-content">
+                    <h5>Dịch vụ tận tâm</h5>
+                    <p>Hỗ trợ kỹ thuật 24/7, bảo hành chính hãng, đồng hành cùng khách hàng trong suốt vòng đời dự án.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real Projects Section -->
+    <section id="du-an-thuc-te"></section>
+    <section class="projects-section-new mb-5">
+        <div class="projects-container">
+            <h2 class="projects-title">DỰ ÁN THỰC TẾ</h2>
+            <p class="projects-subtitle">
+                Các dự án bơm năng lượng mặt trời hiệu quả cao đã được HBMP Solar triển khai
+            </p>
+
+            <!-- Projects Slider -->
+            <div class="projects-slider-wrapper">
+                <!-- Left Arrow -->
+                <button class="project-nav-btn project-prev" id="projectPrevAgriculture">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <!-- Slider Container -->
+                <div class="projects-slider" id="projectsSliderAgriculture">
+                    <!-- Project 1 -->
+                    <div class="project-slide side-slide">
+                        <img src="https://datsolar.com/wp-content/uploads/2020/10/du-an-nong-nghiep-h2.png"
+                            alt="Dự án 1">
+                    </div>
+
+                    <!-- Main Project (Center) -->
+                    <div class="project-slide main-slide">
+                        <img src="https://datsolar.com/wp-content/uploads/2020/10/du-an-nong-nghiep-h3.jpg"
+                            alt="Sản xuất rau sạch">
+                        <div class="project-slide-overlay">
+                            <span class="project-category">NÔNG NGHIỆP</span>
+                            <h3 class="project-name">SẢN XUẤT RAU SẠCH CÔNG NGHỆ CAO</h3>
+                            <div class="project-stats-row">
+                                <div class="stat-box">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span class="stat-label">Năm thi công</span>
+                                    <span class="stat-value">2018</span>
+                                </div>
+                                <div class="stat-box">
+                                    <i class="fas fa-bolt"></i>
+                                    <span class="stat-label">Công suất</span>
+                                    <span class="stat-value">2.2 kW</span>
+                                </div>
+                                <div class="stat-box">
+                                    <i class="fas fa-sun"></i>
+                                    <span class="stat-label">Hiệu quả</span>
+                                    <span class="stat-value">Cao</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-slide side-slide">
+                        <img src="https://datsolar.com/wp-content/uploads/2020/10/he-thong-dien-mat-troi-cho-bom-nuoc-h71110.png"
+                            alt="Dự án 3">
+                    </div>
+                </div>
+
+                <!-- Right Arrow -->
+                <button class="project-nav-btn project-next" id="projectNextAgriculture">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container text-center">
+            <h2 class="text-white mb-4">BẠN MUỐN LẮP ĐẶT ĐIỆN MẶT TRỜI CHO NÔNG NGHIỆP?</h2>
+            <p class="text-white-50 mb-4">Liên hệ ngay để được tư vấn miễn phí và nhận báo giá tốt nhất!</p>
+            <button class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#quoteModal">
+                <i class="fas fa-phone-alt me-2"></i> NHẬN TƯ VẤN NGAY
+            </button>
+        </div>
+    </section>
+
+    <!-- Quote Modal -->
+    <div class="modal fade" id="quoteModal" tabindex="-1" aria-labelledby="quoteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title-container">
+                        <h4 class="modal-title text-warning" id="quoteModalLabel">TƯ VẤN & BÁO GIÁ</h4>
+                        <h5 class="modal-subtitle">NÔNG NGHIỆP</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="quoteForm" method="post">
+                        <!-- Route to Enterprise Admin -->
+                        <input type="hidden" name="quoteType" value="ENTERPRISE">
+                        <input type="hidden" name="installationType" value="Nông nghiệp">
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-danger">Tên của bạn *</label>
+                                <input type="text" class="form-control" name="fullName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Số điện thoại *</label>
+                                <input type="tel" class="form-control" name="phone" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-danger">Email *</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tên công ty</label>
+                                <input type="text" class="form-control" name="companyName"
+                                    placeholder="Tên doanh nghiệp của bạn">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-danger">Diện tích mái (m²) *</label>
+                                <input type="number" class="form-control" name="roofArea" required min="1"
+                                    placeholder="VD: 1000">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label text-danger">Tỉnh/Thành phố *</label>
+                                <select class="form-select" name="address" required>
+                                    <option value="">Chọn tỉnh/thành phố</option>
+                                    <option value="Thành phố Hà Nội">Thành phố Hà Nội</option>
+                                    <option value="Thành phố Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
+                                    <option value="Thành phố Đà Nẵng">Thành phố Đà Nẵng</option>
+                                    <option value="Bình Dương">Bình Dương</option>
+                                    <option value="Đồng Nai">Đồng Nai</option>
+                                    <option value="Long An">Long An</option>
+                                    <option value="Khác">Khác</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Yêu cầu của bạn</label>
+                            <textarea class="form-control" name="message" rows="3"
+                                placeholder="Mô tả yêu cầu cụ thể của doanh nghiệp"></textarea>
+                        </div>
+
+                        <div class="text-start mt-3">
+                            <button type="submit" class="btn btn-submit">
+                                GỬI THÔNG TIN
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{layout/footer :: footer}"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab switching logic
+            window.showSystem = function (id, btn) {
+                document.querySelectorAll('.system-content').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.system-type-btn').forEach(el => el.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+                btn.classList.add('active');
+            };
+
+            // Slider Logic
+            const projectSlider = document.getElementById('projectsSliderAgriculture');
+            const projectPrev = document.getElementById('projectPrevAgriculture');
+            const projectNext = document.getElementById('projectNextAgriculture');
+
+            // Dictionary for Agriculture Projects
+            // --- Server Data Integration ---
+            /*[+
+            const serverProjects = [[${projects}]];
+            +]*/
+            const rawProjects = (typeof serverProjects !== 'undefined' && serverProjects) ? serverProjects : [];
+
+            // Map server data to slider format
+            const mappedProjects = rawProjects.map(p => ({
+                img: p.imageUrl || '/photo/anh10.jpg',
+                name: p.name,
+                category: 'NÔNG NGHIỆP',
+                year: p.createdAt ? new Date(p.createdAt).getFullYear() : '2023',
+                power: p.power ? p.power + ' kWp' : 'N/A',
+                eff: 'Cao'
+            }));
+
+            const agriProjects = mappedProjects.length > 0 ? mappedProjects : [
+                { img: 'https://datsolar.com/wp-content/uploads/2020/10/du-an-nong-nghiep-h2.png', name: 'BƠM NLMT NÔNG TRƯỜNG MÍA', category: 'NÔNG NGHIỆP', year: '2016', power: '2.2 kW', eff: 'Cao' },
+                { img: 'https://datsolar.com/wp-content/uploads/2020/10/du-an-nong-nghiep-h3.jpg', name: 'SẢN XUẤT RAU SẠCH CÔNG NGHỆ CAO', category: 'NÔNG NGHIỆP', year: '2018', power: '2.2 kW', eff: 'Cao' },
+                { img: 'https://datsolar.com/wp-content/uploads/2020/10/he-thong-dien-mat-troi-cho-bom-nuoc-h71110.png', name: 'NÔNG TRƯỜNG TẠI CAMPUCHIA', category: 'NÔNG NGHIỆP', year: '2020', power: '2.2 kW', eff: 'Cao' }
+            ];
+
+            let currentIdx = 1;
+
+            function updateAgriSlider() {
+                const slides = projectSlider.querySelectorAll('.project-slide');
+                const prevIdx = (currentIdx - 1 + agriProjects.length) % agriProjects.length;
+                const nextIdx = (currentIdx + 1) % agriProjects.length;
+
+                slides[0].querySelector('img').src = agriProjects[prevIdx].img;
+                slides[2].querySelector('img').src = agriProjects[nextIdx].img;
+
+                const mainSlide = slides[1];
+                mainSlide.querySelector('img').src = agriProjects[currentIdx].img;
+                mainSlide.querySelector('.project-category').textContent = agriProjects[currentIdx].category;
+                mainSlide.querySelector('.project-name').textContent = agriProjects[currentIdx].name;
+                mainSlide.querySelectorAll('.stat-value')[0].textContent = agriProjects[currentIdx].year;
+                mainSlide.querySelectorAll('.stat-value')[1].textContent = agriProjects[currentIdx].power;
+                mainSlide.querySelectorAll('.stat-value')[2].textContent = agriProjects[currentIdx].eff;
+            }
+
+            if (projectPrev && projectNext) {
+                projectPrev.addEventListener('click', function () {
+                    currentIdx = (currentIdx - 1 + agriProjects.length) % agriProjects.length;
+                    updateAgriSlider();
+                });
+
+                projectNext.addEventListener('click', function () {
+                    currentIdx = (currentIdx + 1) % agriProjects.length;
+                    updateAgriSlider();
+                });
+            }
+
+            // Quote Form Submission logic
+            const quoteForm = document.getElementById('quoteForm');
+            if (quoteForm) {
+                quoteForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    const formData = new FormData(this);
+                    const data = {};
+                    formData.forEach((value, key) => data[key] = value);
+
+                    fetch('/api/quotes', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => response.json())
+                        .then(result => {
+                            // Hide modal
+                            const modalEl = document.getElementById('quoteModal');
+                            const modal = bootstrap.Modal.getInstance(modalEl);
+                            if (modal) {
+                                modal.hide();
+                            }
+                            this.reset();
+                            alert('Cảm ơn bạn! Yêu cầu tư vấn của bạn đã được gửi thành công. Chúng tôi sẽ liên hệ lại sớm nhất.');
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Có lỗi xảy ra khi gửi yêu cầu. Vui lòng thử lại sau.');
+                        });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

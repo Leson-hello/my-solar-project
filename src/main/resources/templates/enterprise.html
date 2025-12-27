@@ -411,7 +411,26 @@
             const projectPrev = document.getElementById('projectPrevEnterprise');
             const projectNext = document.getElementById('projectNextEnterprise');
 
-            const enterpriseProjects = [
+            // --- Server Data Integration ---
+            /*[+
+            const serverProjects = [[${projects}]];
+            +]*/
+            const rawProjects = (typeof serverProjects !== 'undefined' && serverProjects) ? serverProjects : [];
+
+            // Helper to clean 'null' or undefined values
+            const clean = (val) => val || '';
+
+            // Map server data to slider format
+            const mappedProjects = rawProjects.map(p => ({
+                img: p.imageUrl || '/photo/anh6.jpg',
+                name: p.name,
+                category: 'DOANH NGHIỆP', // We know this page is for Enterprise
+                year: p.createdAt ? new Date(p.createdAt).getFullYear() : '2023',
+                power: p.power ? p.power + ' kWp' : 'N/A',
+                production: 'N/A'
+            }));
+
+            const enterpriseProjects = mappedProjects.length > 0 ? mappedProjects : [
                 { img: '/photo/anh6.jpg', name: 'CÔNG TY XYZ – ĐỒNG NAI', category: 'DOANH NGHIỆP', year: '2022', power: '1.2 MWp', production: '1,800 MWh' },
                 { img: '/photo/anh7.jpg', name: 'CÔNG TY TNHH ABC – BÌNH DƯƠNG', category: 'DOANH NGHIỆP', year: '2023', power: '500 kWp', production: '750 MWh' },
                 { img: '/photo/anh8.jpg', name: 'NHÀ MÁY DEF – LONG AN', category: 'DOANH NGHIỆP', year: '2023', power: '2.5 MWp', production: '3,750 MWh' },
@@ -734,6 +753,3 @@
 </body>
 
 </html>
-
-
-

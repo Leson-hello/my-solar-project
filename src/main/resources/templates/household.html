@@ -618,7 +618,23 @@
             const projectPrev = document.getElementById('projectPrevHousehold');
             const projectNext = document.getElementById('projectNextHousehold');
 
-            const householdProjects = [
+            // --- Server Data Integration ---
+            /*[+
+            const serverProjects = [[${projects}]];
+            +]*/
+            const rawProjects = (typeof serverProjects !== 'undefined' && serverProjects) ? serverProjects : [];
+
+            // Map server data to slider format
+            const mappedProjects = rawProjects.map(p => ({
+                img: p.imageUrl || '/photo/anh10.jpg',
+                name: p.name,
+                category: 'HỘ GIA ĐÌNH',
+                year: p.createdAt ? new Date(p.createdAt).getFullYear() : '2023',
+                power: p.power ? p.power + ' kWp' : 'N/A',
+                production: 'N/A'
+            }));
+
+            const householdProjects = mappedProjects.length > 0 ? mappedProjects : [
                 { img: '/photo/anh10.jpg', name: 'ANH LONG – BÌNH DƯƠNG', category: 'HỘ GIA ĐÌNH', year: '2018', power: '4.2 kWp', production: '7.9 MWh' },
                 { img: '/photo/anh18.jpg', name: 'ANH TRÍ – TP. HỒ CHÍ MINH', category: 'HỘ GIA ĐÌNH', year: '2019', power: '5.4 kWp', production: '10.2 MWh' },
                 { img: '/photo/anh9.jpg', name: 'ANH MINH – ĐỒNG NAI', category: 'HỘ GIA ĐÌNH', year: '2019', power: '3.24 kWp', production: '6.1 MWh' },
@@ -1014,6 +1030,3 @@
 </body>
 
 </html>
-
-
-

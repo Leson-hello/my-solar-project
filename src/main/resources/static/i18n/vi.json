@@ -1,0 +1,79 @@
+{
+    "nav": {
+        "enterprise": "DOANH NGHIỆP",
+        "household": "HỘ GIA ĐÌNH",
+        "agriculture": "NÔNG NGHIỆP",
+        "projects": "DỰ ÁN",
+        "solutions": "GIẢI PHÁP",
+        "products": "SẢN PHẨM",
+        "news": "TIN TỨC",
+        "contact": "LIÊN HỆ",
+        "intro": "Giới thiệu",
+        "careers": "Tuyển dụng",
+        "partners": "Đối tác",
+        "support": "Hỗ trợ",
+        "docs": "Tài liệu"
+    },
+    "solutions_menu": {
+        "esco": "ESCO",
+        "grid_tied": "Hệ thống ĐMT hòa lưới",
+        "hybrid": "Hệ thống Hybrid",
+        "pump": "Bơm năng lượng mặt trời"
+    },
+    "products_menu": {
+        "panels": "Tấm pin năng lượng mặt trời",
+        "inverter": "Inverter / Bộ hòa lưới",
+        "battery": "Pin lưu trữ",
+        "lights": "Đèn năng lượng mặt trời",
+        "accessories": "Phụ kiện",
+        "all": "Tất cả sản phẩm"
+    },
+    "common": {
+        "search_placeholder": "Tìm kiếm...",
+        "hotline": "Hotline",
+        "connect": "KẾT NỐI VỚI HBMP",
+        "read_more": "XEM CHI TIẾT",
+        "contact_now": "NHẬN TƯ VẤN NGAY"
+    },
+    "home": {
+        "banner": {
+            "title": "CHÚNG TÔI LÀ ĐƠN VỊ HỮU HIỆU TRONG LĨNH VỰC NĂNG LƯỢNG MẶT TRỜI",
+            "cta": "KHÁM PHÁ THẾ GIỚI NĂNG LƯỢNG XANH CÙNG HBMP SOLAR"
+        },
+        "stats": {
+            "capacity": "TỔNG CÔNG SUẤT",
+            "capacity_unit": "GWP",
+            "systems": "HỆ THỐNG ĐÃ LẮP ĐẶT",
+            "systems_unit": "HỆ THỐNG",
+            "partners": "ĐỐI TÁC PHÂN PHỐI",
+            "partners_unit": "ĐỐI TÁC"
+        },
+        "about": {
+            "title": "VỀ HBMP",
+            "desc": "HBMP là Tập đoàn công nghệ – thương mại dịch vụ có quy mô, uy tín dẫn đầu Việt Nam trong lĩnh vực tự động hóa công nghiệp và năng lượng tái tạo.",
+            "exp_years": "NĂM KINH NGHIỆM PHÁT",
+            "exp_sustainable": "TRIỂN BỀN VỮNG",
+            "profile_cta": "HỒ SƠ NĂNG LỰC"
+        },
+        "solutions_title": "GIẢI PHÁP ĐIỆN NĂNG LƯỢNG MẶT TRỜI",
+        "solutions_subtitle": "HBMP hiểu rõ những lợi ích của việc ứng dụng nguồn năng lượng mặt trời vào nhiều lĩnh vực khác nhau của cuộc sống.",
+        "solutions_detail": {
+            "label": "GIẢI PHÁP",
+            "usage": "SỬ DỤNG",
+            "payback": "HOÀN VỐN",
+            "year": "Năm"
+        },
+        "projects_title": "DỰ ÁN ĐÃ THỰC HIỆN",
+        "projects_subtitle": "Chúng tôi cam kết phục vụ khách hàng bằng cả \"trái tim\" của sự nhiệt huyết và tinh thần trách nhiệm cao!",
+        "project_card": {
+            "year": "Năm thi công",
+            "power": "Công suất",
+            "production": "Sản lượng/năm"
+        },
+        "products_title": "SẢN PHẨM NỔI BẬT",
+        "news_title": "TIN TỨC SỰ KIỆN",
+        "news_view_all": "TẤT CẢ TIN TỨC",
+        "partners_title": "ĐỐI TÁC CHIẾN LƯỢC",
+        "partners_subtitle": "Chúng tôi hợp tác với các nhà sản xuất điện tử và nhà phân phối hàng đầu toàn thế giới để mang đến cho khách hàng những sản phẩm năng lượng tối ưu."
+    }
+}

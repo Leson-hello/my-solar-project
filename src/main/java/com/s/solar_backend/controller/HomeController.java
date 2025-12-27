@@ -4,6 +4,7 @@ import com.s.solar_backend.dto.NewsDTO;
 import com.s.solar_backend.dto.ProductDTO;
 import com.s.solar_backend.service.NewsService;
 import com.s.solar_backend.service.ProductService;
+import com.s.solar_backend.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ public class HomeController {
 
     private final NewsService newsService;
     private final ProductService productService;
+    private final ProjectService projectService;
 
     @GetMapping
     public String home(Model model) {
@@ -37,6 +39,21 @@ public class HomeController {
         // Add featured products for homepage
         List<ProductDTO> featuredProducts = productService.getFeaturedProducts();
         model.addAttribute("featuredProducts", featuredProducts);
+
+        // Add recent projects for homepage slider
+        List<com.s.solar_backend.entity.Project> projectEntities = projectService.getActiveProjects(0, 20).getContent();
+        List<java.util.Map<String, Object>> projects = projectEntities.stream().map(p -> {
+            java.util.Map<String, Object> map = new java.util.HashMap<>();
+            map.put("id", p.getId());
+            map.put("name", p.getName());
+            map.put("imageUrl", p.getImageUrl());
+            map.put("application", p.getApplication() != null ? p.getApplication().name() : "DOANH_NGHIEP");
+            map.put("power", p.getPower());
+            map.put("createdAt", p.getCreatedAt() != null ? p.getCreatedAt().toString() : null);
+            return map;
+        }).collect(java.util.stream.Collectors.toList());
+
+        model.addAttribute("projects", projects);
 
         return "index";
     }

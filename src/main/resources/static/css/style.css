@@ -167,13 +167,6 @@ body {
     color: #333;
 }
 
-.language-selector img {
-    height: 14px;
-    /* Small flags */
-    width: auto;
-    vertical-align: middle;
-}
-
 /* 3. Main Navigation (Black Part) */
 .main-navigation {
     background-color: #222222;
@@ -243,6 +236,105 @@ body {
     color: #333;
 }
 
+/* Active Language */
+.lang-flag {
+    width: 26px;
+    height: 18px;
+    object-fit: cover;
+    border-radius: 2px;
+    transition: all 0.2s;
+    border: 1px solid #e0e0e0;
+}
+
+.language-selector a:hover .lang-flag {
+    transform: scale(1.1);
+}
+
+.active-lang .lang-flag {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 8px rgba(30, 136, 229, 0.4);
+    transform: scale(1.1);
+}
+
+/* Responsive Header Adjustments */
+@media (max-width: 991px) {
+    .site-logo img.header-image {
+        max-height: 50px;
+    }
+
+    .top-bar {
+        display: none;
+    }
+
+    /* Off-canvas Style Mobile Menu */
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* Hidden by default */
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: #222;
+        padding: 60px 20px 20px;
+        transition: right 0.3s ease-in-out;
+        z-index: 9999;
+        overflow-y: auto;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .navbar-collapse.show {
+        right: 0;
+        /* Slide in */
+    }
+
+    .main-navigation .navbar-nav {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .main-navigation .nav-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+        text-align: left;
+    }
+
+    .main-navigation .nav-link {
+        color: #fff !important;
+        padding: 15px 0 !important;
+        font-size: 16px;
+    }
+
+    .navbar-toggler {
+        border: none;
+        background: transparent;
+        font-size: 24px;
+        color: #333;
+        z-index: 10000;
+        /* Above menu */
+    }
+
+    /* Overlay when menu is open */
+    .menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .menu-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+}
+
 /* Banner Slider Styles */
 .banner_slider {
     position: relative;
@@ -258,7 +350,8 @@ body {
 .banner img {
     width: 100%;
     height: auto;
-    min-height: 400px;
+    min-height: 250px;
+    /* Reduce min-height for mobile */
     object-fit: cover;
     display: block;
 }
@@ -3235,21 +3328,26 @@ body {
 /* 4. Products Section Layout Fix */
 .product_tab_item_box {
     background: #fff;
-    padding: 15px;
+    padding: 12px;
     border: 1px solid #eee;
-    height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    /* Horizontal layout: image left, content right */
     align-items: flex-start;
+    /* Align items to the top */
     text-align: left;
     justify-content: flex-start;
     transition: all 0.3s ease;
+    gap: 15px;
+    /* Space between image and text */
+    border-radius: 4px;
 }
 
 .product_tab_item_content {
-    width: 100%;
+    flex: 1;
+    /* Take remaining width */
     text-align: left;
-    padding-top: 5px;
+    padding-top: 0;
 }
 
 .product-specs-home p {
@@ -3268,7 +3366,8 @@ body {
 }
 
 .product_tab_item_content h4 {
-    font-size: 16px;
+    font-size: 18px;
+    /* Slightly larger heading */
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -3284,13 +3383,34 @@ body {
 }
 
 .product_tab_item_img {
-    width: 100%;
-    height: 200px;
-    /* Fixed height for consistency */
+    width: 220px;
+    /* Fixed width for the image part */
+    height: 160px;
+    /* Maintain fixed height */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 0;
+    /* Remove bottom margin */
+    flex-shrink: 0;
+    /* Don't let the image shrink */
+    background: #f8f9fa;
+    /* Light background for image area */
+    border-radius: 4px;
+}
+
+/* Responsiveness for small screens */
+@media (max-width: 768px) {
+    .product_tab_item_box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .product_tab_item_img {
+        width: 100%;
+        height: 200px;
+    }
 }
 
 .product_tab_item_img img {
@@ -3298,4 +3418,94 @@ body {
     max-width: 100%;
     width: auto;
     object-fit: contain;
+}
+
+/* =========================================
+   HORIZONTAL SCROLLABLE PRODUCT DISPLAY
+   ========================================= */
+
+.product-horizontal-scroll {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    padding: 10px 5px;
+    cursor: grab;
+    user-select: none;
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
+}
+
+.product-horizontal-scroll:active {
+    cursor: grabbing;
+}
+
+/* Hide scrollbar but keep functionality */
+.product-horizontal-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.product-horizontal-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.product-horizontal-scroll::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.product-horizontal-scroll::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* Individual product card in horizontal scroll */
+.product-card-horizontal {
+    flex: 0 0 auto;
+    width: 480px;
+    min-width: 480px;
+    display: flex;
+}
+
+.product-card-horizontal .product_tab_item_box {
+    width: 100%;
+    flex-direction: row;
+    /* Image left, content right */
+    align-items: flex-start;
+}
+
+.product-card-horizontal .product_tab_item_img {
+    width: 200px;
+    height: 150px;
+    margin-bottom: 0;
+    margin-right: 15px;
+}
+
+.product-card-horizontal .product_tab_item_content {
+    flex: 1;
+    padding-top: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .product-card-horizontal {
+        width: 300px;
+        min-width: 300px;
+    }
+
+    .product-card-horizontal .product_tab_item_img {
+        height: 160px;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-card-horizontal {
+        width: 260px;
+        min-width: 260px;
+    }
+
+    .product-card-horizontal .product_tab_item_img {
+        height: 140px;
+    }
 }

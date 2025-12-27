@@ -8,21 +8,15 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class HouseholdController {
+public class NongNghiepController {
 
     private final com.s.solar_backend.service.ProjectService projectService;
 
-    @GetMapping("/ho-gia-dinh")
-    public String household(Model model) {
-        // Add model attributes for statistics
-        model.addAttribute("yearsExperience", "20+");
-        model.addAttribute("totalStaff", "350+");
-        model.addAttribute("totalCapacity", "900");
-        model.addAttribute("totalSystems", "10.000+");
-
-        // Fetch Household Projects
+    @GetMapping("/nong-nghiep")
+    public String nongNghiepPage(Model model) {
+        // Fetch Agriculture Projects
         List<com.s.solar_backend.entity.Project> projectEntities = projectService.filterProjects(
-                com.s.solar_backend.entity.Project.ProjectApplication.HO_GIA_DINH,
+                com.s.solar_backend.entity.Project.ProjectApplication.NONG_NGHIEP,
                 null,
                 0, 20).getContent();
 
@@ -31,7 +25,7 @@ public class HouseholdController {
             map.put("id", p.getId());
             map.put("name", p.getName());
             map.put("imageUrl", p.getImageUrl());
-            map.put("application", p.getApplication() != null ? p.getApplication().name() : "HO_GIA_DINH");
+            map.put("application", p.getApplication() != null ? p.getApplication().name() : "NONG_NGHIEP");
             map.put("power", p.getPower());
             map.put("createdAt", p.getCreatedAt() != null ? p.getCreatedAt().toString() : null);
             return map;
@@ -39,6 +33,6 @@ public class HouseholdController {
 
         model.addAttribute("projects", projects);
 
-        return "household";
+        return "nong-nghiep";
     }
 }

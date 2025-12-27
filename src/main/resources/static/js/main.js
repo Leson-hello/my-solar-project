@@ -106,12 +106,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Mobile menu toggle
     const mobileMenuToggle = document.querySelector('.navbar-toggler');
-    const mobileMenu = document.querySelector('#navbarNav');
+    const mobileMenu = document.querySelector('#mainNav');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    const mobileCloseBtn = document.querySelector('.btn-close-menu'); // If you add a specific class to the close button
 
-    if (mobileMenuToggle && mobileMenu) {
-        mobileMenuToggle.addEventListener('click', function () {
-            mobileMenu.classList.toggle('show');
+    if (mobileMenu) {
+        // Bootstrap handles the toggle of 'show' class mostly, but we can hook into it
+        // Or manually handle it if we want custom behavior. 
+        // Since we rely on Bootstrap's data-bs-toggle, let's listen for changes
+
+        const observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if (mutation.attributeName === "class") {
+                    const isOpened = mobileMenu.classList.contains('show');
+                    if (isOpened) {
+                        if (menuOverlay) menuOverlay.classList.add('active');
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling
+                    } else {
+                        if (menuOverlay) menuOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
         });
+
+        observer.observe(mobileMenu, {
+            attributes: true
+        });
+
+        // click on overlay to close
+        if (menuOverlay) {
+            menuOverlay.addEventListener('click', function () {
+                const bsCollapse = new bootstrap.Collapse(mobileMenu, {
+                    toggle: false
+                });
+                bsCollapse.hide();
+            });
+        }
     }
 
     // Newsletter form submission

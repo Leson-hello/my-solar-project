@@ -56,8 +56,10 @@
             <img th:src="@{/photo/anh7.1.jpg}" alt="HBMP Solar Farm">
             <div class="container grid-container">
                 <div class="content_banner">
-                    <h2>CHÚNG TÔI LÀ ĐƠN VỊ HỮU HIỆU TRONG LĨNH VỰC NĂNG LƯỢNG MẶT TRỜI</h2>
-                    <a href="#" class="button_style">KHÁM PHÁ THẾ GIỚI NĂNG LƯỢNG XANH CÙNG HBMP SOLAR</a>
+                    <h2 data-i18n="home.banner.title">CHÚNG TÔI LÀ ĐƠN VỊ HỮU HIỆU TRONG LĨNH VỰC NĂNG LƯỢNG MẶT TRỜI
+                    </h2>
+                    <a href="#" class="button_style" data-i18n="home.banner.cta">KHÁM PHÁ THẾ GIỚI NĂNG LƯỢNG XANH CÙNG
+                        HBMP SOLAR</a>
                 </div>
             </div>
         </div>
@@ -73,8 +75,9 @@
                             <i class="fas fa-solar-panel text-warning fa-3x"></i>
                         </div>
                         <div class="stat-number h2 fw-bold text-primary" th:text="${totalCapacity}">1+</div>
-                        <div class="stat-unit fw-bold" th:text="${totalCapacityUnit}">GWP</div>
-                        <div class="stat-label text-muted">TỔNG CÔNG SUẤT</div>
+                        <div class="stat-unit fw-bold" th:text="${totalCapacityUnit}"
+                            data-i18n="home.stats.capacity_unit">GWP</div>
+                        <div class="stat-label text-muted" data-i18n="home.stats.capacity">TỔNG CÔNG SUẤT</div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -83,8 +86,9 @@
                             <i class="fas fa-building text-warning fa-3x"></i>
                         </div>
                         <div class="stat-number h2 fw-bold text-primary" th:text="${totalProjects}">12.000+</div>
-                        <div class="stat-unit fw-bold" th:text="${projectsUnit}">HỆ THỐNG</div>
-                        <div class="stat-label text-muted">HỆ THỐNG ĐÃ LẮP ĐẶT</div>
+                        <div class="stat-unit fw-bold" th:text="${projectsUnit}" data-i18n="home.stats.systems_unit">HỆ
+                            THỐNG</div>
+                        <div class="stat-label text-muted" data-i18n="home.stats.systems">HỆ THỐNG ĐÃ LẮP ĐẶT</div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -93,8 +97,9 @@
                             <i class="fas fa-users text-warning fa-3x"></i>
                         </div>
                         <div class="stat-number h2 fw-bold text-primary" th:text="${totalEmployees}">2.000+</div>
-                        <div class="stat-unit fw-bold" th:text="${employeesUnit}">ĐỐI TÁC</div>
-                        <div class="stat-label text-muted">ĐỐI TÁC PHÂN PHỐI</div>
+                        <div class="stat-unit fw-bold" th:text="${employeesUnit}" data-i18n="home.stats.partners_unit">
+                            ĐỐI TÁC</div>
+                        <div class="stat-label text-muted" data-i18n="home.stats.partners">ĐỐI TÁC PHÂN PHỐI</div>
                     </div>
                 </div>
             </div>
@@ -107,7 +112,8 @@
             <div class="about-grid">
                 <!-- Left Side - Content -->
                 <div class="about-left">
-                    <h2 class="about-title"><span class="title-underline">VỀ HBMP</span></h2>
+                    <h2 class="about-title"><span class="title-underline" data-i18n="home.about.title">VỀ HBMP</span>
+                    </h2>
                     <p class="about-description">
                         HBMP là Tập đoàn công nghệ – thương mại dịch vụ có quy mô, uy tín dẫn đầu Việt Nam trong
                         lĩnh vực tự động hóa công nghiệp và năng lượng tái tạo. Trong đó, HBMP chuyên cung cấp các
@@ -142,11 +148,11 @@
                             <div class="orange-box-content">
                                 <span class="big-number">19<sup>+</sup></span>
                                 <div class="box-text">
-                                    <span>NĂM KINH NGHIỆM PHÁT</span>
-                                    <span>TRIỂN BỀN VỮNG</span>
+                                    <span data-i18n="home.about.exp_years">NĂM KINH NGHIỆM PHÁT</span>
+                                    <span data-i18n="home.about.exp_sustainable">TRIỂN BỀN VỮNG</span>
                                 </div>
                                 <a href="#" class="cta-link">
-                                    <span>HỒ SƠ NĂNG LỰC</span>
+                                    <span data-i18n="home.about.profile_cta">HỒ SƠ NĂNG LỰC</span>
                                     <div class="plus-icon-circle">
                                         <i class="fas fa-plus"></i>
                                     </div>
@@ -165,12 +171,12 @@
             <div class="solutions-grid">
                 <!-- Left Side - Categories -->
                 <div class="solutions-left">
-                    <h2 class="solutions-main-title">
+                    <h2 class="solutions-main-title" data-i18n="home.solutions_title">
                         GIẢI PHÁP ĐIỆN<br>
                         NĂNG LƯỢNG<br>
                         MẶT TRỜI
                     </h2>
-                    <p class="solutions-description">
+                    <p class="solutions-description" data-i18n="home.solutions_subtitle">
                         HBMP hiểu rõ những lợi ích của việc ứng dụng nguồn năng lượng mặt trời vào nhiều lĩnh vực khác
                         nhau của cuộc sống.
                     </p>
@@ -179,27 +185,30 @@
                     <div class="solution-categories-grid">
                         <!-- Doanh nghiệp -->
                         <div class="solution-cat-item active" data-category="business">
-                            <span class="cat-title">Doanh nghiệp</span>
+                            <span class="cat-title" data-i18n="nav.enterprise">Doanh nghiệp</span>
                             <div class="cat-icon-wrapper">
-                                <img src="https://cdn-icons-png.flaticon.com/512/2942/2942813.png" alt="Doanh nghiệp">
+                                <img th:src="@{/photo/icon-doanh-nghiep.png}" alt="Doanh nghiệp"
+                                    style="filter: brightness(0);">
                             </div>
                             <i class="fas fa-chevron-right cat-arrow"></i>
                         </div>
 
                         <!-- Hộ gia đình -->
                         <div class="solution-cat-item" data-category="household">
-                            <span class="cat-title">Hộ gia đình</span>
+                            <span class="cat-title" data-i18n="nav.household">Hộ gia đình</span>
                             <div class="cat-icon-wrapper">
-                                <img src="https://cdn-icons-png.flaticon.com/512/619/619153.png" alt="Hộ gia đình">
+                                <img th:src="@{/photo/icon-ho-gia-dinh.png}" alt="Hộ gia đình"
+                                    style="filter: brightness(0);">
                             </div>
                             <i class="fas fa-chevron-right cat-arrow"></i>
                         </div>
 
                         <!-- Nông nghiệp -->
                         <div class="solution-cat-item" data-category="agriculture">
-                            <span class="cat-title">Nông nghiệp</span>
+                            <span class="cat-title" data-i18n="nav.agriculture">Nông nghiệp</span>
                             <div class="cat-icon-wrapper">
-                                <img src="https://cdn-icons-png.flaticon.com/512/3514/3514337.png" alt="Nông nghiệp">
+                                <img th:src="@{/photo/icon-nong-nghiep.png}" alt="Nông nghiệp"
+                                    style="filter: brightness(0);">
                             </div>
                             <i class="fas fa-chevron-right cat-arrow"></i>
                         </div>
@@ -221,14 +230,14 @@
 
                         <div class="solution-stats-section">
                             <div class="solution-stat-item">
-                                <span class="stat-upper">SỬ DỤNG</span>
+                                <span class="stat-upper" data-i18n="home.solutions_detail.usage">SỬ DỤNG</span>
                                 <span class="stat-number" id="statUsage">30</span>
-                                <span class="stat-lower">Năm</span>
+                                <span class="stat-lower" data-i18n="home.solutions_detail.year">Năm</span>
                             </div>
                             <div class="solution-stat-item">
-                                <span class="stat-upper">HOÀN VỐN</span>
+                                <span class="stat-upper" data-i18n="home.solutions_detail.payback">HOÀN VỐN</span>
                                 <span class="stat-number" id="statPayback">4 – 5</span>
-                                <span class="stat-lower">Năm</span>
+                                <span class="stat-lower" data-i18n="home.solutions_detail.year">Năm</span>
                             </div>
                         </div>
 
@@ -259,14 +268,15 @@
             const solutionImage = document.getElementById('solutionImage');
 
             const categoryData = {
-                business: {
-                    title: 'ĐIỆN MẶT TRỜI CHO<br>DOANH NGHIỆP',
-                    desc: 'Điện mặt trời giúp doanh nghiệp tiết kiệm đến hàng tỷ đồng tiền điện mỗi năm, nâng cao uy tín, giá trị thương hiệu, hướng đến hình ảnh doanh nghiệp xanh thân thiện với môi trường.',
+                agriculture: {
+                    title: 'ĐIỆN MẶT TRỜI CHO<br>NÔNG NGHIỆP',
+                    desc: 'Ứng dụng cho lĩnh vực nông nghiệp, đảm bảo nguồn nước cho việc tưới tiêu, các trạm bơm cấp nước.',
                     usage: '30',
                     payback: '4 – 5',
-                    ctaHtml: 'GIẢI PHÁP<br><strong>ESCO</strong>',
-                    ctaIcon: 'fas fa-cog',
-                    image: '/photo/anh10.jpg'
+                    ctaHtml: 'XEM CHI TIẾT <i class="fas fa-arrow-right"></i>',
+                    ctaIcon: '',
+                    image: '/photo/anh11.jpg',
+                    link: '/nong-nghiep'
                 },
                 household: {
                     title: 'ĐIỆN MẶT TRỜI CHO<br>HỘ GIA ĐÌNH',
@@ -275,16 +285,18 @@
                     payback: '5 – 6',
                     ctaHtml: 'XEM CHI TIẾT <i class="fas fa-arrow-right"></i>',
                     ctaIcon: '',
-                    image: '/photo/anh9.jpg'
+                    image: '/photo/anh9.jpg',
+                    link: '/ho-gia-dinh'
                 },
-                agriculture: {
-                    title: 'ĐIỆN MẶT TRỜI CHO<br>NÔNG NGHIỆP',
-                    desc: 'Ứng dụng cho lĩnh vực nông nghiệp, đảm bảo nguồn nước cho việc tưới tiêu, các trạm bơm cấp nước.',
+                business: {
+                    title: 'ĐIỆN MẶT TRỜI CHO<br>DOANH NGHIỆP',
+                    desc: 'Điện mặt trời giúp doanh nghiệp tiết kiệm đến hàng tỷ đồng tiền điện mỗi năm, nâng cao uy tín, giá trị thương hiệu, hướng đến hình ảnh doanh nghiệp xanh thân thiện với môi trường.',
                     usage: '30',
                     payback: '4 – 5',
-                    ctaHtml: 'XEM CHI TIẾT <i class="fas fa-arrow-right"></i>',
-                    ctaIcon: '',
-                    image: '/photo/anh11.jpg'
+                    ctaHtml: 'GIẢI PHÁP<br><strong>ESCO</strong>',
+                    ctaIcon: 'fas fa-cog',
+                    image: '/photo/anh10.jpg',
+                    link: '/doanh-nghiep'
                 }
             };
 
@@ -304,6 +316,10 @@
                         ctaIcon.className = data.ctaIcon;
                         solutionImage.src = data.image;
 
+                        if (data.link) {
+                            ctaBtn.href = data.link;
+                        }
+
                         // Change button style for non-business categories
                         if (category === 'business') {
                             ctaBtn.classList.remove('detail-btn');
@@ -313,6 +329,15 @@
                     }
                 });
             });
+
+            // Initialize with active category
+            const activeItem = document.querySelector('.solution-cat-item.active');
+            if (activeItem) {
+                const category = activeItem.dataset.category;
+                if (categoryData[category] && categoryData[category].link) {
+                    ctaBtn.href = categoryData[category].link;
+                }
+            }
         });
     </script>
 
@@ -320,8 +345,8 @@
     <section class="projects-section-new"
         style="background-image: url('/photo/2-layersfse.jpg'); background-size: cover; background-attachment: fixed;">
         <div class="projects-container">
-            <h2 class="projects-title">DỰ ÁN ĐÃ THỰC HIỆN</h2>
-            <p class="projects-subtitle">
+            <h2 class="projects-title" data-i18n="home.projects_title">DỰ ÁN ĐÃ THỰC HIỆN</h2>
+            <p class="projects-subtitle" data-i18n="home.projects_subtitle">
                 Chúng tôi cam kết phục vụ khách hàng bằng cả "trái tim" của sự nhiệt huyết và tinh thần trách nhiệm cao!
             </p>
 
@@ -355,17 +380,18 @@
                             <div class="project-stats-row">
                                 <div class="stat-box">
                                     <i class="fas fa-calendar-alt"></i>
-                                    <span class="stat-label">Năm thi công</span>
+                                    <span class="stat-label" data-i18n="home.project_card.year">Năm thi công</span>
                                     <span class="stat-value">2020</span>
                                 </div>
                                 <div class="stat-box">
                                     <i class="fas fa-bolt"></i>
-                                    <span class="stat-label">Công suất</span>
+                                    <span class="stat-label" data-i18n="home.project_card.power">Công suất</span>
                                     <span class="stat-value">1 MWp</span>
                                 </div>
                                 <div class="stat-box">
                                     <i class="fas fa-sun"></i>
-                                    <span class="stat-label">Sản lượng/năm</span>
+                                    <span class="stat-label" data-i18n="home.project_card.production">Sản
+                                        lượng/năm</span>
                                     <span class="stat-value">1.440 MWh</span>
                                 </div>
                             </div>
@@ -392,56 +418,165 @@
             const projectPrev = document.getElementById('projectPrev');
             const projectNext = document.getElementById('projectNext');
 
-            // Project data for rotation
-            const projects = [
-                { img: '/photo/anh10.jpg', name: 'CÔNG TY TNHH ABC - ĐỒNG NAI', category: 'DOANH NGHIỆP', year: '2019', power: '800 kWp', production: '1.150 MWh' },
-                { img: '/photo/anh18.jpg', name: 'NHÀ MÁY GIÀY ĐẠI LỘC – BÌNH DƯƠNG', category: 'DOANH NGHIỆP', year: '2020', power: '1 MWp', production: '1.440 MWh' },
-                { img: '/photo/anh19.jpg', name: 'NHÀ MÁY THỰC PHẨM - LONG AN', category: 'DOANH NGHIỆP', year: '2021', power: '1.2 MWp', production: '1.680 MWh' },
-                { img: '/photo/anh20.jpg', name: 'KHU CÔNG NGHIỆP VSIP - BÌNH DƯƠNG', category: 'DOANH NGHIỆP', year: '2022', power: '2 MWp', production: '2.800 MWh' },
-                { img: '/photo/anh21.jpg', name: 'TRANG TRẠI NĂNG LƯỢNG - TÂY NINH', category: 'NÔNG NGHIỆP', year: '2023', power: '5 MWp', production: '7.200 MWh' }
+            // --- Server Data Integration ---
+            /*[+
+            const serverProjects = [[${projects}]];
+            +]*/
+            // Fallback if null (though controller ensures it's not null, good for safety)
+            const rawProjects = (typeof serverProjects !== 'undefined' && serverProjects) ? serverProjects : [];
+
+            // Helper to get display category
+            function getCategoryDisplay(appEnum) {
+                const map = {
+                    'HO_GIA_DINH': 'HỘ GIA ĐÌNH',
+                    'DOANH_NGHIEP': 'DOANH NGHIỆP',
+                    'NONG_NGHIEP': 'NÔNG NGHIỆP',
+                    'CONG_TRINH_CONG': 'CÔNG TRÌNH'
+                };
+                return map[appEnum] || appEnum || 'DOANH NGHIỆP';
+            }
+
+            // Map server data to slider format
+            const allProjects = rawProjects.map(p => ({
+                img: p.imageUrl || '/photo/anh10.jpg',
+                name: p.name,
+                category: getCategoryDisplay(p.application),
+                originalCategory: p.application, // store enum for filtering
+                year: p.createdAt ? new Date(p.createdAt).getFullYear() : '2023',
+                power: p.power ? p.power + ' kWp' : 'N/A',
+                production: 'N/A' // Field doesn't exist in entity
+            }));
+
+            // If no data from server, use fallback (keeping existing logic for demo if DB empty)
+            let projects = allProjects.length > 0 ? allProjects : [
+                { img: '/photo/anh10.jpg', name: 'MẪU - CÔNG TY TNHH ABC', category: 'DOANH NGHIỆP', originalCategory: 'DOANH_NGHIEP', year: '2019', power: '800 kWp', production: '1.150 MWh' },
+                { img: '/photo/anh18.jpg', name: 'MẪU - NHÀ MÁY ĐẠI LỘC', category: 'DOANH NGHIỆP', originalCategory: 'DOANH_NGHIEP', year: '2020', power: '1 MWp', production: '1.440 MWh' },
+                { img: '/photo/anh21.jpg', name: 'MẪU - TRANG TRẠI TÂY NINH', category: 'NÔNG NGHIỆP', originalCategory: 'NONG_NGHIEP', year: '2023', power: '5 MWp', production: '7.200 MWh' }
             ];
 
-            let currentIndex = 1;
+            // Allow for filtering - maintain a current filtered list
+            let filteredProjects = [...projects];
+            let currentIndex = 0;
 
             function updateSlider() {
+                if (filteredProjects.length === 0) return; // Handle empty state if needed
+
                 const slides = projectSlider.querySelectorAll('.project-slide');
-                const prevIdx = (currentIndex - 1 + projects.length) % projects.length;
-                const nextIdx = (currentIndex + 1) % projects.length;
+
+                // Safety check: ensure we have at least 1 project, repeat if needed to fill 3 slots? 
+                // The existing CSS logic relies on prev/main/next. 
+                // We really need at least 1 item.
+
+                const count = filteredProjects.length;
+                let prevIdx = (currentIndex - 1 + count) % count;
+                let nextIdx = (currentIndex + 1) % count;
+
+                // If only 1 item
+                if (count === 1) { prevIdx = 0; nextIdx = 0; }
 
                 // Update side slides
-                slides[0].querySelector('img').src = projects[prevIdx].img;
-                slides[2].querySelector('img').src = projects[nextIdx].img;
+                slides[0].querySelector('img').src = filteredProjects[prevIdx].img;
+                slides[2].querySelector('img').src = filteredProjects[nextIdx].img;
 
                 // Update main slide
                 const mainSlide = slides[1];
-                mainSlide.querySelector('img').src = projects[currentIndex].img;
-                mainSlide.querySelector('.project-category').textContent = projects[currentIndex].category;
-                mainSlide.querySelector('.project-name').textContent = projects[currentIndex].name;
-                mainSlide.querySelectorAll('.stat-value')[0].textContent = projects[currentIndex].year;
-                mainSlide.querySelectorAll('.stat-value')[1].textContent = projects[currentIndex].power;
-                mainSlide.querySelectorAll('.stat-value')[2].textContent = projects[currentIndex].production;
+                const currentProj = filteredProjects[currentIndex];
+
+                mainSlide.querySelector('img').src = currentProj.img;
+                mainSlide.querySelector('img').alt = currentProj.name;
+                mainSlide.querySelector('.project-category').textContent = currentProj.category;
+                mainSlide.querySelector('.project-name').textContent = currentProj.name;
+
+                const stats = mainSlide.querySelectorAll('.stat-value');
+                if (stats.length >= 3) {
+                    stats[0].textContent = currentProj.year;
+                    stats[1].textContent = currentProj.power;
+                    stats[2].textContent = currentProj.production;
+                }
             }
 
             if (projectPrev && projectNext) {
                 projectPrev.addEventListener('click', function () {
-                    currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+                    if (filteredProjects.length === 0) return;
+                    currentIndex = (currentIndex - 1 + filteredProjects.length) % filteredProjects.length;
                     updateSlider();
                 });
 
                 projectNext.addEventListener('click', function () {
-                    currentIndex = (currentIndex + 1) % projects.length;
+                    if (filteredProjects.length === 0) return;
+                    currentIndex = (currentIndex + 1) % filteredProjects.length;
                     updateSlider();
                 });
             }
 
-            // Filter buttons
+            // --- Filtering Logic ---
             const filterBtns = document.querySelectorAll('.filter-btn');
+
+            // Map data-filter to Enum
+            const filterMap = {
+                'all': null, // Show all
+                'household': 'HO_GIA_DINH',
+                'agriculture': 'NONG_NGHIEP',
+                'business': 'DOANH_NGHIEP' // Default active was 'Doanh nghiệp' but button says data-filter="all"? 
+                // Looking at HTML: Button "DOANH NGHIỆP" has data-filter="all" (Wait, that's wrong conceptually if it says Enterprise).
+                // Existing HTML: <button ... data-filter="all">DOANH NGHIỆP</button>
+                // This seems like the user intended "All" to be the default tab labeled "Doanh nghiệp"? 
+                // No, standard UX: "All Projects" or specific tabs.
+                // Let's assume the labels in HTML are what we want: "DOANH NGHIỆP", "HỘ GIA ĐÌNH", "NÔNG NGHIỆP".
+                // I should correct the data-filter attributes in the HTML or map them correctly here.
+                // HTML: 
+                // <button ... data-filter="all">DOANH NGHIỆP</button>  <- This is confusing. 
+                // <button ... data-filter="household">HỘ GIA ĐÌNH</button>
+                // <button ... data-filter="agriculture">NÔNG NGHIỆP</button>
+
+                // I will assume data-filter="all" was a mistake and should be "enterprise" OR the label "DOANH NGHIỆP" implies the main business category.
+                // Given the user request: "data thật... đối với từng doanh nghiệp/hộ gia đình/ nông nghiệp"
+                // It implies 3 distinct categories.
+                // I will treat the first button as "Enterprise" filter.
+            };
+
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', function () {
                     filterBtns.forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
+
+                    const filterKey = this.getAttribute('data-filter');
+
+                    // Logic correction: Map "all" to DOANH_NGHIEP if the label says so, OR if it really means ALL.
+                    // Given the label is "DOANH NGHIỆP", I will filter by DOANH_NGHIEP.
+                    // But if I want to support "ALL", I'd need a button for it.
+                    // Current buttons: [DOANH NGHIỆP] [HỘ GIA ĐÌNH] [NÔNG NGHIỆP]
+
+                    let targetEnum = null;
+                    if (filterKey === 'all' || filterKey === 'enterprise') targetEnum = 'DOANH_NGHIEP';
+                    else if (filterKey === 'household') targetEnum = 'HO_GIA_DINH';
+                    else if (filterKey === 'agriculture') targetEnum = 'NONG_NGHIEP';
+
+                    if (targetEnum) {
+                        filteredProjects = projects.filter(p => p.originalCategory === targetEnum);
+                    } else {
+                        filteredProjects = [...projects]; // Fallback to all if something weird
+                    }
+
+                    // If filtered list is empty, maybe show all or show placeholder?
+                    // For now, if empty, we just don't crash, maybe keep previous? 
+                    // Better to clear or show empty state. 
+                    if (filteredProjects.length === 0) {
+                        // Fallback to show active projects from other categories just to not show empty slider? 
+                        // No, correct is to show nothing or message. 
+                        // I'll leave it empty but handle index 0.
+                    }
+
+                    currentIndex = 0;
+                    updateSlider();
                 });
             });
+
+            // Initial render
+            // Trigger click on active button to run filter logic
+            const activeBtn = document.querySelector('.filter-btn.active');
+            if (activeBtn) activeBtn.click();
+            else updateSlider(); // Fallback
         });
     </script>
 
@@ -449,7 +584,8 @@
     <section class="products-section section" style="padding: 50px 0;">
         <div class="container datsolar-grid-container">
             <h2 class="text-center mb-5"
-                style="font-weight: bold; font-size: 30px; color: #222; text-transform: uppercase;">SẢN PHẨM NỔI BẬT
+                style="font-weight: bold; font-size: 30px; color: #222; text-transform: uppercase;"
+                data-i18n="home.products_title">SẢN PHẨM NỔI BẬT
             </h2>
 
             <div class="row">
@@ -462,9 +598,7 @@
                                 onclick="switchProductCategory('Tấm pin năng lượng mặt trời', this)">
                                 <div class="button_tab_box">
                                     <h4>Tấm pin năng lượng mặt trời</h4>
-                                    <img th:src="@{/photo/icon-solar-panel.png}"
-                                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3514/3514337.png'"
-                                        alt="Solar Panel">
+                                    <img th:src="@{/photo/tam-pin.png}" alt="Solar Panel">
                                 </div>
                             </div>
 
@@ -472,9 +606,7 @@
                             <div class="product_tab_icon" onclick="switchProductCategory('Inverter hòa lưới', this)">
                                 <div class="button_tab_box">
                                     <h4>Inverter hòa lưới</h4>
-                                    <img th:src="@{/photo/icon-inverter.png}"
-                                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3514/3514343.png'"
-                                        alt="Inverter">
+                                    <img th:src="@{/photo/inverter.png}" alt="Inverter">
                                 </div>
                             </div>
 
@@ -483,9 +615,7 @@
                                 onclick="switchProductCategory('Inverter Hybrid & Lưu trữ', this)">
                                 <div class="button_tab_box">
                                     <h4>Inverter Hybrid & Lưu trữ</h4>
-                                    <img th:src="@{/photo/icon-hybrid.png}"
-                                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3514/3514343.png'"
-                                        alt="Hybrid">
+                                    <img th:src="@{/photo/pin-luu-tru.png}" alt="Hybrid">
                                 </div>
                             </div>
 
@@ -494,9 +624,7 @@
                                 onclick="switchProductCategory('Đèn năng lượng mặt trời', this)">
                                 <div class="button_tab_box">
                                     <h4>Đèn năng lượng mặt trời</h4>
-                                    <img th:src="@{/photo/icon-light.png}"
-                                        onerror="this.src='https://cdn-icons-png.flaticon.com/512/3514/3514309.png'"
-                                        alt="Light">
+                                    <img th:src="@{/photo/den-nang-luong.png}" alt="Light">
                                 </div>
                             </div>
                         </div>
@@ -506,11 +634,10 @@
                 <!-- Right Side: Product Display Area -->
                 <div class="col-lg-8 col-md-12">
                     <div class="product-display-area">
-                        <!-- Products Grid -->
-                        <div class="row" id="productGridContainer">
+                        <!-- Horizontal Scrollable Products Container -->
+                        <div class="product-horizontal-scroll" id="productGridContainer">
                             <!-- Dynamic Products Loop -->
-                            <div th:each="product : ${featuredProducts}" class="col-md-4 col-sm-6 mb-4 product-item"
-                                style="display: block;"
+                            <div th:each="product : ${featuredProducts}" class="product-card-horizontal product-item"
                                 th:data-category="${(product.category != null && !product.category.isEmpty()) ? product.category : ((product.type != null) ? product.type : 'other')}"
                                 th:data-name="${product.name}">
                                 <div class="product_tab_item_box">
@@ -545,13 +672,13 @@
                             </div>
 
                             <!-- No match in category message -->
-                            <div id="noMatchMessage" class="col-12 text-center py-5 d-none">
+                            <div id="noMatchMessage" class="text-center py-5 d-none" style="min-width: 100%;">
                                 <p class="text-muted">Chưa có sản phẩm nào trong danh mục này.</p>
                             </div>
 
                             <!-- Fallback if no products in database -->
                             <div th:if="${featuredProducts == null or featuredProducts.isEmpty()}"
-                                class="col-12 text-center py-5">
+                                class="text-center py-5" style="min-width: 100%;">
                                 <p class="mb-2">Chưa tìm thấy sản phẩm nổi bật nào.</p>
                                 <small class="text-muted d-block">Lưu ý: Sản phẩm phải được tích chọn <strong>"Hoạt
                                         động"</strong> VÀ <strong>"Sản phẩm nổi bật"</strong> để hiển thị ở đây.</small>
@@ -589,7 +716,7 @@
                 }
 
                 if (match) {
-                    item.style.display = 'block';
+                    item.style.display = 'flex';
                     visibleCount++;
                 } else {
                     item.style.display = 'none';
@@ -622,9 +749,9 @@
         <div class="news-container">
             <!-- Header -->
             <div class="news-header">
-                <h2 class="news-section-title">TIN TỨC & SỰ KIỆN</h2>
+                <h2 class="news-section-title" data-i18n="home.news_title">TIN TỨC & SỰ KIỆN</h2>
                 <a th:href="@{/news}" class="news-view-all-btn">
-                    TẤT CẢ TIN TỨC <i class="fas fa-arrow-right"></i>
+                    <span data-i18n="home.news_view_all">TẤT CẢ TIN TỨC</span> <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
 
@@ -742,8 +869,8 @@
     <!-- Strategic Partners Section -->
     <section class="strategic-partners-section">
         <div class="strategic-partners-container">
-            <h2 class="strategic-title">ĐỐI TÁC CHIẾN LƯỢC</h2>
-            <p class="strategic-subtitle">
+            <h2 class="strategic-title" data-i18n="home.partners_title">ĐỐI TÁC CHIẾN LƯỢC</h2>
+            <p class="strategic-subtitle" data-i18n="home.partners_subtitle">
                 Chúng tôi hợp tác với các nhà sản xuất điện tử và nhà phân phối hàng đầu
                 toàn thế giới để mang đến cho khách hàng những sản phẩm năng lượng tối ưu.
             </p>
@@ -848,6 +975,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/product-scroll.js}"></script>
 
 </body>
 
