@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/giai-phap")
+@RequestMapping("/solutions")
 public class EscoController {
 
     @Autowired
@@ -34,6 +34,6 @@ public class EscoController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra. Vui lòng thử lại.");
         }
-        return "redirect:/giai-phap/esco#register-form";
+        return "redirect:/solutions/esco#register-form";
     }
 }

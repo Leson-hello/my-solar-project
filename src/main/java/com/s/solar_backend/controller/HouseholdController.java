@@ -12,7 +12,7 @@ public class HouseholdController {
 
     private final com.s.solar_backend.service.ProjectService projectService;
 
-    @GetMapping("/ho-gia-dinh")
+    @GetMapping("/household")
     public String household(Model model) {
         // Add model attributes for statistics
         model.addAttribute("yearsExperience", "20+");

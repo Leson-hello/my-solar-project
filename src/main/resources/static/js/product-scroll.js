@@ -1,4 +1,3 @@
-\u003cscript\u003e
 document.addEventListener('DOMContentLoaded', function () {
     const scrollContainer = document.getElementById('productGridContainer');
     if (scrollContainer) {
@@ -6,25 +5,25 @@ document.addEventListener('DOMContentLoaded', function () {
         let startX;
         let scrollLeft;
 
-        scrollContainer.addEventListener('mousedown', (e) =\u003e {
+        scrollContainer.addEventListener('mousedown', (e) => {
             isDown = true;
             scrollContainer.style.cursor = 'grabbing';
             startX = e.pageX - scrollContainer.offsetLeft;
             scrollLeft = scrollContainer.scrollLeft;
         });
 
-        scrollContainer.addEventListener('mousele', () =\u003e {
+        scrollContainer.addEventListener('mouseleave', () => {
             isDown = false;
             scrollContainer.style.cursor = 'grab';
         });
 
-        scrollContainer.addEventListener('mouseup', () =\u003e {
+        scrollContainer.addEventListener('mouseup', () => {
             isDown = false;
             scrollContainer.style.cursor = 'grab';
         });
 
-        scrollContainer.addEventListener('mousemove', (e) =\u003e {
-            if(!isDown) return;
+        scrollContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - scrollContainer.offsetLeft;
             const walk = (x - startX) * 2; // Scroll speed multiplier
@@ -32,4 +31,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-\u003c / script\u003e

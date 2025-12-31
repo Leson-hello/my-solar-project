@@ -17,219 +17,8 @@
     <!-- Custom CSS -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
 
-    <style>
-        /* Custom styles for this page extracted/adapted from reference */
-        .solution-banner {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            background-image: url('https://datsolar.com/wp-content/uploads/2020/09/Solar-Panels-Sunset-shutterstock-219491350.jpg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
 
-        .solution-banner-overlay {
-            background: rgba(0, 0, 0, 0.5);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
 
-        .solution-banner-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .section-title {
-            color: #000;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .about-solution-box {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            margin: 50px 0;
-            background: #fff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .about-solution-content {
-            padding: 40px;
-            flex: 1;
-        }
-
-        .about-solution-img {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .about-solution-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .system-types-nav {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .system-type-btn {
-            padding: 10px 30px;
-            background: #f1f1f1;
-            border: none;
-            cursor: pointer;
-            margin: 0 10px;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .system-type-btn.active {
-            background: #FF6600;
-            color: white;
-        }
-
-        .system-content {
-            display: none;
-        }
-
-        .system-content.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .benefit-section {
-            background-image: url('https://datsolar.com/wp-content/uploads/2020/09/bg_befiness.jpg');
-            background-size: cover;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .benefit-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .benefit-item {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 8px;
-            height: 100%;
-        }
-
-        .benefit-item h3 {
-            font-size: 1.2rem;
-            color: #FF6600;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .stats-box {
-            background: #f9f9f9;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-
-        .stat-item h3 {
-            color: #FF6600;
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: #FF6600;
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 50px;
-            transition: background 0.3s;
-            margin-top: 20px;
-        }
-
-        .cta-button:hover {
-            background: #cc5200;
-            color: white;
-        }
-
-        .customer-story-item {
-            position: relative;
-            margin-bottom: 30px;
-            cursor: pointer;
-        }
-
-        .customer-story-item img {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .play-icon i {
-            color: white;
-            font-size: 24px;
-        }
-
-        .why-choose-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .why-item {
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .why-icon {
-            width: 60px;
-            margin-right: 20px;
-        }
-
-        .why-content {
-            flex: 1;
-        }
-    </style>
 </head>
 
 <body>
@@ -262,7 +51,8 @@
                     Đây là giải pháp tối ưu cho các vùng nông thôn, khu vực thiếu hoặc không có điện lưới, phục vụ tưới
                     tiêu, cấp nước sinh hoạt và các ứng dụng công nghiệp.
                 </p>
-                <a href="#contact-form" class="cta-button">NHẬN TƯ VẤN VÀ BÁO GIÁ</a>
+                <button type="button" class="cta-button border-0" data-bs-toggle="modal"
+                    data-bs-target="#quoteModal">NHẬN TƯ VẤN VÀ BÁO GIÁ</button>
             </div>
             <div class="about-solution-img">
                 <img src="https://datsolar.com/wp-content/uploads/2020/10/he-thong-dien-mat-troi-cho-bom-nuoc-h11110.png"
@@ -464,7 +254,7 @@
     <!-- CTA Section -->
     <section class="cta-section py-5">
         <div class="container text-center">
-            <h2 class="text-white mb-4">BẠN MUỐN LẮP ĐẶT ĐIỆN MẶT TRỜI CHO NÔNG NGHIỆP?</h2>
+            <h2 class="text-white mb-4">BẠN MUỐN LẮP ĐẶT ĐIỆN MẶT TRỜI k?</h2>
             <p class="text-white-50 mb-4">Liên hệ ngay để được tư vấn miễn phí và nhận báo giá tốt nhất!</p>
             <button class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#quoteModal">
                 <i class="fas fa-phone-alt me-2"></i> NHẬN TƯ VẤN NGAY
@@ -479,15 +269,15 @@
                 <div class="modal-header">
                     <div class="modal-title-container">
                         <h4 class="modal-title text-warning" id="quoteModalLabel">TƯ VẤN & BÁO GIÁ</h4>
-                        <h5 class="modal-subtitle">NÔNG NGHIỆP</h5>
+                        <h5 class="modal-subtitle">HỘ GIA ĐÌNH</h5>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="quoteForm" method="post">
-                        <!-- Route to Enterprise Admin -->
-                        <input type="hidden" name="quoteType" value="ENTERPRISE">
-                        <input type="hidden" name="installationType" value="Nông nghiệp">
+                    <form id="quoteForm" th:action="@{/api/quotes}" method="post">
+                        <input type="hidden" name="installationType" value="Hộ gia đình">
+                        <input type="hidden" name="quoteType" value="HOUSEHOLD">
+                        <input type="hidden" name="selectedPackage" id="selectedPackage">
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -506,17 +296,28 @@
                                 <input type="email" class="form-control" name="email" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Tên công ty</label>
-                                <input type="text" class="form-control" name="companyName"
-                                    placeholder="Tên doanh nghiệp của bạn">
+                                <label class="form-label">Yêu cầu của bạn</label>
+                                <input type="text" class="form-control" name="message"
+                                    placeholder="VD: Tư vấn gói 5kWp">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label text-danger">Diện tích mái (m²) *</label>
-                                <input type="number" class="form-control" name="roofArea" required min="1"
-                                    placeholder="VD: 1000">
+                                <label class="form-label text-danger">Số tiền điện mỗi tháng*</label>
+                                <select class="form-select" name="monthlyBill" id="monthlyBillSelect" required>
+                                    <option value="">Chọn mức tiền điện</option>
+                                    <option value="Dưới 1.000.000 VNĐ" data-package="3kWp">Dưới 1.000.000 VNĐ</option>
+                                    <option value="1.000.000 - 2.000.000 VNĐ" data-package="5kWp">1.000.000 - 2.000.000
+                                        VNĐ</option>
+                                    <option value="2.000.000 - 4.000.000 VNĐ" data-package="10kWp">2.000.000 - 4.000.000
+                                        VNĐ</option>
+                                    <option value="4.000.000 - 6.000.000 VNĐ" data-package="15kWp">4.000.000 - 6.000.000
+                                        VNĐ</option>
+                                    <option value="6.000.000 - 8.000.000 VNĐ" data-package="20kWp">6.000.000 - 8.000.000
+                                        VNĐ</option>
+                                    <option value="Trên 8.000.000 VNĐ" data-package="30kWp">Trên 8.000.000 VNĐ</option>
+                                </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label text-danger">Tỉnh/Thành phố *</label>
@@ -525,18 +326,15 @@
                                     <option value="Thành phố Hà Nội">Thành phố Hà Nội</option>
                                     <option value="Thành phố Hồ Chí Minh">Thành phố Hồ Chí Minh</option>
                                     <option value="Thành phố Đà Nẵng">Thành phố Đà Nẵng</option>
+                                    <option value="Thành phố Cần Thơ">Thành phố Cần Thơ</option>
+                                    <option value="Thành phố Hải Phòng">Thành phố Hải Phòng</option>
                                     <option value="Bình Dương">Bình Dương</option>
                                     <option value="Đồng Nai">Đồng Nai</option>
                                     <option value="Long An">Long An</option>
+                                    <option value="Bình Thuận">Bình Thuận</option>
                                     <option value="Khác">Khác</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Yêu cầu của bạn</label>
-                            <textarea class="form-control" name="message" rows="3"
-                                placeholder="Mô tả yêu cầu cụ thể của doanh nghiệp"></textarea>
                         </div>
 
                         <div class="text-start mt-3">
@@ -549,6 +347,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Footer -->
     <div th:replace="~{layout/footer :: footer}"></div>
@@ -622,7 +421,52 @@
                 });
             }
 
-            // Quote Form Submission logic
+            // --- Quote Form & Package Logic ---
+
+            // Handle package selection for modal
+            document.querySelectorAll('[data-bs-target="#quoteModal"]').forEach(button => {
+                button.addEventListener('click', function () {
+                    const packageName = this.getAttribute('data-package');
+                    if (packageName) {
+                        const packageInput = document.getElementById('selectedPackage');
+                        if (packageInput) packageInput.value = packageName;
+
+                        // Pre-fill message with package name
+                        const messageField = document.querySelector('#quoteModal input[name="message"]');
+                        if (messageField) {
+                            messageField.value = 'Tư vấn gói ' + packageName;
+                        }
+
+                        // Pre-fill from estimation form data if available
+                        if (window.estimationData) {
+                            // Pre-fill name
+                            const nameField = document.querySelector('#quoteModal input[name="fullName"]');
+                            if (nameField && window.estimationData.name) {
+                                nameField.value = window.estimationData.name;
+                            }
+
+                            // Pre-fill email
+                            const emailField = document.querySelector('#quoteModal input[name="email"]');
+                            if (emailField && window.estimationData.email) {
+                                emailField.value = window.estimationData.email;
+                            }
+
+                            // Pre-fill monthly bill select
+                            const billSelect = document.getElementById('monthlyBillSelect');
+                            if (billSelect && window.estimationData.monthlyBillRange) {
+                                for (let i = 0; i < billSelect.options.length; i++) {
+                                    if (billSelect.options[i].value === window.estimationData.monthlyBillRange) {
+                                        billSelect.selectedIndex = i;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+
+            // Handle quote form submission
             const quoteForm = document.getElementById('quoteForm');
             if (quoteForm) {
                 quoteForm.addEventListener('submit', function (e) {
@@ -631,6 +475,14 @@
                     const formData = new FormData(this);
                     const data = {};
                     formData.forEach((value, key) => data[key] = value);
+
+                    // Get recommended package from electricity bill selection
+                    const billSelect = document.getElementById('monthlyBillSelect');
+                    if (billSelect && billSelect.selectedIndex >= 0) {
+                        const selectedOption = billSelect.options[billSelect.selectedIndex];
+                        const recommendedPackage = selectedOption.getAttribute('data-package');
+                        if (recommendedPackage) data.recommendedPackage = recommendedPackage;
+                    }
 
                     fetch('/api/quotes', {
                         method: 'POST',
@@ -641,20 +493,31 @@
                     })
                         .then(response => response.json())
                         .then(result => {
-                            // Hide modal
+                            // Close modal
                             const modalEl = document.getElementById('quoteModal');
                             const modal = bootstrap.Modal.getInstance(modalEl);
                             if (modal) {
                                 modal.hide();
                             }
                             this.reset();
-                            alert('Cảm ơn bạn! Yêu cầu tư vấn của bạn đã được gửi thành công. Chúng tôi sẽ liên hệ lại sớm nhất.');
+
+                            if (data.recommendedPackage) {
+                                alert(`Cảm ơn bạn! Dựa vào mức tiền điện, chúng tôi đề xuất gói ${data.recommendedPackage} cho bạn. Chúng tôi sẽ liên hệ lại sớm nhất.`);
+                            } else {
+                                alert('Cảm ơn bạn! Yêu cầu tư vấn của bạn đã được gửi thành công. Chúng tôi sẽ liên hệ lại sớm nhất.');
+                            }
                         })
                         .catch(error => {
                             console.error('Error:', error);
                             alert('Có lỗi xảy ra khi gửi yêu cầu. Vui lòng thử lại sau.');
                         });
                 });
+            }
+
+            // Estimation Form Logic (Safe handling)
+            const estimationForm = document.getElementById('estimationForm');
+            if (estimationForm) {
+                // Logic would go here if estimationForm existed on this page
             }
         });
     </script>

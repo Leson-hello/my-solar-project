@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/giai-phap")
-public class HoaLuoiController {
+@RequestMapping("/solutions")
+public class GridTiedController {
 
     @Autowired
     private QuoteRequestService quoteRequestService;
 
-    @GetMapping("/hoa-luoi")
-    public String hoaLuoiPage(Model model) {
+    @GetMapping("/grid-tied")
+    public String gridTiedPage(Model model) {
         model.addAttribute("quoteRequest", new QuoteRequest());
-        return "hoa-luoi";
+        return "grid-tied";
     }
 
-    @PostMapping("/hoa-luoi/register")
-    public String registerHoaLuoi(@ModelAttribute QuoteRequest quoteRequest,
+    @PostMapping("/grid-tied/register")
+    public String registerGridTied(@ModelAttribute QuoteRequest quoteRequest,
             RedirectAttributes redirectAttributes) {
         try {
             quoteRequest.setSolution("HOA_LUOI");
@@ -34,6 +34,6 @@ public class HoaLuoiController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra. Vui lòng thử lại!");
         }
-        return "redirect:/giai-phap/hoa-luoi#register-form";
+        return "redirect:/solutions/grid-tied#register-form";
     }
 }

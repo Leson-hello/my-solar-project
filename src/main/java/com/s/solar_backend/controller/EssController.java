@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/giai-phap")
+@RequestMapping("/solutions")
 public class EssController {
 
     @Autowired
@@ -34,6 +34,6 @@ public class EssController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra. Vui lòng thử lại.");
         }
-        return "redirect:/giai-phap/ess#register-form";
+        return "redirect:/solutions/ess#register-form";
     }
 }

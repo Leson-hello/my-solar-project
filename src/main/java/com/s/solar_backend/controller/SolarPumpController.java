@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/giai-phap")
-public class BomNuocController {
+@RequestMapping("/solutions")
+public class SolarPumpController {
 
     @Autowired
     private QuoteRequestService quoteRequestService;
 
-    @GetMapping("/bom-nuoc")
-    public String bomNuocPage(Model model) {
+    @GetMapping("/solar-pump")
+    public String solarPumpPage(Model model) {
         model.addAttribute("quoteRequest", new QuoteRequest());
-        return "bom-nuoc";
+        return "solar-pump";
     }
 
-    @PostMapping("/bom-nuoc/register")
-    public String registerBomNuoc(@ModelAttribute QuoteRequest quoteRequest,
+    @PostMapping("/solar-pump/register")
+    public String registerSolarPump(@ModelAttribute QuoteRequest quoteRequest,
             RedirectAttributes redirectAttributes) {
         try {
             quoteRequest.setSolution("BOM_NUOC");
@@ -34,6 +34,6 @@ public class BomNuocController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra. Vui lòng thử lại!");
         }
-        return "redirect:/giai-phap/bom-nuoc#register-form";
+        return "redirect:/solutions/solar-pump#register-form";
     }
 }

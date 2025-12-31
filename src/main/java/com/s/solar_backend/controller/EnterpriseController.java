@@ -12,7 +12,7 @@ public class EnterpriseController {
 
     private final com.s.solar_backend.service.ProjectService projectService;
 
-    @GetMapping("/doanh-nghiep")
+    @GetMapping("/enterprise")
     public String enterprise(Model model) {
         // Add model attributes for statistics
         model.addAttribute("yearsExperience", "18+");

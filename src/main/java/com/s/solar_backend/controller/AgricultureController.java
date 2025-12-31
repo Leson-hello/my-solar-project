@@ -8,12 +8,17 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class NongNghiepController {
+public class AgricultureController {
 
     private final com.s.solar_backend.service.ProjectService projectService;
 
-    @GetMapping("/nong-nghiep")
-    public String nongNghiepPage(Model model) {
+    @GetMapping("/agriculture")
+    public String agriculturePage(Model model) {
+        // Add model attributes for statistics
+        model.addAttribute("yearsExperience", "20+");
+        model.addAttribute("totalStaff", "350+");
+        model.addAttribute("totalCapacity", "900");
+        model.addAttribute("totalSystems", "10.000+");
         // Fetch Agriculture Projects
         List<com.s.solar_backend.entity.Project> projectEntities = projectService.filterProjects(
                 com.s.solar_backend.entity.Project.ProjectApplication.NONG_NGHIEP,
@@ -33,6 +38,6 @@ public class NongNghiepController {
 
         model.addAttribute("projects", projects);
 
-        return "nong-nghiep";
+        return "agriculture";
     }
 }

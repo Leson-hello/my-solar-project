@@ -2040,12 +2040,27 @@ body {
 
 .social-links a {
     color: white;
-    font-size: 1.5rem;
-    transition: color 0.3s;
+    font-size: 1.2rem;
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: all 0.3s;
+    text-decoration: none;
 }
 
 .social-links a:hover {
-    color: var(--accent-color);
+    color: white;
+    background: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.social-links a i {
+    color: inherit;
 }
 
 .newsletter-form .form-control {
@@ -3508,4 +3523,208 @@ body {
     .product-card-horizontal .product_tab_item_img {
         height: 140px;
     }
+}
+
+/* Agriculture Page Styles (Moved from agriculture.html) */
+.solution-banner {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url('https://datsolar.com/wp-content/uploads/2020/09/Solar-Panels-Sunset-shutterstock-219491350.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.solution-banner-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.solution-banner-content {
+    position: relative;
+    z-index: 2;
+}
+
+.about-solution-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 50px 0;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.about-solution-content {
+    padding: 40px;
+    flex: 1;
+}
+
+.about-solution-img {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-solution-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.system-types-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.system-type-btn {
+    padding: 10px 30px;
+    background: #f1f1f1;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.system-type-btn.active {
+    background: #FF6600;
+    color: white;
+}
+
+.system-content {
+    display: none;
+}
+
+.system-content.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.benefit-section {
+    background-image: url('https://datsolar.com/wp-content/uploads/2020/09/bg_befiness.jpg');
+    background-size: cover;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.benefit-item {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 8px;
+    height: 100%;
+}
+
+.benefit-item h3 {
+    font-size: 1.2rem;
+    color: #FF6600;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.stats-box {
+    background: #f9f9f9;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.stat-item h3 {
+    color: #FF6600;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #FF6600;
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: background 0.3s;
+    margin-top: 20px;
+}
+
+.cta-button:hover {
+    background: #cc5200;
+    color: white;
+}
+
+.customer-story-item {
+    position: relative;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.customer-story-item img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-icon i {
+    color: white;
+    font-size: 24px;
+}
+
+.why-choose-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.why-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+.why-icon {
+    width: 60px;
+    margin-right: 20px;
+}
+
+.why-content {
+    flex: 1;
 }
