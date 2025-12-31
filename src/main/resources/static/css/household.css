@@ -812,15 +812,53 @@
     .solution-image-container {
         min-height: 350px;
     }
+
+    /* Section Nav - scroll horizontally on tablet */
+    .section-nav-list {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        justify-content: flex-start;
+    }
+
+    .section-nav-list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .section-nav-list a {
+        padding: 12px 25px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
 }
 
 @media (max-width: 768px) {
+
+    /* Fix horizontal overflow on mobile */
+    html,
+    body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    .page-banner {
+        padding-left: 20px;
+        padding-right: 20px;
+        height: auto;
+        min-height: 400px;
+    }
+
+    .banner-title {
+        font-size: 1.1rem;
+    }
+
     .solution-text-container {
         padding: 30px 20px;
     }
 
     .solution-main-title {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         text-align: center;
     }
 
@@ -836,6 +874,47 @@
         display: block;
         text-align: center;
         width: 100%;
+    }
+
+    /* Section Nav on mobile */
+    .section-nav-list a {
+        padding: 10px 18px;
+        font-size: 11px;
+    }
+
+    /* Estimation form padding */
+    .estimation-form-container {
+        padding: 30px 20px;
+    }
+
+    .estimation-title {
+        font-size: 1.2rem;
+    }
+
+    /* Hero section */
+    .hero-image-wrapper {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-banner {
+        height: auto;
+        min-height: 300px;
+        padding-bottom: 20px;
+    }
+
+    .banner-title {
+        font-size: 1rem;
+    }
+
+    .solution-main-title {
+        font-size: 1.3rem;
+    }
+
+    .section-nav-list a {
+        padding: 8px 12px;
+        font-size: 10px;
     }
 }
 
