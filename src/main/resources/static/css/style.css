@@ -3566,36 +3566,60 @@ body {
     .product-card-horizontal {
         width: 200px;
         min-width: 200px;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .product-card-horizontal .product_tab_item_box {
         flex-direction: column;
         align-items: stretch;
+        background: white;
+        height: 100%;
     }
 
     .product-card-horizontal .product_tab_item_img {
         width: 100%;
-        height: 150px;
+        height: 140px;
         margin-right: 0;
-        margin-bottom: 10px;
+        margin-bottom: 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .product-card-horizontal .product_tab_item_img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     .product-card-horizontal .product_tab_item_content {
-        padding: 0 10px 10px;
+        padding: 10px;
+        background: white;
+        position: relative;
+        z-index: 1;
+    }
+
+    .product-card-horizontal .product_tab_item_content h4 {
+        margin-bottom: 5px;
     }
 
     .product-card-horizontal .product_tab_item_content h4 a {
-        font-size: 0.9rem !important;
+        font-size: 0.85rem !important;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .product-card-horizontal .product_tab_item_content p {
-        font-size: 0.8em !important;
-        -webkit-line-clamp: 2;
+        display: none !important;
     }
 
     .product-specs-home p {
         font-size: 0.75rem !important;
-        margin-bottom: 3px !important;
+        margin-bottom: 2px !important;
     }
 
     /* Hide scrollbar on product scroll */
