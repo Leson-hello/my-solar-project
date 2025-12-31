@@ -1297,20 +1297,19 @@ body {
 }
 
 @media (max-width: 992px) {
-    .side-slide {
+
+    /* Projects Slider Mobile Layout - Show all slides in horizontal scroll */
+    .projects-slider-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding: 0 10px;
+    }
+
+    .projects-slider-wrapper::-webkit-scrollbar {
         display: none;
-    }
-
-    .main-slide {
-        width: 100%;
-        min-width: 0;
-        /* Fix: Reset min-width to prevent overflow on small screens */
-        max-width: 700px;
-        height: 400px;
-    }
-
-    .project-name {
-        font-size: 1.3rem;
     }
 
     /* Hide navigation buttons on tablet and mobile */
@@ -1318,24 +1317,38 @@ body {
         display: none !important;
     }
 
-    /* Enable horizontal scroll/swipe for projects slider */
-    .projects-slider-wrapper {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-        /* Firefox */
-        -ms-overflow-style: none;
-        /* IE/Edge */
-    }
-
-    .projects-slider-wrapper::-webkit-scrollbar {
-        display: none;
-        /* Chrome/Safari/Opera */
-    }
-
     .projects-slider {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: flex-start;
+    }
+
+    /* Show ALL slides including side slides */
+    .project-slide {
+        display: block !important;
+        flex-shrink: 0;
         scroll-snap-align: center;
+    }
+
+    .side-slide {
+        display: block !important;
+        width: 280px;
+        height: 200px;
+        min-width: 280px;
+        border-radius: 10px;
+    }
+
+    .main-slide {
+        width: 320px;
+        min-width: 320px;
+        max-width: none;
+        height: 380px;
+        border-radius: 10px;
+    }
+
+    .project-name {
+        font-size: 1.2rem;
     }
 }
 
@@ -1355,10 +1368,18 @@ body {
 
     .main-slide {
         height: 350px;
+        width: 300px;
+        min-width: 300px;
+    }
+
+    .side-slide {
+        width: 250px;
+        min-width: 250px;
+        height: 180px;
     }
 
     .project-slide-overlay {
-        padding: 20px;
+        padding: 15px;
     }
 
     .project-name {
@@ -1372,27 +1393,32 @@ body {
     .stat-box .stat-value {
         font-size: 1rem;
     }
-
-    /* Fix slider wrapper on mobile */
-    .projects-slider-wrapper {
-        width: 100%;
-        margin-left: 0;
-        padding: 0;
-    }
 }
 
 @media (max-width: 576px) {
     .main-slide {
         height: 300px;
+        width: 280px;
+        min-width: 280px;
+    }
+
+    .side-slide {
+        width: 220px;
+        min-width: 220px;
+        height: 160px;
     }
 
     .project-stats-row {
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 8px;
     }
 
     .stat-box {
         flex: 0 0 45%;
+    }
+
+    .project-name {
+        font-size: 1rem;
     }
 }
 
