@@ -150,22 +150,7 @@ body {
     width: auto;
 }
 
-.search-form input.form-control {
-    border-radius: 20px 0 0 20px;
-    border-right: none;
-    font-size: 14px;
-}
 
-.search-form button {
-    border-radius: 0 20px 20px 0;
-    border-left: none;
-    color: #666;
-}
-
-.search-form button:hover {
-    background: transparent;
-    color: #333;
-}
 
 /* 3. Main Navigation (Black Part) */
 .main-navigation {
@@ -236,25 +221,7 @@ body {
     color: #333;
 }
 
-/* Active Language */
-.lang-flag {
-    width: 26px;
-    height: 18px;
-    object-fit: cover;
-    border-radius: 2px;
-    transition: all 0.2s;
-    border: 1px solid #e0e0e0;
-}
 
-.language-selector a:hover .lang-flag {
-    transform: scale(1.1);
-}
-
-.active-lang .lang-flag {
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 0 8px rgba(30, 136, 229, 0.4);
-    transform: scale(1.1);
-}
 
 /* Responsive Header Adjustments */
 @media (max-width: 991px) {
@@ -1344,6 +1311,31 @@ body {
 
     .project-name {
         font-size: 1.3rem;
+    }
+
+    /* Hide navigation buttons on tablet and mobile */
+    .project-nav-btn {
+        display: none !important;
+    }
+
+    /* Enable horizontal scroll/swipe for projects slider */
+    .projects-slider-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE/Edge */
+    }
+
+    .projects-slider-wrapper::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari/Opera */
+    }
+
+    .projects-slider {
+        scroll-snap-align: center;
     }
 }
 

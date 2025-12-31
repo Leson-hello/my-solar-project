@@ -280,14 +280,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Language switcher
-    const languageSelector = document.querySelector('.language-selector');
-    if (languageSelector) {
-        languageSelector.addEventListener('click', function () {
-            // Toggle language or show language options
-            console.log('Language switcher clicked');
-        });
-    }
+
 
     // Contact form validation (if exists)
     const contactForms = document.querySelectorAll('form');
